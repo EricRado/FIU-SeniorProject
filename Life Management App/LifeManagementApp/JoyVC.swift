@@ -40,6 +40,11 @@ class JoyVC: UIViewController {
     @IBOutlet weak var startingDate: UILabel!
     @IBOutlet weak var endingDate: UILabel!
     
+    // goal text fields
+    @IBOutlet weak var goal1TextField: UITextField!
+    @IBOutlet weak var goal2TextField: UITextField!
+    @IBOutlet weak var goal3TextField: UITextField!
+    @IBOutlet weak var goal4TextField: UITextField!
     
     @IBOutlet var dayBtns: [UIButton]!
     
@@ -140,8 +145,6 @@ class JoyVC: UIViewController {
                 }
                 self.userCategoryKey = child.key
                 let joySprintSnapShot = child.childSnapshot(forPath:"JoySprints/")
-              
-                print(joySprintSnapShot)
                 
                 self.storeSprints(snapshot: joySprintSnapShot, categoryName: "Joy")
 
@@ -153,6 +156,7 @@ class JoyVC: UIViewController {
                 //self.reloadInputViews()
 
                 self.setDates()
+                self.setGoalsText()
                 
             }
             
@@ -359,6 +363,12 @@ class JoyVC: UIViewController {
         }
     }
     
+    func setGoalsText(){
+        self.goal1TextField.text = self.userCategory.joySprints[0].goal1
+        self.goal2TextField.text = self.userCategory.joySprints[0].goal2
+        self.goal3TextField.text = self.userCategory.joySprints[0].goal3
+        self.goal4TextField.text = self.userCategory.joySprints[0].goal4
+    }
     
     func setActivityImg(activityName: String, option: String){
         let imgUrlDBref = Database.database().reference(withPath: "ActivityImgs/JoyActivities/")
@@ -396,16 +406,36 @@ class JoyVC: UIViewController {
         let index = dailyPoints.index(dailyPoints.startIndex, offsetBy: dailyPointsIndex)
         let value = dailyPoints[index]
         var newDailyPoints: String
-        print("Daily points index : \(dailyPointsIndex)")
-        print(value)
+        
+        // modify the daily points string according the value found
         if value == "1"{
             newDailyPoints = dailyPoints.replace(dailyPointsIndex, "0")
         }else{
             newDailyPoints = dailyPoints.replace(dailyPointsIndex, "1")
         }
-        print(newDailyPoints)
+        
+        // update the new sprint daily points to the database
         let activityRef = dbref.child("Activities/\(id)")
         activityRef.updateChildValues(["actualPoints": newScore,"sprintDailyPoints": newDailyPoints])
+    }
+    
+    func updateGoals(goal1: String, goal2: String, goal3: String, goal4: String){
+        // query by starting date to find the key of the current sprint displayed
+        let categoryRef = dbref.child("Categories/\(self.userCategoryKey)/JoySprints/")
+        let query = categoryRef.queryOrdered(byChild: "startingDate").queryEqual(toValue: self.userCategory.joySprints[0].startingDate)
+        
+        query.observeSingleEvent(of: .value, with: {(snapshot) in
+            for child in snapshot.children.allObjects as! [DataSnapshot]{
+                // store the key of the sprint which the goals will be updated to
+                let updateKey = child.key
+                
+                // create a reference to the location with the key and the update the new values
+                let updateRef = self.dbref.child("Categories/\(self.userCategoryKey)/JoySprints/\(updateKey)/")
+                updateRef.updateChildValues(["goal1": goal1, "goal2": goal2, "goal3": goal3, "goal4": goal4])
+            }
+        }, withCancel: {
+            (error) in print(error.localizedDescription)
+        })
     }
     
     @IBAction func topDayBtnPressed(_ sender: UIButton) {
@@ -456,6 +486,12 @@ class JoyVC: UIViewController {
             sender.backgroundColor = UIColor.green
         }
         updateActualScoreAndDailyPoints(newScore: String(newScore), id: self.userCategory.joySprints[0].sprintActivityId2, dailyPointsIndex: index, dailyPoints: self.activity2OnDisplay.sprintDailyPoints)
+    }
+    
+    
+    @IBAction func submitPressed(_ sender: UIButton) {
+        // update the new goals to the database
+        updateGoals(goal1: goal1TextField.text!, goal2: goal2TextField.text!, goal3: goal3TextField.text!, goal4: goal4TextField.text!)
     }
 
 

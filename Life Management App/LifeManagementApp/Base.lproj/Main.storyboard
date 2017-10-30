@@ -5062,6 +5062,9 @@
                                                         <state key="normal" title="Submit Goals">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="submitPressed:" destination="jxi-QP-Bwu" eventType="touchUpInside" id="Xmt-IG-GNW"/>
+                                                        </connections>
                                                     </button>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mbL-ON-VBo">
                                                         <rect key="frame" x="0.0" y="262" width="375" height="30"/>
@@ -5170,6 +5173,10 @@
                         <outlet property="currentScore1" destination="PGt-TA-Gy9" id="xQi-iy-gFn"/>
                         <outlet property="currentScore2" destination="rfg-LL-al6" id="I7D-kG-Rlu"/>
                         <outlet property="endingDate" destination="vdz-5S-Ljr" id="gdV-7x-vbv"/>
+                        <outlet property="goal1TextField" destination="5RS-E7-fmA" id="jDS-Eo-Z0z"/>
+                        <outlet property="goal2TextField" destination="AWX-Tq-rG3" id="b6S-xE-tff"/>
+                        <outlet property="goal3TextField" destination="pyF-PO-9Xe" id="2YB-4J-CWa"/>
+                        <outlet property="goal4TextField" destination="mbL-ON-VBo" id="vbX-1Q-0gl"/>
                         <outlet property="goalPercentage1" destination="zJe-uS-MCO" id="Hpp-dL-O3P"/>
                         <outlet property="goalPercentage2" destination="Wng-IU-aPq" id="1BJ-an-hzD"/>
                         <outlet property="goalScore1" destination="ARF-JL-pA0" id="1dZ-ws-qo5"/>
