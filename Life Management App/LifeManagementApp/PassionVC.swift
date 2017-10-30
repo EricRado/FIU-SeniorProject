@@ -1,26 +1,16 @@
 //
-//  JoyVC.swift
+//  PassionVC.swift
 //  LifeManagementApp
 //
-//  Created by Eric Rado on 9/26/17.
+//  Created by Eric Rado on 10/30/17.
 //  Copyright © 2017 SeniorProject. All rights reserved.
 //
 
 import UIKit
 import Firebase
 
-extension String {
-    
-    //Enables replacement of the character at a specified position within a string
-    func replace(_ index: Int, _ newChar: Character) -> String {
-        var chars = Array(characters)
-        chars[index] = newChar
-        let modifiedString = String(chars)
-        return modifiedString
-    }
-}
 
-extension JoyVC: UIViewControllerTransitioningDelegate{
+extension PassionVC: UIViewControllerTransitioningDelegate{
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return PresentMenuAnimator()
     }
@@ -30,7 +20,7 @@ extension JoyVC: UIViewControllerTransitioningDelegate{
     }
     
     /* indicate that the dismiss transition is going to be interactive, but
-       only if the user is panning */
+     only if the user is panning */
     
     func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
         return interactor.hasStarted ? interactor : nil
@@ -41,7 +31,7 @@ extension JoyVC: UIViewControllerTransitioningDelegate{
     }
 }
 
-class JoyVC: UIViewController {
+class PassionVC: UIViewController {
     
     let interactor = Interactor()
     
@@ -49,12 +39,13 @@ class JoyVC: UIViewController {
     var activity1OnDisplay: Activity = Activity()
     var activity2OnDisplay: Activity = Activity()
     
+    
     @IBOutlet weak var goalScore1: UILabel!
     @IBOutlet weak var goalScore2: UILabel!
     @IBOutlet weak var currentScore1: UILabel!
     @IBOutlet weak var currentScore2: UILabel!
-    @IBOutlet weak var joyActivity1Img: UIImageView!
-    @IBOutlet weak var joyActivity2Img: UIImageView!
+    @IBOutlet weak var activity1Img: UIImageView!
+    @IBOutlet weak var activity2Img: UIImageView!
     
     @IBOutlet weak var goalPercentage1: UILabel!
     @IBOutlet weak var goalPercentage2: UILabel!
@@ -68,14 +59,14 @@ class JoyVC: UIViewController {
     @IBOutlet weak var goal3TextField: UITextField!
     @IBOutlet weak var goal4TextField: UITextField!
     
-    @IBOutlet var dayBtns: [UIButton]!
+    @IBOutlet var dayTopBtns: [UIButton]!
     
     @IBOutlet var dayBottomBtns: [UIButton]!
     
     @IBOutlet weak var menuBtn: UIBarButtonItem!
     
-    @IBOutlet weak var joyScore: KDCircularProgress!
-    @IBOutlet weak var joyScoreLabel: UILabel!
+    @IBOutlet weak var activityScore: KDCircularProgress!
+    @IBOutlet weak var activityScoreLabel: UILabel!
     
     
     var dbref = Database.database().reference(fromURL: "https://life-management-f0cdf.firebaseio.com/")
@@ -87,10 +78,10 @@ class JoyVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         self.view.layoutIfNeeded()
         
-        self.joyScore.progressThickness = 0.5
+        self.activityScore.progressThickness = 0.5
         
         // turn label and images to circles
         
@@ -105,9 +96,7 @@ class JoyVC: UIViewController {
         
         queryByStartingDate()
         
-        print("JOY \(self.delegate.user.id)")
         getUserCategory(userId: self.delegate.user.id)
-    
     }
     
     func turnLabelToCircle(label: UILabel){
@@ -137,17 +126,17 @@ class JoyVC: UIViewController {
             }
         })
     }
-    
+
     func getUserCategory(userId: String){
         let categoryRef = dbref.child("Categories")
         
         /* query the category collection and find the record which
-           contains the current online user's id */
+         contains the current online user's id */
         let userCategoryQuery = categoryRef.queryOrdered(byChild: "userId")
             .queryEqual(toValue: userId)
         
         /* store the key of the user category collection in order to
-           make a reference to joy, contribution and passion sprints */
+         make a reference to joy, contribution and passion sprints */
         userCategoryQuery.observeSingleEvent(of: .value, with: {(snapshot) in
             for child in snapshot.children.allObjects as! [DataSnapshot]{
                 if !child.exists(){
@@ -155,17 +144,17 @@ class JoyVC: UIViewController {
                     return
                 }
                 self.userCategoryKey = child.key
-                let joySprintSnapShot = child.childSnapshot(forPath:"JoySprints/")
+                let joySprintSnapShot = child.childSnapshot(forPath:"PassionSprints/")
                 
-                self.storeSprints(snapshot: joySprintSnapShot, categoryName: "Joy")
-
-                print(self.userCategory.joySprints)
-                let activityId1 = self.userCategory.joySprints[0].sprintActivityId1
-                let activityId2 = self.userCategory.joySprints[0].sprintActivityId2
+                self.storeSprints(snapshot: joySprintSnapShot, categoryName: "Passion")
+                
+                let activityId1 = self.userCategory.passionSprints[0].sprintActivityId1
+                let activityId2 = self.userCategory.passionSprints[0].sprintActivityId2
+                
                 self.getActivities(id1: activityId1, id2: activityId2)
-
+                
                 //self.reloadInputViews()
-
+                
                 self.setDates()
                 self.setGoalsText()
                 
@@ -180,13 +169,13 @@ class JoyVC: UIViewController {
         for child in snapshot.children.allObjects as! [DataSnapshot]{
             // check if snapshot is empty before adding it to category arrays
             if !child.exists(){
-               print("Snapshot is empty...")
+                print("Snapshot is empty...")
                 return
             }
             // store the data from the snapshot to a sprint object
             let sprintDict = child.value as? [String: Any]
             let newSprint = parseSprintDictionary(dict: sprintDict!)
-            // store the sprint to its specific Sprint array 
+            // store the sprint to its specific Sprint array
             if(categoryName == "Joy"){
                 self.userCategory.joySprints.append(newSprint)
             }else if(categoryName == "Passion"){
@@ -194,12 +183,12 @@ class JoyVC: UIViewController {
             }else{
                 self.userCategory.contributionSprints.append(newSprint)
             }
-        
+            
         }
     }
     
     func getActivities(id1: String, id2: String){
-      
+        
         //set two referencece points to each activity that will be displayed on dashboard
         let activity1Ref = Database.database().reference(withPath: "Activities/\(id1)")
         let activity2Ref = Database.database().reference(withPath: "Activities/\(id2)")
@@ -216,7 +205,7 @@ class JoyVC: UIViewController {
             
             self.setScoresAndPercentages()
             self.setActivityImg(activityName: self.activity1OnDisplay.name, option: "1")
-            self.setCalendar(btnArray: self.dayBtns, dailyPointsStr: self.activity1OnDisplay.sprintDailyPoints)
+            self.setCalendar(btnArray: self.dayTopBtns, dailyPointsStr: self.activity1OnDisplay.sprintDailyPoints)
         })
         
         // get activity 2 values from the database
@@ -225,6 +214,7 @@ class JoyVC: UIViewController {
                 print("Snapshot is empty...")
                 return
             }
+            
             let activityDict = snapshot.value as? [String:Any]
             self.activity2OnDisplay = self.parseActivityDictionary(dict: activityDict!)
             
@@ -294,16 +284,16 @@ class JoyVC: UIViewController {
             self.goalPercentage2?.text = "\(String(goalP2Int))%"
         }else{return}
         
-        // find the average score of both joy activies by taking their 
+        // find the average score of both joy activies by taking their
         // percentage score for each activity and dividing by 2
         if let p1 = goalP1, let p2 = goalP2{
-            let joyAvg = ((p1 + p2)/2.0)
-            let joyAvgInt = Int(round(joyAvg * 3.6))
-            self.joyScore.angle = Double(joyAvgInt)
-            self.joyScoreLabel?.text = String(format:"%.01f%"+"%", joyAvg)
+            let activityAvg = ((p1 + p2)/2.0)
+            let activityAvgInt = Int(round(activityAvg * 3.6))
+            self.activityScore.angle = Double(activityAvgInt)
+            self.activityScoreLabel?.text = String(format:"%.01f%"+"%", activityAvg)
             
         }else{return}
-
+        
     }
     
     func setDates(){
@@ -312,8 +302,8 @@ class JoyVC: UIViewController {
         
         // convert date strings to date objects
         dateFmt.dateFormat = "MMddyyyy"
-        let startDate = dateFmt.date(from: self.userCategory.joySprints[0].startingDate)
-        let endDate = dateFmt.date(from: self.userCategory.joySprints[0].endingDate)
+        let startDate = dateFmt.date(from: self.userCategory.passionSprints[0].startingDate)
+        let endDate = dateFmt.date(from: self.userCategory.passionSprints[0].endingDate)
         
         // format dates to MM/dd/yyyy
         dateFmt.dateFormat = "MM/dd/yyyy"
@@ -330,7 +320,7 @@ class JoyVC: UIViewController {
         
         // convert date strings to date objects
         dateFmt.dateFormat = "MMddyyyy"
-        let startDate = dateFmt.date(from: self.userCategory.joySprints[0].startingDate)
+        let startDate = dateFmt.date(from: self.userCategory.passionSprints[0].startingDate)
         
         // determine the day of the week such as Wenesday = 3 or Friday = 5
         // the day of the week is substracted by 1 because the button tags start at index 0
@@ -340,7 +330,7 @@ class JoyVC: UIViewController {
         var startDay = Calendar.current.component(.day, from: startDate!)
         
         // determine the last day of the sprint from the number of weeks input by the user
-        let dayCountInWeekChoice = (Int(self.userCategory.joySprints[0].numberOfWeeks)! * 7) - 1
+        let dayCountInWeekChoice = (Int(self.userCategory.passionSprints[0].numberOfWeeks)! * 7) - 1
         var dayCounter = 0
         
         // store the indexes of all the day buttons that are displayed on the calendar
@@ -360,7 +350,7 @@ class JoyVC: UIViewController {
                 button.isHidden = true
             }
         }
-
+        
         var counter = 0
         
         // setup the sprint daily points
@@ -373,16 +363,16 @@ class JoyVC: UIViewController {
             counter = counter + 1
         }
     }
-    
+
     func setGoalsText(){
-        self.goal1TextField.text = self.userCategory.joySprints[0].goal1
-        self.goal2TextField.text = self.userCategory.joySprints[0].goal2
-        self.goal3TextField.text = self.userCategory.joySprints[0].goal3
-        self.goal4TextField.text = self.userCategory.joySprints[0].goal4
+        self.goal1TextField.text = self.userCategory.passionSprints[0].goal1
+        self.goal2TextField.text = self.userCategory.passionSprints[0].goal2
+        self.goal3TextField.text = self.userCategory.passionSprints[0].goal3
+        self.goal4TextField.text = self.userCategory.passionSprints[0].goal4
     }
     
     func setActivityImg(activityName: String, option: String){
-        let imgUrlDBref = Database.database().reference(withPath: "ActivityImgs/JoyActivities/")
+        let imgUrlDBref = Database.database().reference(withPath: "ActivityImgs/PassionActivities/")
         let imgUrlQuery = imgUrlDBref.queryOrdered(byChild: "name")
             .queryEqual(toValue: activityName)
         
@@ -398,11 +388,11 @@ class JoyVC: UIViewController {
                             return
                         }else{
                             if option == "1"{
-                                self.joyActivity1Img.image = UIImage(data:data!)
-                                self.turnImageToCircle(picture: self.joyActivity1Img)
+                                self.activity1Img.image = UIImage(data:data!)
+                                self.turnImageToCircle(picture: self.activity1Img)
                             }else{
-                                self.joyActivity2Img.image = UIImage(data:data!)
-                                self.turnImageToCircle(picture: self.joyActivity2Img)
+                                self.activity2Img.image = UIImage(data:data!)
+                                self.turnImageToCircle(picture: self.activity2Img)
                             }
                             
                         }
@@ -411,7 +401,7 @@ class JoyVC: UIViewController {
             }
         })
     }
-    
+
     func updateActualScoreAndDailyPoints(newScore: String, id: String, dailyPointsIndex: Int, dailyPoints: String){
         // update daily points
         let index = dailyPoints.index(dailyPoints.startIndex, offsetBy: dailyPointsIndex)
@@ -432,8 +422,8 @@ class JoyVC: UIViewController {
     
     func updateGoals(goal1: String, goal2: String, goal3: String, goal4: String){
         // query by starting date to find the key of the current sprint displayed
-        let categoryRef = dbref.child("Categories/\(self.userCategoryKey)/JoySprints/")
-        let query = categoryRef.queryOrdered(byChild: "startingDate").queryEqual(toValue: self.userCategory.joySprints[0].startingDate)
+        let categoryRef = dbref.child("Categories/\(self.userCategoryKey)/PassionSprints/")
+        let query = categoryRef.queryOrdered(byChild: "startingDate").queryEqual(toValue: self.userCategory.passionSprints[0].startingDate)
         
         query.observeSingleEvent(of: .value, with: {(snapshot) in
             for child in snapshot.children.allObjects as! [DataSnapshot]{
@@ -441,7 +431,7 @@ class JoyVC: UIViewController {
                 let updateKey = child.key
                 
                 // create a reference to the location with the key and the update the new values
-                let updateRef = self.dbref.child("Categories/\(self.userCategoryKey)/JoySprints/\(updateKey)/")
+                let updateRef = self.dbref.child("Categories/\(self.userCategoryKey)/PassionSprints/\(updateKey)/")
                 updateRef.updateChildValues(["goal1": goal1, "goal2": goal2, "goal3": goal3, "goal4": goal4])
             }
         }, withCancel: {
@@ -455,7 +445,7 @@ class JoyVC: UIViewController {
         // convert date strings to date objects
         let dateFmt = DateFormatter()
         dateFmt.dateFormat = "MMddyyyy"
-        let startDate = dateFmt.date(from: self.userCategory.joySprints[0].startingDate)
+        let startDate = dateFmt.date(from: self.userCategory.passionSprints[0].startingDate)
         let startDay = Calendar.current.component(.day, from: startDate!)
         
         // store the index that will be changed in sprint daily points
@@ -471,8 +461,8 @@ class JoyVC: UIViewController {
             newScore = Int(self.activity1OnDisplay.actualPoints)! + 1
             sender.backgroundColor = UIColor.green
         }
-      
-        updateActualScoreAndDailyPoints(newScore: String(newScore), id: self.userCategory.joySprints[0].sprintActivityId1, dailyPointsIndex: index, dailyPoints: self.activity1OnDisplay.sprintDailyPoints)
+        
+        updateActualScoreAndDailyPoints(newScore: String(newScore), id: self.userCategory.passionSprints[0].sprintActivityId1, dailyPointsIndex: index, dailyPoints: self.activity1OnDisplay.sprintDailyPoints)
     }
     
     @IBAction func bottomDayBtnPressed(_ sender: UIButton) {
@@ -481,7 +471,7 @@ class JoyVC: UIViewController {
         // convert date strings to date objects
         let dateFmt = DateFormatter()
         dateFmt.dateFormat = "MMddyyyy"
-        let startDate = dateFmt.date(from: self.userCategory.joySprints[0].startingDate)
+        let startDate = dateFmt.date(from: self.userCategory.passionSprints[0].startingDate)
         let startDay = Calendar.current.component(.day, from: startDate!)
         
         // store the index that will be changed in sprint daily points
@@ -496,44 +486,29 @@ class JoyVC: UIViewController {
             newScore = Int(self.activity2OnDisplay.actualPoints)! + 1
             sender.backgroundColor = UIColor.green
         }
-        updateActualScoreAndDailyPoints(newScore: String(newScore), id: self.userCategory.joySprints[0].sprintActivityId2, dailyPointsIndex: index, dailyPoints: self.activity2OnDisplay.sprintDailyPoints)
+        updateActualScoreAndDailyPoints(newScore: String(newScore), id: self.userCategory.passionSprints[0].sprintActivityId2, dailyPointsIndex: index, dailyPoints: self.activity2OnDisplay.sprintDailyPoints)
     }
-    
     
     @IBAction func submitPressed(_ sender: UIButton) {
         // update the new goals to the database
         updateGoals(goal1: goal1TextField.text!, goal2: goal2TextField.text!, goal3: goal3TextField.text!, goal4: goal4TextField.text!)
     }
-
-
+    
+    
     /***********************************************************
- 
+     
                         Side Menu Functions
- 
-    ***********************************************************/
-    
-    
-    @IBAction func openMenu(_ sender: AnyObject){
-        performSegue(withIdentifier: "openMenu", sender: nil)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destinationViewController = segue.destination as? SideMenuViewController{
-            destinationViewController.transitioningDelegate = self
-            // pass the interactor object forward
-            destinationViewController.interactor = interactor
-        }
-    }
-    
-    @IBAction func edgePanGesture(sender: UIScreenEdgePanGestureRecognizer){
-        let translation = sender.translation(in: view)
-        
-        let progress = MenuHelper.calculateProgress(translationInView: translation, viewBounds: view.bounds, direction: .Right)
-        
-        MenuHelper.mapGestureStateToInteractor(gestureState: sender.state, progress: progress, interactor: interactor){
-                self.performSegue(withIdentifier: "openMenu", sender: nil)
-        }
-    }
-    
+     
+     ***********************************************************/
 
 }
+
+
+
+
+
+
+
+
+
+
