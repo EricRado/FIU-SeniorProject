@@ -30,6 +30,10 @@
 		07316B811F83191F00EF2F8F /* SideMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07316B801F83191F00EF2F8F /* SideMenuTableViewCell.swift */; };
 		07316B831F832C5400EF2F8F /* SideMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07316B821F832C5400EF2F8F /* SideMenuVC.swift */; };
 		07316B851F843C3D00EF2F8F /* KDCircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07316B841F843C3D00EF2F8F /* KDCircularProgress.swift */; };
+		073D89D71FA7692F000DE687 /* MenuHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073D89D61FA7692F000DE687 /* MenuHelper.swift */; };
+		073D89D91FA76947000DE687 /* Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073D89D81FA76947000DE687 /* Interactor.swift */; };
+		073D89DB1FA7696A000DE687 /* PresentMenuAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073D89DA1FA7696A000DE687 /* PresentMenuAnimator.swift */; };
+		073D89DD1FA7697E000DE687 /* DismissMenuAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073D89DC1FA7697E000DE687 /* DismissMenuAnimator.swift */; };
 		076E009B1F9DB050004467D0 /* PassionActivitySelectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076E009A1F9DB050004467D0 /* PassionActivitySelectionVC.swift */; };
 		076E009D1F9DB078004467D0 /* ContributionActivitySelectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076E009C1F9DB078004467D0 /* ContributionActivitySelectionVC.swift */; };
 		076E009F1F9EAAF8004467D0 /* SprintSettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076E009E1F9EAAF8004467D0 /* SprintSettingsVC.swift */; };
@@ -93,6 +97,10 @@
 		07316B801F83191F00EF2F8F /* SideMenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuTableViewCell.swift; sourceTree = "<group>"; };
 		07316B821F832C5400EF2F8F /* SideMenuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuVC.swift; sourceTree = "<group>"; };
 		07316B841F843C3D00EF2F8F /* KDCircularProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDCircularProgress.swift; sourceTree = "<group>"; };
+		073D89D61FA7692F000DE687 /* MenuHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuHelper.swift; sourceTree = "<group>"; };
+		073D89D81FA76947000DE687 /* Interactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Interactor.swift; sourceTree = "<group>"; };
+		073D89DA1FA7696A000DE687 /* PresentMenuAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentMenuAnimator.swift; sourceTree = "<group>"; };
+		073D89DC1FA7697E000DE687 /* DismissMenuAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DismissMenuAnimator.swift; sourceTree = "<group>"; };
 		076E009A1F9DB050004467D0 /* PassionActivitySelectionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassionActivitySelectionVC.swift; sourceTree = "<group>"; };
 		076E009C1F9DB078004467D0 /* ContributionActivitySelectionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContributionActivitySelectionVC.swift; sourceTree = "<group>"; };
 		076E009E1F9EAAF8004467D0 /* SprintSettingsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SprintSettingsVC.swift; sourceTree = "<group>"; };
@@ -169,6 +177,7 @@
 		072F861A1F5D9227007E5A8A /* LifeManagementApp */ = {
 			isa = PBXGroup;
 			children = (
+				073D89D51FA76901000DE687 /* Side Menu */,
 				079C30E81F8E68BF0044DA18 /* Sources */,
 				072F86811F6F1CC3007E5A8A /* Models */,
 				072F868A1F6F814C007E5A8A /* Controllers */,
@@ -235,6 +244,17 @@
 				076E009E1F9EAAF8004467D0 /* SprintSettingsVC.swift */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		073D89D51FA76901000DE687 /* Side Menu */ = {
+			isa = PBXGroup;
+			children = (
+				073D89D61FA7692F000DE687 /* MenuHelper.swift */,
+				073D89D81FA76947000DE687 /* Interactor.swift */,
+				073D89DA1FA7696A000DE687 /* PresentMenuAnimator.swift */,
+				073D89DC1FA7697E000DE687 /* DismissMenuAnimator.swift */,
+			);
+			name = "Side Menu";
 			sourceTree = "<group>";
 		};
 		079C30E81F8E68BF0044DA18 /* Sources */ = {
@@ -579,8 +599,10 @@
 				07B40A1D1F9AC6200002DCC3 /* ActivityImage.swift in Sources */,
 				076E009F1F9EAAF8004467D0 /* SprintSettingsVC.swift in Sources */,
 				072F861C1F5D9227007E5A8A /* AppDelegate.swift in Sources */,
+				073D89D71FA7692F000DE687 /* MenuHelper.swift in Sources */,
 				072F86721F685D5C007E5A8A /* Popup1VC.swift in Sources */,
 				072F866C1F609F08007E5A8A /* PageVC.swift in Sources */,
+				073D89DD1FA7697E000DE687 /* DismissMenuAnimator.swift in Sources */,
 				07316B811F83191F00EF2F8F /* SideMenuTableViewCell.swift in Sources */,
 				07316B851F843C3D00EF2F8F /* KDCircularProgress.swift in Sources */,
 				072F867C1F69F2A9007E5A8A /* Popup5VC.swift in Sources */,
@@ -592,6 +614,7 @@
 				076E009D1F9DB078004467D0 /* ContributionActivitySelectionVC.swift in Sources */,
 				072F86781F69DABF007E5A8A /* Popup3VC.swift in Sources */,
 				079265651F7B0636008B5BDE /* JoyVC.swift in Sources */,
+				073D89DB1FA7696A000DE687 /* PresentMenuAnimator.swift in Sources */,
 				072F86761F69968D007E5A8A /* Popup2VC.swift in Sources */,
 				072F86871F6F4D7F007E5A8A /* RegistrationVC.swift in Sources */,
 				072F867E1F69F483007E5A8A /* Popup6VC.swift in Sources */,
@@ -601,6 +624,7 @@
 				072F86741F696625007E5A8A /* Screen4VC.swift in Sources */,
 				07316B831F832C5400EF2F8F /* SideMenuVC.swift in Sources */,
 				072F86851F6F236D007E5A8A /* Category.swift in Sources */,
+				073D89D91FA76947000DE687 /* Interactor.swift in Sources */,
 				07174FD51F8E73DE00E1E8AC /* JoyActivitySelectionVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
