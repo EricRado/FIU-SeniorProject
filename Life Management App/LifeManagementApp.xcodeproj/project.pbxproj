@@ -34,6 +34,7 @@
 		073D89D91FA76947000DE687 /* Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073D89D81FA76947000DE687 /* Interactor.swift */; };
 		073D89DB1FA7696A000DE687 /* PresentMenuAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073D89DA1FA7696A000DE687 /* PresentMenuAnimator.swift */; };
 		073D89DD1FA7697E000DE687 /* DismissMenuAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073D89DC1FA7697E000DE687 /* DismissMenuAnimator.swift */; };
+		073D89DF1FA7754E000DE687 /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073D89DE1FA7754E000DE687 /* SideMenuViewController.swift */; };
 		076E009B1F9DB050004467D0 /* PassionActivitySelectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076E009A1F9DB050004467D0 /* PassionActivitySelectionVC.swift */; };
 		076E009D1F9DB078004467D0 /* ContributionActivitySelectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076E009C1F9DB078004467D0 /* ContributionActivitySelectionVC.swift */; };
 		076E009F1F9EAAF8004467D0 /* SprintSettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076E009E1F9EAAF8004467D0 /* SprintSettingsVC.swift */; };
@@ -101,6 +102,7 @@
 		073D89D81FA76947000DE687 /* Interactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Interactor.swift; sourceTree = "<group>"; };
 		073D89DA1FA7696A000DE687 /* PresentMenuAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentMenuAnimator.swift; sourceTree = "<group>"; };
 		073D89DC1FA7697E000DE687 /* DismissMenuAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DismissMenuAnimator.swift; sourceTree = "<group>"; };
+		073D89DE1FA7754E000DE687 /* SideMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
 		076E009A1F9DB050004467D0 /* PassionActivitySelectionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassionActivitySelectionVC.swift; sourceTree = "<group>"; };
 		076E009C1F9DB078004467D0 /* ContributionActivitySelectionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContributionActivitySelectionVC.swift; sourceTree = "<group>"; };
 		076E009E1F9EAAF8004467D0 /* SprintSettingsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SprintSettingsVC.swift; sourceTree = "<group>"; };
@@ -253,6 +255,7 @@
 				073D89D81FA76947000DE687 /* Interactor.swift */,
 				073D89DA1FA7696A000DE687 /* PresentMenuAnimator.swift */,
 				073D89DC1FA7697E000DE687 /* DismissMenuAnimator.swift */,
+				073D89DE1FA7754E000DE687 /* SideMenuViewController.swift */,
 			);
 			name = "Side Menu";
 			sourceTree = "<group>";
@@ -599,6 +602,7 @@
 				07B40A1D1F9AC6200002DCC3 /* ActivityImage.swift in Sources */,
 				076E009F1F9EAAF8004467D0 /* SprintSettingsVC.swift in Sources */,
 				072F861C1F5D9227007E5A8A /* AppDelegate.swift in Sources */,
+				073D89DF1FA7754E000DE687 /* SideMenuViewController.swift in Sources */,
 				073D89D71FA7692F000DE687 /* MenuHelper.swift in Sources */,
 				072F86721F685D5C007E5A8A /* Popup1VC.swift in Sources */,
 				072F866C1F609F08007E5A8A /* PageVC.swift in Sources */,

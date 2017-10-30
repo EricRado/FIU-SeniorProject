@@ -20,8 +20,31 @@ extension String {
     }
 }
 
-class JoyVC: UIViewController {
+extension JoyVC: UIViewControllerTransitioningDelegate{
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return PresentMenuAnimator()
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return DismissMenuAnimator()
+    }
+    
+    /* indicate that the dismiss transition is going to be interactive, but
+       only if the user is panning */
+    
+    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        return interactor.hasStarted ? interactor : nil
+    }
+    
+    func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        return interactor.hasStarted ? interactor : nil
+    }
+}
 
+class JoyVC: UIViewController {
+    
+    let interactor = Interactor()
+    
     var onlineUser: User = User()
     var activity1OnDisplay: Activity = Activity()
     var activity2OnDisplay: Activity = Activity()
@@ -80,17 +103,6 @@ class JoyVC: UIViewController {
         
         turnLabelToCircle(label: currentScore1)
         turnLabelToCircle(label: currentScore2)
-        
-        sideMenuVC = self.storyboard?.instantiateViewController(withIdentifier: "SideMenuVC") as! SideMenuVC
-        
-        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToGesture))
-        swipeRight.direction = UISwipeGestureRecognizerDirection.right
-        
-        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToGesture))
-        swipeLeft.direction = UISwipeGestureRecognizerDirection.left
-        
-        self.view.addGestureRecognizer(swipeRight)
-        self.view.addGestureRecognizer(swipeLeft)
         
         queryByStartingDate()
         
@@ -501,55 +513,28 @@ class JoyVC: UIViewController {
  
     ***********************************************************/
     
-    func respondToGesture(gesture: UISwipeGestureRecognizer){
+    
+    @IBAction func openMenu(_ sender: AnyObject){
+        performSegue(withIdentifier: "openMenu", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destinationViewController = segue.destination as? SideMenuViewController{
+            destinationViewController.transitioningDelegate = self
+            // pass the interactor object forward
+            destinationViewController.interactor = interactor
+        }
+    }
+    
+    @IBAction func edgePanGesture(sender: UIScreenEdgePanGestureRecognizer){
+        let translation = sender.translation(in: view)
         
-        switch gesture.direction{
-        case UISwipeGestureRecognizerDirection.right:
-            print("right")
-            
-            // show menu
-            showSideMenu()
-            
-        case UISwipeGestureRecognizerDirection.left:
-            print("left")
-            
-            // close menu
-            hideSideMenu()
-            
-        default:
-            break
+        let progress = MenuHelper.calculateProgress(translationInView: translation, viewBounds: view.bounds, direction: .Right)
+        
+        MenuHelper.mapGestureStateToInteractor(gestureState: sender.state, progress: progress, interactor: interactor){
+                self.performSegue(withIdentifier: "openMenu", sender: nil)
         }
     }
     
-    
-    @IBAction func sideMenuPressed(_ sender: UIBarButtonItem) {
-        if AppDelegate.menu_bool{
-            // show menu
-            showSideMenu()
-        }else{
-            // close menu
-            hideSideMenu()
-        }
-    
-    }
-    
-    func showSideMenu(){
-        UIView.animate(withDuration: 0.3) { ()-> Void in
-            self.sideMenuVC.view.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height)
-            self.addChildViewController(self.sideMenuVC)
-            self.view.addSubview(self.sideMenuVC.view)
-            AppDelegate.menu_bool = false
-        }
-    }
-    
-    func hideSideMenu(){
-        UIView.animate(withDuration: 0.3, animations: { () -> Void in
-            self.sideMenuVC.view.frame = CGRect(x: -UIScreen.main.bounds.size.width, y: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height)
-        }) { (finished) in
-            self.sideMenuVC.view.removeFromSuperview()
-        }
-       
-        AppDelegate.menu_bool = true
-    }
 
 }
