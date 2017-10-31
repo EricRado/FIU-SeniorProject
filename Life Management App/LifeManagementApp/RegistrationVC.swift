@@ -27,7 +27,6 @@ class RegistrationVC: UIViewController {
     var usernameList = [String]()
     var emailList = [String]()
     var check:Bool = false
-    var onlineUser:User = User()
     let delegate = UIApplication.shared.delegate as! AppDelegate
     
     let dbRef = Database.database().reference(fromURL: "https://life-management-f0cdf.firebaseio.com/")
@@ -143,10 +142,10 @@ class RegistrationVC: UIViewController {
         print("before the key...")
         let uid = childRef.key
         print("the key" + uid)
-        onlineUser = User(id: uid ,email: email, username: username,firstName: firstName!, lastName: lastName!,
+        self.delegate.user = User(id: uid ,email: email, username: username,firstName: firstName!, lastName: lastName!,
                         dob: dob!, password: password, adminFlag: false, coachFlag: false)
         
-        childRef.setValue(onlineUser.toAnyObject(), withCompletionBlock: {(error, ref) in
+        childRef.setValue(self.delegate.user.toAnyObject(), withCompletionBlock: {(error, ref) in
             if error != nil{
                 print(error!)
                 return
@@ -386,14 +385,5 @@ class RegistrationVC: UIViewController {
         return false
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ActivitySelectionSegue", let joySelection = segue.destination as? JoyActivitySelectionVC{
-            print("Transitioning to joy selection activity")
-            
-            joySelection.onlineUser = self.onlineUser
-            self.delegate.user = self.onlineUser
-            
-        }
-    }
     
 }

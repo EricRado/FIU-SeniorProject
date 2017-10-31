@@ -16,15 +16,7 @@ class CategoryTabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        print("INSIDE TAB BAR CONTROLLER")
-        print(onlineUser.firstName)
 
-       // passing user to joy dashboard screen
-        let joyNavController = self.viewControllers![0] as! UINavigationController
-        let joyVC = joyNavController.topViewController as! JoyVC
-        
-        joyVC.onlineUser = self.onlineUser
     }
 
 

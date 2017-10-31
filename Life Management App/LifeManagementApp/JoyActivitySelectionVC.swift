@@ -11,7 +11,6 @@ import Firebase
 
 
 class JoyActivitySelectionVC: UIViewController, iCarouselDataSource, iCarouselDelegate {
-    var onlineUser:User = User()
     var selectionIsValid = false
 
     @IBOutlet var joyCarouselView: iCarousel!
@@ -26,7 +25,6 @@ class JoyActivitySelectionVC: UIViewController, iCarouselDataSource, iCarouselDe
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        displayUsername.text = onlineUser.username
         joyCarouselView.delegate = self
         joyCarouselView.dataSource = self
         joyCarouselView.reloadData()
@@ -99,7 +97,7 @@ class JoyActivitySelectionVC: UIViewController, iCarouselDataSource, iCarouselDe
         print("Category Key : \(self.delegate.categoryKey)")
         
         // create a new Category collection in the database for the new user
-        categoryRef.setValue(["userId": self.onlineUser.id], withCompletionBlock: {(error,categoryRef) in
+        categoryRef.setValue(["userId": self.delegate.user.id], withCompletionBlock: {(error,categoryRef) in
             if error != nil {
                 print(error!)
                 return
@@ -141,7 +139,8 @@ class JoyActivitySelectionVC: UIViewController, iCarouselDataSource, iCarouselDe
             print("This is the name going to db : \(name)")
             
             // create a new Activity object to store in the database
-            let newActivity = Activity(name: name, categoryId: self.delegate.categoryKey, userId: self.onlineUser.id)
+            let newActivity = Activity(name: name, categoryId: self.delegate.categoryKey, userId: self.delegate.user
+                .id)
             // Activity object is stored in the database
             activityRef.setValue(newActivity.toAnyObject(), withCompletionBlock: {(error,activityRef) in
                 if error != nil{

@@ -45,7 +45,6 @@ class JoyVC: UIViewController {
     
     let interactor = Interactor()
     
-    var onlineUser: User = User()
     var activity1OnDisplay: Activity = Activity()
     var activity2OnDisplay: Activity = Activity()
     
@@ -83,7 +82,6 @@ class JoyVC: UIViewController {
     var delegate = UIApplication.shared.delegate as! AppDelegate
     
     var userCategory: Category = Category()
-    var userCategoryKey: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -154,7 +152,7 @@ class JoyVC: UIViewController {
                     print("Snapshot is empty")
                     return
                 }
-                self.userCategoryKey = child.key
+                self.delegate.categoryKey = child.key
                 let joySprintSnapShot = child.childSnapshot(forPath:"JoySprints/")
                 
                 self.storeSprints(snapshot: joySprintSnapShot, categoryName: "Joy")
@@ -432,7 +430,7 @@ class JoyVC: UIViewController {
     
     func updateGoals(goal1: String, goal2: String, goal3: String, goal4: String){
         // query by starting date to find the key of the current sprint displayed
-        let categoryRef = dbref.child("Categories/\(self.userCategoryKey)/JoySprints/")
+        let categoryRef = dbref.child("Categories/\(self.delegate.categoryKey)/JoySprints/")
         let query = categoryRef.queryOrdered(byChild: "startingDate").queryEqual(toValue: self.userCategory.joySprints[0].startingDate)
         
         query.observeSingleEvent(of: .value, with: {(snapshot) in
@@ -441,7 +439,7 @@ class JoyVC: UIViewController {
                 let updateKey = child.key
                 
                 // create a reference to the location with the key and the update the new values
-                let updateRef = self.dbref.child("Categories/\(self.userCategoryKey)/JoySprints/\(updateKey)/")
+                let updateRef = self.dbref.child("Categories/\(self.delegate.categoryKey)/JoySprints/\(updateKey)/")
                 updateRef.updateChildValues(["goal1": goal1, "goal2": goal2, "goal3": goal3, "goal4": goal4])
             }
         }, withCancel: {

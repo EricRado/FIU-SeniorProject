@@ -73,7 +73,6 @@ class ContributionVC: UIViewController {
     var delegate = UIApplication.shared.delegate as! AppDelegate
     
     var userCategory: Category = Category()
-    var userCategoryKey: String = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -142,7 +141,7 @@ class ContributionVC: UIViewController {
                     print("Snapshot is empty")
                     return
                 }
-                self.userCategoryKey = child.key
+                self.delegate.categoryKey = child.key
                 let joySprintSnapShot = child.childSnapshot(forPath:"ContributionSprints/")
                 
                 self.storeSprints(snapshot: joySprintSnapShot, categoryName: "Contribution")
@@ -421,7 +420,7 @@ class ContributionVC: UIViewController {
     
     func updateGoals(goal1: String, goal2: String, goal3: String, goal4: String){
         // query by starting date to find the key of the current sprint displayed
-        let categoryRef = dbref.child("Categories/\(self.userCategoryKey)/ContributionSprints/")
+        let categoryRef = dbref.child("Categories/\(self.delegate.categoryKey)/ContributionSprints/")
         let query = categoryRef.queryOrdered(byChild: "startingDate").queryEqual(toValue: self.userCategory.contributionSprints[0].startingDate)
         
         query.observeSingleEvent(of: .value, with: {(snapshot) in
@@ -430,7 +429,7 @@ class ContributionVC: UIViewController {
                 let updateKey = child.key
                 
                 // create a reference to the location with the key and the update the new values
-                let updateRef = self.dbref.child("Categories/\(self.userCategoryKey)/ContributionSprints/\(updateKey)/")
+                let updateRef = self.dbref.child("Categories/\(self.delegate.categoryKey)/ContributionSprints/\(updateKey)/")
                 updateRef.updateChildValues(["goal1": goal1, "goal2": goal2, "goal3": goal3, "goal4": goal4])
             }
         }, withCancel: {
