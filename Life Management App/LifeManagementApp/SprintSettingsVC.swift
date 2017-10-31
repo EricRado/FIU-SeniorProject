@@ -60,6 +60,7 @@ class SprintSettingsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         weekOptions.dataSource = self
         weekTextField.delegate = self
         categoryKey = delegate.categoryKey
+        print("This is the category key: \(categoryKey)")
         
         weekOptions.isHidden = true
         
@@ -101,6 +102,7 @@ class SprintSettingsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         let currentDate = Date()
         
         var daysToAdd = 0
+        print("week choice : \(weeks)")
         
         // check the user week input to determine when is the sprint ending date and the daily points
         if(weeks == "1"){
@@ -109,6 +111,7 @@ class SprintSettingsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         }else if(weeks == "2"){
             daysToAdd = 13
             sprintDailyPoints = "00000000000000"
+            print("Inside TWO weeks")
         }else{
             daysToAdd = 20
             sprintDailyPoints = "000000000000000000000"

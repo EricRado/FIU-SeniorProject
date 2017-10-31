@@ -330,6 +330,9 @@ class JoyVC: UIViewController {
         dateFmt.dateFormat = "MMddyyyy"
         let startDate = dateFmt.date(from: self.userCategory.joySprints[0].startingDate)
         
+        // save start month will be used to check if the date has changed to a new month
+        let startMonth = Calendar.current.component(.month, from: startDate!)
+        
         // determine the day of the week such as Wenesday = 3 or Friday = 5
         // the day of the week is substracted by 1 because the button tags start at index 0
         let dayOfTheWeek = Int(Calendar.current.component(.weekday, from: startDate!)) - 1
@@ -344,8 +347,25 @@ class JoyVC: UIViewController {
         // store the indexes of all the day buttons that are displayed on the calendar
         var btnIndexes = [Int]()
         
+        var dateComponent = DateComponents()
+        
+        // month flag is used to make sure the reset of startDay is only executed once
+        var monthFlag = true
+        
         // setup the calendar display
         for button in btnArray{
+            // get the date about to be displayed and extract the month from the date
+            dateComponent.day = dayCounter
+            let date = Calendar.current.date(byAdding: dateComponent, to: startDate!)
+            let checkMonth = Calendar.current.component(.month, from: date!)
+            
+            /* with the month extracted compare it to the start day month, if they are not
+             equal a new month has begun. Reset startDay to 1, to display a valid day*/
+            if checkMonth != startMonth && monthFlag{
+                startDay = 1
+                monthFlag = false
+            }
+            
             if button.tag < dayOfTheWeek{
                 button.isHidden = true
             }
@@ -358,7 +378,7 @@ class JoyVC: UIViewController {
                 button.isHidden = true
             }
         }
-
+        
         var counter = 0
         
         // setup the sprint daily points
