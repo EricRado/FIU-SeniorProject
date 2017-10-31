@@ -493,6 +493,35 @@ class ContributionVC: UIViewController {
         updateGoals(goal1: goal1TextField.text!, goal2: goal2TextField.text!, goal3: goal3TextField.text!, goal4: goal4TextField.text!)
     }
 
+    /***********************************************************
+     
+     Side Menu Functions
+     
+     ***********************************************************/
+    
+    
+    @IBAction func openMenu(_ sender: AnyObject){
+        performSegue(withIdentifier: "openMenu", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destinationViewController = segue.destination as? SideMenuViewController{
+            destinationViewController.transitioningDelegate = self
+            // pass the interactor object forward
+            destinationViewController.interactor = interactor
+        }
+    }
+    
+    @IBAction func edgePanGesture(sender: UIScreenEdgePanGestureRecognizer){
+        let translation = sender.translation(in: view)
+        
+        let progress = MenuHelper.calculateProgress(translationInView: translation, viewBounds: view.bounds, direction: .Right)
+        
+        MenuHelper.mapGestureStateToInteractor(gestureState: sender.state, progress: progress, interactor: interactor){
+            self.performSegue(withIdentifier: "openMenu", sender: nil)
+        }
+    }
+
     
 }
 

@@ -1825,6 +1825,7 @@
                                                     </label>
                                                 </subviews>
                                                 <accessibility key="accessibilityConfiguration" identifier="Dashboard"/>
+                                                <gestureRecognizers/>
                                                 <constraints>
                                                     <constraint firstItem="mvd-PQ-vmP" firstAttribute="leading" secondItem="beT-9G-UwC" secondAttribute="trailing" constant="2" id="0b1-ZE-YBI"/>
                                                     <constraint firstItem="3ku-0C-9ky" firstAttribute="leading" secondItem="iRx-hR-XK7" secondAttribute="trailing" constant="2" id="0cN-hE-b3e"/>
@@ -2082,6 +2083,9 @@
                                                     <constraint firstItem="W9h-zh-pfF" firstAttribute="leading" secondItem="8c8-fq-Ipz" secondAttribute="trailing" constant="2" id="yaA-e3-XNR"/>
                                                     <constraint firstItem="B4J-Dm-swx" firstAttribute="top" secondItem="9fx-m5-yl8" secondAttribute="bottom" constant="10" id="zRR-GZ-aAE"/>
                                                 </constraints>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="g6C-s0-Whe" appends="YES" id="ty8-kd-sbH"/>
+                                                </connections>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pbu-R9-0go" userLabel="Input Goals">
                                                 <rect key="frame" x="0.0" y="405" width="375" height="332"/>
@@ -2263,6 +2267,10 @@
                     <navigationItem key="navigationItem" id="Yld-y5-Y0i">
                         <barButtonItem key="leftBarButtonItem" image="dropdown" id="Lcv-ag-3w8">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="openMenu:" destination="7F2-H1-Koc" id="t68-wj-e8X"/>
+                                <segue destination="d5V-DO-Q8U" kind="presentation" identifier="openMenu" id="Bw2-EF-S4J"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
@@ -2346,8 +2354,14 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eVs-i4-Rq6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <screenEdgePanGestureRecognizer minimumNumberOfTouches="1" id="g6C-s0-Whe">
+                    <rectEdge key="edges" left="YES"/>
+                    <connections>
+                        <action selector="edgePanGestureWithSender:" destination="7F2-H1-Koc" id="3HZ-9W-NRx"/>
+                    </connections>
+                </screenEdgePanGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="6703.1999999999998" y="-2266.866566716642"/>
+            <point key="canvasLocation" x="5993" y="-1417"/>
         </scene>
         <!--Contribution-->
         <scene sceneID="eQZ-0V-vbL">
@@ -3486,6 +3500,7 @@
                                                     </view>
                                                 </subviews>
                                                 <accessibility key="accessibilityConfiguration" identifier="Dashboard"/>
+                                                <gestureRecognizers/>
                                                 <constraints>
                                                     <constraint firstItem="lEP-YW-fEb" firstAttribute="height" secondItem="SNp-Fz-nLn" secondAttribute="height" id="0BI-EG-OHX"/>
                                                     <constraint firstItem="Hg3-Rr-EG8" firstAttribute="leading" secondItem="eQ4-o2-dFK" secondAttribute="trailing" constant="2" id="0bh-ue-Yaf"/>
@@ -3742,6 +3757,9 @@
                                                     <constraint firstItem="sgq-Jw-mUR" firstAttribute="top" secondItem="B8q-GV-qDT" secondAttribute="bottom" constant="10" id="zbs-bG-Hii"/>
                                                     <constraint firstItem="eQ4-o2-dFK" firstAttribute="leading" secondItem="uEO-oD-XzW" secondAttribute="trailing" constant="2" id="zsn-bh-NFT"/>
                                                 </constraints>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="3Kx-cy-o4b" appends="YES" id="ssy-2N-PRn"/>
+                                                </connections>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wuA-3P-UwK" userLabel="Input Goals">
                                                 <rect key="frame" x="0.0" y="405" width="375" height="332"/>
@@ -3922,6 +3940,10 @@
                     <navigationItem key="navigationItem" id="YSn-8t-axl">
                         <barButtonItem key="leftBarButtonItem" image="dropdown" id="071-Iu-BPf">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="openMenu:" destination="44b-de-dwk" id="gPB-fb-VkC"/>
+                                <segue destination="d5V-DO-Q8U" kind="presentation" identifier="openMenu" id="E2e-RD-eat"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
@@ -4005,8 +4027,14 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kit-RX-xGs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <screenEdgePanGestureRecognizer minimumNumberOfTouches="1" id="3Kx-cy-o4b">
+                    <rectEdge key="edges" left="YES"/>
+                    <connections>
+                        <action selector="edgePanGestureWithSender:" destination="44b-de-dwk" id="kRR-zP-lAS"/>
+                    </connections>
+                </screenEdgePanGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="7520.8000000000002" y="-2266.866566716642"/>
+            <point key="canvasLocation" x="6719" y="-745"/>
         </scene>
         <!--Side MenuVC-->
         <scene sceneID="QxL-7C-vXE">
@@ -4099,6 +4127,15 @@
                                     <outletCollection property="gestureRecognizers" destination="cho-6t-AvS" appends="YES" id="VoV-vO-9mB"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ea-go-2Jm">
+                                <rect key="frame" x="41" y="145" width="115" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="New Sprint"/>
+                                <connections>
+                                    <segue destination="aVb-NQ-5Dj" kind="show" id="IaP-48-Zun"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.58853316307067871" green="0.91091698408126831" blue="0.39747157692909241" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -4116,7 +4153,7 @@
                     </connections>
                 </panGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="7009" y="-3128"/>
+            <point key="canvasLocation" x="7792.8000000000002" y="-1515.2923538230887"/>
         </scene>
         <!--Joy-->
         <scene sceneID="SKQ-4B-8Vw">
@@ -6062,7 +6099,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HvA-uI-7Zv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5060" y="-1486"/>
+            <point key="canvasLocation" x="5036" y="-1416"/>
         </scene>
         <!--Joy Activity SelectionVC-->
         <scene sceneID="Uyj-Xm-oRI">
@@ -6464,7 +6501,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jNm-sA-1Hk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5060" y="-730.88455772113946"/>
+            <point key="canvasLocation" x="5036" y="-662"/>
         </scene>
     </scenes>
     <resources>
@@ -6501,6 +6538,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="vUG-b0-bNY"/>
+        <segue reference="IaP-48-Zun"/>
+        <segue reference="E2e-RD-eat"/>
         <segue reference="tDY-fT-66O"/>
         <segue reference="Mmc-8c-1pg"/>
     </inferredMetricsTieBreakers>

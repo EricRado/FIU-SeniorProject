@@ -25,6 +25,7 @@ class SprintSettingsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     
     var startingDate = ""
     var endingDate = ""
+    var sprintDailyPoints = ""
     
     @IBOutlet weak var weekTextField: UITextField!
     @IBOutlet weak var weekOptions: UIPickerView!
@@ -101,13 +102,16 @@ class SprintSettingsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         
         var daysToAdd = 0
         
-        // check the user week input to determine when is the sprint ending date
+        // check the user week input to determine when is the sprint ending date and the daily points
         if(weeks == "1"){
-            daysToAdd = 7
+            daysToAdd = 6
+            sprintDailyPoints = "0000000"
         }else if(weeks == "2"){
-            daysToAdd = 14
+            daysToAdd = 13
+            sprintDailyPoints = "00000000000000"
         }else{
-            daysToAdd = 21
+            daysToAdd = 20
+            sprintDailyPoints = "000000000000000000000"
         }
         
         var dateComponent = DateComponents()
@@ -273,6 +277,8 @@ class SprintSettingsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     
     @IBAction func submitPressed(_ sender: Any) {
         
+        // add validation before updating to database, exit if their is empty fields
+        
         updateTargetScore(id: joyActivityIds[0], targetPoints: joyTargetScore1.text!)
         updateTargetScore(id: joyActivityIds[1], targetPoints: joyTargetScore2.text!)
         
@@ -290,9 +296,10 @@ class SprintSettingsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         
         setStartAndEndDate(weeks: weekChoice)
         
-        joySprintRef.updateChildValues(["startingDate": startingDate, "endingDate": endingDate, "numberOfWeeks": weekChoice])
-        passionSprintRef.updateChildValues(["startingDate": startingDate, "endingDate": endingDate, "numberOfWeeks": weekChoice])
-        contributionSprintRef.updateChildValues(["startingDate": startingDate, "endingDate": endingDate, "numberOfWeeks": weekChoice])
+        // update starting date, ending date , number of weeks, and daily points for all activities selected
+        joySprintRef.updateChildValues(["startingDate": startingDate, "endingDate": endingDate, "numberOfWeeks": weekChoice, "sprintDailyPoints": sprintDailyPoints])
+        passionSprintRef.updateChildValues(["startingDate": startingDate, "endingDate": endingDate, "numberOfWeeks": weekChoice, "sprintDailyPoints": sprintDailyPoints])
+        contributionSprintRef.updateChildValues(["startingDate": startingDate, "endingDate": endingDate, "numberOfWeeks": weekChoice, "sprintDailyPoints": sprintDailyPoints])
         
         performSegue(withIdentifier: "newDashBoardSegue", sender: self)
         

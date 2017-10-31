@@ -90,6 +90,10 @@ class JoyActivitySelectionVC: UIViewController, iCarouselDataSource, iCarouselDe
     }
     
     func createCategory(){
+        // if a category key already exists do not create a new category, its not a first time user
+        if self.delegate.categoryKey != ""{
+            return
+        }
         let categoryRef = dbRef.child("Categories").childByAutoId()
         self.delegate.categoryKey = categoryRef.key
         print("Category Key : \(self.delegate.categoryKey)")
