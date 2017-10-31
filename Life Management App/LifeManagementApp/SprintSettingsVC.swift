@@ -60,7 +60,7 @@ class SprintSettingsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         weekOptions.dataSource = self
         weekTextField.delegate = self
         categoryKey = delegate.categoryKey
-        print("This is the category key: \(categoryKey)")
+        print("This is the category key (sprint settings) : \(categoryKey)")
         
         weekOptions.isHidden = true
         
@@ -131,13 +131,9 @@ class SprintSettingsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     
     func getSprintActivities(){
         // set references to the three different categories sprints location
-        let joySprintsRef = dbref.child("Categories/\(categoryKey)/JoySprints")
-        let passionSprintsRef = dbref.child("Categories/\(categoryKey)/PassionSprints")
-        let contributionSprintsRef = dbref.child("Categories/\(categoryKey)/ContributionSprints")
-        
-        joySprintsRef.queryOrdered(byChild: "startingDate").queryEqual(toValue: "")
-        passionSprintsRef.queryOrdered(byChild: "startingDate").queryEqual(toValue: "")
-        contributionSprintsRef.queryOrdered(byChild: "startingDate").queryEqual(toValue: "")
+        let joySprintsRef = dbref.child("Categories/\(categoryKey)/JoySprints").queryOrdered(byChild: "numberOfWeeks").queryEqual(toValue: "0")
+        let passionSprintsRef = dbref.child("Categories/\(categoryKey)/PassionSprints").queryOrdered(byChild: "numberOfWeeks").queryEqual(toValue: "0")
+        let contributionSprintsRef = dbref.child("Categories/\(categoryKey)/ContributionSprints").queryOrdered(byChild: "numberOfWeeks").queryEqual(toValue: "0")
         
         joySprintsRef.observeSingleEvent(of: .value, with: {(snapshot) in
             for child in snapshot.children.allObjects as! [DataSnapshot]{
@@ -266,9 +262,9 @@ class SprintSettingsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         }
     }
     
-    func updateTargetScore(id: String, targetPoints: String){
+    func updateTargetScoreAndDailyPoints(id: String, targetPoints: String){
         let activityRef = dbref.child("Activities/\(id)")
-        activityRef.updateChildValues(["targetPoints": targetPoints])
+        activityRef.updateChildValues(["targetPoints": targetPoints, "sprintDailyPoints": sprintDailyPoints])
     }
     
     
@@ -282,15 +278,6 @@ class SprintSettingsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         
         // add validation before updating to database, exit if their is empty fields
         
-        updateTargetScore(id: joyActivityIds[0], targetPoints: joyTargetScore1.text!)
-        updateTargetScore(id: joyActivityIds[1], targetPoints: joyTargetScore2.text!)
-        
-        updateTargetScore(id: passionActivityIds[0], targetPoints: passionTargetScore1.text!)
-        updateTargetScore(id: passionActivityIds[1], targetPoints: passionTargetScore2.text!)
-        
-        updateTargetScore(id: contributionActivityIds[0], targetPoints: contributionTargetScore1.text!)
-        updateTargetScore(id: contributionActivityIds[1], targetPoints: contributionTargetScore2.text!)
-        
         let joySprintRef = dbref.child("Categories/\(categoryKey)/JoySprints/\(joySprintKey)")
         let passionSprintRef = dbref.child("Categories/\(categoryKey)/PassionSprints/\(passionSprintKey)")
         let contributionSprintRef = dbref.child("Categories/\(categoryKey)/ContributionSprints/\(contributionSprintKey)")
@@ -299,10 +286,21 @@ class SprintSettingsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         
         setStartAndEndDate(weeks: weekChoice)
         
-        // update starting date, ending date , number of weeks, and daily points for all activities selected
-        joySprintRef.updateChildValues(["startingDate": startingDate, "endingDate": endingDate, "numberOfWeeks": weekChoice, "sprintDailyPoints": sprintDailyPoints])
-        passionSprintRef.updateChildValues(["startingDate": startingDate, "endingDate": endingDate, "numberOfWeeks": weekChoice, "sprintDailyPoints": sprintDailyPoints])
-        contributionSprintRef.updateChildValues(["startingDate": startingDate, "endingDate": endingDate, "numberOfWeeks": weekChoice, "sprintDailyPoints": sprintDailyPoints])
+        // update starting date, ending date , number of weeks
+        joySprintRef.updateChildValues(["startingDate": startingDate, "endingDate": endingDate, "numberOfWeeks": weekChoice])
+        passionSprintRef.updateChildValues(["startingDate": startingDate, "endingDate": endingDate, "numberOfWeeks": weekChoice,])
+        contributionSprintRef.updateChildValues(["startingDate": startingDate, "endingDate": endingDate, "numberOfWeeks": weekChoice])
+        
+        // update target score and sprint daily points
+        
+        updateTargetScoreAndDailyPoints(id: joyActivityIds[0], targetPoints: joyTargetScore1.text!)
+        updateTargetScoreAndDailyPoints(id: joyActivityIds[1], targetPoints: joyTargetScore2.text!)
+        
+        updateTargetScoreAndDailyPoints(id: passionActivityIds[0], targetPoints: passionTargetScore1.text!)
+        updateTargetScoreAndDailyPoints(id: passionActivityIds[1], targetPoints: passionTargetScore2.text!)
+        
+        updateTargetScoreAndDailyPoints(id: contributionActivityIds[0], targetPoints: contributionTargetScore1.text!)
+        updateTargetScoreAndDailyPoints(id: contributionActivityIds[1], targetPoints: contributionTargetScore2.text!)
         
         performSegue(withIdentifier: "newDashBoardSegue", sender: self)
         

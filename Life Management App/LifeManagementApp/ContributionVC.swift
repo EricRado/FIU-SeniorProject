@@ -34,9 +34,9 @@ class ContributionVC: UIViewController {
     
     let interactor = Interactor()
     
-    var onlineUser: User = User()
     var activity1OnDisplay: Activity = Activity()
     var activity2OnDisplay: Activity = Activity()
+    var btnIndexes = [Int]()
     
     
     @IBOutlet weak var goalScore1: UILabel!
@@ -335,7 +335,6 @@ class ContributionVC: UIViewController {
         var dayCounter = 0
         
         // store the indexes of all the day buttons that are displayed on the calendar
-        var btnIndexes = [Int]()
         
         var dateComponent = DateComponents()
         
@@ -361,7 +360,9 @@ class ContributionVC: UIViewController {
             }
             if (dayOfTheWeek <= button.tag) &&  (dayCounter <= dayCountInWeekChoice){
                 button.setTitle(String(startDay), for: .normal)
-                btnIndexes.append(button.tag)
+                
+                // store the indexes of all the day buttons that are displayed on the calendar
+                self.btnIndexes.append(button.tag)
                 startDay = startDay + 1
                 dayCounter = dayCounter + 1
             }else{
@@ -375,7 +376,7 @@ class ContributionVC: UIViewController {
         for index in dailyPointsStr.characters.indices{
             if dailyPointsStr[index] == "1"{
                 // get the index of the button on display
-                let btnIndex = btnIndexes[counter]
+                let btnIndex = self.btnIndexes[counter]
                 btnArray[btnIndex].backgroundColor = UIColor.green
             }
             counter = counter + 1
@@ -460,15 +461,9 @@ class ContributionVC: UIViewController {
     @IBAction func topDayBtnPressed(_ sender: UIButton) {
         var newScore: Int
         
-        // convert date strings to date objects
-        let dateFmt = DateFormatter()
-        dateFmt.dateFormat = "MMddyyyy"
-        let startDate = dateFmt.date(from: self.userCategory.contributionSprints[0].startingDate)
-        let startDay = Calendar.current.component(.day, from: startDate!)
-        
         // store the index that will be changed in sprint daily points
-        let index = Int(sender.title(for: .normal)!)! - startDay
-        
+        let index = self.btnIndexes.index(of: sender.tag)
+        let indexInt = Int(index!)
         
         if sender.backgroundColor == UIColor.green{
             // the score has decreased
@@ -480,20 +475,15 @@ class ContributionVC: UIViewController {
             sender.backgroundColor = UIColor.green
         }
         
-        updateActualScoreAndDailyPoints(newScore: String(newScore), id: self.userCategory.contributionSprints[0].sprintActivityId1, dailyPointsIndex: index, dailyPoints: self.activity1OnDisplay.sprintDailyPoints)
+        updateActualScoreAndDailyPoints(newScore: String(newScore), id: self.userCategory.contributionSprints[0].sprintActivityId1, dailyPointsIndex: indexInt, dailyPoints: self.activity1OnDisplay.sprintDailyPoints)
     }
     
     @IBAction func bottomDayBtnPressed(_ sender: UIButton) {
         var newScore: Int
         
-        // convert date strings to date objects
-        let dateFmt = DateFormatter()
-        dateFmt.dateFormat = "MMddyyyy"
-        let startDate = dateFmt.date(from: self.userCategory.contributionSprints[0].startingDate)
-        let startDay = Calendar.current.component(.day, from: startDate!)
-        
         // store the index that will be changed in sprint daily points
-        let index = Int(sender.title(for: .normal)!)! - startDay
+        let index = self.btnIndexes.index(of: sender.tag)
+        let indexInt = Int(index!)
         
         if sender.backgroundColor == UIColor.green{
             // the score has decreased
@@ -504,7 +494,7 @@ class ContributionVC: UIViewController {
             newScore = Int(self.activity2OnDisplay.actualPoints)! + 1
             sender.backgroundColor = UIColor.green
         }
-        updateActualScoreAndDailyPoints(newScore: String(newScore), id: self.userCategory.contributionSprints[0].sprintActivityId2, dailyPointsIndex: index, dailyPoints: self.activity2OnDisplay.sprintDailyPoints)
+        updateActualScoreAndDailyPoints(newScore: String(newScore), id: self.userCategory.contributionSprints[0].sprintActivityId2, dailyPointsIndex: indexInt, dailyPoints: self.activity2OnDisplay.sprintDailyPoints)
     }
     
     @IBAction func submitPressed(_ sender: UIButton) {
