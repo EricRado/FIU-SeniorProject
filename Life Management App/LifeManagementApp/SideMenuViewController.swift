@@ -8,14 +8,41 @@
 
 import UIKit
 
-class SideMenuViewController: UIViewController {
+class SideMenuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
     // mainVC passes the interactor object to the sidemenuVC. This is how they share state
     var interactor: Interactor? = nil
     
+    var iconNameArr = [String]()
+    var iconImage = [UIImage]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        iconNameArr = ["Home","New Cycle","Sprint History"]
+        
+        
 
         // Do any additional setup after loading the view.
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return iconNameArr.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SideMenuTableViewCell") as! SideMenuTableViewCell
+        cell.iconNameLabel.text! = iconNameArr[indexPath.row]
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as! SideMenuTableViewCell
+        
+        if cell.iconNameLabel.text! == "New Cycle"{
+            self.performSegue(withIdentifier: "newCycleSegue", sender: self)
+        }
     }
     
     @IBAction func handleGesture(sender: UIPanGestureRecognizer){

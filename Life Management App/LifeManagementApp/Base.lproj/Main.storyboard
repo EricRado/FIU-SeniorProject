@@ -4128,23 +4128,63 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ea-go-2Jm">
-                                <rect key="frame" x="41" y="145" width="115" height="30"/>
+                                <rect key="frame" x="29" y="39" width="115" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="New Sprint"/>
-                                <connections>
-                                    <segue destination="aVb-NQ-5Dj" kind="show" id="IaP-48-Zun"/>
-                                </connections>
                             </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="41" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7OP-ZT-Yjv">
+                                <rect key="frame" x="0.0" y="133.5" width="282" height="533.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SideMenuTableViewCell" rowHeight="41" id="YFz-ht-4qe" customClass="SideMenuTableViewCell" customModule="LifeManagementApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="282" height="41"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YFz-ht-4qe" id="gNd-qC-OhE">
+                                            <rect key="frame" x="0.0" y="0.0" width="282" height="40"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="joy" translatesAutoresizingMaskIntoConstraints="NO" id="to2-Zn-r0q">
+                                                    <rect key="frame" x="8" y="0.0" width="40" height="41"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="New Cycle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hpi-AT-dNE">
+                                                    <rect key="frame" x="64" y="10" width="210" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="iconImage" destination="to2-Zn-r0q" id="rtX-B6-50j"/>
+                                            <outlet property="iconNameLabel" destination="hpi-AT-dNE" id="yNB-ZG-aZ8"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <sections/>
+                                <connections>
+                                    <outlet property="dataSource" destination="d5V-DO-Q8U" id="gGh-RP-z7B"/>
+                                    <outlet property="delegate" destination="d5V-DO-Q8U" id="TSn-oA-aV8"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.58853316307067871" green="0.91091698408126831" blue="0.39747157692909241" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="7OP-ZT-Yjv" firstAttribute="leading" secondItem="1li-pi-AkF" secondAttribute="leading" id="8qC-eG-iex"/>
                             <constraint firstItem="pk9-DY-W0i" firstAttribute="width" secondItem="1li-pi-AkF" secondAttribute="width" multiplier="0.25" id="I7n-tX-xWY"/>
+                            <constraint firstItem="pk9-DY-W0i" firstAttribute="leading" secondItem="7OP-ZT-Yjv" secondAttribute="trailing" id="Opo-SU-G9W"/>
+                            <constraint firstItem="7OP-ZT-Yjv" firstAttribute="height" secondItem="1li-pi-AkF" secondAttribute="height" multiplier="0.8" id="ScY-w5-bot"/>
+                            <constraint firstItem="EKT-cw-wLh" firstAttribute="top" secondItem="7OP-ZT-Yjv" secondAttribute="bottom" id="YGe-FD-kLU"/>
                             <constraint firstItem="EKT-cw-wLh" firstAttribute="top" secondItem="pk9-DY-W0i" secondAttribute="bottom" id="fBs-zg-HiK"/>
                             <constraint firstItem="pk9-DY-W0i" firstAttribute="top" secondItem="Cif-EU-1nz" secondAttribute="bottom" id="rbt-FQ-Osh"/>
                             <constraint firstAttribute="trailing" secondItem="pk9-DY-W0i" secondAttribute="trailing" id="sPr-92-wiu"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <segue destination="aVb-NQ-5Dj" kind="show" identifier="newCycleSegue" id="IHu-UO-RcH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GKT-cB-krq" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <panGestureRecognizer minimumNumberOfTouches="1" id="cho-6t-AvS">
@@ -6320,10 +6360,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="startSprint" translatesAutoresizingMaskIntoConstraints="NO" id="iDe-lr-OsV">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lQN-aq-SB8">
                                 <rect key="frame" x="220" y="442" width="97" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -6534,13 +6570,12 @@
         <image name="screen3top" width="334" height="255"/>
         <image name="screen4Bottom" width="400" height="267"/>
         <image name="screen4top" width="334" height="255"/>
-        <image name="startSprint" width="805" height="537"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="vUG-b0-bNY"/>
-        <segue reference="IaP-48-Zun"/>
+        <segue reference="IHu-UO-RcH"/>
         <segue reference="E2e-RD-eat"/>
-        <segue reference="tDY-fT-66O"/>
+        <segue reference="vUG-b0-bNY"/>
         <segue reference="Mmc-8c-1pg"/>
+        <segue reference="tDY-fT-66O"/>
     </inferredMetricsTieBreakers>
 </document>

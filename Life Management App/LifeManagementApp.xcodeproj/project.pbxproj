@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		070ED9121FABBD80007F18F2 /* SideMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070ED9111FABBD80007F18F2 /* SideMenuTableViewCell.swift */; };
 		07174FD51F8E73DE00E1E8AC /* JoyActivitySelectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07174FD41F8E73DE00E1E8AC /* JoyActivitySelectionVC.swift */; };
 		072F861C1F5D9227007E5A8A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072F861B1F5D9227007E5A8A /* AppDelegate.swift */; };
 		072F86211F5D9227007E5A8A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 072F861F1F5D9227007E5A8A /* Main.storyboard */; };
@@ -27,8 +28,6 @@
 		072F86851F6F236D007E5A8A /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072F86841F6F236D007E5A8A /* Category.swift */; };
 		072F86871F6F4D7F007E5A8A /* RegistrationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072F86861F6F4D7F007E5A8A /* RegistrationVC.swift */; };
 		072F86891F6F8121007E5A8A /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072F86881F6F8121007E5A8A /* SignInVC.swift */; };
-		07316B811F83191F00EF2F8F /* SideMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07316B801F83191F00EF2F8F /* SideMenuTableViewCell.swift */; };
-		07316B831F832C5400EF2F8F /* SideMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07316B821F832C5400EF2F8F /* SideMenuVC.swift */; };
 		07316B851F843C3D00EF2F8F /* KDCircularProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07316B841F843C3D00EF2F8F /* KDCircularProgress.swift */; };
 		073D89D71FA7692F000DE687 /* MenuHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073D89D61FA7692F000DE687 /* MenuHelper.swift */; };
 		073D89D91FA76947000DE687 /* Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 073D89D81FA76947000DE687 /* Interactor.swift */; };
@@ -71,6 +70,7 @@
 
 /* Begin PBXFileReference section */
 		05652A4FCE086819C9AC972C /* Pods-LifeManagementAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeManagementAppTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LifeManagementAppTests/Pods-LifeManagementAppTests.debug.xcconfig"; sourceTree = "<group>"; };
+		070ED9111FABBD80007F18F2 /* SideMenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuTableViewCell.swift; sourceTree = "<group>"; };
 		07174FD41F8E73DE00E1E8AC /* JoyActivitySelectionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoyActivitySelectionVC.swift; sourceTree = "<group>"; };
 		072F86181F5D9227007E5A8A /* LifeManagementApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LifeManagementApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		072F861B1F5D9227007E5A8A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -97,8 +97,6 @@
 		072F86841F6F236D007E5A8A /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		072F86861F6F4D7F007E5A8A /* RegistrationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationVC.swift; sourceTree = "<group>"; };
 		072F86881F6F8121007E5A8A /* SignInVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
-		07316B801F83191F00EF2F8F /* SideMenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuTableViewCell.swift; sourceTree = "<group>"; };
-		07316B821F832C5400EF2F8F /* SideMenuVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuVC.swift; sourceTree = "<group>"; };
 		07316B841F843C3D00EF2F8F /* KDCircularProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDCircularProgress.swift; sourceTree = "<group>"; };
 		073D89D61FA7692F000DE687 /* MenuHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuHelper.swift; sourceTree = "<group>"; };
 		073D89D81FA76947000DE687 /* Interactor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Interactor.swift; sourceTree = "<group>"; };
@@ -241,8 +239,6 @@
 				072F86881F6F8121007E5A8A /* SignInVC.swift */,
 				072F86861F6F4D7F007E5A8A /* RegistrationVC.swift */,
 				079265641F7B0636008B5BDE /* JoyVC.swift */,
-				07316B801F83191F00EF2F8F /* SideMenuTableViewCell.swift */,
-				07316B821F832C5400EF2F8F /* SideMenuVC.swift */,
 				07F6BB111F8DC33B00E5F4E1 /* CategoryTabBarController.swift */,
 				07174FD41F8E73DE00E1E8AC /* JoyActivitySelectionVC.swift */,
 				076E009A1F9DB050004467D0 /* PassionActivitySelectionVC.swift */,
@@ -262,6 +258,7 @@
 				073D89DA1FA7696A000DE687 /* PresentMenuAnimator.swift */,
 				073D89DC1FA7697E000DE687 /* DismissMenuAnimator.swift */,
 				073D89DE1FA7754E000DE687 /* SideMenuViewController.swift */,
+				070ED9111FABBD80007F18F2 /* SideMenuTableViewCell.swift */,
 			);
 			name = "Side Menu";
 			sourceTree = "<group>";
@@ -614,7 +611,6 @@
 				072F86721F685D5C007E5A8A /* Popup1VC.swift in Sources */,
 				072F866C1F609F08007E5A8A /* PageVC.swift in Sources */,
 				073D89DD1FA7697E000DE687 /* DismissMenuAnimator.swift in Sources */,
-				07316B811F83191F00EF2F8F /* SideMenuTableViewCell.swift in Sources */,
 				07316B851F843C3D00EF2F8F /* KDCircularProgress.swift in Sources */,
 				072F867C1F69F2A9007E5A8A /* Popup5VC.swift in Sources */,
 				07F6BB0E1F874FB200E5F4E1 /* Activity.swift in Sources */,
@@ -625,6 +621,7 @@
 				072F86891F6F8121007E5A8A /* SignInVC.swift in Sources */,
 				076E009D1F9DB078004467D0 /* ContributionActivitySelectionVC.swift in Sources */,
 				072F86781F69DABF007E5A8A /* Popup3VC.swift in Sources */,
+				070ED9121FABBD80007F18F2 /* SideMenuTableViewCell.swift in Sources */,
 				079265651F7B0636008B5BDE /* JoyVC.swift in Sources */,
 				073D89DB1FA7696A000DE687 /* PresentMenuAnimator.swift in Sources */,
 				072F86761F69968D007E5A8A /* Popup2VC.swift in Sources */,
@@ -634,7 +631,6 @@
 				07F6BB121F8DC33B00E5F4E1 /* CategoryTabBarController.swift in Sources */,
 				072F86831F6F1CF6007E5A8A /* User.swift in Sources */,
 				072F86741F696625007E5A8A /* Screen4VC.swift in Sources */,
-				07316B831F832C5400EF2F8F /* SideMenuVC.swift in Sources */,
 				072F86851F6F236D007E5A8A /* Category.swift in Sources */,
 				073D89D91FA76947000DE687 /* Interactor.swift in Sources */,
 				07174FD51F8E73DE00E1E8AC /* JoyActivitySelectionVC.swift in Sources */,

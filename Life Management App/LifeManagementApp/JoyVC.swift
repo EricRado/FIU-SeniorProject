@@ -282,7 +282,11 @@ class JoyVC: UIViewController {
             Double(self.activity1OnDisplay.targetPoints){
             goalP1 = (actual1 / target1) * 100
             let goalP1Int = Int(round(goalP1!))
-            self.goalPercentage1?.text = "\(String(goalP1Int))%"
+            if goalP1Int >= 100{
+                self.goalPercentage1?.text = "100%"
+            }else{
+                self.goalPercentage1?.text = "\(String(goalP1Int))%"
+            }
         }else{return}
         
         // set goal percentage actual/target for activity 2
@@ -290,7 +294,11 @@ class JoyVC: UIViewController {
             Double(self.activity2OnDisplay.targetPoints){
             goalP2 = (actual2 / target2) * 100
             let goalP2Int = Int(round(goalP2!))
-            self.goalPercentage2?.text = "\(String(goalP2Int))%"
+            if goalP2Int >= 100{
+                self.goalPercentage2?.text = "100%"
+            }else{
+                self.goalPercentage2?.text = "\(String(goalP2Int))%"
+            }
         }else{return}
         
         // find the average score of both joy activies by taking their 
