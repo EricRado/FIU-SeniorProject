@@ -35,6 +35,7 @@ class PassionVC: UIViewController {
     
     let interactor = Interactor()
     
+    var sprintOnDisplay: Sprint = Sprint()
     var activity1OnDisplay: Activity = Activity()
     var activity2OnDisplay: Activity = Activity()
     var btnIndexes = [Int]()
@@ -73,7 +74,6 @@ class PassionVC: UIViewController {
     
     var delegate = UIApplication.shared.delegate as! AppDelegate
     
-    var userCategory: Category = Category()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,9 +93,7 @@ class PassionVC: UIViewController {
         turnLabelToCircle(label: currentScore1)
         turnLabelToCircle(label: currentScore2)
         
-        queryByStartingDate()
-        
-        getUserCategory(userId: self.delegate.user.id)
+        getCategoryKey(userId: self.delegate.user.id)
     }
     
     func turnLabelToCircle(label: UILabel){
@@ -110,82 +108,54 @@ class PassionVC: UIViewController {
         self.view.layoutIfNeeded()
     }
     
-    func queryByStartingDate(){
+    func getCategoryKey(userId: String){
         let categoryRef = dbref.child("Categories")
-        let userCategoryQuery = categoryRef.queryOrdered(byChild: "startingDate").queryEqual(toValue: self.delegate.user.id)
-        print("INSIDE QUERY BY STARTING DATE...")
+        /* query the category collection and find the record which
+         contains the current online user's id */
+        let userCategoryQuery = categoryRef.queryOrdered(byChild: "userId").queryEqual(toValue: userId)
+        
         userCategoryQuery.observeSingleEvent(of: .value, with: {(snapshot) in
             for child in snapshot.children.allObjects as! [DataSnapshot]{
-                if !child.exists(){
-                    print("Snapshot is empty")
-                    return
-                }
-                print("STARTING DATE QUERY...")
-                print(child)
+                /* store the key of the user category collection in order to
+                 make a reference to joy, contribution and passion sprints */
+                self.delegate.categoryKey = child.key
+                self.getActiveSprint(categoryKey: self.delegate.categoryKey)
             }
+        }, withCancel: {(error) in
+            print(error.localizedDescription)
         })
     }
 
-    func getUserCategory(userId: String){
-        let categoryRef = dbref.child("Categories")
+    func getActiveSprint(categoryKey: String){
+        let categoryRef = dbref.child("Categories/\(categoryKey)/PassionSprints")
         
-        /* query the category collection and find the record which
-         contains the current online user's id */
-        let userCategoryQuery = categoryRef.queryOrdered(byChild: "userId")
-            .queryEqual(toValue: userId)
+        // get the latest sprint
+        let activeSprintQuery = categoryRef.queryOrdered(byChild: "startingDate").queryLimited(toLast: 1)
         
-        /* store the key of the user category collection in order to
-         make a reference to joy, contribution and passion sprints */
-        userCategoryQuery.observeSingleEvent(of: .value, with: {(snapshot) in
+        activeSprintQuery.observeSingleEvent(of: .value, with: {(snapshot) in
             for child in snapshot.children.allObjects as! [DataSnapshot]{
                 if !child.exists(){
                     print("Snapshot is empty")
                     return
                 }
-                self.delegate.categoryKey = child.key
-                let joySprintSnapShot = child.childSnapshot(forPath:"PassionSprints/")
                 
-                self.storeSprints(snapshot: joySprintSnapShot, categoryName: "Passion")
+                self.sprintOnDisplay = Sprint(snapshot: child)!
                 
-                let activityId1 = self.userCategory.passionSprints[0].sprintActivityId1
-                let activityId2 = self.userCategory.passionSprints[0].sprintActivityId2
-                
+                let activityId1 = self.sprintOnDisplay.sprintActivityId1
+                let activityId2 = self.sprintOnDisplay.sprintActivityId2
                 self.getActivities(id1: activityId1, id2: activityId2)
-                
-                //self.reloadInputViews()
                 
                 self.setDates()
                 self.setGoalsText()
                 
             }
-            
         }, withCancel: {
             (error) in print(error.localizedDescription)
         })
+     
     }
     
-    func storeSprints(snapshot: DataSnapshot, categoryName: String){
-        for child in snapshot.children.allObjects as! [DataSnapshot]{
-            // check if snapshot is empty before adding it to category arrays
-            if !child.exists(){
-                print("Snapshot is empty...")
-                return
-            }
-            // store the data from the snapshot to a sprint object
-            let sprintDict = child.value as? [String: Any]
-            let newSprint = parseSprintDictionary(dict: sprintDict!)
-            // store the sprint to its specific Sprint array
-            if(categoryName == "Joy"){
-                self.userCategory.joySprints.append(newSprint)
-            }else if(categoryName == "Passion"){
-                self.userCategory.passionSprints.append(newSprint)
-            }else{
-                self.userCategory.contributionSprints.append(newSprint)
-            }
-            
-        }
-    }
-    
+
     func getActivities(id1: String, id2: String){
         
         //set two referencece points to each activity that will be displayed on dashboard
@@ -222,24 +192,6 @@ class PassionVC: UIViewController {
             self.setCalendar(btnArray: self.dayBottomBtns, dailyPointsStr: self.activity2OnDisplay.sprintDailyPoints)
         })
         
-    }
-    
-    func parseSprintDictionary(dict: [String: Any]) -> Sprint {
-        let endingDate = dict["endingDate"] as? String
-        let startingDate = dict["startingDate"] as? String
-        let numberOfWeeks = dict["numberOfWeeks"] as? String
-        let sprintActivityId1 = dict["sprintActivityId1"] as? String
-        let sprintActivityId2 = dict["sprintActivityId2"] as? String
-        let sprintOverallScore = dict["sprintOverallScore"] as? String
-        let goal1 = dict["goal1"] as? String
-        let goal2 = dict["goal2"] as? String
-        let goal3 = dict["goal3"] as? String
-        let goal4 = dict["goal4"] as? String
-        let categoryId = dict["categoryId"] as? String
-        
-        let sprint = Sprint(numberOfWeeks: numberOfWeeks!, sprintOverallScore: sprintOverallScore!, startingDate: startingDate!, endingDate: endingDate!, sprintActivityId1: sprintActivityId1!, sprintActivityId2: sprintActivityId2!,goal1: goal1!, goal2: goal2!, goal3: goal3!, goal4: goal4!, categoryId: categoryId!)
-        
-        return sprint
     }
     
     func parseActivityDictionary(dict: [String:Any]) -> Activity{
@@ -301,8 +253,8 @@ class PassionVC: UIViewController {
         
         // convert date strings to date objects
         dateFmt.dateFormat = "MMddyyyy"
-        let startDate = dateFmt.date(from: self.userCategory.passionSprints[0].startingDate)
-        let endDate = dateFmt.date(from: self.userCategory.passionSprints[0].endingDate)
+        let startDate = dateFmt.date(from: self.sprintOnDisplay.startingDate)
+        let endDate = dateFmt.date(from: self.sprintOnDisplay.endingDate)
         
         // format dates to MM/dd/yyyy
         dateFmt.dateFormat = "MM/dd/yyyy"
@@ -319,7 +271,7 @@ class PassionVC: UIViewController {
         
         // convert date strings to date objects
         dateFmt.dateFormat = "MMddyyyy"
-        let startDate = dateFmt.date(from: self.userCategory.passionSprints[0].startingDate)
+        let startDate = dateFmt.date(from: self.sprintOnDisplay.startingDate)
         
         // save start month will be used to check if the date has changed to a new month
         let startMonth = Calendar.current.component(.month, from: startDate!)
@@ -332,7 +284,7 @@ class PassionVC: UIViewController {
         var startDay = Calendar.current.component(.day, from: startDate!)
         
         // determine the last day of the sprint from the number of weeks input by the user
-        let dayCountInWeekChoice = (Int(self.userCategory.passionSprints[0].numberOfWeeks)! * 7) - 1
+        let dayCountInWeekChoice = (Int(self.sprintOnDisplay.numberOfWeeks)! * 7) - 1
         var dayCounter = 0
         
         var dateComponent = DateComponents()
@@ -383,10 +335,10 @@ class PassionVC: UIViewController {
     }
 
     func setGoalsText(){
-        self.goal1TextField.text = self.userCategory.passionSprints[0].goal1
-        self.goal2TextField.text = self.userCategory.passionSprints[0].goal2
-        self.goal3TextField.text = self.userCategory.passionSprints[0].goal3
-        self.goal4TextField.text = self.userCategory.passionSprints[0].goal4
+        self.goal1TextField.text = self.sprintOnDisplay.goal1
+        self.goal2TextField.text = self.sprintOnDisplay.goal2
+        self.goal3TextField.text = self.sprintOnDisplay.goal3
+        self.goal4TextField.text = self.sprintOnDisplay.goal4
     }
     
     func setActivityImg(activityName: String, option: String){
@@ -441,7 +393,7 @@ class PassionVC: UIViewController {
     func updateGoals(goal1: String, goal2: String, goal3: String, goal4: String){
         // query by starting date to find the key of the current sprint displayed
         let categoryRef = dbref.child("Categories/\(self.delegate.categoryKey)/PassionSprints/")
-        let query = categoryRef.queryOrdered(byChild: "startingDate").queryEqual(toValue: self.userCategory.passionSprints[0].startingDate)
+        let query = categoryRef.queryOrdered(byChild: "startingDate").queryEqual(toValue: self.sprintOnDisplay.startingDate)
         
         query.observeSingleEvent(of: .value, with: {(snapshot) in
             for child in snapshot.children.allObjects as! [DataSnapshot]{
@@ -474,7 +426,7 @@ class PassionVC: UIViewController {
             sender.backgroundColor = UIColor.green
         }
         
-        updateActualScoreAndDailyPoints(newScore: String(newScore), id: self.userCategory.passionSprints[0].sprintActivityId1, dailyPointsIndex: indexInt, dailyPoints: self.activity1OnDisplay.sprintDailyPoints)
+        updateActualScoreAndDailyPoints(newScore: String(newScore), id: self.sprintOnDisplay.sprintActivityId1, dailyPointsIndex: indexInt, dailyPoints: self.activity1OnDisplay.sprintDailyPoints)
     }
     
     @IBAction func bottomDayBtnPressed(_ sender: UIButton) {
@@ -493,7 +445,7 @@ class PassionVC: UIViewController {
             newScore = Int(self.activity2OnDisplay.actualPoints)! + 1
             sender.backgroundColor = UIColor.green
         }
-        updateActualScoreAndDailyPoints(newScore: String(newScore), id: self.userCategory.passionSprints[0].sprintActivityId2, dailyPointsIndex: indexInt, dailyPoints: self.activity2OnDisplay.sprintDailyPoints)
+        updateActualScoreAndDailyPoints(newScore: String(newScore), id: self.sprintOnDisplay.sprintActivityId2, dailyPointsIndex: indexInt, dailyPoints: self.activity2OnDisplay.sprintDailyPoints)
     }
     
     @IBAction func submitPressed(_ sender: UIButton) {

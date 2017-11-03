@@ -78,12 +78,9 @@ class JoyVC: UIViewController {
     @IBOutlet weak var joyScore: KDCircularProgress!
     @IBOutlet weak var joyScoreLabel: UILabel!
     
-    
     var dbref = Database.database().reference(fromURL: "https://life-management-f0cdf.firebaseio.com/")
     
     var delegate = UIApplication.shared.delegate as! AppDelegate
-    
-    var userCategory: Category = Category()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -130,16 +127,17 @@ class JoyVC: UIViewController {
                 /* store the key of the user category collection in order to
                  make a reference to joy, contribution and passion sprints */
                 self.delegate.categoryKey = child.key
-                self.getUserCategory(categoryKey: self.delegate.categoryKey)
+                self.getActiveSprint(categoryKey: self.delegate.categoryKey)
             }
         }, withCancel: {(error) in
             print(error.localizedDescription)
         })
     }
     
-    func getUserCategory(categoryKey: String){
+    func getActiveSprint(categoryKey: String){
         let categoryRef = dbref.child("Categories/\(categoryKey)/JoySprints")
         
+        // get the latest sprint
         let activeSprintQuery = categoryRef.queryOrdered(byChild: "startingDate").queryLimited(toLast: 1)
         
         activeSprintQuery.observeSingleEvent(of: .value, with: {(snapshot) in
