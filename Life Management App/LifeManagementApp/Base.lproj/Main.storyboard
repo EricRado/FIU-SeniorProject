@@ -4110,7 +4110,7 @@
         <!--Side Menu View Controller-->
         <scene sceneID="RKa-Hk-fRa">
             <objects>
-                <viewController id="d5V-DO-Q8U" customClass="SideMenuViewController" customModule="LifeManagementApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController useStoryboardIdentifierAsRestorationIdentifier="YES" id="d5V-DO-Q8U" customClass="SideMenuViewController" customModule="LifeManagementApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Cif-EU-1nz"/>
                         <viewControllerLayoutGuide type="bottom" id="EKT-cw-wLh"/>
@@ -4126,12 +4126,6 @@
                                     <action selector="closeMenu:" destination="d5V-DO-Q8U" eventType="touchUpInside" id="FkO-A6-o9y"/>
                                     <outletCollection property="gestureRecognizers" destination="cho-6t-AvS" appends="YES" id="VoV-vO-9mB"/>
                                 </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ea-go-2Jm">
-                                <rect key="frame" x="29" y="39" width="115" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="New Sprint"/>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="41" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7OP-ZT-Yjv">
                                 <rect key="frame" x="0.0" y="133.5" width="282" height="533.5"/>
@@ -4170,7 +4164,7 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" red="0.58853316307067871" green="0.91091698408126831" blue="0.39747157692909241" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="7OP-ZT-Yjv" firstAttribute="leading" secondItem="1li-pi-AkF" secondAttribute="leading" id="8qC-eG-iex"/>
                             <constraint firstItem="pk9-DY-W0i" firstAttribute="width" secondItem="1li-pi-AkF" secondAttribute="width" multiplier="0.25" id="I7n-tX-xWY"/>

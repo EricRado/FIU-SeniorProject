@@ -19,7 +19,7 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        iconNameArr = ["Home","New Cycle","Sprint History"]
+        iconNameArr = ["Home","New Cycle","Sprint History", "View Coaches", "Share Progress","Messages", "Invite a Friend"]
         
         
 
