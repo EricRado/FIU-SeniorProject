@@ -4190,10 +4190,10 @@
             </objects>
             <point key="canvasLocation" x="7792.8000000000002" y="-1515.2923538230887"/>
         </scene>
-        <!--View Controller-->
+        <!--Previous CycleVC-->
         <scene sceneID="yWO-J5-kWA">
             <objects>
-                <viewController id="0Lk-KN-HwK" sceneMemberID="viewController">
+                <viewController id="0Lk-KN-HwK" customClass="PreviousCycleVC" customModule="LifeManagementApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="5Nh-fI-8kL"/>
                         <viewControllerLayoutGuide type="bottom" id="TRd-32-QWe"/>
@@ -4206,7 +4206,7 @@
                                 <rect key="frame" x="0.0" y="66.5" width="375" height="600.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="summaryCell" rowHeight="126" id="Xcm-yC-Anq">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="summaryCell" rowHeight="126" id="Xcm-yC-Anq" customClass="PreviousCycleTableViewCell" customModule="LifeManagementApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="126"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Xcm-yC-Anq" id="Rb1-oF-RlY">
@@ -4308,10 +4308,10 @@
             </objects>
             <point key="canvasLocation" x="8556" y="-1521.5892053973014"/>
         </scene>
-        <!--View Controller-->
+        <!--Previous Cycle SummaryVC-->
         <scene sceneID="GeR-JJ-FO4">
             <objects>
-                <viewController id="oyB-RY-4aW" sceneMemberID="viewController">
+                <viewController id="oyB-RY-4aW" customClass="PreviousCycleSummaryVC" customModule="LifeManagementApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="j7h-Lu-s20"/>
                         <viewControllerLayoutGuide type="bottom" id="4SV-eN-Cl0"/>

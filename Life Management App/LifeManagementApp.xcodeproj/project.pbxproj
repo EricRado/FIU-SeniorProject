@@ -43,6 +43,9 @@
 		07B40A151F99A6540002DCC3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07B40A141F99A6540002DCC3 /* QuartzCore.framework */; };
 		07B40A191F99A8E30002DCC3 /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 07B40A181F99A8E30002DCC3 /* iCarousel.m */; };
 		07B40A1D1F9AC6200002DCC3 /* ActivityImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B40A1C1F9AC6200002DCC3 /* ActivityImage.swift */; };
+		07F2F4621FB4B547002B4308 /* PreviousCycleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F2F4611FB4B547002B4308 /* PreviousCycleVC.swift */; };
+		07F2F4641FB4B611002B4308 /* PreviousCycleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F2F4631FB4B611002B4308 /* PreviousCycleTableViewCell.swift */; };
+		07F2F4661FB4B7ED002B4308 /* PreviousCycleSummaryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F2F4651FB4B7ED002B4308 /* PreviousCycleSummaryVC.swift */; };
 		07F6BB0E1F874FB200E5F4E1 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F6BB0D1F874FB200E5F4E1 /* Activity.swift */; };
 		07F6BB101F874FC300E5F4E1 /* Sprint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F6BB0F1F874FC300E5F4E1 /* Sprint.swift */; };
 		07F6BB121F8DC33B00E5F4E1 /* CategoryTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F6BB111F8DC33B00E5F4E1 /* CategoryTabBarController.swift */; };
@@ -114,6 +117,9 @@
 		07B40A171F99A8E30002DCC3 /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iCarousel.h; path = "../../../../projects/iCarousel-master/iCarousel/iCarousel.h"; sourceTree = "<group>"; };
 		07B40A181F99A8E30002DCC3 /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = iCarousel.m; path = "../../../../projects/iCarousel-master/iCarousel/iCarousel.m"; sourceTree = "<group>"; };
 		07B40A1C1F9AC6200002DCC3 /* ActivityImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityImage.swift; sourceTree = "<group>"; };
+		07F2F4611FB4B547002B4308 /* PreviousCycleVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviousCycleVC.swift; sourceTree = "<group>"; };
+		07F2F4631FB4B611002B4308 /* PreviousCycleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviousCycleTableViewCell.swift; sourceTree = "<group>"; };
+		07F2F4651FB4B7ED002B4308 /* PreviousCycleSummaryVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviousCycleSummaryVC.swift; sourceTree = "<group>"; };
 		07F6BB0D1F874FB200E5F4E1 /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
 		07F6BB0F1F874FC300E5F4E1 /* Sprint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sprint.swift; sourceTree = "<group>"; };
 		07F6BB111F8DC33B00E5F4E1 /* CategoryTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryTabBarController.swift; sourceTree = "<group>"; };
@@ -246,6 +252,9 @@
 				076E009E1F9EAAF8004467D0 /* SprintSettingsVC.swift */,
 				073D89E01FA78E14000DE687 /* PassionVC.swift */,
 				073D89E21FA78E43000DE687 /* ContributionVC.swift */,
+				07F2F4611FB4B547002B4308 /* PreviousCycleVC.swift */,
+				07F2F4631FB4B611002B4308 /* PreviousCycleTableViewCell.swift */,
+				07F2F4651FB4B7ED002B4308 /* PreviousCycleSummaryVC.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -617,12 +626,15 @@
 				076E009B1F9DB050004467D0 /* PassionActivitySelectionVC.swift in Sources */,
 				073D89E31FA78E43000DE687 /* ContributionVC.swift in Sources */,
 				07F6BB101F874FC300E5F4E1 /* Sprint.swift in Sources */,
+				07F2F4621FB4B547002B4308 /* PreviousCycleVC.swift in Sources */,
 				072F867A1F69EF88007E5A8A /* Popup4VC.swift in Sources */,
 				072F86891F6F8121007E5A8A /* SignInVC.swift in Sources */,
 				076E009D1F9DB078004467D0 /* ContributionActivitySelectionVC.swift in Sources */,
 				072F86781F69DABF007E5A8A /* Popup3VC.swift in Sources */,
+				07F2F4661FB4B7ED002B4308 /* PreviousCycleSummaryVC.swift in Sources */,
 				070ED9121FABBD80007F18F2 /* SideMenuTableViewCell.swift in Sources */,
 				079265651F7B0636008B5BDE /* JoyVC.swift in Sources */,
+				07F2F4641FB4B611002B4308 /* PreviousCycleTableViewCell.swift in Sources */,
 				073D89DB1FA7696A000DE687 /* PresentMenuAnimator.swift in Sources */,
 				072F86761F69968D007E5A8A /* Popup2VC.swift in Sources */,
 				072F86871F6F4D7F007E5A8A /* RegistrationVC.swift in Sources */,
