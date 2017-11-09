@@ -19,7 +19,7 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        iconNameArr = ["Home","New Cycle","Sprint History", "View Coaches", "Share Progress","Messages", "Invite a Friend"]
+        iconNameArr = ["Home","New Cycle","Previous Cycle", "View Coaches", "Share Progress","Messages", "Invite a Friend"]
         
         
 
@@ -43,6 +43,11 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
         if cell.iconNameLabel.text! == "New Cycle"{
             self.performSegue(withIdentifier: "newCycleSegue", sender: self)
         }
+        
+        if cell.iconNameLabel.text! == "Previous Cycle"{
+            self.performSegue(withIdentifier: "previousCycleSegue", sender: self)
+        }
+        
     }
     
     @IBAction func handleGesture(sender: UIPanGestureRecognizer){
