@@ -29,12 +29,13 @@ class PreviousCycleVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     }
     
     func getSpecificCategory(ref: DatabaseReference, option: String){
-        ref.observe(.value, with: {(snapshot) in
+        ref.queryOrdered(byChild: "startingDate").observe(.value, with: {(snapshot) in
             for child in snapshot.children.allObjects as! [DataSnapshot]{
                 if !child.exists(){
                     print("Snapshot is empty")
                     return
                 }
+                print(child)
                 let newSprint = Sprint(snapshot: child)
                 print(newSprint!)
                 if option == "Joy"{
@@ -73,8 +74,9 @@ class PreviousCycleVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "summaryCell") as! PreviousCycleTableViewCell
+        let newIndex = (self.userCategory.joySprints.count - 1) - indexPath.row
         
-        cell.sprintDate.text = getDate(startingDate: self.userCategory.joySprints[indexPath.row].startingDate, endingDate: self.userCategory.joySprints[indexPath.row].endingDate)
+        cell.sprintDate.text = getDate(startingDate: self.userCategory.joySprints[newIndex].startingDate, endingDate: self.userCategory.joySprints[newIndex].endingDate)
         return cell
     }
     
