@@ -21,9 +21,6 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
         
         iconNameArr = ["Home","New Cycle","Previous Cycle", "View Coaches", "Share Progress","Messages", "Invite a Friend"]
         
-        
-
-        // Do any additional setup after loading the view.
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -4288,8 +4288,18 @@
                                                 <constraint firstItem="elJ-4G-IgP" firstAttribute="top" secondItem="g4c-Xm-YaY" secondAttribute="top" id="xty-5l-Rys"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="contributionOverallScore" destination="TWI-yL-h2G" id="MSF-bf-VpE"/>
+                                            <outlet property="joyOverallScore" destination="qm7-A4-Wux" id="frV-fa-OpB"/>
+                                            <outlet property="passionOverallScore" destination="elJ-4G-IgP" id="j5G-ka-XEl"/>
+                                            <outlet property="sprintDate" destination="FE0-Yk-6RS" id="99A-Yy-9dN"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="0Lk-KN-HwK" id="FmP-lZ-gl9"/>
+                                    <outlet property="delegate" destination="0Lk-KN-HwK" id="WBE-9j-QCj"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

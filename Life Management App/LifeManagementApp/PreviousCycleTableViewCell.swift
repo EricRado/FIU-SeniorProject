@@ -10,7 +10,10 @@ import UIKit
 
 class PreviousCycleTableViewCell: UITableViewCell {
     
-    
+    @IBOutlet weak var sprintDate: UILabel!
+    @IBOutlet weak var joyOverallScore: UILabel!
+    @IBOutlet weak var passionOverallScore: UILabel!
+    @IBOutlet weak var contributionOverallScore: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
