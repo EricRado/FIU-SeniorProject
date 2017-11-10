@@ -79,7 +79,6 @@ class JoyVC: UIViewController {
     @IBOutlet weak var joyScoreLabel: UILabel!
     
     var dbref = Database.database().reference(fromURL: "https://life-management-f0cdf.firebaseio.com/")
-    
     var delegate = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
