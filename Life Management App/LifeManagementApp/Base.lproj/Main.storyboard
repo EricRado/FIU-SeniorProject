@@ -4311,6 +4311,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="tableView" destination="ee3-Rn-biV" id="aEb-c8-Aad"/>
                         <segue destination="oyB-RY-4aW" kind="show" identifier="summaryCellSegue" id="t5p-u7-cjF"/>
                     </connections>
                 </viewController>
@@ -7040,10 +7041,10 @@
         <image name="screen4top" width="334" height="255"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="tDY-fT-66O"/>
-        <segue reference="Mmc-8c-1pg"/>
         <segue reference="vUG-b0-bNY"/>
         <segue reference="IHu-UO-RcH"/>
-        <segue reference="Bw2-EF-S4J"/>
+        <segue reference="jEA-9h-OB1"/>
+        <segue reference="Mmc-8c-1pg"/>
+        <segue reference="tDY-fT-66O"/>
     </inferredMetricsTieBreakers>
 </document>
