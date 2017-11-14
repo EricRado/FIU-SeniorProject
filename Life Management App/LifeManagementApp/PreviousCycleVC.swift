@@ -46,19 +46,16 @@ class PreviousCycleVC: UIViewController, UITableViewDataSource, UITableViewDeleg
                 if option == "Joy"{
                     if let sprint = newSprint{
                         self.userCategory.joySprints.append(sprint)
-                        self.getActivities(id1: sprint.sprintActivityId1, id2: sprint.sprintActivityId2, option: "Joy")
                     }
                     
                 }else if option == "Passion"{
                     if let sprint = newSprint{
                         self.userCategory.passionSprints.append(sprint)
-                        self.getActivities(id1: sprint.sprintActivityId1, id2: sprint.sprintActivityId2, option: "Passion")
                     }
                     
                 }else{
                     if let sprint = newSprint{
                         self.userCategory.contributionSprints.append(sprint)
-                        self.getActivities(id1: sprint.sprintActivityId1, id2: sprint.sprintActivityId2, option: "Contribution")
                     }
                 }
             }
@@ -102,6 +99,24 @@ class PreviousCycleVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         // get activity 2
         activity2Ref.observeSingleEvent(of: .value, with: {(snapshot) in
             print(snapshot)
+            let activity = Activity(snapshot: snapshot)
+            if option == "Joy"{
+                if let newActivity = activity{
+                    self.joyActivitiesArr.append(newActivity)
+                    print(self.joyActivitiesArr)
+                }
+            }else if option == "Passion"{
+                if let newActivity = activity{
+                    self.passionActivitiesArr.append(newActivity)
+                    print(self.passionActivitiesArr)
+                }
+            }else{
+                if let newActivity = activity{
+                    self.contributionActivitiesArr.append(newActivity)
+                    print(self.contributionActivitiesArr)
+                }
+            }
+
         }, withCancel: {(error) in
             print(error.localizedDescription)
         })
@@ -127,14 +142,19 @@ class PreviousCycleVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        tableView.reloadData()
         let cell = tableView.dequeueReusableCell(withIdentifier: "summaryCell") as! PreviousCycleTableViewCell
         print(self.userCategory.joySprints.count)
-        print("This is joy activity count : \(self.joyActivitiesArr.count)")
         let newIndex = (self.userCategory.joySprints.count - 1) - indexPath.row
         print("This is the newIndex : \(newIndex)")
         
         cell.sprintDate.text = getDate(startingDate: self.userCategory.joySprints[newIndex].startingDate, endingDate: self.userCategory.joySprints[newIndex].endingDate)
+        
+        // get activities from user category
+        getActivities(id1: self.userCategory.joySprints[newIndex].sprintActivityId1, id2: self.userCategory.joySprints[newIndex].sprintActivityId2, option: "Joy")
+        getActivities(id1: self.userCategory.passionSprints[newIndex].sprintActivityId1, id2: self.userCategory.passionSprints[newIndex].sprintActivityId2, option: "Passion")
+        getActivities(id1: self.userCategory.contributionSprints[newIndex].sprintActivityId1, id2: self.userCategory.contributionSprints[newIndex].sprintActivityId2, option: "Contribution")
+        
+        cell.joyOverallScore.text = self.joyActivitiesArr[0].targetPoints
         return cell
     }
     
