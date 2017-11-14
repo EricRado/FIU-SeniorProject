@@ -19,6 +19,8 @@ class PreviousCycleVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     var joyActivitiesArr = [Activity]()
     var passionActivitiesArr = [Activity]()
     var contributionActivitiesArr = [Activity]()
+    
+    @IBOutlet weak var tableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +37,7 @@ class PreviousCycleVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     
     func getSpecificCategory(ref: DatabaseReference, option: String){
         ref.queryOrdered(byChild: "startingDate").observe(.value, with: {(snapshot) in
+            var size = 0
             for child in snapshot.children.allObjects as! [DataSnapshot]{
                 if !child.exists(){
                     print("Snapshot is empty")
@@ -46,19 +49,24 @@ class PreviousCycleVC: UIViewController, UITableViewDataSource, UITableViewDeleg
                 if option == "Joy"{
                     if let sprint = newSprint{
                         self.userCategory.joySprints.append(sprint)
+                        size = self.userCategory.joySprints.count
                     }
                     
                 }else if option == "Passion"{
                     if let sprint = newSprint{
                         self.userCategory.passionSprints.append(sprint)
+                        size = self.userCategory.passionSprints.count
                     }
                     
                 }else{
                     if let sprint = newSprint{
                         self.userCategory.contributionSprints.append(sprint)
+                        size = self.userCategory.contributionSprints.count
                     }
                 }
             }
+            
+            self.tableView.reloadData()
             
             
         }, withCancel: {(error) in
@@ -151,10 +159,24 @@ class PreviousCycleVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         
         // get activities from user category
         getActivities(id1: self.userCategory.joySprints[newIndex].sprintActivityId1, id2: self.userCategory.joySprints[newIndex].sprintActivityId2, option: "Joy")
-        getActivities(id1: self.userCategory.passionSprints[newIndex].sprintActivityId1, id2: self.userCategory.passionSprints[newIndex].sprintActivityId2, option: "Passion")
-        getActivities(id1: self.userCategory.contributionSprints[newIndex].sprintActivityId1, id2: self.userCategory.contributionSprints[newIndex].sprintActivityId2, option: "Contribution")
         
-        cell.joyOverallScore.text = self.joyActivitiesArr[0].targetPoints
+        if(self.userCategory.passionSprints.indices.contains(newIndex)){
+            getActivities(id1: self.userCategory.passionSprints[newIndex].sprintActivityId1, id2: self.userCategory.passionSprints[newIndex].sprintActivityId2, option: "Passion")
+        }
+        if(self.userCategory.contributionSprints.indices.contains(newIndex)){
+            getActivities(id1: self.userCategory.contributionSprints[newIndex].sprintActivityId1, id2: self.userCategory.contributionSprints[newIndex].sprintActivityId2, option: "Contribution")
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
+            cell.joyOverallScore.text = self.joyActivitiesArr[0].targetPoints
+            if(self.passionActivitiesArr.indices.contains(1)){
+                cell.passionOverallScore.text = self.passionActivitiesArr[0].targetPoints
+            }
+            if(self.contributionActivitiesArr.indices.contains(1)){
+                cell.contributionOverallScore.text = self.contributionActivitiesArr[0].targetPoints
+            }
+        })
+        
         return cell
     }
     
