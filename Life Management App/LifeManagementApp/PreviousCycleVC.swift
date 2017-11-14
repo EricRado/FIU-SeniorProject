@@ -19,8 +19,6 @@ class PreviousCycleVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     var joyActivitiesArr = [Activity]()
     var passionActivitiesArr = [Activity]()
     var contributionActivitiesArr = [Activity]()
-    
-    @IBOutlet weak var tableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,7 +78,22 @@ class PreviousCycleVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         activity1Ref.observeSingleEvent(of: .value, with: {(snapshot) in
             print(snapshot)
             let activity = Activity(snapshot: snapshot)
-            self.addActivitiesToArr(activity: activity, option: "Joy")
+            if option == "Joy"{
+                if let newActivity = activity{
+                    self.joyActivitiesArr.append(newActivity)
+                    print(self.joyActivitiesArr)
+                }
+            }else if option == "Passion"{
+                if let newActivity = activity{
+                    self.passionActivitiesArr.append(newActivity)
+                    print(self.passionActivitiesArr)
+                }
+            }else{
+                if let newActivity = activity{
+                    self.contributionActivitiesArr.append(newActivity)
+                    print(self.contributionActivitiesArr)
+                }
+            }
         }, withCancel: {(error) in
             print(error.localizedDescription)
         })
@@ -92,29 +105,6 @@ class PreviousCycleVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         }, withCancel: {(error) in
             print(error.localizedDescription)
         })
-    }
-    
-    func addActivitiesToArr(activity: Activity?, option: String){
-        if option == "Joy"{
-            if let newActivity = activity{
-                self.joyActivitiesArr.append(newActivity)
-                print(self.joyActivitiesArr)
-            }
-        }else if option == "Passion"{
-            if let newActivity = activity{
-                self.passionActivitiesArr.append(newActivity)
-                print(self.passionActivitiesArr)
-            }
-        }else{
-            if let newActivity = activity{
-                self.contributionActivitiesArr.append(newActivity)
-                print(self.contributionActivitiesArr)
-            }
-        }
-        
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
     }
     
     func getDate(startingDate: String, endingDate: String) -> String{
@@ -130,10 +120,6 @@ class PreviousCycleVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         
         let str = "\(startDateStr) - \(endDateStr)"
         return str
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
