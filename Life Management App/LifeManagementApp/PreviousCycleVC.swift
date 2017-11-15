@@ -37,7 +37,6 @@ class PreviousCycleVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     
     func getSpecificCategory(ref: DatabaseReference, option: String){
         ref.queryOrdered(byChild: "startingDate").observe(.value, with: {(snapshot) in
-            var size = 0
             for child in snapshot.children.allObjects as! [DataSnapshot]{
                 if !child.exists(){
                     print("Snapshot is empty")
@@ -49,19 +48,16 @@ class PreviousCycleVC: UIViewController, UITableViewDataSource, UITableViewDeleg
                 if option == "Joy"{
                     if let sprint = newSprint{
                         self.userCategory.joySprints.append(sprint)
-                        size = self.userCategory.joySprints.count
                     }
                     
                 }else if option == "Passion"{
                     if let sprint = newSprint{
                         self.userCategory.passionSprints.append(sprint)
-                        size = self.userCategory.passionSprints.count
                     }
                     
                 }else{
                     if let sprint = newSprint{
                         self.userCategory.contributionSprints.append(sprint)
-                        size = self.userCategory.contributionSprints.count
                     }
                 }
             }
@@ -144,6 +140,22 @@ class PreviousCycleVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         let str = "\(startDateStr) - \(endDateStr)"
         return str
     }
+    
+    func getScorePercentage(target1: String, actual1: String, target2: String, actual2: String) -> String{
+        var avgScore: String
+        print("This is target1 : \(target1)")
+        print("This is actual1 : \(actual1)")
+        print("This is target2 : \(target2)")
+        print("This is actual2 : \(actual2)")
+        
+        var score: Double = ((Double(actual1)! / Double(target1)!) + (Double(actual2)! / Double(target2)!))/2
+        score = score*100
+        print("This is score : \(score)")
+        
+        avgScore = String(format:"%.01f%"+"%", score)
+        
+        return avgScore
+    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.userCategory.joySprints.count
@@ -152,7 +164,9 @@ class PreviousCycleVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "summaryCell") as! PreviousCycleTableViewCell
         print(self.userCategory.joySprints.count)
-        let newIndex = (self.userCategory.joySprints.count - 1) - indexPath.row
+        let currentIndex = indexPath.row
+        print("This is current index : \(currentIndex)")
+        let newIndex = (self.userCategory.joySprints.count - 1) - currentIndex
         print("This is the newIndex : \(newIndex)")
         
         cell.sprintDate.text = getDate(startingDate: self.userCategory.joySprints[newIndex].startingDate, endingDate: self.userCategory.joySprints[newIndex].endingDate)
@@ -168,11 +182,12 @@ class PreviousCycleVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
-            cell.joyOverallScore.text = self.joyActivitiesArr[0].targetPoints
-            if(self.passionActivitiesArr.indices.contains(1)){
-                cell.passionOverallScore.text = self.passionActivitiesArr[0].targetPoints
+            cell.joyOverallScore.text = self.getScorePercentage(target1: self.joyActivitiesArr[newIndex*2].targetPoints, actual1: self.joyActivitiesArr[newIndex*2].actualPoints, target2: self.joyActivitiesArr[newIndex*2 + 1].targetPoints, actual2: self.joyActivitiesArr[newIndex*2 + 1].actualPoints)
+            
+            if(self.passionActivitiesArr.indices.contains(newIndex)){
+                cell.passionOverallScore.text = self.getScorePercentage(target1: self.passionActivitiesArr[newIndex*2].targetPoints, actual1: self.passionActivitiesArr[newIndex*2].actualPoints, target2: self.passionActivitiesArr[newIndex*2 + 1].targetPoints, actual2: self.passionActivitiesArr[newIndex*2 + 1].actualPoints )
             }
-            if(self.contributionActivitiesArr.indices.contains(1)){
+            if(self.contributionActivitiesArr.indices.contains(newIndex)){
                 cell.contributionOverallScore.text = self.contributionActivitiesArr[0].targetPoints
             }
         })
