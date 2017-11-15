@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		070ED9121FABBD80007F18F2 /* SideMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 070ED9111FABBD80007F18F2 /* SideMenuTableViewCell.swift */; };
 		07174FD51F8E73DE00E1E8AC /* JoyActivitySelectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07174FD41F8E73DE00E1E8AC /* JoyActivitySelectionVC.swift */; };
-		0726B6CE1FBB822200842CE9 /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0726B6CD1FBB822200842CE9 /* iCarousel.m */; };
 		072F861C1F5D9227007E5A8A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072F861B1F5D9227007E5A8A /* AppDelegate.swift */; };
 		072F86211F5D9227007E5A8A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 072F861F1F5D9227007E5A8A /* Main.storyboard */; };
 		072F86231F5D9228007E5A8A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 072F86221F5D9228007E5A8A /* Assets.xcassets */; };
@@ -40,6 +39,7 @@
 		076E009B1F9DB050004467D0 /* PassionActivitySelectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076E009A1F9DB050004467D0 /* PassionActivitySelectionVC.swift */; };
 		076E009D1F9DB078004467D0 /* ContributionActivitySelectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076E009C1F9DB078004467D0 /* ContributionActivitySelectionVC.swift */; };
 		076E009F1F9EAAF8004467D0 /* SprintSettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 076E009E1F9EAAF8004467D0 /* SprintSettingsVC.swift */; };
+		0778EEAE1FBCBCD8009E9903 /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0778EEAD1FBCBCD8009E9903 /* iCarousel.m */; };
 		079265651F7B0636008B5BDE /* JoyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079265641F7B0636008B5BDE /* JoyVC.swift */; };
 		07B40A151F99A6540002DCC3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07B40A141F99A6540002DCC3 /* QuartzCore.framework */; };
 		07B40A1D1F9AC6200002DCC3 /* ActivityImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B40A1C1F9AC6200002DCC3 /* ActivityImage.swift */; };
@@ -75,8 +75,6 @@
 		05652A4FCE086819C9AC972C /* Pods-LifeManagementAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeManagementAppTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LifeManagementAppTests/Pods-LifeManagementAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		070ED9111FABBD80007F18F2 /* SideMenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuTableViewCell.swift; sourceTree = "<group>"; };
 		07174FD41F8E73DE00E1E8AC /* JoyActivitySelectionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoyActivitySelectionVC.swift; sourceTree = "<group>"; };
-		0726B6CC1FBB820B00842CE9 /* iCarousel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = iCarousel.h; path = "../../../../../Downloads/iCarousel-master/iCarousel/iCarousel.h"; sourceTree = "<group>"; };
-		0726B6CD1FBB822200842CE9 /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = iCarousel.m; path = "../../../../../Downloads/iCarousel-master/iCarousel/iCarousel.m"; sourceTree = "<group>"; };
 		072F86181F5D9227007E5A8A /* LifeManagementApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LifeManagementApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		072F861B1F5D9227007E5A8A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		072F86201F5D9227007E5A8A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -113,6 +111,8 @@
 		076E009A1F9DB050004467D0 /* PassionActivitySelectionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassionActivitySelectionVC.swift; sourceTree = "<group>"; };
 		076E009C1F9DB078004467D0 /* ContributionActivitySelectionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContributionActivitySelectionVC.swift; sourceTree = "<group>"; };
 		076E009E1F9EAAF8004467D0 /* SprintSettingsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SprintSettingsVC.swift; sourceTree = "<group>"; };
+		0778EEAC1FBCBCCC009E9903 /* iCarousel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = iCarousel.h; path = "../../../../../../../Volumes/Eric SD/iCarousel-master/iCarousel/iCarousel.h"; sourceTree = "<group>"; };
+		0778EEAD1FBCBCD8009E9903 /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = iCarousel.m; path = "../../../../../../../Volumes/Eric SD/iCarousel-master/iCarousel/iCarousel.m"; sourceTree = "<group>"; };
 		079265641F7B0636008B5BDE /* JoyVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoyVC.swift; sourceTree = "<group>"; };
 		07B40A141F99A6540002DCC3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		07B40A161F99A8E30002DCC3 /* LifeManagementApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LifeManagementApp-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -275,8 +275,8 @@
 		079C30E81F8E68BF0044DA18 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				0726B6CC1FBB820B00842CE9 /* iCarousel.h */,
-				0726B6CD1FBB822200842CE9 /* iCarousel.m */,
+				0778EEAC1FBCBCCC009E9903 /* iCarousel.h */,
+				0778EEAD1FBCBCD8009E9903 /* iCarousel.m */,
 				07316B841F843C3D00EF2F8F /* KDCircularProgress.swift */,
 				07B40A161F99A8E30002DCC3 /* LifeManagementApp-Bridging-Header.h */,
 			);
@@ -632,7 +632,7 @@
 				076E009D1F9DB078004467D0 /* ContributionActivitySelectionVC.swift in Sources */,
 				072F86781F69DABF007E5A8A /* Popup3VC.swift in Sources */,
 				07F2F4661FB4B7ED002B4308 /* PreviousCycleSummaryVC.swift in Sources */,
-				0726B6CE1FBB822200842CE9 /* iCarousel.m in Sources */,
+				0778EEAE1FBCBCD8009E9903 /* iCarousel.m in Sources */,
 				070ED9121FABBD80007F18F2 /* SideMenuTableViewCell.swift in Sources */,
 				079265651F7B0636008B5BDE /* JoyVC.swift in Sources */,
 				07F2F4641FB4B611002B4308 /* PreviousCycleTableViewCell.swift in Sources */,

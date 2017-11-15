@@ -16,9 +16,9 @@ class PreviousCycleVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     var userCategory = Category()
     
     // activities arrays
-    var joyActivitiesArr = [Activity]()
-    var passionActivitiesArr = [Activity]()
-    var contributionActivitiesArr = [Activity]()
+    var joyActivitiesArr = [String: Activity]()
+    var passionActivitiesArr = [String: Activity]()
+    var contributionActivitiesArr = [String: Activity]()
     
     @IBOutlet weak var tableView: UITableView!
 
@@ -45,24 +45,28 @@ class PreviousCycleVC: UIViewController, UITableViewDataSource, UITableViewDeleg
                 print(child)
                 let newSprint = Sprint(snapshot: child)
                 print(newSprint!)
+                // add sprint to category specific array then get activities
                 if option == "Joy"{
                     if let sprint = newSprint{
                         self.userCategory.joySprints.append(sprint)
+                        self.getActivities(id1: sprint.sprintActivityId1, id2: sprint.sprintActivityId2, option: "Joy")
                     }
                     
                 }else if option == "Passion"{
                     if let sprint = newSprint{
                         self.userCategory.passionSprints.append(sprint)
+                        self.getActivities(id1: sprint.sprintActivityId1, id2: sprint.sprintActivityId2, option: "Passion")
                     }
                     
                 }else{
                     if let sprint = newSprint{
                         self.userCategory.contributionSprints.append(sprint)
+                        self.getActivities(id1: sprint.sprintActivityId1, id2: sprint.sprintActivityId2, option: "Contribution")
                     }
                 }
             }
             
-            self.tableView.reloadData()
+            //self.tableView.reloadData()
             
             
         }, withCancel: {(error) in
@@ -81,17 +85,17 @@ class PreviousCycleVC: UIViewController, UITableViewDataSource, UITableViewDeleg
             let activity = Activity(snapshot: snapshot)
             if option == "Joy"{
                 if let newActivity = activity{
-                    self.joyActivitiesArr.append(newActivity)
+                    self.joyActivitiesArr[id1] = newActivity
                     print(self.joyActivitiesArr)
                 }
             }else if option == "Passion"{
                 if let newActivity = activity{
-                    self.passionActivitiesArr.append(newActivity)
+                    self.passionActivitiesArr[id1] = newActivity
                     print(self.passionActivitiesArr)
                 }
             }else{
                 if let newActivity = activity{
-                    self.contributionActivitiesArr.append(newActivity)
+                    self.contributionActivitiesArr[id1] = newActivity
                     print(self.contributionActivitiesArr)
                 }
             }
@@ -106,20 +110,21 @@ class PreviousCycleVC: UIViewController, UITableViewDataSource, UITableViewDeleg
             let activity = Activity(snapshot: snapshot)
             if option == "Joy"{
                 if let newActivity = activity{
-                    self.joyActivitiesArr.append(newActivity)
+                    self.joyActivitiesArr[id2] = newActivity
                     print(self.joyActivitiesArr)
                 }
             }else if option == "Passion"{
                 if let newActivity = activity{
-                    self.passionActivitiesArr.append(newActivity)
+                    self.passionActivitiesArr[id2] = newActivity
                     print(self.passionActivitiesArr)
                 }
             }else{
                 if let newActivity = activity{
-                    self.contributionActivitiesArr.append(newActivity)
+                    self.contributionActivitiesArr[id2] = newActivity
                     print(self.contributionActivitiesArr)
                 }
             }
+            self.tableView.reloadData()
 
         }, withCancel: {(error) in
             print(error.localizedDescription)
@@ -141,8 +146,9 @@ class PreviousCycleVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         return str
     }
     
-    func getScorePercentage(target1: String, actual1: String, target2: String, actual2: String) -> String{
+    func getScorePercentage(target1: String, actual1: String, target2: String, actual2: String, option: String) -> String{
         var avgScore: String
+        print("This is the option : \(option)")
         print("This is target1 : \(target1)")
         print("This is actual1 : \(actual1)")
         print("This is target2 : \(target2)")
@@ -163,33 +169,59 @@ class PreviousCycleVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "summaryCell") as! PreviousCycleTableViewCell
-        print(self.userCategory.joySprints.count)
-        let currentIndex = indexPath.row
-        print("This is current index : \(currentIndex)")
-        let newIndex = (self.userCategory.joySprints.count - 1) - currentIndex
-        print("This is the newIndex : \(newIndex)")
+        let newIndex = (self.userCategory.joySprints.count - 1) - indexPath.row
         
-        cell.sprintDate.text = getDate(startingDate: self.userCategory.joySprints[newIndex].startingDate, endingDate: self.userCategory.joySprints[newIndex].endingDate)
+        var joySprint: Sprint?
+        var passionSprint: Sprint?
+        var contributionSprint: Sprint?
         
-        // get activities from user category
-        getActivities(id1: self.userCategory.joySprints[newIndex].sprintActivityId1, id2: self.userCategory.joySprints[newIndex].sprintActivityId2, option: "Joy")
-        
-        if(self.userCategory.passionSprints.indices.contains(newIndex)){
-            getActivities(id1: self.userCategory.passionSprints[newIndex].sprintActivityId1, id2: self.userCategory.passionSprints[newIndex].sprintActivityId2, option: "Passion")
+        // get user sprints
+        joySprint = self.userCategory.joySprints[newIndex]
+        if self.userCategory.passionSprints.indices.contains(newIndex){
+            passionSprint = self.userCategory.passionSprints[newIndex]
         }
-        if(self.userCategory.contributionSprints.indices.contains(newIndex)){
-            getActivities(id1: self.userCategory.contributionSprints[newIndex].sprintActivityId1, id2: self.userCategory.contributionSprints[newIndex].sprintActivityId2, option: "Contribution")
+        if self.userCategory.contributionSprints.indices.contains(newIndex){
+            contributionSprint = self.userCategory.contributionSprints[newIndex]
         }
         
+        if let sprint = joySprint{
+            cell.sprintDate.text = getDate(startingDate: sprint.startingDate, endingDate: sprint.endingDate)
+        }
+    
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
-            cell.joyOverallScore.text = self.getScorePercentage(target1: self.joyActivitiesArr[newIndex*2].targetPoints, actual1: self.joyActivitiesArr[newIndex*2].actualPoints, target2: self.joyActivitiesArr[newIndex*2 + 1].targetPoints, actual2: self.joyActivitiesArr[newIndex*2 + 1].actualPoints)
+            var act1: Activity
+            var act2: Activity
+            if let sprint = joySprint{
+                if self.joyActivitiesArr.keys.contains(sprint.sprintActivityId1)
+                    && self.joyActivitiesArr.keys.contains(sprint.sprintActivityId2){
+                    act1 = self.joyActivitiesArr[sprint.sprintActivityId1]!
+                    act2 = self.joyActivitiesArr[sprint.sprintActivityId2]!
+                
+                    cell.joyOverallScore.text = self.getScorePercentage(target1: act1.targetPoints,
+                            actual1: act1.actualPoints,target2: act2.targetPoints, actual2: act2.actualPoints, option: "Joy")
+                }
+            }
+            if let sprint = passionSprint{
+                if self.passionActivitiesArr.keys.contains(sprint.sprintActivityId1)
+                    && self.passionActivitiesArr.keys.contains(sprint.sprintActivityId2){
+                    act1 = self.passionActivitiesArr[sprint.sprintActivityId1]!
+                    act2 = self.passionActivitiesArr[sprint.sprintActivityId2]!
+                
+                    cell.passionOverallScore.text = self.getScorePercentage(target1: act1.targetPoints,
+                            actual1: act1.actualPoints,target2: act2.targetPoints, actual2: act2.actualPoints, option: "Passion")
+                }
+            }
+            if let sprint = contributionSprint{
+                if self.contributionActivitiesArr.keys.contains(sprint.sprintActivityId1)
+                    && self.contributionActivitiesArr.keys.contains(sprint.sprintActivityId2){
+                    act1 = self.contributionActivitiesArr[sprint.sprintActivityId1]!
+                    act2 = self.contributionActivitiesArr[sprint.sprintActivityId2]!
+                
+                    cell.contributionOverallScore.text = self.getScorePercentage(target1: act1.targetPoints,
+                            actual1: act1.actualPoints, target2: act2.targetPoints, actual2: act2.actualPoints, option: "Contribution")
+                }
+            }
             
-            if(self.passionActivitiesArr.indices.contains(newIndex)){
-                cell.passionOverallScore.text = self.getScorePercentage(target1: self.passionActivitiesArr[newIndex*2].targetPoints, actual1: self.passionActivitiesArr[newIndex*2].actualPoints, target2: self.passionActivitiesArr[newIndex*2 + 1].targetPoints, actual2: self.passionActivitiesArr[newIndex*2 + 1].actualPoints )
-            }
-            if(self.contributionActivitiesArr.indices.contains(newIndex)){
-                cell.contributionOverallScore.text = self.contributionActivitiesArr[0].targetPoints
-            }
         })
         
         return cell
