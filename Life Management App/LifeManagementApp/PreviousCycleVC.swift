@@ -240,8 +240,9 @@ class PreviousCycleVC: UIViewController, UITableViewDataSource, UITableViewDeleg
             viewController.joyActivity2 = self.joyActivitiesDict[self.joySprint.sprintActivityId2]!
             viewController.passionActivity1 = self.passionActivitiesDict[self.passionSprint.sprintActivityId1]!
             viewController.passionActivity2 = self.passionActivitiesDict[self.passionSprint.sprintActivityId2]!
-            viewController.contributionActivity1 = self.contributionActivitiesDict[self.passionSprint.sprintActivityId1]!
+            viewController.contributionActivity1 = self.contributionActivitiesDict[self.contributionSprint.sprintActivityId1]!
             viewController.contributionActivity2 = self.contributionActivitiesDict[self.contributionSprint.sprintActivityId2]!
+            viewController.sprint = self.joySprint
         }
     }
     

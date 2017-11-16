@@ -41,13 +41,39 @@ class PreviousCycleSummaryVC: UIViewController {
     
     @IBOutlet weak var contribActivityGoalScore1Label: UILabel!
     @IBOutlet weak var contribActivityGoalScore2Label: UILabel!
-   
+    
+    // images for each activity
+    @IBOutlet weak var joyActivity1Image: UIImageView!
+    @IBOutlet weak var joyActivity2Image: UIImageView!
+    
+    @IBOutlet weak var passionActivity1Image: UIImageView!
+    @IBOutlet weak var passionActivity2Image: UIImageView!
+    
+    @IBOutlet weak var contributionActivity1Image: UIImageView!
+    @IBOutlet weak var contributionActivity2Image: UIImageView!
+    
+    
+    // label for date
+    @IBOutlet weak var sprintDateLabel: UILabel!
+    
+    // KDCircularProgress for each category
+    @IBOutlet weak var joyOverallScore: KDCircularProgress!
+    @IBOutlet weak var passionOverallScore: KDCircularProgress!
+    @IBOutlet weak var contributionOverallScore: KDCircularProgress!
+    
+    // label for overall scores
+    @IBOutlet weak var joyOverallScoreLabel: UILabel!
+    @IBOutlet weak var passionOverallScoreLabel: UILabel!
+    @IBOutlet weak var contributionOverallScoreLabel: UILabel!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         loadLabels()
+        loadImages(name1: joyActivity1.name, name2: joyActivity2.name, option: "Joy")
+        loadImages(name1: passionActivity1.name, name2: passionActivity2.name, option: "Passion")
+        loadImages(name1: contributionActivity1.name, name2: contributionActivity2.name,option: "Contribution")
     }
     
     func loadLabels(){
@@ -68,8 +94,68 @@ class PreviousCycleSummaryVC: UIViewController {
         
         contribActivityGoalScore1Label.text = contributionActivity1.targetPoints
         contribActivityGoalScore2Label.text = contributionActivity2.targetPoints
+        
+        sprintDateLabel.text = setDates(startDay: sprint.startingDate, endDay: sprint.endingDate)
     }
     
+    func setDates(startDay: String, endDay: String) -> String{
+        let dateFmt = DateFormatter()
+        
+        // convert date strings to  date objects 
+        dateFmt.dateFormat = "MMddyyyy"
+        let startDate = dateFmt.date(from: startDay)
+        let endDate = dateFmt.date(from: endDay)
+        
+        dateFmt.dateFormat = "MM/dd/yy"
+        let startDateStr = dateFmt.string(from: startDate!)
+        let endDateStr = dateFmt.string(from: endDate!)
+        
+        return "\(startDateStr) - \(endDateStr)"
+    }
     
+    func loadImages(name1: String, name2: String, option: String){
+        //retrieve the images for the specific category for the sprint
+        if(option == "Joy"){
+            // find joy images
+            for image in self.delegate.joyImages{
+                
+                if(image.name == name1){
+                    joyActivity1Image.image = image.uiImage.image
+                    turnImageToCircle(picture: joyActivity1Image)
+                }else if(image.name == name2){
+                    joyActivity2Image.image = image.uiImage.image
+                    turnImageToCircle(picture: joyActivity2Image)
+                }
+            }
+        }else if(option == "Passion"){
+            // find passion images
+            for image in self.delegate.passionImages{
+                if(image.name == name1){
+                    passionActivity1Image.image = image.uiImage.image
+                    turnImageToCircle(picture: passionActivity1Image)
+                }else if(image.name == name2){
+                    passionActivity2Image.image = image.uiImage.image
+                    turnImageToCircle(picture: passionActivity2Image)
+                }
+            }
+        }else{
+            // find contribution images
+            for image in self.delegate.contributionImages{
+                if(image.name == name1){
+                    contributionActivity1Image.image = image.uiImage.image
+                    turnImageToCircle(picture: contributionActivity1Image)
+                }else if(image.name == name2){
+                    contributionActivity2Image.image = image.uiImage.image
+                    turnImageToCircle(picture: contributionActivity2Image)
+                }
+            }
+        }
+    }
+    
+    func turnImageToCircle(picture: UIImageView){
+        picture.layer.cornerRadius = picture.frame.size.width / 2
+        picture.clipsToBounds = true
+        self.view.layoutIfNeeded()
+    }
 
 }
