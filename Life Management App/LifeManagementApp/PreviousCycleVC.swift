@@ -216,7 +216,43 @@ class PreviousCycleVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let newIndex = (self.userCategory.joySprints.count - 1) - indexPath.row
+        let joySprint = self.userCategory.joySprints[newIndex]
+        let passionSprint = self.userCategory.passionSprints[newIndex]
+        let contributionSprint = self.userCategory.contributionSprints[newIndex]
         
+        
+        // create instance of previousCycleSummaryVC and pass the variables
+        let destinationVC = PreviousCycleSummaryVC()
+        
+        destinationVC.joyActivity1 = joyActivitiesDict[joySprint.sprintActivityId1]!
+        destinationVC.joyActivity2 = joyActivitiesDict[joySprint.sprintActivityId2]!
+        
+        destinationVC.passionActivity1 = passionActivitiesDict[passionSprint.sprintActivityId1]!
+        destinationVC.passionActivity2 = passionActivitiesDict[passionSprint.sprintActivityId2]!
+        
+        destinationVC.contributionActivity1 = contributionActivitiesDict[contributionSprint.sprintActivityId1]!
+        destinationVC.contributionActivity2 = contributionActivitiesDict[contributionSprint.sprintActivityId2]!
+        
+        destinationVC.sprint = joySprint
+        
+        // This will perform the segue and pre-load the variable for you to use
+        destinationVC.performSegue(withIdentifier: "summaryCellSegue", sender: self)
     }
     
+    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

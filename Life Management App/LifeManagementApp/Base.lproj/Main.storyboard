@@ -4659,6 +4659,20 @@
                             <constraint firstItem="IaB-iE-ESj" firstAttribute="centerX" secondItem="kd6-Eq-fRU" secondAttribute="centerX" id="yOi-xZ-rfE"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="contribActivityGoalScore1Label" destination="lM8-k7-a2J" id="RQt-ez-WOS"/>
+                        <outlet property="contribActivityGoalScore2Label" destination="zqU-Ch-6IN" id="Dcl-Yb-niQ"/>
+                        <outlet property="contribActivityScore1Label" destination="DR3-W4-K92" id="0qo-ZP-Dub"/>
+                        <outlet property="contribActivityScore2Label" destination="TWB-9Q-fSs" id="xEE-Ra-Ulx"/>
+                        <outlet property="joyActivityGoalScore1Label" destination="qBj-eS-dlp" id="fe0-f4-lMA"/>
+                        <outlet property="joyActivityGoalScore2Label" destination="GRe-7s-7P3" id="tNl-hB-mAU"/>
+                        <outlet property="joyActivityScore1Label" destination="xru-qg-YUa" id="BlE-Wu-XUl"/>
+                        <outlet property="joyActivityScore2Label" destination="CO9-J7-RhV" id="ck9-g2-CNo"/>
+                        <outlet property="passionActivityGoalScore1Label" destination="wQX-gJ-iLF" id="1wm-3H-b6T"/>
+                        <outlet property="passionActivityGoalScore2Label" destination="GdO-1Z-ydl" id="Xz9-Xt-Jpk"/>
+                        <outlet property="passionActivityScore1Label" destination="M8q-jk-bek" id="e9I-OB-oDj"/>
+                        <outlet property="passionActivityScore2Label" destination="HM9-3n-jJ0" id="qZB-kQ-2s0"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gLS-31-eBZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
