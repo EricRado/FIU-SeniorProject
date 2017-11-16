@@ -71,9 +71,14 @@ class PreviousCycleSummaryVC: UIViewController {
         super.viewDidLoad()
 
         loadLabels()
+        
         loadImages(name1: joyActivity1.name, name2: joyActivity2.name, option: "Joy")
         loadImages(name1: passionActivity1.name, name2: passionActivity2.name, option: "Passion")
         loadImages(name1: contributionActivity1.name, name2: contributionActivity2.name,option: "Contribution")
+        
+        setScorePercentage(target1: joyActivity1.targetPoints, actual1: joyActivity1.actualPoints, target2: joyActivity2.targetPoints, actual2: joyActivity2.actualPoints, option: "Joy")
+        setScorePercentage(target1: passionActivity1.targetPoints, actual1: passionActivity1.actualPoints, target2: passionActivity2.targetPoints, actual2: passionActivity2.actualPoints, option: "Passion")
+        setScorePercentage(target1: contributionActivity1.targetPoints, actual1: contributionActivity1.actualPoints, target2: contributionActivity2.targetPoints, actual2: contributionActivity2.actualPoints, option: "Contribution")
     }
     
     func loadLabels(){
@@ -149,6 +154,22 @@ class PreviousCycleSummaryVC: UIViewController {
                     turnImageToCircle(picture: contributionActivity2Image)
                 }
             }
+        }
+    }
+    
+    func setScorePercentage(target1: String, actual1: String, target2: String, actual2: String, option: String){
+        let avgScore: String
+        var score: Double = ((Double(actual1)! / Double(target1)!) + (Double(actual2)! / Double(target2)!))/2
+        score = score*100
+        
+        avgScore = String(format:"%.01f%"+"%", score)
+        
+        if(option == "Joy"){
+            joyOverallScoreLabel.text = avgScore
+        }else if(option == "Passion"){
+            passionOverallScoreLabel.text = avgScore
+        }else{
+            contributionOverallScoreLabel.text = avgScore
         }
     }
     
