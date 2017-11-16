@@ -123,7 +123,6 @@ class PreviousCycleSummaryVC: UIViewController {
         if(option == "Joy"){
             // find joy images
             for image in self.delegate.joyImages{
-                
                 if(image.name == name1){
                     joyActivity1Image.image = image.uiImage.image
                     turnImageToCircle(picture: joyActivity1Image)
@@ -166,10 +165,13 @@ class PreviousCycleSummaryVC: UIViewController {
         
         if(option == "Joy"){
             joyOverallScoreLabel.text = avgScore
+            joyOverallScore.angle = score * 3.6
         }else if(option == "Passion"){
             passionOverallScoreLabel.text = avgScore
+            passionOverallScore.angle = score * 3.6
         }else{
             contributionOverallScoreLabel.text = avgScore
+            contributionOverallScore.angle = score * 3.6
         }
     }
     
