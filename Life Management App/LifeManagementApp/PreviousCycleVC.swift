@@ -20,6 +20,11 @@ class PreviousCycleVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     var passionActivitiesDict = [String: Activity]()
     var contributionActivitiesDict = [String: Activity]()
     
+    // sprints will be passed to next screen when user selects table cell
+    var joySprint = Sprint()
+    var passionSprint = Sprint()
+    var contributionSprint = Sprint()
+    
     @IBOutlet weak var tableView: UITableView!
 
     override func viewDidLoad() {
@@ -217,27 +222,27 @@ class PreviousCycleVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let newIndex = (self.userCategory.joySprints.count - 1) - indexPath.row
-        let joySprint = self.userCategory.joySprints[newIndex]
-        let passionSprint = self.userCategory.passionSprints[newIndex]
-        let contributionSprint = self.userCategory.contributionSprints[newIndex]
+        self.joySprint = self.userCategory.joySprints[newIndex]
+        self.passionSprint = self.userCategory.passionSprints[newIndex]
+        self.contributionSprint = self.userCategory.contributionSprints[newIndex]
         
-        
-        // create instance of previousCycleSummaryVC and pass the variables
-        let destinationVC = PreviousCycleSummaryVC()
-        
-        destinationVC.joyActivity1 = joyActivitiesDict[joySprint.sprintActivityId1]!
-        destinationVC.joyActivity2 = joyActivitiesDict[joySprint.sprintActivityId2]!
-        
-        destinationVC.passionActivity1 = passionActivitiesDict[passionSprint.sprintActivityId1]!
-        destinationVC.passionActivity2 = passionActivitiesDict[passionSprint.sprintActivityId2]!
-        
-        destinationVC.contributionActivity1 = contributionActivitiesDict[contributionSprint.sprintActivityId1]!
-        destinationVC.contributionActivity2 = contributionActivitiesDict[contributionSprint.sprintActivityId2]!
-        
-        destinationVC.sprint = joySprint
-        
-        // This will perform the segue and pre-load the variable for you to use
-        destinationVC.performSegue(withIdentifier: "summaryCellSegue", sender: self)
+        // This will perform the segue to PreviousCycleSummary
+        performSegue(withIdentifier: "summaryCellSegue", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier == "summaryCellSegue"){
+            // initialize new view controller and cast it as your view controller
+            let viewController = segue.destination as! PreviousCycleSummaryVC
+            
+            // new vc should have property that will store passed value
+            viewController.joyActivity1 = self.joyActivitiesDict[self.joySprint.sprintActivityId1]!
+            viewController.joyActivity2 = self.joyActivitiesDict[self.joySprint.sprintActivityId2]!
+            viewController.passionActivity1 = self.passionActivitiesDict[self.passionSprint.sprintActivityId1]!
+            viewController.passionActivity2 = self.passionActivitiesDict[self.passionSprint.sprintActivityId2]!
+            viewController.contributionActivity1 = self.contributionActivitiesDict[self.passionSprint.sprintActivityId1]!
+            viewController.contributionActivity2 = self.contributionActivitiesDict[self.contributionSprint.sprintActivityId2]!
+        }
     }
     
     
