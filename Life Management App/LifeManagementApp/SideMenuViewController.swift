@@ -45,6 +45,10 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
             self.performSegue(withIdentifier: "previousCycleSegue", sender: self)
         }
         
+        if cell.iconNameLabel.text! == "View Coaches"{
+            self.performSegue(withIdentifier: "viewCoachesSegue", sender: self)
+        }
+        
     }
     
     @IBAction func handleGesture(sender: UIPanGestureRecognizer){

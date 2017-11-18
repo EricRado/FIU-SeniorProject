@@ -4036,77 +4036,6 @@
             </objects>
             <point key="canvasLocation" x="6719" y="-745"/>
         </scene>
-        <!--Side MenuVC-->
-        <scene sceneID="QxL-7C-vXE">
-            <objects>
-                <viewController storyboardIdentifier="SideMenuVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ekV-Im-zoi" customClass="SideMenuVC" customModule="LifeManagementApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="0Gp-Dg-aEr"/>
-                        <viewControllerLayoutGuide type="bottom" id="6Lt-Yv-vKz"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="ut2-OK-R76">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nkx-5p-AM0">
-                                <rect key="frame" x="0.0" y="144" width="272" height="523"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="SideMenuTableViewCell" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="sideMenuCell" id="kk9-tF-zcb" customClass="SideMenuTableViewCell" customModule="LifeManagementApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="272" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kk9-tF-zcb" id="e3D-oa-ghe">
-                                            <rect key="frame" x="0.0" y="0.0" width="272" height="44"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m4o-i0-aHB">
-                                                    <rect key="frame" x="94" y="11" width="242" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="titleLabel" destination="m4o-i0-aHB" id="B4N-iq-1v0"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="103" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="idA-A2-Vex">
-                                <rect key="frame" x="0.0" y="8" width="272" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="userPictureCell" rowHeight="103" id="eX3-Em-bKW">
-                                        <rect key="frame" x="0.0" y="28" width="272" height="103"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eX3-Em-bKW" id="GuH-or-hll">
-                                            <rect key="frame" x="0.0" y="0.0" width="272" height="103"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="noPicture" translatesAutoresizingMaskIntoConstraints="NO" id="EGp-vC-wAZ">
-                                                    <rect key="frame" x="60" y="8" width="134" height="86"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                </imageView>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <connections>
-                        <outlet property="menuTableView" destination="nkx-5p-AM0" id="iMe-69-x1V"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="GNY-cq-Lux" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="5603" y="-3072"/>
-        </scene>
         <!--Side Menu View Controller-->
         <scene sceneID="RKa-Hk-fRa">
             <objects>
@@ -4179,6 +4108,7 @@
                     <connections>
                         <segue destination="aVb-NQ-5Dj" kind="show" identifier="newCycleSegue" id="IHu-UO-RcH"/>
                         <segue destination="0Lk-KN-HwK" kind="show" identifier="previousCycleSegue" id="C7z-JB-zWa"/>
+                        <segue destination="7cS-Fm-9g7" kind="show" identifier="viewCoachesSegue" id="qJF-bO-A9x"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GKT-cB-krq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4745,6 +4675,52 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gLS-31-eBZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="9325.6000000000004" y="-1515.2923538230887"/>
+        </scene>
+        <!--View CoachesVC-->
+        <scene sceneID="Kfg-qj-T7z">
+            <objects>
+                <viewController id="Yft-hU-Zzf" customClass="ViewCoachesVC" customModule="LifeManagementApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="OJz-4v-y0I"/>
+                        <viewControllerLayoutGuide type="bottom" id="mZe-S2-b0z"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="4by-iA-ZCP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="View Coach" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tF1-e2-Yyq">
+                                <rect key="frame" x="178" y="361" width="126" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="xfk-3p-RZ4" appends="YES" id="Vsn-wM-eAK"/>
+                        </connections>
+                    </view>
+                    <navigationItem key="navigationItem" id="CAi-jC-NYK">
+                        <barButtonItem key="leftBarButtonItem" image="dropdown" id="BA7-Rz-zhV">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="openMenu:" destination="Yft-hU-Zzf" id="DDK-8Y-Bu3"/>
+                                <segue destination="d5V-DO-Q8U" kind="presentation" identifier="openMenu" id="F6P-x2-fed"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="15c-6Z-dmb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <screenEdgePanGestureRecognizer minimumNumberOfTouches="1" id="xfk-3p-RZ4">
+                    <rectEdge key="edges" left="YES"/>
+                    <connections>
+                        <action selector="edgePanGestureWithSender:" destination="Yft-hU-Zzf" id="Wjs-UT-59D"/>
+                    </connections>
+                </screenEdgePanGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="9880.7999999999993" y="-767.76611694152928"/>
         </scene>
         <!--Joy-->
         <scene sceneID="SKQ-4B-8Vw">
@@ -7090,6 +7066,25 @@
             </objects>
             <point key="canvasLocation" x="4911" y="-699"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="vzt-Ri-QHQ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7cS-Fm-9g7" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="keM-dc-arb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.13466796389999999" green="0.090682785239999994" blue="0.79683452070000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Yft-hU-Zzf" kind="relationship" relationship="rootViewController" id="25A-7i-gyS"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Gja-xB-1ce" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="8927" y="-774"/>
+        </scene>
     </scenes>
     <resources>
         <image name="LifeManagementBG2" width="4500" height="3001"/>
@@ -7106,7 +7101,6 @@
         <image name="need4" width="236" height="241"/>
         <image name="need5" width="236" height="241"/>
         <image name="need6" width="236" height="241"/>
-        <image name="noPicture" width="200" height="200"/>
         <image name="passion" width="30" height="30"/>
         <image name="popUpNeed1" width="375" height="420"/>
         <image name="popupNeed2" width="375" height="420"/>
@@ -7123,11 +7117,11 @@
         <image name="screen4top" width="334" height="255"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="E2e-RD-eat"/>
         <segue reference="vUG-b0-bNY"/>
         <segue reference="IHu-UO-RcH"/>
-        <segue reference="tDY-fT-66O"/>
+        <segue reference="F6P-x2-fed"/>
+        <segue reference="C7z-JB-zWa"/>
         <segue reference="Mmc-8c-1pg"/>
-        <segue reference="nac-kk-BeO"/>
+        <segue reference="tDY-fT-66O"/>
     </inferredMetricsTieBreakers>
 </document>
