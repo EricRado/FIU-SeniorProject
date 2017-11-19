@@ -32,13 +32,36 @@ extension ViewCoachesVC: UIViewControllerTransitioningDelegate{
 
 
 
-class ViewCoachesVC: UIViewController {
+class ViewCoachesVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     let interactor = Interactor()
+    
+    var dbref = Database.database().reference(fromURL: "https://life-management-f0cdf.firebaseio.com/")
+    let delegate = UIApplication.shared.delegate as! AppDelegate
+    var coachList = [Coach]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        
+    }
+    
+    func getCoaches(){
+    
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "coachCell") as! ViewCoachTableViewCell
+        
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     }
 

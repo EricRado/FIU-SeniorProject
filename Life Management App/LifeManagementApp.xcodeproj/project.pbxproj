@@ -51,6 +51,7 @@
 		07F6BB121F8DC33B00E5F4E1 /* CategoryTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F6BB111F8DC33B00E5F4E1 /* CategoryTabBarController.swift */; };
 		07F9D2B91FBFCDF10083AEF2 /* ViewCoachesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F9D2B81FBFCDF10083AEF2 /* ViewCoachesVC.swift */; };
 		07F9D2BB1FBFCEE50083AEF2 /* ViewCoachTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F9D2BA1FBFCEE50083AEF2 /* ViewCoachTableViewCell.swift */; };
+		07FED9B21FC1F1D400F5D763 /* Coach.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FED9B11FC1F1D400F5D763 /* Coach.swift */; };
 		1B2B05D62BBECE085957DD88 /* Pods_LifeManagementAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD2E15214151F4A5569119C2 /* Pods_LifeManagementAppUITests.framework */; };
 		5D1E2C62B058D75B140D9636 /* Pods_LifeManagementApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EEB56DFFD2D6DB1CEBA2D06 /* Pods_LifeManagementApp.framework */; };
 		FA04C19CE6DDC5C959E2CC8D /* Pods_LifeManagementAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBADDEA3A15B9D8510A851CB /* Pods_LifeManagementAppTests.framework */; };
@@ -127,6 +128,7 @@
 		07F6BB111F8DC33B00E5F4E1 /* CategoryTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryTabBarController.swift; sourceTree = "<group>"; };
 		07F9D2B81FBFCDF10083AEF2 /* ViewCoachesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewCoachesVC.swift; sourceTree = "<group>"; };
 		07F9D2BA1FBFCEE50083AEF2 /* ViewCoachTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewCoachTableViewCell.swift; sourceTree = "<group>"; };
+		07FED9B11FC1F1D400F5D763 /* Coach.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coach.swift; sourceTree = "<group>"; };
 		26C9179FB6569CF8F0450F69 /* Pods-LifeManagementAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeManagementAppUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LifeManagementAppUITests/Pods-LifeManagementAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		54322A843B3FA1EA6DA5DE28 /* Pods-LifeManagementApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeManagementApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LifeManagementApp/Pods-LifeManagementApp.debug.xcconfig"; sourceTree = "<group>"; };
 		5EEB56DFFD2D6DB1CEBA2D06 /* Pods_LifeManagementApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LifeManagementApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -239,6 +241,7 @@
 				07F6BB0D1F874FB200E5F4E1 /* Activity.swift */,
 				07F6BB0F1F874FC300E5F4E1 /* Sprint.swift */,
 				07B40A1C1F9AC6200002DCC3 /* ActivityImage.swift */,
+				07FED9B11FC1F1D400F5D763 /* Coach.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -633,6 +636,7 @@
 				073D89E31FA78E43000DE687 /* ContributionVC.swift in Sources */,
 				07F6BB101F874FC300E5F4E1 /* Sprint.swift in Sources */,
 				07F2F4621FB4B547002B4308 /* PreviousCycleVC.swift in Sources */,
+				07FED9B21FC1F1D400F5D763 /* Coach.swift in Sources */,
 				072F867A1F69EF88007E5A8A /* Popup4VC.swift in Sources */,
 				072F86891F6F8121007E5A8A /* SignInVC.swift in Sources */,
 				076E009D1F9DB078004467D0 /* ContributionActivitySelectionVC.swift in Sources */,

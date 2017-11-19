@@ -9,10 +9,16 @@
 import UIKit
 
 class ViewCoachTableViewCell: UITableViewCell {
+    
+    
+    @IBOutlet weak var coachImage: UIImageView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        coachImage.layer.cornerRadius = coachImage.frame.size.width / 2
+        coachImage.clipsToBounds = true
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
