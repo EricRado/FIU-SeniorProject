@@ -36,27 +36,48 @@ class ViewCoachesVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     
     let interactor = Interactor()
     
+    @IBOutlet weak var tableView: UITableView!
+    
+    
     var dbref = Database.database().reference(fromURL: "https://life-management-f0cdf.firebaseio.com/")
     let delegate = UIApplication.shared.delegate as! AppDelegate
     var coachList = [Coach]()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        getCoaches()
         
     }
     
     func getCoaches(){
-    
+        let coachRef = dbref.child("Coaches")
+        coachRef.observe(.value, with: {(snapshot) in
+            print(snapshot)
+            for child in snapshot.children.allObjects as! [DataSnapshot]{
+                print(child)
+                let coach = Coach(snapshot: child)
+                if let newCoach = coach {
+                    self.coachList.append(newCoach)
+                    print(self.coachList)
+                }
+            }
+            self.tableView.reloadData()
+            
+        }, withCancel: {(error) in
+            print(error.localizedDescription)
+        })
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return self.coachList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "coachCell") as! ViewCoachTableViewCell
-        
+        let coach = self.coachList[indexPath.row]
+        cell.coachNameLabel.text = "\(coach.firstName) \(coach.lastName)"
+        cell.skillsLabel.text = "\(coach.skills)"
         
         return cell
     }

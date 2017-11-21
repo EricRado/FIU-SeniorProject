@@ -43,6 +43,8 @@
 		079265651F7B0636008B5BDE /* JoyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079265641F7B0636008B5BDE /* JoyVC.swift */; };
 		07B40A151F99A6540002DCC3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07B40A141F99A6540002DCC3 /* QuartzCore.framework */; };
 		07B40A1D1F9AC6200002DCC3 /* ActivityImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B40A1C1F9AC6200002DCC3 /* ActivityImage.swift */; };
+		07C53BB81FC4D7BF00AD9904 /* CurrentChatsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C53BB71FC4D7BF00AD9904 /* CurrentChatsVC.swift */; };
+		07C53BBA1FC4D80500AD9904 /* ConversationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C53BB91FC4D80500AD9904 /* ConversationVC.swift */; };
 		07F2F4621FB4B547002B4308 /* PreviousCycleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F2F4611FB4B547002B4308 /* PreviousCycleVC.swift */; };
 		07F2F4641FB4B611002B4308 /* PreviousCycleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F2F4631FB4B611002B4308 /* PreviousCycleTableViewCell.swift */; };
 		07F2F4661FB4B7ED002B4308 /* PreviousCycleSummaryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F2F4651FB4B7ED002B4308 /* PreviousCycleSummaryVC.swift */; };
@@ -120,6 +122,8 @@
 		07B40A141F99A6540002DCC3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		07B40A161F99A8E30002DCC3 /* LifeManagementApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LifeManagementApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		07B40A1C1F9AC6200002DCC3 /* ActivityImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityImage.swift; sourceTree = "<group>"; };
+		07C53BB71FC4D7BF00AD9904 /* CurrentChatsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentChatsVC.swift; sourceTree = "<group>"; };
+		07C53BB91FC4D80500AD9904 /* ConversationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationVC.swift; sourceTree = "<group>"; };
 		07F2F4611FB4B547002B4308 /* PreviousCycleVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviousCycleVC.swift; sourceTree = "<group>"; };
 		07F2F4631FB4B611002B4308 /* PreviousCycleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviousCycleTableViewCell.swift; sourceTree = "<group>"; };
 		07F2F4651FB4B7ED002B4308 /* PreviousCycleSummaryVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviousCycleSummaryVC.swift; sourceTree = "<group>"; };
@@ -195,6 +199,7 @@
 			children = (
 				073D89D51FA76901000DE687 /* Side Menu */,
 				079C30E81F8E68BF0044DA18 /* Sources */,
+				07C53BBB1FC4D80F00AD9904 /* Views */,
 				072F86811F6F1CC3007E5A8A /* Models */,
 				072F868A1F6F814C007E5A8A /* Controllers */,
 				072F861B1F5D9227007E5A8A /* AppDelegate.swift */,
@@ -260,10 +265,9 @@
 				073D89E01FA78E14000DE687 /* PassionVC.swift */,
 				073D89E21FA78E43000DE687 /* ContributionVC.swift */,
 				07F2F4611FB4B547002B4308 /* PreviousCycleVC.swift */,
-				07F2F4631FB4B611002B4308 /* PreviousCycleTableViewCell.swift */,
 				07F2F4651FB4B7ED002B4308 /* PreviousCycleSummaryVC.swift */,
 				07F9D2B81FBFCDF10083AEF2 /* ViewCoachesVC.swift */,
-				07F9D2BA1FBFCEE50083AEF2 /* ViewCoachTableViewCell.swift */,
+				07C53BB71FC4D7BF00AD9904 /* CurrentChatsVC.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -290,6 +294,16 @@
 				07B40A161F99A8E30002DCC3 /* LifeManagementApp-Bridging-Header.h */,
 			);
 			name = Sources;
+			sourceTree = "<group>";
+		};
+		07C53BBB1FC4D80F00AD9904 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				07F9D2BA1FBFCEE50083AEF2 /* ViewCoachTableViewCell.swift */,
+				07C53BB91FC4D80500AD9904 /* ConversationVC.swift */,
+				07F2F4631FB4B611002B4308 /* PreviousCycleTableViewCell.swift */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		8D1A1436F2307BCF3B8430EE /* Pods */ = {
@@ -623,6 +637,7 @@
 				073D89E11FA78E14000DE687 /* PassionVC.swift in Sources */,
 				07B40A1D1F9AC6200002DCC3 /* ActivityImage.swift in Sources */,
 				076E009F1F9EAAF8004467D0 /* SprintSettingsVC.swift in Sources */,
+				07C53BBA1FC4D80500AD9904 /* ConversationVC.swift in Sources */,
 				072F861C1F5D9227007E5A8A /* AppDelegate.swift in Sources */,
 				073D89DF1FA7754E000DE687 /* SideMenuViewController.swift in Sources */,
 				073D89D71FA7692F000DE687 /* MenuHelper.swift in Sources */,
@@ -655,6 +670,7 @@
 				072F86831F6F1CF6007E5A8A /* User.swift in Sources */,
 				07F9D2BB1FBFCEE50083AEF2 /* ViewCoachTableViewCell.swift in Sources */,
 				072F86741F696625007E5A8A /* Screen4VC.swift in Sources */,
+				07C53BB81FC4D7BF00AD9904 /* CurrentChatsVC.swift in Sources */,
 				072F86851F6F236D007E5A8A /* Category.swift in Sources */,
 				073D89D91FA76947000DE687 /* Interactor.swift in Sources */,
 				07174FD51F8E73DE00E1E8AC /* JoyActivitySelectionVC.swift in Sources */,

@@ -4109,6 +4109,7 @@
                         <segue destination="aVb-NQ-5Dj" kind="show" identifier="newCycleSegue" id="IHu-UO-RcH"/>
                         <segue destination="0Lk-KN-HwK" kind="show" identifier="previousCycleSegue" id="C7z-JB-zWa"/>
                         <segue destination="7cS-Fm-9g7" kind="show" identifier="viewCoachesSegue" id="qJF-bO-A9x"/>
+                        <segue destination="zuQ-HF-i9G" kind="show" identifier="viewChatsSegue" id="xh9-O9-RTn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GKT-cB-krq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4688,44 +4689,44 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="134" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cjW-fD-hDH">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="148" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cjW-fD-hDH">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="coachCell" rowHeight="134" id="CWL-ms-wMn" customClass="ViewCoachTableViewCell" customModule="LifeManagementApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="134"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="coachCell" rowHeight="148" id="CWL-ms-wMn" customClass="ViewCoachTableViewCell" customModule="LifeManagementApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="148"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CWL-ms-wMn" id="ADY-Hk-UKD">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="134"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="148"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="CoachCell" translatesAutoresizingMaskIntoConstraints="NO" id="TMz-TX-zpo">
-                                                    <rect key="frame" x="118" y="17" width="249" height="100"/>
+                                                    <rect key="frame" x="116" y="17" width="249" height="116"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="noPicture" translatesAutoresizingMaskIntoConstraints="NO" id="mgV-Uj-S8y">
-                                                    <rect key="frame" x="8" y="17" width="100" height="100"/>
+                                                    <rect key="frame" x="8" y="23" width="100" height="100"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sansa Stark" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2lO-RK-Drb">
-                                                    <rect key="frame" x="126" y="21" width="226" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sansa Stark" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2lO-RK-Drb">
+                                                    <rect key="frame" x="126" y="21" width="233" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="86%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IF2-yY-idz">
-                                                    <rect key="frame" x="126" y="85" width="42" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Passion Coach " lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8NV-zE-PLT">
+                                                    <rect key="frame" x="122" y="45" width="243" height="39"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Passion Coach" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8NV-zE-PLT">
-                                                    <rect key="frame" x="257" y="21" width="90" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="100%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IF2-yY-idz">
+                                                    <rect key="frame" x="122" y="92" width="48" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -4733,12 +4734,15 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="coachImage" destination="mgV-Uj-S8y" id="wqf-Oc-2BA"/>
+                                            <outlet property="coachNameLabel" destination="2lO-RK-Drb" id="xvf-lv-1E0"/>
+                                            <outlet property="skillsLabel" destination="8NV-zE-PLT" id="kGg-IQ-fq2"/>
+                                            <outlet property="successRateLabel" destination="IF2-yY-idz" id="r4a-9I-J7q"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
-                                    <outlet property="dataSource" destination="Yft-hU-Zzf" id="0ch-lj-kBd"/>
-                                    <outlet property="delegate" destination="Yft-hU-Zzf" id="el9-Dc-u5w"/>
+                                    <outlet property="dataSource" destination="Yft-hU-Zzf" id="gMP-Fo-BWF"/>
+                                    <outlet property="delegate" destination="Yft-hU-Zzf" id="YuD-rn-cb1"/>
                                 </connections>
                             </tableView>
                         </subviews>
@@ -4758,6 +4762,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="cjW-fD-hDH" id="AdA-Pq-elb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="15c-6Z-dmb" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <screenEdgePanGestureRecognizer minimumNumberOfTouches="1" id="xfk-3p-RZ4">
@@ -4768,6 +4775,35 @@
                 </screenEdgePanGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="9880.7999999999993" y="-767.76611694152928"/>
+        </scene>
+        <!--Chats-->
+        <scene sceneID="ohg-Uq-AvZ">
+            <objects>
+                <viewController id="zRr-Eh-p61" customClass="CurrentChatsVC" customModule="LifeManagementApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="BVJ-Lw-gUQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="Zcc-kJ-beb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="XrG-WW-Qbh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Chats" id="DVd-nh-rTM">
+                        <barButtonItem key="leftBarButtonItem" image="dropdown" id="s8Y-xR-RNf">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <segue destination="d5V-DO-Q8U" kind="presentation" identifier="openMenu" id="3ql-YB-El6"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="5Y3-1r-btY">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="j64-0f-hgq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="12004" y="-774.06296851574223"/>
         </scene>
         <!--Joy-->
         <scene sceneID="SKQ-4B-8Vw">
@@ -7132,6 +7168,25 @@
             </objects>
             <point key="canvasLocation" x="8927" y="-774"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="bkR-Ee-eTz">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zuQ-HF-i9G" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="GTa-fj-DBO">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.13466796389999999" green="0.090682785239999994" blue="0.79683452070000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="zRr-Eh-p61" kind="relationship" relationship="rootViewController" id="ad4-0U-OWs"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QUY-Gu-CU0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="11064.799999999999" y="-774.06296851574223"/>
+        </scene>
     </scenes>
     <resources>
         <image name="CoachCell" width="225" height="97"/>
@@ -7166,10 +7221,10 @@
         <image name="screen4top" width="334" height="255"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="vUG-b0-bNY"/>
+        <segue reference="3ql-YB-El6"/>
         <segue reference="IHu-UO-RcH"/>
-        <segue reference="F6P-x2-fed"/>
         <segue reference="C7z-JB-zWa"/>
+        <segue reference="vUG-b0-bNY"/>
         <segue reference="Mmc-8c-1pg"/>
         <segue reference="tDY-fT-66O"/>
     </inferredMetricsTieBreakers>

@@ -12,6 +12,11 @@ class ViewCoachTableViewCell: UITableViewCell {
     
     
     @IBOutlet weak var coachImage: UIImageView!
+    
+    @IBOutlet weak var coachNameLabel: UILabel!
+    @IBOutlet weak var skillsLabel: UILabel!
+    @IBOutlet weak var successRateLabel: UILabel!
+    
 
     override func awakeFromNib() {
         super.awakeFromNib()

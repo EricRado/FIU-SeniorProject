@@ -248,17 +248,3 @@ class PreviousCycleVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     
     
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
