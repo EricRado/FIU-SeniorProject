@@ -4788,11 +4788,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="baD-GI-PAa" appends="YES" id="Thk-cy-IPQ"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="Chats" id="DVd-nh-rTM">
                         <barButtonItem key="leftBarButtonItem" image="dropdown" id="s8Y-xR-RNf">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
+                                <action selector="openMenu:" destination="zRr-Eh-p61" id="QNO-mm-eZz"/>
                                 <segue destination="d5V-DO-Q8U" kind="presentation" identifier="openMenu" id="3ql-YB-El6"/>
                             </connections>
                         </barButtonItem>
@@ -4802,6 +4807,12 @@
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j64-0f-hgq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <screenEdgePanGestureRecognizer minimumNumberOfTouches="1" id="baD-GI-PAa">
+                    <rectEdge key="edges" left="YES"/>
+                    <connections>
+                        <action selector="edgePanGestureWithSender:" destination="zRr-Eh-p61" id="LN7-Tj-EZM"/>
+                    </connections>
+                </screenEdgePanGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="12004" y="-774.06296851574223"/>
         </scene>
