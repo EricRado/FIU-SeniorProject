@@ -12,7 +12,7 @@ import Firebase
 class SprintSettingsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate {
     
     let delegate = UIApplication.shared.delegate as! AppDelegate
-    let dbref = Database.database().reference(fromURL: "https://life-management-f0cdf.firebaseio.com/")
+    let dbref = Database.database().reference(fromURL: "https://life-management-v2.firebaseio.com/")
     var categoryKey = ""
     var weekList = ["1", "2", "3"]
     var weekChoice = ""

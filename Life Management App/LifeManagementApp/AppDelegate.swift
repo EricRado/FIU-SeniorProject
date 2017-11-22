@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
-        imgDbRef = Database.database().reference(fromURL: "https://life-management-f0cdf.firebaseio.com/")
+        imgDbRef = Database.database().reference(fromURL: "https://life-management-v2.firebaseio.com/")
         self.getImgURLS(option: "Joy")
         self.getImgURLS(option: "Passion")
         self.getImgURLS(option: "Contribution")

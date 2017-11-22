@@ -11,7 +11,7 @@ import Firebase
 
 class PreviousCycleVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    var dbref = Database.database().reference(fromURL: "https://life-management-f0cdf.firebaseio.com/")
+    var dbref = Database.database().reference(fromURL: "https://life-management-v2.firebaseio.com/")
     var delegate = UIApplication.shared.delegate as! AppDelegate
     var userCategory = Category()
     

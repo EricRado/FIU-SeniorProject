@@ -23,7 +23,6 @@
 		072F867A1F69EF88007E5A8A /* Popup4VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072F86791F69EF88007E5A8A /* Popup4VC.swift */; };
 		072F867C1F69F2A9007E5A8A /* Popup5VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072F867B1F69F2A9007E5A8A /* Popup5VC.swift */; };
 		072F867E1F69F483007E5A8A /* Popup6VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072F867D1F69F483007E5A8A /* Popup6VC.swift */; };
-		072F86801F6D86E9007E5A8A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 072F867F1F6D86E9007E5A8A /* GoogleService-Info.plist */; };
 		072F86831F6F1CF6007E5A8A /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072F86821F6F1CF6007E5A8A /* User.swift */; };
 		072F86851F6F236D007E5A8A /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072F86841F6F236D007E5A8A /* Category.swift */; };
 		072F86871F6F4D7F007E5A8A /* RegistrationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072F86861F6F4D7F007E5A8A /* RegistrationVC.swift */; };
@@ -43,6 +42,7 @@
 		079265651F7B0636008B5BDE /* JoyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079265641F7B0636008B5BDE /* JoyVC.swift */; };
 		07B40A151F99A6540002DCC3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07B40A141F99A6540002DCC3 /* QuartzCore.framework */; };
 		07B40A1D1F9AC6200002DCC3 /* ActivityImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B40A1C1F9AC6200002DCC3 /* ActivityImage.swift */; };
+		07C129F31FC5CC60003149A6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 07C129F21FC5CC60003149A6 /* GoogleService-Info.plist */; };
 		07C53BB81FC4D7BF00AD9904 /* CurrentChatsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C53BB71FC4D7BF00AD9904 /* CurrentChatsVC.swift */; };
 		07C53BBA1FC4D80500AD9904 /* ConversationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C53BB91FC4D80500AD9904 /* ConversationVC.swift */; };
 		07F2F4621FB4B547002B4308 /* PreviousCycleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F2F4611FB4B547002B4308 /* PreviousCycleVC.swift */; };
@@ -100,7 +100,6 @@
 		072F86791F69EF88007E5A8A /* Popup4VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Popup4VC.swift; sourceTree = "<group>"; };
 		072F867B1F69F2A9007E5A8A /* Popup5VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Popup5VC.swift; sourceTree = "<group>"; };
 		072F867D1F69F483007E5A8A /* Popup6VC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Popup6VC.swift; sourceTree = "<group>"; };
-		072F867F1F6D86E9007E5A8A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		072F86821F6F1CF6007E5A8A /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		072F86841F6F236D007E5A8A /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		072F86861F6F4D7F007E5A8A /* RegistrationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationVC.swift; sourceTree = "<group>"; };
@@ -122,6 +121,7 @@
 		07B40A141F99A6540002DCC3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		07B40A161F99A8E30002DCC3 /* LifeManagementApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LifeManagementApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		07B40A1C1F9AC6200002DCC3 /* ActivityImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityImage.swift; sourceTree = "<group>"; };
+		07C129F21FC5CC60003149A6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../../Volumes/Eric SD/LifeMangementPics/Current_DB/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		07C53BB71FC4D7BF00AD9904 /* CurrentChatsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentChatsVC.swift; sourceTree = "<group>"; };
 		07C53BB91FC4D80500AD9904 /* ConversationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationVC.swift; sourceTree = "<group>"; };
 		07F2F4611FB4B547002B4308 /* PreviousCycleVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviousCycleVC.swift; sourceTree = "<group>"; };
@@ -214,8 +214,8 @@
 				072F86791F69EF88007E5A8A /* Popup4VC.swift */,
 				072F867B1F69F2A9007E5A8A /* Popup5VC.swift */,
 				072F867D1F69F483007E5A8A /* Popup6VC.swift */,
+				07C129F21FC5CC60003149A6 /* GoogleService-Info.plist */,
 				072F86271F5D9228007E5A8A /* Info.plist */,
-				072F867F1F6D86E9007E5A8A /* GoogleService-Info.plist */,
 			);
 			path = LifeManagementApp;
 			sourceTree = "<group>";
@@ -449,7 +449,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				072F86261F5D9228007E5A8A /* LaunchScreen.storyboard in Resources */,
-				072F86801F6D86E9007E5A8A /* GoogleService-Info.plist in Resources */,
+				07C129F31FC5CC60003149A6 /* GoogleService-Info.plist in Resources */,
 				072F86231F5D9228007E5A8A /* Assets.xcassets in Resources */,
 				072F86211F5D9227007E5A8A /* Main.storyboard in Resources */,
 			);

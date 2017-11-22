@@ -34,7 +34,7 @@ class SignInVC: UIViewController {
     @IBOutlet weak var signInButton: UIButton!
     
     let delegate = UIApplication.shared.delegate as! AppDelegate
-    let dbRef = Database.database().reference(fromURL: "https://life-management-f0cdf.firebaseio.com/")
+    let dbRef = Database.database().reference(fromURL: "https://life-management-v2.firebaseio.com/")
     var users = [User]()
     var signInUser = User()
     

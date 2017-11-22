@@ -39,7 +39,7 @@ class ViewCoachesVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     @IBOutlet weak var tableView: UITableView!
     
     
-    var dbref = Database.database().reference(fromURL: "https://life-management-f0cdf.firebaseio.com/")
+    var dbref = Database.database().reference(fromURL: "https://life-management-v2.firebaseio.com/")
     let delegate = UIApplication.shared.delegate as! AppDelegate
     var coachList = [Coach]()
     
@@ -53,7 +53,6 @@ class ViewCoachesVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     func getCoaches(){
         let coachRef = dbref.child("Coaches")
         coachRef.observe(.value, with: {(snapshot) in
-            print(snapshot)
             for child in snapshot.children.allObjects as! [DataSnapshot]{
                 print(child)
                 let coach = Coach(snapshot: child)
@@ -69,6 +68,23 @@ class ViewCoachesVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         })
     }
     
+    func getCoachImage(url: String) -> UIImage{
+        let imageView = UIImageView()
+        print("THIS IS URL... \(url)")
+        let imageRef = storage.reference(forURL: url)
+        imageRef.getData(maxSize: 1 * 1024 * 1024, completion: {data, error in
+            if let error = error {
+                print("GOT AN ERROR")
+                print(error.localizedDescription)
+                return
+            }else {
+                print("GETTING IMAGE...")
+                imageView.image = UIImage(data: data!)
+            }
+        })
+        return imageView.image!
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.coachList.count
     }
@@ -78,6 +94,11 @@ class ViewCoachesVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         let coach = self.coachList[indexPath.row]
         cell.coachNameLabel.text = "\(coach.firstName) \(coach.lastName)"
         cell.skillsLabel.text = "\(coach.skills)"
+        
+        // get coach image from firebase storage
+        if coach.imgURL != ""{
+            cell.coachImage.image = getCoachImage(url: coach.imgURL)
+        }
         
         return cell
     }

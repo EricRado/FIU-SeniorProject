@@ -68,7 +68,7 @@ class ContributionVC: UIViewController {
     @IBOutlet weak var activityScore: KDCircularProgress!
     @IBOutlet weak var activityScoreLabel: UILabel!
     
-    var dbref = Database.database().reference(fromURL: "https://life-management-f0cdf.firebaseio.com/")
+    var dbref = Database.database().reference(fromURL: "https://life-management-v2.firebaseio.com/")
     
     var delegate = UIApplication.shared.delegate as! AppDelegate
 

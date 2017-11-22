@@ -18,7 +18,7 @@ class ContributionActivitySelectionVC: UIViewController, iCarouselDataSource, iC
     var selectedIndexes = Set<Int>()
 
     let delegate = UIApplication.shared.delegate as! AppDelegate
-    let dbref = Database.database().reference(fromURL: "https://life-management-f0cdf.firebaseio.com/")
+    let dbref = Database.database().reference(fromURL: "https://life-management-v2.firebaseio.com/")
     
     override func viewDidLoad() {
         super.viewDidLoad()
