@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class SideMenuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -16,11 +17,16 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
     var iconNameArr = [String]()
     var iconImage = [UIImage]()
     
+    @IBOutlet weak var userImg: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         iconNameArr = ["Home","New Cycle","Previous Cycle", "View Coaches", "Share Progress","Messages", "Invite a Friend"]
         
+        userImg.layer.masksToBounds = false
+        userImg.layer.cornerRadius = userImg.frame.height / 2
+        userImg.clipsToBounds = true
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
