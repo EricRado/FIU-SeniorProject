@@ -68,21 +68,20 @@ class ViewCoachesVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         })
     }
     
-    func getCoachImage(url: String) -> UIImage{
-        let imageView = UIImageView()
+    func getCoachImage(url: String, cell : ViewCoachTableViewCell){
         print("THIS IS URL... \(url)")
         let imageRef = storage.reference(forURL: url)
+        
         imageRef.getData(maxSize: 1 * 1024 * 1024, completion: {data, error in
             if let error = error {
-                print("GOT AN ERROR")
                 print(error.localizedDescription)
                 return
             }else {
                 print("GETTING IMAGE...")
-                imageView.image = UIImage(data: data!)
+                cell.coachImage.image = UIImage(data: data!)
             }
         })
-        return imageView.image!
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -94,10 +93,11 @@ class ViewCoachesVC: UIViewController, UITableViewDataSource, UITableViewDelegat
         let coach = self.coachList[indexPath.row]
         cell.coachNameLabel.text = "\(coach.firstName) \(coach.lastName)"
         cell.skillsLabel.text = "\(coach.skills)"
+        cell.successRateLabel.text = "\(coach.successRating)%"
         
         // get coach image from firebase storage
         if coach.imgURL != ""{
-            cell.coachImage.image = getCoachImage(url: coach.imgURL)
+            getCoachImage(url: coach.imgURL, cell: cell)
         }
         
         return cell

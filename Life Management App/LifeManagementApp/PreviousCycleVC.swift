@@ -9,6 +9,27 @@
 import UIKit
 import Firebase
 
+extension PreviousCycleVC: UIViewControllerTransitioningDelegate{
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return PresentMenuAnimator()
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return DismissMenuAnimator()
+    }
+    
+    /* indicate that the dismiss transition is going to be interactive, but
+     only if the user is panning */
+    
+    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        return interactor.hasStarted ? interactor : nil
+    }
+    
+    func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        return interactor.hasStarted ? interactor : nil
+    }
+}
+
 class PreviousCycleVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     var dbref = Database.database().reference(fromURL: "https://life-management-v2.firebaseio.com/")
@@ -24,6 +45,8 @@ class PreviousCycleVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     var joySprint = Sprint()
     var passionSprint = Sprint()
     var contributionSprint = Sprint()
+    
+    let interactor = Interactor()
     
     @IBOutlet weak var tableView: UITableView!
 
@@ -244,7 +267,35 @@ class PreviousCycleVC: UIViewController, UITableViewDataSource, UITableViewDeleg
             viewController.contributionActivity2 = self.contributionActivitiesDict[self.contributionSprint.sprintActivityId2]!
             viewController.sprint = self.joySprint
         }
+        
+        if let destinationViewController = segue.destination as? SideMenuViewController{
+            destinationViewController.transitioningDelegate = self
+            // pass the interactor object forward
+            destinationViewController.interactor = interactor
+        }
     }
     
+    /***********************************************************
+     
+                        Side Menu Functions
+     
+     ***********************************************************/
+    
+    
+    @IBAction func openMenu(_ sender: AnyObject){
+        performSegue(withIdentifier: "openMenu", sender: nil)
+    }
+    
+    
+    @IBAction func edgePanGesture(sender: UIScreenEdgePanGestureRecognizer){
+        let translation = sender.translation(in: view)
+        
+        let progress = MenuHelper.calculateProgress(translationInView: translation, viewBounds: view.bounds, direction: .Right)
+        
+        MenuHelper.mapGestureStateToInteractor(gestureState: sender.state, progress: progress, interactor: interactor){
+            self.performSegue(withIdentifier: "openMenu", sender: nil)
+        }
+    }
+
     
 }

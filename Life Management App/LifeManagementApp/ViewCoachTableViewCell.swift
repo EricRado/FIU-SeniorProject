@@ -23,6 +23,8 @@ class ViewCoachTableViewCell: UITableViewCell {
         // Initialization code
         coachImage.layer.cornerRadius = coachImage.frame.size.width / 2
         coachImage.clipsToBounds = true
+        coachImage.layer.borderWidth = 2
+        coachImage.layer.borderColor = UIColor.blue.cgColor
         
     }
 
