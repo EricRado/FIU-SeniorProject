@@ -17,12 +17,17 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
     var iconNameArr = [String]()
     var iconImage = [UIImage]()
     
+    @IBOutlet weak var tableView: UITableView!
+    
     @IBOutlet weak var userImg: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         iconNameArr = ["Home","New Cycle","Previous Cycle", "View Coaches", "Share Progress","Messages", "Invite a Friend"]
+        iconImage = [UIImage(named: "home")!, UIImage(named: "newCycles")!, UIImage(named: "previousCycles")!, UIImage(named: "coachList")!, UIImage(named: "shareProgress")!, UIImage(named: "messages")!, UIImage(named: "inviteFriend")!]
+        
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.none
         
         userImg.layer.masksToBounds = false
         userImg.layer.cornerRadius = userImg.frame.height / 2
@@ -36,6 +41,8 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SideMenuTableViewCell") as! SideMenuTableViewCell
         cell.iconNameLabel.text! = iconNameArr[indexPath.row]
+        
+        cell.iconImage.image = iconImage[indexPath.row]
         
         return cell
     }
