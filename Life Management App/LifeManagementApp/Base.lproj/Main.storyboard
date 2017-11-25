@@ -4056,22 +4056,58 @@
                                     <outletCollection property="gestureRecognizers" destination="cho-6t-AvS" appends="YES" id="VoV-vO-9mB"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="55" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7OP-ZT-Yjv">
-                                <rect key="frame" x="0.0" y="167" width="319" height="500"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="55" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7OP-ZT-Yjv">
+                                <rect key="frame" x="0.0" y="0.0" width="319" height="667"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SideMenuTableViewCell" rowHeight="55" id="YFz-ht-4qe" customClass="SideMenuTableViewCell" customModule="LifeManagementApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="319" height="55"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SideMenuTopTableViewCell" rowHeight="135" id="YFz-ht-4qe" customClass="SideMenuTopTableViewCell" customModule="LifeManagementApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="319" height="135"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YFz-ht-4qe" id="gNd-qC-OhE">
+                                            <rect key="frame" x="0.0" y="0.0" width="319" height="134.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Some Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sfq-xa-uKw">
+                                                    <rect key="frame" x="67" y="104" width="185" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noPicture" translatesAutoresizingMaskIntoConstraints="NO" id="5wJ-7d-Gj8">
+                                                    <rect key="frame" x="114" y="8" width="90" height="90"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="90" id="KFB-xV-Hhv"/>
+                                                        <constraint firstAttribute="width" constant="90" id="poh-gZ-1cf"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="sfq-xa-uKw" firstAttribute="top" secondItem="5wJ-7d-Gj8" secondAttribute="bottom" constant="6" id="G7r-Od-ReG"/>
+                                                <constraint firstItem="5wJ-7d-Gj8" firstAttribute="top" secondItem="gNd-qC-OhE" secondAttribute="topMargin" id="JUn-u3-BoN"/>
+                                                <constraint firstItem="sfq-xa-uKw" firstAttribute="centerX" secondItem="5wJ-7d-Gj8" secondAttribute="centerX" id="QGs-4p-XYV"/>
+                                                <constraint firstItem="5wJ-7d-Gj8" firstAttribute="centerX" secondItem="gNd-qC-OhE" secondAttribute="centerX" id="TTl-0B-dq6"/>
+                                                <constraint firstItem="sfq-xa-uKw" firstAttribute="leading" secondItem="gNd-qC-OhE" secondAttribute="leadingMargin" constant="59" id="W9D-wc-BJU"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="sfq-xa-uKw" secondAttribute="trailing" constant="59" id="f7X-3u-YCA"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="nameLabel" destination="sfq-xa-uKw" id="cEh-x2-Sph"/>
+                                            <outlet property="userProfileImg" destination="5wJ-7d-Gj8" id="IYH-gj-kvv"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SideMenuTableViewCell" rowHeight="55" id="1Ai-nv-sBV" customClass="SideMenuTableViewCell" customModule="LifeManagementApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="163" width="319" height="55"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1Ai-nv-sBV" id="ayN-Kd-t78">
                                             <rect key="frame" x="0.0" y="0.0" width="319" height="55"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="joy" translatesAutoresizingMaskIntoConstraints="NO" id="to2-Zn-r0q">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="joy" translatesAutoresizingMaskIntoConstraints="NO" id="Vua-5U-Lfk">
                                                     <rect key="frame" x="8" y="7" width="40" height="41"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="New Cycle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hpi-AT-dNE">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="New Cycle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W2v-ro-OxQ">
                                                     <rect key="frame" x="63" y="17" width="210" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -4081,8 +4117,8 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="iconImage" destination="to2-Zn-r0q" id="rtX-B6-50j"/>
-                                            <outlet property="iconNameLabel" destination="hpi-AT-dNE" id="yNB-ZG-aZ8"/>
+                                            <outlet property="iconImage" destination="Vua-5U-Lfk" id="bEy-fC-HXd"/>
+                                            <outlet property="iconNameLabel" destination="W2v-ro-OxQ" id="oSf-2b-H7f"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -4092,31 +4128,17 @@
                                     <outlet property="delegate" destination="d5V-DO-Q8U" id="TSn-oA-aV8"/>
                                 </connections>
                             </tableView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noPicture" translatesAutoresizingMaskIntoConstraints="NO" id="5wJ-7d-Gj8">
-                                <rect key="frame" x="99.5" y="20" width="120" height="120"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="120" id="1jH-eu-mRG"/>
-                                    <constraint firstAttribute="height" constant="120" id="lrg-E7-e2r"/>
-                                </constraints>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="7OP-ZT-Yjv" firstAttribute="leading" secondItem="1li-pi-AkF" secondAttribute="leading" id="8qC-eG-iex"/>
                             <constraint firstItem="pk9-DY-W0i" firstAttribute="width" secondItem="1li-pi-AkF" secondAttribute="width" multiplier="0.15" id="I7n-tX-xWY"/>
-                            <constraint firstItem="pk9-DY-W0i" firstAttribute="leading" secondItem="7OP-ZT-Yjv" secondAttribute="trailing" id="Opo-SU-G9W"/>
-                            <constraint firstItem="7OP-ZT-Yjv" firstAttribute="height" secondItem="1li-pi-AkF" secondAttribute="height" multiplier="0.75" id="ScY-w5-bot"/>
-                            <constraint firstItem="EKT-cw-wLh" firstAttribute="top" secondItem="7OP-ZT-Yjv" secondAttribute="bottom" id="YGe-FD-kLU"/>
                             <constraint firstItem="EKT-cw-wLh" firstAttribute="top" secondItem="pk9-DY-W0i" secondAttribute="bottom" id="fBs-zg-HiK"/>
-                            <constraint firstItem="5wJ-7d-Gj8" firstAttribute="centerX" secondItem="7OP-ZT-Yjv" secondAttribute="centerX" id="i9a-Y0-YT1"/>
                             <constraint firstItem="pk9-DY-W0i" firstAttribute="top" secondItem="Cif-EU-1nz" secondAttribute="bottom" id="rbt-FQ-Osh"/>
                             <constraint firstAttribute="trailing" secondItem="pk9-DY-W0i" secondAttribute="trailing" id="sPr-92-wiu"/>
-                            <constraint firstItem="5wJ-7d-Gj8" firstAttribute="top" secondItem="Cif-EU-1nz" secondAttribute="bottom" id="wCB-fI-oef"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="tableView" destination="7OP-ZT-Yjv" id="soz-bo-tsq"/>
-                        <outlet property="userImg" destination="5wJ-7d-Gj8" id="yUl-WC-q2a"/>
                         <segue destination="aVb-NQ-5Dj" kind="show" identifier="newCycleSegue" id="IHu-UO-RcH"/>
                         <segue destination="gni-k7-3yr" kind="show" identifier="previousCycleSegue" id="C7z-JB-zWa"/>
                         <segue destination="7cS-Fm-9g7" kind="show" identifier="viewCoachesSegue" id="qJF-bO-A9x"/>
@@ -7315,6 +7337,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.13466796389999999" green="0.090682785239999994" blue="0.79683452070000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

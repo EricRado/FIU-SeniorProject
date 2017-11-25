@@ -41,6 +41,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.getImgURLS(option: "Joy")
         self.getImgURLS(option: "Passion")
         self.getImgURLS(option: "Contribution")
+        
+        // set the navigation background color
+        //UINavigationBar.appearance().barTintColor = UIColor.blue
+        
+        // set the navigation bar color
+        UINavigationBar.appearance().tintColor = UIColor.white
+        
+        // set the navigation bar title text color
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
 
         return true
     }

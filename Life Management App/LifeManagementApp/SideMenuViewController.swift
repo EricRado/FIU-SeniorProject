@@ -21,25 +21,15 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
     
     @IBOutlet weak var tableView: UITableView!
     
-    @IBOutlet weak var userImg: UIImageView!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        iconNameArr = ["Home","New Cycle","Previous Cycle", "View Coaches", "Share Progress","Messages", "Invite a Friend", "Settings"]
-        iconImage = [UIImage(named: "home")!, UIImage(named: "newCycles")!, UIImage(named: "previousCycles")!, UIImage(named: "coachList")!, UIImage(named: "shareProgress")!, UIImage(named: "messages")!, UIImage(named: "inviteFriend")!, UIImage(named: "settings")!]
+        iconNameArr = ["Top","Home","New Cycle","Previous Cycle", "View Coaches", "Share Progress","Messages", "Invite a Friend", "Settings"]
+        iconImage = [delegate.userImgProfile, UIImage(named: "home")!, UIImage(named: "newCycles")!, UIImage(named: "previousCycles")!, UIImage(named: "coachList")!, UIImage(named: "shareProgress")!, UIImage(named: "messages")!, UIImage(named: "inviteFriend")!, UIImage(named: "settings")!]
         
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.none
     
-        setUserImage()
         
-    }
-    
-    func setUserImage(){
-        userImg.image = delegate.userImgProfile
-        userImg.layer.masksToBounds = false
-        userImg.layer.cornerRadius = userImg.frame.height / 2
-        userImg.clipsToBounds = true
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -47,41 +37,51 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SideMenuTableViewCell") as! SideMenuTableViewCell
-        cell.iconNameLabel.text! = iconNameArr[indexPath.row]
+        if indexPath.row == 0{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SideMenuTopTableViewCell") as! SideMenuTopTableViewCell
+            cell.nameLabel.text = "\(delegate.user.firstName) \(delegate.user.lastName)"
+            cell.userProfileImg.image = delegate.userImgProfile
+            cell.layoutIfNeeded()
+            return cell
+        }else{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SideMenuTableViewCell") as! SideMenuTableViewCell
+            cell.iconNameLabel.text! = iconNameArr[indexPath.row]
         
-        cell.iconImage.image = iconImage[indexPath.row]
+            cell.iconImage.image = iconImage[indexPath.row]
+            return cell
+        }
         
-        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath) as! SideMenuTableViewCell
-        
-        if cell.iconNameLabel.text! == "New Cycle"{
-            self.performSegue(withIdentifier: "newCycleSegue", sender: self)
+        if indexPath.row >= 1{
+            let cell = tableView.cellForRow(at: indexPath) as! SideMenuTableViewCell
+            
+            if cell.iconNameLabel.text! == "New Cycle"{
+                self.performSegue(withIdentifier: "newCycleSegue", sender: self)
+            }
+            
+            if cell.iconNameLabel.text! == "Previous Cycle"{
+                self.performSegue(withIdentifier: "previousCycleSegue", sender: self)
+            }
+            
+            if cell.iconNameLabel.text! == "View Coaches"{
+                self.performSegue(withIdentifier: "viewCoachesSegue", sender: self)
+            }
+            
+            if cell.iconNameLabel.text! == "Messages"{
+                self.performSegue(withIdentifier: "viewChatsSegue", sender: self)
+            }
+            
+            if cell.iconNameLabel.text! == "Settings"{
+                self.performSegue(withIdentifier: "settingsSegue", sender: self)
+            }
+            
+            if cell.iconNameLabel.text! == "Home"{
+                self.performSegue(withIdentifier: "homeSegue", sender: self)
+            }
+
         }
-        
-        if cell.iconNameLabel.text! == "Previous Cycle"{
-            self.performSegue(withIdentifier: "previousCycleSegue", sender: self)
-        }
-        
-        if cell.iconNameLabel.text! == "View Coaches"{
-            self.performSegue(withIdentifier: "viewCoachesSegue", sender: self)
-        }
-        
-        if cell.iconNameLabel.text! == "Messages"{
-            self.performSegue(withIdentifier: "viewChatsSegue", sender: self)
-        }
-        
-        if cell.iconNameLabel.text! == "Settings"{
-            self.performSegue(withIdentifier: "settingsSegue", sender: self)
-        }
-        
-        if cell.iconNameLabel.text! == "Home"{
-            self.performSegue(withIdentifier: "homeSegue", sender: self)
-        }
-        
     }
     
     @IBAction func handleGesture(sender: UIPanGestureRecognizer){

@@ -45,6 +45,7 @@
 		07C129F31FC5CC60003149A6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 07C129F21FC5CC60003149A6 /* GoogleService-Info.plist */; };
 		07C129F51FC88EAF003149A6 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C129F41FC88EAF003149A6 /* SettingsVC.swift */; };
 		07C129F71FC8A54E003149A6 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C129F61FC8A54E003149A6 /* ImageManager.swift */; };
+		07C129F91FC9CBB2003149A6 /* SideMenuTopTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C129F81FC9CBB2003149A6 /* SideMenuTopTableViewCell.swift */; };
 		07C53BB81FC4D7BF00AD9904 /* CurrentChatsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C53BB71FC4D7BF00AD9904 /* CurrentChatsVC.swift */; };
 		07C53BBA1FC4D80500AD9904 /* ConversationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C53BB91FC4D80500AD9904 /* ConversationVC.swift */; };
 		07F2F4621FB4B547002B4308 /* PreviousCycleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F2F4611FB4B547002B4308 /* PreviousCycleVC.swift */; };
@@ -126,6 +127,7 @@
 		07C129F21FC5CC60003149A6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../../Volumes/Eric SD/LifeMangementPics/Current_DB/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		07C129F41FC88EAF003149A6 /* SettingsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		07C129F61FC8A54E003149A6 /* ImageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
+		07C129F81FC9CBB2003149A6 /* SideMenuTopTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuTopTableViewCell.swift; sourceTree = "<group>"; };
 		07C53BB71FC4D7BF00AD9904 /* CurrentChatsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentChatsVC.swift; sourceTree = "<group>"; };
 		07C53BB91FC4D80500AD9904 /* ConversationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationVC.swift; sourceTree = "<group>"; };
 		07F2F4611FB4B547002B4308 /* PreviousCycleVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviousCycleVC.swift; sourceTree = "<group>"; };
@@ -308,6 +310,7 @@
 				07F9D2BA1FBFCEE50083AEF2 /* ViewCoachTableViewCell.swift */,
 				07C53BB91FC4D80500AD9904 /* ConversationVC.swift */,
 				07F2F4631FB4B611002B4308 /* PreviousCycleTableViewCell.swift */,
+				07C129F81FC9CBB2003149A6 /* SideMenuTopTableViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -642,6 +645,7 @@
 			files = (
 				073D89E11FA78E14000DE687 /* PassionVC.swift in Sources */,
 				07B40A1D1F9AC6200002DCC3 /* ActivityImage.swift in Sources */,
+				07C129F91FC9CBB2003149A6 /* SideMenuTopTableViewCell.swift in Sources */,
 				076E009F1F9EAAF8004467D0 /* SprintSettingsVC.swift in Sources */,
 				07C53BBA1FC4D80500AD9904 /* ConversationVC.swift in Sources */,
 				072F861C1F5D9227007E5A8A /* AppDelegate.swift in Sources */,
