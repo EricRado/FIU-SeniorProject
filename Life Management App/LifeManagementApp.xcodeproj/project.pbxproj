@@ -43,6 +43,8 @@
 		07B40A151F99A6540002DCC3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07B40A141F99A6540002DCC3 /* QuartzCore.framework */; };
 		07B40A1D1F9AC6200002DCC3 /* ActivityImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B40A1C1F9AC6200002DCC3 /* ActivityImage.swift */; };
 		07C129F31FC5CC60003149A6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 07C129F21FC5CC60003149A6 /* GoogleService-Info.plist */; };
+		07C129F51FC88EAF003149A6 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C129F41FC88EAF003149A6 /* SettingsVC.swift */; };
+		07C129F71FC8A54E003149A6 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C129F61FC8A54E003149A6 /* ImageManager.swift */; };
 		07C53BB81FC4D7BF00AD9904 /* CurrentChatsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C53BB71FC4D7BF00AD9904 /* CurrentChatsVC.swift */; };
 		07C53BBA1FC4D80500AD9904 /* ConversationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C53BB91FC4D80500AD9904 /* ConversationVC.swift */; };
 		07F2F4621FB4B547002B4308 /* PreviousCycleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F2F4611FB4B547002B4308 /* PreviousCycleVC.swift */; };
@@ -122,6 +124,8 @@
 		07B40A161F99A8E30002DCC3 /* LifeManagementApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LifeManagementApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		07B40A1C1F9AC6200002DCC3 /* ActivityImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityImage.swift; sourceTree = "<group>"; };
 		07C129F21FC5CC60003149A6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../../Volumes/Eric SD/LifeMangementPics/Current_DB/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		07C129F41FC88EAF003149A6 /* SettingsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
+		07C129F61FC8A54E003149A6 /* ImageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		07C53BB71FC4D7BF00AD9904 /* CurrentChatsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentChatsVC.swift; sourceTree = "<group>"; };
 		07C53BB91FC4D80500AD9904 /* ConversationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationVC.swift; sourceTree = "<group>"; };
 		07F2F4611FB4B547002B4308 /* PreviousCycleVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviousCycleVC.swift; sourceTree = "<group>"; };
@@ -268,6 +272,7 @@
 				07F2F4651FB4B7ED002B4308 /* PreviousCycleSummaryVC.swift */,
 				07F9D2B81FBFCDF10083AEF2 /* ViewCoachesVC.swift */,
 				07C53BB71FC4D7BF00AD9904 /* CurrentChatsVC.swift */,
+				07C129F41FC88EAF003149A6 /* SettingsVC.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -292,6 +297,7 @@
 				0778EEAD1FBCBCD8009E9903 /* iCarousel.m */,
 				07316B841F843C3D00EF2F8F /* KDCircularProgress.swift */,
 				07B40A161F99A8E30002DCC3 /* LifeManagementApp-Bridging-Header.h */,
+				07C129F61FC8A54E003149A6 /* ImageManager.swift */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
@@ -643,10 +649,12 @@
 				073D89D71FA7692F000DE687 /* MenuHelper.swift in Sources */,
 				072F86721F685D5C007E5A8A /* Popup1VC.swift in Sources */,
 				072F866C1F609F08007E5A8A /* PageVC.swift in Sources */,
+				07C129F71FC8A54E003149A6 /* ImageManager.swift in Sources */,
 				073D89DD1FA7697E000DE687 /* DismissMenuAnimator.swift in Sources */,
 				07316B851F843C3D00EF2F8F /* KDCircularProgress.swift in Sources */,
 				072F867C1F69F2A9007E5A8A /* Popup5VC.swift in Sources */,
 				07F6BB0E1F874FB200E5F4E1 /* Activity.swift in Sources */,
+				07C129F51FC88EAF003149A6 /* SettingsVC.swift in Sources */,
 				076E009B1F9DB050004467D0 /* PassionActivitySelectionVC.swift in Sources */,
 				073D89E31FA78E43000DE687 /* ContributionVC.swift in Sources */,
 				07F6BB101F874FC300E5F4E1 /* Sprint.swift in Sources */,

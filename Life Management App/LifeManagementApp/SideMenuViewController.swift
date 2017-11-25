@@ -24,8 +24,8 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        iconNameArr = ["Home","New Cycle","Previous Cycle", "View Coaches", "Share Progress","Messages", "Invite a Friend"]
-        iconImage = [UIImage(named: "home")!, UIImage(named: "newCycles")!, UIImage(named: "previousCycles")!, UIImage(named: "coachList")!, UIImage(named: "shareProgress")!, UIImage(named: "messages")!, UIImage(named: "inviteFriend")!]
+        iconNameArr = ["Home","New Cycle","Previous Cycle", "View Coaches", "Share Progress","Messages", "Invite a Friend", "Settings"]
+        iconImage = [UIImage(named: "home")!, UIImage(named: "newCycles")!, UIImage(named: "previousCycles")!, UIImage(named: "coachList")!, UIImage(named: "shareProgress")!, UIImage(named: "messages")!, UIImage(named: "inviteFriend")!, UIImage(named: "settings")!]
         
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.none
         
@@ -64,6 +64,14 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
         
         if cell.iconNameLabel.text! == "Messages"{
             self.performSegue(withIdentifier: "viewChatsSegue", sender: self)
+        }
+        
+        if cell.iconNameLabel.text! == "Settings"{
+            self.performSegue(withIdentifier: "settingsSegue", sender: self)
+        }
+        
+        if cell.iconNameLabel.text! == "Home"{
+            self.performSegue(withIdentifier: "homeSegue", sender: self)
         }
         
     }
