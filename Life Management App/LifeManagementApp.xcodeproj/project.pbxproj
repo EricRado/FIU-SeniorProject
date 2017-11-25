@@ -46,6 +46,9 @@
 		07C129F51FC88EAF003149A6 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C129F41FC88EAF003149A6 /* SettingsVC.swift */; };
 		07C129F71FC8A54E003149A6 /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C129F61FC8A54E003149A6 /* ImageManager.swift */; };
 		07C129F91FC9CBB2003149A6 /* SideMenuTopTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C129F81FC9CBB2003149A6 /* SideMenuTopTableViewCell.swift */; };
+		07C129FB1FCA05CD003149A6 /* CurrentChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C129FA1FCA05CD003149A6 /* CurrentChatTableViewCell.swift */; };
+		07C129FF1FCA180F003149A6 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C129FE1FCA180F003149A6 /* Chat.swift */; };
+		07C12A011FCA181C003149A6 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C12A001FCA181C003149A6 /* Message.swift */; };
 		07C53BB81FC4D7BF00AD9904 /* CurrentChatsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C53BB71FC4D7BF00AD9904 /* CurrentChatsVC.swift */; };
 		07C53BBA1FC4D80500AD9904 /* ConversationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C53BB91FC4D80500AD9904 /* ConversationVC.swift */; };
 		07F2F4621FB4B547002B4308 /* PreviousCycleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F2F4611FB4B547002B4308 /* PreviousCycleVC.swift */; };
@@ -128,6 +131,9 @@
 		07C129F41FC88EAF003149A6 /* SettingsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		07C129F61FC8A54E003149A6 /* ImageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		07C129F81FC9CBB2003149A6 /* SideMenuTopTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuTopTableViewCell.swift; sourceTree = "<group>"; };
+		07C129FA1FCA05CD003149A6 /* CurrentChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentChatTableViewCell.swift; sourceTree = "<group>"; };
+		07C129FE1FCA180F003149A6 /* Chat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
+		07C12A001FCA181C003149A6 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		07C53BB71FC4D7BF00AD9904 /* CurrentChatsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentChatsVC.swift; sourceTree = "<group>"; };
 		07C53BB91FC4D80500AD9904 /* ConversationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationVC.swift; sourceTree = "<group>"; };
 		07F2F4611FB4B547002B4308 /* PreviousCycleVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviousCycleVC.swift; sourceTree = "<group>"; };
@@ -253,6 +259,8 @@
 				07F6BB0F1F874FC300E5F4E1 /* Sprint.swift */,
 				07B40A1C1F9AC6200002DCC3 /* ActivityImage.swift */,
 				07FED9B11FC1F1D400F5D763 /* Coach.swift */,
+				07C129FE1FCA180F003149A6 /* Chat.swift */,
+				07C12A001FCA181C003149A6 /* Message.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -311,6 +319,7 @@
 				07C53BB91FC4D80500AD9904 /* ConversationVC.swift */,
 				07F2F4631FB4B611002B4308 /* PreviousCycleTableViewCell.swift */,
 				07C129F81FC9CBB2003149A6 /* SideMenuTopTableViewCell.swift */,
+				07C129FA1FCA05CD003149A6 /* CurrentChatTableViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -656,9 +665,11 @@
 				07C129F71FC8A54E003149A6 /* ImageManager.swift in Sources */,
 				073D89DD1FA7697E000DE687 /* DismissMenuAnimator.swift in Sources */,
 				07316B851F843C3D00EF2F8F /* KDCircularProgress.swift in Sources */,
+				07C129FF1FCA180F003149A6 /* Chat.swift in Sources */,
 				072F867C1F69F2A9007E5A8A /* Popup5VC.swift in Sources */,
 				07F6BB0E1F874FB200E5F4E1 /* Activity.swift in Sources */,
 				07C129F51FC88EAF003149A6 /* SettingsVC.swift in Sources */,
+				07C12A011FCA181C003149A6 /* Message.swift in Sources */,
 				076E009B1F9DB050004467D0 /* PassionActivitySelectionVC.swift in Sources */,
 				073D89E31FA78E43000DE687 /* ContributionVC.swift in Sources */,
 				07F6BB101F874FC300E5F4E1 /* Sprint.swift in Sources */,
@@ -678,6 +689,7 @@
 				072F86871F6F4D7F007E5A8A /* RegistrationVC.swift in Sources */,
 				07F9D2B91FBFCDF10083AEF2 /* ViewCoachesVC.swift in Sources */,
 				072F867E1F69F483007E5A8A /* Popup6VC.swift in Sources */,
+				07C129FB1FCA05CD003149A6 /* CurrentChatTableViewCell.swift in Sources */,
 				07F6BB121F8DC33B00E5F4E1 /* CategoryTabBarController.swift in Sources */,
 				072F86831F6F1CF6007E5A8A /* User.swift in Sources */,
 				07F9D2BB1FBFCEE50083AEF2 /* ViewCoachTableViewCell.swift in Sources */,

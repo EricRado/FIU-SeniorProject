@@ -30,15 +30,33 @@ extension CurrentChatsVC: UIViewControllerTransitioningDelegate{
     }
 }
 
-class CurrentChatsVC: UIViewController {
+class CurrentChatsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     let interactor = Interactor()
+    
+    @IBOutlet weak var tableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         
     }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 3
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "currentChatCell") as! CurrentChatTableViewCell
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        
+    }
+    
+    
     
     /***********************************************************
      
