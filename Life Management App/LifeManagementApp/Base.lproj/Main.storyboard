@@ -4122,7 +4122,7 @@
                         <segue destination="7cS-Fm-9g7" kind="show" identifier="viewCoachesSegue" id="qJF-bO-A9x"/>
                         <segue destination="zuQ-HF-i9G" kind="show" identifier="viewChatsSegue" id="xh9-O9-RTn"/>
                         <segue destination="EAB-pk-uy0" kind="show" identifier="settingsSegue" id="ner-H4-YhQ"/>
-                        <segue destination="jxi-QP-Bwu" kind="show" identifier="homeSegue" id="DT9-Ib-Yax"/>
+                        <segue destination="KBk-6g-RTb" kind="show" identifier="homeSegue" id="AbD-Je-raW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GKT-cB-krq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -7363,7 +7363,7 @@
         <segue reference="vUG-b0-bNY"/>
         <segue reference="IHu-UO-RcH"/>
         <segue reference="i7d-6F-pdb"/>
-        <segue reference="DT9-Ib-Yax"/>
+        <segue reference="AbD-Je-raW"/>
         <segue reference="tDY-fT-66O"/>
         <segue reference="Mmc-8c-1pg"/>
     </inferredMetricsTieBreakers>

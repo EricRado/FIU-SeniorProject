@@ -85,22 +85,23 @@ class SettingsVC: UIViewController, UINavigationControllerDelegate, UIImagePicke
                 if let url = fileURL?.absoluteString{
                     print("THIS IS THE URL : \(url)")
                     self.userRef.updateChildValues(["imgURL": url])
-
+                    
+                    // download new image to display in side menu
+                    print("THIS IS IMAGE NAME : \(self.imageManager.uploadImgName)")
+                    let imageRef = storage.reference().child("userProfileImgs/\(self.imageManager.uploadImgName)")
+                    imageRef.getData(maxSize: 5 * 1024 * 1024, completion: {(data, error) in
+                        if let error = error{
+                            print(error.localizedDescription)
+                        }else{
+                            self.delegate.userImgProfile = UIImage(data: data!)!
+                        }
+                    })
                 }
                 
             })
             
             userUploadImage.image = image
             
-            // download new image to display in side menu
-            let imageRef = storage.reference().child("userProfileImgs/\(self.imageManager.uploadImgName)")
-            imageRef.getData(maxSize: 1 * 1024 * 1024, completion: {(data, error) in
-                if let error = error{
-                    print(error.localizedDescription)
-                }else{
-                    self.delegate.userImgProfile = UIImage(data: data!)!
-                }
-            })
         
         }else{
             // Error message
