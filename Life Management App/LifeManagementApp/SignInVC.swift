@@ -37,7 +37,7 @@ class SignInVC: UIViewController {
     let dbRef = Database.database().reference(fromURL: "https://life-management-v2.firebaseio.com/")
     var users = [User]()
     var signInUser = User()
-    
+    let imageManager = ImageManager()
     
     var username = ""
     var password = ""
@@ -80,10 +80,11 @@ class SignInVC: UIViewController {
                 let isAdmin = userDict["adminFlag"] as? Bool
                 let isCoach = userDict["coachFlag"] as? Bool
                 let id = userDict["id"] as? String
+                let imgURL = userDict["imgURL"] as? String
                 
                 // create user with variables previously created
                 let addUser = User(id: id!,email: email!,username: username!,firstName: firstName!,
-                                   lastName: lastName!, dob: dob!, password: password!, adminFlag: isAdmin!,coachFlag: isCoach!)
+                                   lastName: lastName!, dob: dob!, password: password!, adminFlag: isAdmin!,coachFlag: isCoach!, imgURL: imgURL!)
                 print("this is FIRSTNAME " + addUser.firstName + " | " )
                 print("this is id " + id! + " | ")
                 self.users.append(addUser)
@@ -114,6 +115,9 @@ class SignInVC: UIViewController {
                 self.signInUser.lastName = user.lastName
                 self.signInUser.password = user.password
                 self.signInUser.dob = user.dob
+                self.signInUser.imgURL = user.imgURL
+                
+                self.delegate.user = self.signInUser
                 
                 return true
             }
@@ -144,14 +148,19 @@ class SignInVC: UIViewController {
         if (credentialCheck){
             print("Welcome to Life Management " + self.signInUser.username )
             
-            // pass signInUser object to dashBoardVC
-            performSegue(withIdentifier: "DashBoardSegue", sender: self)
+            // get user image profile 
+            imageManager.downloadImage(user: self.delegate.user)
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: {
+                self.delegate.userImgProfile = self.imageManager.downloadedImage
+                self.performSegue(withIdentifier: "DashBoardSegue", sender: self)
+
+            })
             
         }else{
             print("User is invalid")
         }
     
-        
     }
     
     @IBAction func createAccount(_ sender: AnyObject) {
@@ -178,7 +187,6 @@ class SignInVC: UIViewController {
         if segue.identifier == "DashBoardSegue", let tabVC = segue.destination as? CategoryTabBarController{
             print("GOING TO THE Tab BAR CONTROLLER")
             tabVC.onlineUser = self.signInUser
-            self.delegate.user = self.signInUser
             
         }
         

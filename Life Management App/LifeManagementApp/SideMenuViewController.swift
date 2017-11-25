@@ -13,6 +13,8 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
     
     // mainVC passes the interactor object to the sidemenuVC. This is how they share state
     var interactor: Interactor? = nil
+    let imageManager = ImageManager()
+    let delegate = UIApplication.shared.delegate as! AppDelegate
     
     var iconNameArr = [String]()
     var iconImage = [UIImage]()
@@ -28,7 +30,13 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
         iconImage = [UIImage(named: "home")!, UIImage(named: "newCycles")!, UIImage(named: "previousCycles")!, UIImage(named: "coachList")!, UIImage(named: "shareProgress")!, UIImage(named: "messages")!, UIImage(named: "inviteFriend")!, UIImage(named: "settings")!]
         
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+    
+        setUserImage()
         
+    }
+    
+    func setUserImage(){
+        userImg.image = delegate.userImgProfile
         userImg.layer.masksToBounds = false
         userImg.layer.cornerRadius = userImg.frame.height / 2
         userImg.clipsToBounds = true

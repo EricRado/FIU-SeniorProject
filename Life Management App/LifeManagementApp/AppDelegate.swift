@@ -29,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // store user currently online and their category collection key
     var user = User()
     var categoryKey = ""
+    var userImgProfile = UIImage()
     
     var imgDbRef: DatabaseReference? = nil
     

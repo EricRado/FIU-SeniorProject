@@ -143,7 +143,7 @@ class RegistrationVC: UIViewController {
         let uid = childRef.key
         print("the key" + uid)
         self.delegate.user = User(id: uid ,email: email, username: username,firstName: firstName!, lastName: lastName!,
-                        dob: dob!, password: password, adminFlag: false, coachFlag: false)
+                                  dob: dob!, password: password, adminFlag: false, coachFlag: false, imgURL: "")
         
         childRef.setValue(self.delegate.user.toAnyObject(), withCompletionBlock: {(error, ref) in
             if error != nil{

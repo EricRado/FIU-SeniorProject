@@ -18,13 +18,13 @@ struct User{
     var lastName : String
     var password: String
     var dob: String
-    var imgURL: String
+    var imgURL: String?
     let adminFlag: Bool
     let coachFlag: Bool
     
     
     init(id: String, email: String, username: String, firstName: String, lastName: String,
-         dob: String,password: String,adminFlag: Bool, coachFlag: Bool){
+         dob: String,password: String,adminFlag: Bool, coachFlag: Bool, imgURL: String){
         
         self.id = id
         self.email = email
@@ -33,7 +33,7 @@ struct User{
         self.firstName = firstName
         self.lastName = lastName
         self.dob = dob
-        self.imgURL = ""
+        self.imgURL = imgURL
         self.adminFlag = adminFlag
         self.coachFlag = coachFlag
     }
@@ -77,6 +77,6 @@ struct User{
     
     func toAnyObject() -> [AnyHashable:Any]{
         return ["id":id,"email":email, "username":username,"firstName":firstName, "lastName":lastName,
-                "dob":dob, "password":password, "adminFlag": adminFlag, "coachFlag": coachFlag, "imgURL": imgURL] as [AnyHashable:Any]
+                "dob":dob, "password":password, "adminFlag": adminFlag, "coachFlag": coachFlag, "imgURL": ""] as [AnyHashable:Any]
     }
 }
