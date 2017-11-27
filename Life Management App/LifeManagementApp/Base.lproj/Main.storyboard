@@ -541,7 +541,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" alpha="0.84999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="LifeManagementBG2" translatesAutoresizingMaskIntoConstraints="NO" id="B3w-JX-QbP">
+                            <imageView userInteractionEnabled="NO" alpha="0.84999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="registerScreen" translatesAutoresizingMaskIntoConstraints="NO" id="B3w-JX-QbP">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -6618,7 +6618,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" alpha="0.84999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="LifeManagementBG2" translatesAutoresizingMaskIntoConstraints="NO" id="4s7-nq-riS">
+                            <imageView userInteractionEnabled="NO" alpha="0.84999999999999998" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="signInScreen" translatesAutoresizingMaskIntoConstraints="NO" id="4s7-nq-riS">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -6879,11 +6879,15 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q9r-sD-5s0">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="237"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bfi-4U-BPp">
-                                        <rect key="frame" x="148" y="187" width="79" height="30"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="joySelectionText" translatesAutoresizingMaskIntoConstraints="NO" id="XXI-LK-ceF">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="237"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bfi-4U-BPp">
+                                        <rect key="frame" x="118" y="192" width="139" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.94327594497672806" green="0.95494656735751293" blue="0.095782532389149966" alpha="0.84743617957746475" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="22"/>
                                         <state key="normal" title="Submit">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -6892,15 +6896,8 @@
                                             <segue destination="TfH-hu-Osc" kind="show" identifier="PassionActivitySelectionSegue" id="bY5-t3-Usz"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="User" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="azY-wi-une">
-                                        <rect key="frame" x="122" y="27" width="131" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.81628626585006714" green="0.3587806224822998" blue="0.94847267866134644" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="1" green="0.26018222219999998" blue="0.1520350784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <accessibility key="accessibilityConfiguration" identifier="JoyInfoView" label="JoyInfoView">
                                     <bool key="isElement" value="YES"/>
                                 </accessibility>
@@ -6939,7 +6936,6 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="displayUsername" destination="azY-wi-une" id="B78-kV-5GU"/>
                         <outlet property="joyCarouselView" destination="5BV-eU-CTB" id="Eea-UL-tCr"/>
                         <outlet property="submitBtn" destination="bfi-4U-BPp" id="cZ0-hK-JgH"/>
                         <outlet property="view" destination="5BV-eU-CTB" id="PrF-Cp-uZc"/>
@@ -7366,7 +7362,7 @@
             <objects>
                 <navigationController title="Previous Cycle Nav" automaticallyAdjustsScrollViewInsets="NO" id="gni-k7-3yr" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="0Rm-Ry-vUf">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="0Rm-Ry-vUf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.13466796389999999" green="0.090682785239999994" blue="0.79683452070000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -7385,7 +7381,7 @@
             <objects>
                 <navigationController title="Settings Nav" automaticallyAdjustsScrollViewInsets="NO" id="EAB-pk-uy0" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="Hps-7H-Pjk">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Hps-7H-Pjk">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.13466796389999999" green="0.090682785239999994" blue="0.79683452070000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -7405,12 +7401,12 @@
     </scenes>
     <resources>
         <image name="CoachCell" width="225" height="97"/>
-        <image name="LifeManagementBG2" width="4500" height="3001"/>
         <image name="camara" width="50" height="50"/>
         <image name="contribution" width="25" height="25"/>
         <image name="dropdown" width="25" height="25"/>
         <image name="front_image" width="705" height="960"/>
         <image name="joy" width="25" height="25"/>
+        <image name="joySelectionText" width="363" height="245"/>
         <image name="joy_photography" width="400" height="225"/>
         <image name="joy_programming" width="400" height="267"/>
         <image name="moreInformation" width="200" height="200"/>
@@ -7428,6 +7424,7 @@
         <image name="popupNeed4" width="375" height="420"/>
         <image name="popupNeed5" width="375" height="420"/>
         <image name="popupNeed6" width="375" height="420"/>
+        <image name="registerScreen" width="375" height="667"/>
         <image name="screen2Bottom" width="275" height="183"/>
         <image name="screen2Top" width="334" height="255"/>
         <image name="screen3Bottom" width="1688" height="1125"/>
@@ -7435,13 +7432,14 @@
         <image name="screen3top" width="334" height="255"/>
         <image name="screen4Bottom" width="400" height="267"/>
         <image name="screen4top" width="334" height="255"/>
+        <image name="signInScreen" width="375" height="667"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="vUG-b0-bNY"/>
-        <segue reference="IHu-UO-RcH"/>
-        <segue reference="3ql-YB-El6"/>
-        <segue reference="AbD-Je-raW"/>
-        <segue reference="tDY-fT-66O"/>
         <segue reference="Mmc-8c-1pg"/>
+        <segue reference="cIz-8c-tQu"/>
+        <segue reference="DMP-7Y-CxG"/>
+        <segue reference="bY2-co-fsk"/>
+        <segue reference="F6P-x2-fed"/>
+        <segue reference="AbD-Je-raW"/>
     </inferredMetricsTieBreakers>
 </document>
