@@ -10,7 +10,7 @@ import Foundation
 import Firebase
 
 struct Message{
-    var text: String
+    var text: String?
     var username: String
     var timestamp: String
     
@@ -38,6 +38,6 @@ struct Message{
     }
     
     func toAnyObject() -> [AnyHashable: Any]{
-        return ["text": text, "username": username, "timestamp": timestamp]
+        return ["text": text!, "username": username, "timestamp": timestamp]
     }
 }

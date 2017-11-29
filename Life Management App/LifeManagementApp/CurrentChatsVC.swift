@@ -38,6 +38,7 @@ class CurrentChatsVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     let delegate = UIApplication.shared.delegate as! AppDelegate
     let dbref = Database.database().reference(fromURL: "https://life-management-v2.firebaseio.com/")
     var selectedCoach = Coach()
+    var selectedChatId = ""
     
     @IBOutlet weak var tableView: UITableView!
 
@@ -119,8 +120,8 @@ class CurrentChatsVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         let coach = coaches.filter({$0.id == chats[indexPath.row].coachId})
         
         if !coach.isEmpty{
-            self.navigationItem.backBarButtonItem?.title = "Back"
             self.selectedCoach = coach[0]
+            self.selectedChatId = chats[indexPath.row].id
         }
         
         performSegue(withIdentifier: "conversationSegue", sender: self)
@@ -143,6 +144,8 @@ class CurrentChatsVC: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             // new vc should have property that will store passed value
             viewController.recipient = selectedCoach
+            viewController.chatId = selectedChatId
+            
         }
         if let destinationViewController = segue.destination as? SideMenuViewController{
             destinationViewController.transitioningDelegate = self
