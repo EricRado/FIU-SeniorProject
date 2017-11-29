@@ -69,7 +69,6 @@ class ViewCoachesVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     }
     
     func getCoachImage(url: String, cell : ViewCoachTableViewCell){
-        print("THIS IS URL... \(url)")
         let imageRef = storage.reference(forURL: url)
         
         imageRef.getData(maxSize: 1 * 1024 * 1024, completion: {data, error in
@@ -77,7 +76,6 @@ class ViewCoachesVC: UIViewController, UITableViewDataSource, UITableViewDelegat
                 print(error.localizedDescription)
                 return
             }else {
-                print("GETTING IMAGE...")
                 cell.coachImage.image = UIImage(data: data!)
             }
         })
