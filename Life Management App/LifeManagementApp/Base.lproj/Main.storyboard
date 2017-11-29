@@ -4306,7 +4306,7 @@
             </objects>
             <point key="canvasLocation" x="9916" y="-1515.2923538230887"/>
         </scene>
-        <!--Previous Cycle SummaryVC-->
+        <!--Sprint Review-->
         <scene sceneID="GeR-JJ-FO4">
             <objects>
                 <viewController id="oyB-RY-4aW" customClass="PreviousCycleSummaryVC" customModule="LifeManagementApp" customModuleProvider="target" sceneMemberID="viewController">
@@ -4693,6 +4693,7 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <navigationItem key="navigationItem" title="Sprint Review" id="26s-fk-AKN"/>
                     <connections>
                         <outlet property="contribActivityGoalScore1Label" destination="lM8-k7-a2J" id="RQt-ez-WOS"/>
                         <outlet property="contribActivityGoalScore2Label" destination="zqU-Ch-6IN" id="Dcl-Yb-niQ"/>
@@ -4906,6 +4907,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                     <connections>
                         <outlet property="tableView" destination="qIk-I1-1nm" id="ahm-mD-HqI"/>
+                        <segue destination="eBp-QZ-h1l" kind="show" identifier="conversationSegue" id="gfa-e9-goO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j64-0f-hgq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4917,6 +4919,25 @@
                 </screenEdgePanGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="12016.799999999999" y="-774.06296851574223"/>
+        </scene>
+        <!--Message LogVC-->
+        <scene sceneID="bvE-95-BDT">
+            <objects>
+                <viewController id="eBp-QZ-h1l" customClass="MessageLogVC" customModule="LifeManagementApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gIg-bx-5iP"/>
+                        <viewControllerLayoutGuide type="bottom" id="uKj-wx-0fH"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="SsB-nJ-fGG">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zJO-HM-DfR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="12969" y="-775"/>
         </scene>
         <!--Joy-->
         <scene sceneID="SKQ-4B-8Vw">
@@ -7454,11 +7475,11 @@
         <image name="signInScreen" width="375" height="667"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="AbD-Je-raW"/>
+        <segue reference="3ql-YB-El6"/>
+        <segue reference="bY2-co-fsk"/>
         <segue reference="Mmc-8c-1pg"/>
         <segue reference="cIz-8c-tQu"/>
         <segue reference="DMP-7Y-CxG"/>
-        <segue reference="bY2-co-fsk"/>
-        <segue reference="F6P-x2-fed"/>
-        <segue reference="AbD-Je-raW"/>
     </inferredMetricsTieBreakers>
 </document>

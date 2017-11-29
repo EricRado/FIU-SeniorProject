@@ -37,6 +37,7 @@ class CurrentChatsVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     var coaches = [Coach]()
     let delegate = UIApplication.shared.delegate as! AppDelegate
     let dbref = Database.database().reference(fromURL: "https://life-management-v2.firebaseio.com/")
+    var selectedCoach = Coach()
     
     @IBOutlet weak var tableView: UITableView!
 
@@ -114,11 +115,16 @@ class CurrentChatsVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let coach = coaches.filter({$0.id == chats[indexPath.row].coachId})
         
+        if !coach.isEmpty{
+            self.navigationItem.backBarButtonItem?.title = "Back"
+            self.selectedCoach = coach[0]
+        }
+        
+        performSegue(withIdentifier: "conversationSegue", sender: self)
     }
-    
-    
     
     /***********************************************************
      
@@ -132,6 +138,12 @@ class CurrentChatsVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier == "conversationSegue"){
+            let viewController = segue.destination as! MessageLogVC
+            
+            // new vc should have property that will store passed value
+            viewController.recipient = selectedCoach
+        }
         if let destinationViewController = segue.destination as? SideMenuViewController{
             destinationViewController.transitioningDelegate = self
             // pass the interactor object forward

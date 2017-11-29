@@ -249,6 +249,11 @@ class PreviousCycleVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         self.passionSprint = self.userCategory.passionSprints[newIndex]
         self.contributionSprint = self.userCategory.contributionSprints[newIndex]
         
+        // set back button title for next screen
+        let backButton = UIBarButtonItem()
+        backButton.title = "Back"
+        self.navigationItem.backBarButtonItem = backButton
+        
         // This will perform the segue to PreviousCycleSummary
         performSegue(withIdentifier: "summaryCellSegue", sender: self)
     }

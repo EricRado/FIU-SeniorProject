@@ -51,7 +51,6 @@
 		07C129FF1FCA180F003149A6 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C129FE1FCA180F003149A6 /* Chat.swift */; };
 		07C12A011FCA181C003149A6 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C12A001FCA181C003149A6 /* Message.swift */; };
 		07C53BB81FC4D7BF00AD9904 /* CurrentChatsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C53BB71FC4D7BF00AD9904 /* CurrentChatsVC.swift */; };
-		07C53BBA1FC4D80500AD9904 /* ConversationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C53BB91FC4D80500AD9904 /* ConversationVC.swift */; };
 		07F2F4621FB4B547002B4308 /* PreviousCycleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F2F4611FB4B547002B4308 /* PreviousCycleVC.swift */; };
 		07F2F4641FB4B611002B4308 /* PreviousCycleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F2F4631FB4B611002B4308 /* PreviousCycleTableViewCell.swift */; };
 		07F2F4661FB4B7ED002B4308 /* PreviousCycleSummaryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F2F4651FB4B7ED002B4308 /* PreviousCycleSummaryVC.swift */; };
@@ -137,7 +136,6 @@
 		07C129FE1FCA180F003149A6 /* Chat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		07C12A001FCA181C003149A6 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		07C53BB71FC4D7BF00AD9904 /* CurrentChatsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentChatsVC.swift; sourceTree = "<group>"; };
-		07C53BB91FC4D80500AD9904 /* ConversationVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationVC.swift; sourceTree = "<group>"; };
 		07F2F4611FB4B547002B4308 /* PreviousCycleVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviousCycleVC.swift; sourceTree = "<group>"; };
 		07F2F4631FB4B611002B4308 /* PreviousCycleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviousCycleTableViewCell.swift; sourceTree = "<group>"; };
 		07F2F4651FB4B7ED002B4308 /* PreviousCycleSummaryVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviousCycleSummaryVC.swift; sourceTree = "<group>"; };
@@ -319,7 +317,6 @@
 			isa = PBXGroup;
 			children = (
 				07F9D2BA1FBFCEE50083AEF2 /* ViewCoachTableViewCell.swift */,
-				07C53BB91FC4D80500AD9904 /* ConversationVC.swift */,
 				07F2F4631FB4B611002B4308 /* PreviousCycleTableViewCell.swift */,
 				07C129F81FC9CBB2003149A6 /* SideMenuTopTableViewCell.swift */,
 				07C129FA1FCA05CD003149A6 /* CurrentChatTableViewCell.swift */,
@@ -659,7 +656,6 @@
 				07B40A1D1F9AC6200002DCC3 /* ActivityImage.swift in Sources */,
 				07C129F91FC9CBB2003149A6 /* SideMenuTopTableViewCell.swift in Sources */,
 				076E009F1F9EAAF8004467D0 /* SprintSettingsVC.swift in Sources */,
-				07C53BBA1FC4D80500AD9904 /* ConversationVC.swift in Sources */,
 				072F861C1F5D9227007E5A8A /* AppDelegate.swift in Sources */,
 				070F45D31FCE47C9003FAF75 /* MessageLogVC.swift in Sources */,
 				073D89DF1FA7754E000DE687 /* SideMenuViewController.swift in Sources */,
