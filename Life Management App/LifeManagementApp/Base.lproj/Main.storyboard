@@ -4049,23 +4049,22 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pk9-DY-W0i">
-                                <rect key="frame" x="319" y="20" width="56" height="647"/>
+                                <rect key="frame" x="300" y="20" width="75" height="647"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <action selector="closeMenu:" destination="d5V-DO-Q8U" eventType="touchUpInside" id="FkO-A6-o9y"/>
                                     <outletCollection property="gestureRecognizers" destination="cho-6t-AvS" appends="YES" id="VoV-vO-9mB"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="55" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7OP-ZT-Yjv">
-                                <rect key="frame" x="0.0" y="0.0" width="319" height="667"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="55" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7OP-ZT-Yjv">
+                                <rect key="frame" x="0.0" y="0.0" width="300" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SideMenuTopTableViewCell" rowHeight="135" id="YFz-ht-4qe" customClass="SideMenuTopTableViewCell" customModule="LifeManagementApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="319" height="135"/>
+                                        <rect key="frame" x="0.0" y="28" width="300" height="135"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YFz-ht-4qe" id="gNd-qC-OhE">
-                                            <rect key="frame" x="0.0" y="0.0" width="319" height="135"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="300" height="134.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Some Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sfq-xa-uKw">
@@ -4097,10 +4096,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SideMenuTableViewCell" rowHeight="55" id="1Ai-nv-sBV" customClass="SideMenuTableViewCell" customModule="LifeManagementApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="163" width="319" height="55"/>
+                                        <rect key="frame" x="0.0" y="163" width="300" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1Ai-nv-sBV" id="ayN-Kd-t78">
-                                            <rect key="frame" x="0.0" y="0.0" width="319" height="55"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="300" height="54.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="joy" translatesAutoresizingMaskIntoConstraints="NO" id="Vua-5U-Lfk">
@@ -4131,12 +4130,17 @@
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="pk9-DY-W0i" firstAttribute="width" secondItem="1li-pi-AkF" secondAttribute="width" multiplier="0.15" id="I7n-tX-xWY"/>
+                            <constraint firstItem="7OP-ZT-Yjv" firstAttribute="leading" secondItem="1li-pi-AkF" secondAttribute="leading" id="2Sj-tR-onP"/>
+                            <constraint firstItem="EKT-cw-wLh" firstAttribute="top" secondItem="7OP-ZT-Yjv" secondAttribute="bottom" id="GZk-ch-3Ph"/>
+                            <constraint firstItem="pk9-DY-W0i" firstAttribute="width" secondItem="1li-pi-AkF" secondAttribute="width" multiplier="0.2" id="I7n-tX-xWY"/>
+                            <constraint firstItem="7OP-ZT-Yjv" firstAttribute="top" secondItem="1li-pi-AkF" secondAttribute="top" id="Mvt-MC-Azh"/>
                             <constraint firstItem="EKT-cw-wLh" firstAttribute="top" secondItem="pk9-DY-W0i" secondAttribute="bottom" id="fBs-zg-HiK"/>
                             <constraint firstItem="pk9-DY-W0i" firstAttribute="top" secondItem="Cif-EU-1nz" secondAttribute="bottom" id="rbt-FQ-Osh"/>
                             <constraint firstAttribute="trailing" secondItem="pk9-DY-W0i" secondAttribute="trailing" id="sPr-92-wiu"/>
+                            <constraint firstItem="7OP-ZT-Yjv" firstAttribute="width" secondItem="1li-pi-AkF" secondAttribute="width" multiplier="0.8" id="u9c-gk-OUG"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <connections>
                         <outlet property="tableView" destination="7OP-ZT-Yjv" id="soz-bo-tsq"/>
                         <segue destination="aVb-NQ-5Dj" kind="show" identifier="newCycleSegue" id="IHu-UO-RcH"/>
@@ -7513,9 +7517,9 @@
     <inferredMetricsTieBreakers>
         <segue reference="AbD-Je-raW"/>
         <segue reference="3ql-YB-El6"/>
+        <segue reference="IHu-UO-RcH"/>
         <segue reference="bY2-co-fsk"/>
         <segue reference="Mmc-8c-1pg"/>
         <segue reference="cIz-8c-tQu"/>
-        <segue reference="DMP-7Y-CxG"/>
     </inferredMetricsTieBreakers>
 </document>
