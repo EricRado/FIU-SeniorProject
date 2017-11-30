@@ -379,6 +379,10 @@ class RegistrationVC: UIViewController {
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         // check if handleRegister form was valid before performing segue to Activity Selection
+        print("This is the identifier : \(identifier)")
+        if identifier == "signInSegue"{
+            return true
+        }
         if check{
             return true
         }

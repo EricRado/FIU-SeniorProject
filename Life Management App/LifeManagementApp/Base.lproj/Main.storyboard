@@ -638,7 +638,7 @@
                                     <color key="titleColor" red="0.89882320490000001" green="0.98728872410000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="bGx-m1-ER2" kind="show" id="Mmc-8c-1pg"/>
+                                    <segue destination="bGx-m1-ER2" kind="show" identifier="signInSegue" id="Mmc-8c-1pg"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -4148,7 +4148,7 @@
                         <segue destination="7cS-Fm-9g7" kind="show" identifier="viewCoachesSegue" id="qJF-bO-A9x"/>
                         <segue destination="zuQ-HF-i9G" kind="show" identifier="viewChatsSegue" id="xh9-O9-RTn"/>
                         <segue destination="EAB-pk-uy0" kind="show" identifier="settingsSegue" id="ner-H4-YhQ"/>
-                        <segue destination="KBk-6g-RTb" kind="show" identifier="homeSegue" id="AbD-Je-raW"/>
+                        <segue destination="HVX-Cu-tUn" kind="show" identifier="homeSegue" id="Opt-lI-0Wu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GKT-cB-krq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4920,12 +4920,12 @@
                         <viewControllerLayoutGuide type="top" id="sBW-Hi-vfH"/>
                         <viewControllerLayoutGuide type="bottom" id="mpO-y0-6Hv"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" misplaced="YES" id="lea-QB-hG9">
+                    <view key="view" contentMode="scaleToFill" id="lea-QB-hG9">
                         <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="DmC-Fc-TkG">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Awk-wD-QQl">
                                     <size key="itemSize" width="50" height="50"/>
@@ -7503,10 +7503,9 @@
         <image name="signInScreen" width="375" height="667"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="AbD-Je-raW"/>
         <segue reference="3ql-YB-El6"/>
+        <segue reference="Opt-lI-0Wu"/>
         <segue reference="IHu-UO-RcH"/>
-        <segue reference="bY2-co-fsk"/>
         <segue reference="Mmc-8c-1pg"/>
         <segue reference="cIz-8c-tQu"/>
     </inferredMetricsTieBreakers>

@@ -103,6 +103,11 @@ class JoyVC: UIViewController {
     
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
     func turnLabelToCircle(label: UILabel){
         label.layer.cornerRadius = label.frame.size.width / 2
         label.clipsToBounds = true
