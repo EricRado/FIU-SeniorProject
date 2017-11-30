@@ -122,20 +122,21 @@ class MessageLogVC: UIViewController,UICollectionViewDelegate,UICollectionViewDa
     
     func getMessages(){
         let messagesRef = dbref.child("Messages/\(chatId)")
-        messagesRef.observe(.value, with: {(snapshot) in
-            for child in snapshot.children.allObjects as! [DataSnapshot]{
-                print(child)
-                let dict = child.value as? [String: Any]
-                
-                let text = dict?["text"] as? String
-                let username = dict?["username"] as? String
-                
-                if let text = text, let username = username{
-                    let message = Message(text: text, username: username)
-                    self.messages.append(message)
-                    print(self.messages)
-                }
+        
+        messagesRef.queryLimited(toLast: 15).observe(.childAdded, with: {(snapshot) in
+            if !snapshot.exists(){
+                print("Snapshot is empty...")
+                return
+            }
+            let dict = snapshot.value as? [String: Any]
             
+            let text = dict?["text"] as? String
+            let username = dict?["username"] as? String
+            
+            if let text = text, let username = username{
+                let message = Message(text: text, username: username)
+                self.messages.append(message)
+                print(self.messages)
             }
             self.collectionView?.reloadData()
         }, withCancel: {(error) in
