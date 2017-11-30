@@ -44,6 +44,7 @@ class SignInVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()
         getAllUsers()
         self.signInButton.layer.cornerRadius = 15
         self.signInButton.layer.masksToBounds = true

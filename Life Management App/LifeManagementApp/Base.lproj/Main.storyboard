@@ -4923,17 +4923,17 @@
         <!--Message LogVC-->
         <scene sceneID="X6W-VY-4bn">
             <objects>
-                <viewController id="aFD-8f-qp1" customClass="MessageLogVC" customModule="LifeManagementApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="aFD-8f-qp1" customClass="MessageLogVC" customModule="LifeManagementApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="sBW-Hi-vfH"/>
                         <viewControllerLayoutGuide type="bottom" id="mpO-y0-6Hv"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="lea-QB-hG9">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <view key="view" contentMode="scaleToFill" misplaced="YES" id="lea-QB-hG9">
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="DmC-Fc-TkG">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="DmC-Fc-TkG">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Awk-wD-QQl">
                                     <size key="itemSize" width="50" height="50"/>
@@ -4965,6 +4965,7 @@
                             <constraint firstItem="DmC-Fc-TkG" firstAttribute="top" secondItem="sBW-Hi-vfH" secondAttribute="bottom" id="zAf-Ze-cV9"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                     <connections>
                         <outlet property="collectionView" destination="DmC-Fc-TkG" id="Pdx-th-aVT"/>

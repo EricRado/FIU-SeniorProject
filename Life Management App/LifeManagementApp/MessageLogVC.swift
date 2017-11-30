@@ -23,11 +23,28 @@ extension UIView{
     }
 }
 
+extension UIViewController{
+    func hideKeyboardWhenTappedAround(){
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    func dismissKeyboard(){
+        view.endEditing(true)
+    }
+}
+
 class MessageLogVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     var recipient = Coach()
     var chatId = ""
     var messages = [Message]()
+    
+    // important database references
     let dbref = Database.database().reference(fromURL: "https://life-management-v2.firebaseio.com/")
+    var chatRef = DatabaseReference()
+    
+    // current online user or coach
     let delegate = UIApplication.shared.delegate as! AppDelegate
     
     @IBOutlet weak var collectionView: UICollectionView!
@@ -52,12 +69,16 @@ class MessageLogVC: UIViewController,UICollectionViewDelegate,UICollectionViewDa
         let titleColor = UIColor(red: 0, green: 137/255, blue: 249/255, alpha: 1)
         button.setTitleColor(titleColor, for: UIControlState())
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        button.addTarget(self, action: #selector(sendMessage), for: UIControlEvents.touchUpInside)
         return button
     }()
    
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // set chat refernce to current selected chat
+        chatRef = dbref.child("Messages/\(chatId)")
         
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
@@ -113,17 +134,17 @@ class MessageLogVC: UIViewController,UICollectionViewDelegate,UICollectionViewDa
             }, completion: {(completed) in
                 
                 if isKeyboardShowing{
-                    let indexPath = IndexPath(item: self.messages.count - 1, section: 0)
-                    self.collectionView?.scrollToItem(at: indexPath, at: .bottom, animated: true)
+                    if self.messages.count != 0 {
+                        let indexPath = IndexPath(item: self.messages.count - 1, section: 0)
+                        self.collectionView?.scrollToItem(at: indexPath, at: .bottom, animated: true)
+                    }
                 }
             })
         }
     }
     
     func getMessages(){
-        let messagesRef = dbref.child("Messages/\(chatId)")
-        
-        messagesRef.queryLimited(toLast: 15).observe(.childAdded, with: {(snapshot) in
+        chatRef.queryLimited(toLast: 15).observe(.childAdded, with: {(snapshot) in
             if !snapshot.exists(){
                 print("Snapshot is empty...")
                 return
@@ -143,6 +164,24 @@ class MessageLogVC: UIViewController,UICollectionViewDelegate,UICollectionViewDa
             print(error.localizedDescription)
         })
         
+    }
+    
+    func sendMessage(sender: UIButton!){
+        print("Sending Message")
+        if inputTextField.text == ""{
+            return
+        }
+        
+        let text = inputTextField.text
+        if let text = text{
+            let sentMessage = Message(text: text, username: delegate.user.username)
+            chatRef.childByAutoId().setValue(sentMessage.toAnyObject())
+            textFieldDidBeginEditing(textField: inputTextField)
+        }
+    }
+    
+    func textFieldDidBeginEditing(textField: UITextField){
+        textField.text = ""
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
