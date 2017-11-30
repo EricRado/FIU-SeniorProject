@@ -26,6 +26,7 @@ class SprintSettingsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     var startingDate = ""
     var endingDate = ""
     var sprintDailyPoints = ""
+    var segueCheck = false
     
     @IBOutlet weak var weekTextField: UITextField!
     @IBOutlet weak var weekOptions: UIPickerView!
@@ -72,6 +73,8 @@ class SprintSettingsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         turnImageToCircle(picture: contributionActivity1Img)
         turnImageToCircle(picture: contributionActivity2Img)
         
+        setTextFieldEditing()
+        
         submitBtn.layer.cornerRadius = 15
         submitBtn.layer.masksToBounds = true
         
@@ -93,6 +96,15 @@ class SprintSettingsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         picture.layer.cornerRadius = picture.frame.size.width / 2
         picture.clipsToBounds = true
         self.view.layoutIfNeeded()
+    }
+    
+    func setTextFieldEditing(){
+        joyTargetScore1.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        joyTargetScore2.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        passionTargetScore1.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        passionTargetScore2.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        contributionTargetScore1.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        contributionTargetScore2.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
     }
     
     func setStartAndEndDate(weeks: String){
@@ -267,16 +279,67 @@ class SprintSettingsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         activityRef.updateChildValues(["targetPoints": targetPoints, "sprintDailyPoints": sprintDailyPoints])
     }
     
-    
-    
-    @IBAction func moreInfoPressed(_ sender: Any) {
-        print("More info pressed")
+    func createAlert(titleText: String, messageText: String){
+        let alert = UIAlertController(title: titleText, message: messageText, preferredStyle: UIAlertControllerStyle.alert)
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: {(action) in
+            alert.dismiss(animated: true, completion: nil)
+        }))
+        present(alert, animated: true)
     }
     
+    @IBAction func moreInfoPressed(_ sender: UIButton) {
+        self.createAlert(titleText: "Info", messageText: "Im about to drop some knowledge on you")
+        print("more info was pressed")
+    }
     
-    @IBAction func submitPressed(_ sender: Any) {
+    func textFieldDidChange(_ textField: UITextField){
+        textField.layer.borderColor = UIColor.clear.cgColor
+    }
+    
+    func checkTextFields(textField: UITextField) -> Bool{
+        if textField.text == ""{
+            print("Text field is empty")
+            textField.layer.borderWidth = 2.0
+            textField.layer.borderColor = UIColor.red.cgColor
+            return false
+        }else{
+            if weekChoice != ""{
+                print("There is a number selected for week choice")
+                let maxDays = Int(weekChoice)
+                print("This is maxDays : \(maxDays)")
+                
+            }
+        }
+        return true
+    }
+    
+    func checkFields() -> Bool{
+        let textFieldCheck1 = checkTextFields(textField: joyTargetScore1)
+        let textFieldCheck2 = checkTextFields(textField: joyTargetScore2)
+        let textFieldCheck3 = checkTextFields(textField: passionTargetScore1)
+        let textFieldCheck4 = checkTextFields(textField: passionTargetScore2)
+        let textFieldCheck5 = checkTextFields(textField: contributionTargetScore1)
+        let textFieldCheck6 = checkTextFields(textField: contributionTargetScore2)
+        
+        if weekChoice == ""{
+            print("weekChoice is blank...")
+            createAlert(titleText: "Error", messageText: "Please select how long the new sprint will last")
+            return false
+        }
+        
+        return true
+    }
+    
+    @IBAction func submitPressed(_ sender: UIButton) {
         
         // add validation before updating to database, exit if their is empty fields
+        segueCheck = checkFields()
+        print("This is check : \(segueCheck)")
+        if !segueCheck{
+            print("what the fuck")
+            return
+        }
         
         let joySprintRef = dbref.child("Categories/\(categoryKey)/JoySprints/\(joySprintKey)")
         let passionSprintRef = dbref.child("Categories/\(categoryKey)/PassionSprints/\(passionSprintKey)")
@@ -304,6 +367,13 @@ class SprintSettingsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         
         performSegue(withIdentifier: "newDashBoardSegue", sender: self)
         
+    }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool{
+        if segueCheck{
+            return true
+        }
+        return false
     }
     
 }

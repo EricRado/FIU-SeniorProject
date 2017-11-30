@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -4143,7 +4144,7 @@
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <connections>
                         <outlet property="tableView" destination="7OP-ZT-Yjv" id="soz-bo-tsq"/>
-                        <segue destination="aVb-NQ-5Dj" kind="show" identifier="newCycleSegue" id="IHu-UO-RcH"/>
+                        <segue destination="aVb-NQ-5Dj" kind="presentation" identifier="newCycleSegue" id="IHu-UO-RcH"/>
                         <segue destination="gni-k7-3yr" kind="show" identifier="previousCycleSegue" id="C7z-JB-zWa"/>
                         <segue destination="7cS-Fm-9g7" kind="show" identifier="viewCoachesSegue" id="qJF-bO-A9x"/>
                         <segue destination="zuQ-HF-i9G" kind="show" identifier="viewChatsSegue" id="xh9-O9-RTn"/>
@@ -6932,8 +6933,9 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="237"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bfi-4U-BPp">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bfi-4U-BPp">
                                         <rect key="frame" x="118" y="184" width="139" height="38"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.94327594497672806" green="0.95494656735751293" blue="0.095782532389149966" alpha="0.84743617957746475" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="22"/>
                                         <state key="normal" title="Submit">
@@ -6941,7 +6943,7 @@
                                         </state>
                                         <connections>
                                             <action selector="submitPressed:" destination="aVb-NQ-5Dj" eventType="touchUpInside" id="XS3-pd-zIc"/>
-                                            <segue destination="TfH-hu-Osc" kind="show" identifier="PassionActivitySelectionSegue" id="bY5-t3-Usz"/>
+                                            <segue destination="TfH-hu-Osc" kind="showDetail" identifier="PassionActivitySelectionSegue" action="showViewController:sender:" id="bY5-t3-Usz"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -6950,41 +6952,35 @@
                                     <bool key="isElement" value="YES"/>
                                 </accessibility>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="bfi-4U-BPp" secondAttribute="trailing" constant="118" id="1g5-XT-QPe"/>
-                                    <constraint firstItem="bfi-4U-BPp" firstAttribute="top" secondItem="q9r-sD-5s0" secondAttribute="top" constant="184" id="IQz-N6-Gij"/>
-                                    <constraint firstAttribute="bottom" secondItem="bfi-4U-BPp" secondAttribute="bottom" constant="15" id="NsL-dT-v5b"/>
-                                    <constraint firstAttribute="height" constant="237" id="XUy-A5-nbQ"/>
-                                    <constraint firstItem="bfi-4U-BPp" firstAttribute="leading" secondItem="q9r-sD-5s0" secondAttribute="leading" constant="118" id="dRj-h0-34Y"/>
+                                    <constraint firstAttribute="height" constant="237" id="o8h-c6-y07"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k2j-vu-p2N">
                                 <rect key="frame" x="0.0" y="236" width="375" height="431"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5BV-eU-CTB" customClass="iCarousel">
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5BV-eU-CTB" customClass="iCarousel">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="431"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="375" id="0bJ-Jh-7xt"/>
-                                            <constraint firstAttribute="height" constant="431" id="jjb-6f-NBE"/>
-                                        </constraints>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="5BV-eU-CTB" firstAttribute="centerX" secondItem="k2j-vu-p2N" secondAttribute="centerX" id="63W-SR-qDI"/>
-                                    <constraint firstAttribute="height" constant="431" id="96F-PC-GXR"/>
-                                    <constraint firstItem="5BV-eU-CTB" firstAttribute="centerY" secondItem="k2j-vu-p2N" secondAttribute="centerY" id="Dvl-O6-tq8"/>
-                                    <constraint firstAttribute="width" constant="375" id="E7G-hC-kcR"/>
+                                    <constraint firstAttribute="trailing" secondItem="5BV-eU-CTB" secondAttribute="trailing" id="IsC-Df-Paf"/>
+                                    <constraint firstAttribute="height" constant="431" id="M5F-hm-V7U"/>
+                                    <constraint firstItem="5BV-eU-CTB" firstAttribute="centerX" secondItem="k2j-vu-p2N" secondAttribute="centerX" id="aFP-Ui-Wz0"/>
+                                    <constraint firstItem="5BV-eU-CTB" firstAttribute="top" secondItem="k2j-vu-p2N" secondAttribute="top" id="d0x-Ik-2ZO"/>
+                                    <constraint firstItem="5BV-eU-CTB" firstAttribute="leading" secondItem="k2j-vu-p2N" secondAttribute="leading" id="j58-28-IvV"/>
+                                    <constraint firstAttribute="bottom" secondItem="5BV-eU-CTB" secondAttribute="bottom" id="nUM-yB-wAb"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="q9r-sD-5s0" secondAttribute="trailing" id="0nZ-iZ-Dvz"/>
-                            <constraint firstItem="q9r-sD-5s0" firstAttribute="leading" secondItem="rDz-Wp-Tug" secondAttribute="leading" id="4Mi-Aj-D38"/>
-                            <constraint firstItem="q9r-sD-5s0" firstAttribute="top" secondItem="rDz-Wp-Tug" secondAttribute="top" id="GES-t9-8Sq"/>
-                            <constraint firstItem="RT7-PT-pYo" firstAttribute="top" secondItem="k2j-vu-p2N" secondAttribute="bottom" id="QET-MV-0bN"/>
-                            <constraint firstItem="k2j-vu-p2N" firstAttribute="leading" secondItem="rDz-Wp-Tug" secondAttribute="leading" id="SCY-G2-yeI"/>
-                            <constraint firstAttribute="trailing" secondItem="k2j-vu-p2N" secondAttribute="trailing" id="peV-Tc-c1d"/>
+                            <constraint firstItem="q9r-sD-5s0" firstAttribute="leading" secondItem="rDz-Wp-Tug" secondAttribute="leading" id="1ZT-5O-O87"/>
+                            <constraint firstItem="q9r-sD-5s0" firstAttribute="top" secondItem="rDz-Wp-Tug" secondAttribute="top" id="9h0-6k-stC"/>
+                            <constraint firstAttribute="trailing" secondItem="k2j-vu-p2N" secondAttribute="trailing" id="ATc-qF-XOb"/>
+                            <constraint firstItem="k2j-vu-p2N" firstAttribute="bottom" secondItem="rDz-Wp-Tug" secondAttribute="baseline" id="O2X-Y3-47t"/>
+                            <constraint firstItem="k2j-vu-p2N" firstAttribute="leading" secondItem="rDz-Wp-Tug" secondAttribute="leading" id="Xhb-cm-s1C"/>
+                            <constraint firstAttribute="trailing" secondItem="q9r-sD-5s0" secondAttribute="trailing" id="koJ-Bj-Znn"/>
                         </constraints>
                     </view>
                     <connections>
@@ -7269,9 +7265,9 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U25-bQ-n3F">
                                 <rect key="frame" x="230" y="34" width="40" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button" image="moreInformation"/>
+                                <state key="normal" title="info" image="moreInformation"/>
                                 <connections>
-                                    <action selector="moreInfoPressed:" destination="Ab6-EO-jnC" eventType="touchUpInside" id="yB8-b5-Kfq"/>
+                                    <action selector="moreInfoPressed:" destination="Ab6-EO-jnC" eventType="touchUpInside" id="wmM-ju-m7g"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="joy_programming" translatesAutoresizingMaskIntoConstraints="NO" id="8dk-zL-PK9">
@@ -7504,8 +7500,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="3ql-YB-El6"/>
-        <segue reference="Opt-lI-0Wu"/>
         <segue reference="IHu-UO-RcH"/>
+        <segue reference="vUG-b0-bNY"/>
         <segue reference="Mmc-8c-1pg"/>
         <segue reference="cIz-8c-tQu"/>
     </inferredMetricsTieBreakers>
