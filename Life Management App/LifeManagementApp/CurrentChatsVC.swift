@@ -124,6 +124,8 @@ class CurrentChatsVC: UIViewController, UITableViewDelegate, UITableViewDataSour
             self.selectedChatId = chats[indexPath.row].id
         }
         
+        tableView.deselectRow(at: indexPath, animated: true)
+        
         performSegue(withIdentifier: "conversationSegue", sender: self)
     }
     

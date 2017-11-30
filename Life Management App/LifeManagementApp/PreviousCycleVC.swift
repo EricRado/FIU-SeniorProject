@@ -254,6 +254,8 @@ class PreviousCycleVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         backButton.title = "Back"
         self.navigationItem.backBarButtonItem = backButton
         
+        tableView.deselectRow(at: indexPath, animated: true)
+        
         // This will perform the segue to PreviousCycleSummary
         performSegue(withIdentifier: "summaryCellSegue", sender: self)
     }
