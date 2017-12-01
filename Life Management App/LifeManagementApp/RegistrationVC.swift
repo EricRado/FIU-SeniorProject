@@ -51,6 +51,8 @@ class RegistrationVC: UIViewController {
         
         self.registerButton.layer.cornerRadius = 15
         self.registerButton.layer.masksToBounds = true
+        
+        setTextFieldEditing()
     }
     
     override func viewDidLayoutSubviews() {
@@ -106,28 +108,32 @@ class RegistrationVC: UIViewController {
         let childRef = dbRef.child("Users").childByAutoId()
         
         // check for empty fields
-        guard let username = usernameTextField.text else{
+        let username = usernameTextField.text
+        if username == ""{
             print("Please enter a username")
             errorInTextField(usernameTextField)
             createAlert(titleText: "Error", messageText: "Please enter a username")
             return false
         }
         
-        guard let email = emailTextField.text else{
+        let email = emailTextField.text
+        if email == ""{
             print("Please enter an email")
             errorInTextField(emailTextField)
             createAlert(titleText: "Error", messageText: "Please enter an email")
             return false
         }
         
-        guard let password = passwordTextField.text else{
+        let password = passwordTextField.text
+        if password == ""{
             print("Please enter a password.")
-            errorInTextField(usernameTextField)
+            errorInTextField(passwordTextField)
             createAlert(titleText: "Error", messageText: "Please enter a password")
             return false
         }
         
-        guard let reTypePassword = reTypePasswordTextField.text else{
+        let reTypePassword = reTypePasswordTextField.text
+        if reTypePassword == ""{
             print("Please confirm your password.")
             errorInTextField(reTypePasswordTextField)
             createAlert(titleText: "Error", messageText: "Please confirm your password")
@@ -139,22 +145,29 @@ class RegistrationVC: UIViewController {
         let dob = dobTextField.text
         
         // check if username input is valid
-        if !checkUsername(username: username){
+        if !checkUsername(username: username!){
             return false
         }
         
         // check if email input is valid
-        if !checkEmail(email: email){
+        if !checkEmail(email: email!){
             print("Email is invalid")
             errorInTextField(emailTextField)
             createAlert(titleText: "Error", messageText: "Email entered is invalid")
             return false
         }
         
+        // check if email already exists
+        let emailExistsArray = emailList.filter({$0 == email!})
+        if !emailExistsArray.isEmpty{
+            errorInTextField(emailTextField)
+            createAlert(titleText: "Error", messageText: "Email entered already exists")
+        }
+        
         print("confirm password check ...")
 
         // check if password input is valid
-        if !checkPassword(password:password, reTypePassword:reTypePassword){
+        if !checkPassword(password:password!, reTypePassword:reTypePassword!){
             
             return false
         }
@@ -173,8 +186,8 @@ class RegistrationVC: UIViewController {
         print("before the key...")
         let uid = childRef.key
         print("the key" + uid)
-        self.delegate.user = User(id: uid ,email: email, username: username,firstName: firstName!, lastName: lastName!,
-                                  dob: dob!, password: password, adminFlag: false, coachFlag: false, imgURL: "")
+        self.delegate.user = User(id: uid ,email: email!, username: username!,firstName: firstName!, lastName: lastName!,
+                                  dob: dob!, password: password!, adminFlag: false, coachFlag: false, imgURL: "")
         
         childRef.setValue(self.delegate.user.toAnyObject(), withCompletionBlock: {(error, ref) in
             if error != nil{
@@ -242,55 +255,58 @@ class RegistrationVC: UIViewController {
     // password validation
     func checkPassword(password:String, reTypePassword:String) -> Bool{
         var check = true
+        var errorMsg = ""
         
         // check the length of password
         if password.characters.count >= 16{
             print("Password is too long")
             check = false
-            return check
-        }
-        
-        if password.characters.count < 5{
+            errorMsg = "Password is too long"
+        }else if password.characters.count < 5{
             print("Password is too short")
             check = false
-            return check
-        }
-        
-        // check if password contains spaces
-        if containsSpace(word: password){
+            errorMsg = "Password is too short"
+        }else if containsSpace(word: password){
+            
+            // check if password contains spaces
+            
             print("Password CANNOT contain spaces")
             check = false
-            return check
-        }
-        
-        // check if password contains any symbols
-        if containsSymbol(word: password){
+            errorMsg = "Password CANNOT contain any spaces"
+        }else if containsSymbol(word: password){
+            
+            // check if password contains any symbols
+            
             print("Password CANNOT contain any symbols")
             check = false
-            return check
-        }
-        
-        // check if first character of the password is a number
-        if isNumber(char:String(password[password.startIndex])){
+            errorMsg = "Password CANNOT contain any symbols"
+        }else if isNumber(char:String(password[password.startIndex])){
+            
+            // check if first character of the password is a number
+            
             print("Password cannot start with numbers")
             check = false
-            return check
-        }
-        
-        // check if password contains a combination of letters and numbers
-        // create a characterset with letters and add numbers to it
-
-        if !(isNumber(char: password) && containsLetter(word: password)){
+            errorMsg = "Password cannot start with a number"
+        }else if !(isNumber(char: password) && containsLetter(word: password)){
+            
+            // check if password contains a combination of letters and numbers
+            // create a characterset with letters and add numbers to it
+            
             print("Password MUST contain letters and numbers")
             check = false
-            return check
-        }
-        
-        // check if password and confirmed password are the same
-        if password != reTypePassword{
+            errorMsg = "Password MUST contain letters and numbers"
+        }else if password != reTypePassword{
+            
+            // check if password and confirmed password are the same
+            
             print("Password MUST match the confirm password")
             check = false
-            return false
+            errorMsg = "Password MUST match the confirm password"
+        }
+        
+        if !check{
+            errorInTextField(passwordTextField)
+            createAlert(titleText: "Error", messageText: errorMsg)
         }
         
         return check
@@ -320,38 +336,51 @@ class RegistrationVC: UIViewController {
     // first and last name validation
     func checkName(name: String, option: String) -> Bool{
         var check = true
+        var errorMsg = ""
         
-        // check length of first name
+        // check length of first or last name
         if name.characters.count >= 15{
             if option == "first"{
                 print("First name is too long")
+                errorMsg = "First name is too long"
             }else{
                 print("Last name is too long")
+                errorMsg = "Last name is too long"
             }
             check = false
-            return check
-        }
-        
-        // check if first name contains spaces
-        if containsSpace(word: name){
+        }else if containsSpace(word: name){
+            
+            // check if first or last name contains spaces
+            
             if option == "first"{
                 print("First name CANNOT contain spaces")
+                errorMsg = "First name CANNOT contain any spaces"
             }else{
                 print("Last name CANNOT contain spaces")
+                errorMsg = "Last name CANNOT contain any spaces"
             }
             check = false
-            return check
-        }
-        
-        // check if first name contains numbers or symbols
-        if isNumber(char: name) || containsSymbol(word: name){
+        }else if isNumber(char: name) || containsSymbol(word: name){
+            
+            // check if first or last name contains any numbers or symbols
+            
             if option == "first"{
                 print("First name CANNOT contain numbers or symbols")
+                errorMsg = "First name CANNOT contain numbers or symbols"
             }else{
                 print("Last name CANNOT contain numbers or symbols")
+                errorMsg = "Last name CANNOT contain numbers or symbols"
             }
             check = false
-            return check
+        }
+        
+        if !check{
+            if option == "first"{
+                errorInTextField(firstNameTextField)
+            }else{
+                errorInTextField(lastNameTextField)
+            }
+            createAlert(titleText: "Error", messageText: errorMsg)
         }
         
         return check
@@ -412,7 +441,10 @@ class RegistrationVC: UIViewController {
     @IBAction func registerUser(_ sender: AnyObject) {
         self.check = handleRegister()
         
+        print("This is check \(check)")
+        
         if check{
+            print("GOING TO ACTIVITY SELECTION SCREEN")
             performSegue(withIdentifier: "ActivitySelectionSegue", sender: self)
         }
     }

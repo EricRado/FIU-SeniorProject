@@ -626,7 +626,7 @@
                                 <state key="normal" title="Register"/>
                                 <connections>
                                     <action selector="registerUser:" destination="rvJ-mW-ejx" eventType="touchUpInside" id="wev-rA-Jcm"/>
-                                    <segue destination="aVb-NQ-5Dj" kind="show" identifier="ActivitySelectionSegue" id="DMP-7Y-CxG"/>
+                                    <segue destination="aVb-NQ-5Dj" kind="presentation" identifier="ActivitySelectionSegue" id="DMP-7Y-CxG"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MKk-pz-7Yo">
@@ -4841,7 +4841,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="91"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QUz-8H-KXv" id="qYx-vM-jGV">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="90.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="91"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Jon Snow" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PlZ-Cr-HV6">
@@ -7500,9 +7500,9 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="3ql-YB-El6"/>
-        <segue reference="IHu-UO-RcH"/>
         <segue reference="vUG-b0-bNY"/>
-        <segue reference="Mmc-8c-1pg"/>
+        <segue reference="DMP-7Y-CxG"/>
         <segue reference="cIz-8c-tQu"/>
+        <segue reference="Mmc-8c-1pg"/>
     </inferredMetricsTieBreakers>
 </document>
