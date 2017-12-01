@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 
+
 class SprintSettingsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate {
     
     let delegate = UIApplication.shared.delegate as! AppDelegate
@@ -281,15 +282,6 @@ class SprintSettingsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         print("This is activity ref....")
         print(activityRef)
         activityRef.updateChildValues(["targetPoints": targetPoints, "sprintDailyPoints": sprintDailyPoints])
-    }
-    
-    func createAlert(titleText: String, messageText: String){
-        let alert = UIAlertController(title: titleText, message: messageText, preferredStyle: UIAlertControllerStyle.alert)
-        
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: {(action) in
-            alert.dismiss(animated: true, completion: nil)
-        }))
-        present(alert, animated: true)
     }
     
     @IBAction func moreInfoPressed(_ sender: UIButton) {

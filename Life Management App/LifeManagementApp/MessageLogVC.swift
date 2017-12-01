@@ -33,6 +33,16 @@ extension UIViewController{
     func dismissKeyboard(){
         view.endEditing(true)
     }
+    
+    func createAlert(titleText: String, messageText: String){
+        let alert = UIAlertController(title: titleText, message: messageText, preferredStyle: UIAlertControllerStyle.alert)
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: {(action) in
+            alert.dismiss(animated: true, completion: nil)
+        }))
+        present(alert, animated: true)
+    }
+
 }
 
 class MessageLogVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {

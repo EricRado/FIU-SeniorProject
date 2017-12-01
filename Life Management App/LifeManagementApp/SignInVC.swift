@@ -23,6 +23,7 @@ extension UITextField{
         borderLine.backgroundColor = borderColor
         self.addSubview(borderLine)
     }
+    
 }
 
 
@@ -52,6 +53,7 @@ class SignInVC: UIViewController {
                                 attributes: [NSForegroundColorAttributeName:UIColor.black])
         self.passwordTextField.attributedPlaceholder = NSAttributedString(string: "Password",
                                 attributes: [NSForegroundColorAttributeName:UIColor.black])
+        setTextFieldEditing()
 
     }
     
@@ -59,6 +61,22 @@ class SignInVC: UIViewController {
         let lineColor = UIColor(red:0.12, green:0.23, blue:0.35, alpha:0.8)
         self.usernameTextField.setBottomLine(borderColor: lineColor)
         self.passwordTextField.setBottomLine(borderColor: lineColor)
+    }
+    
+    func textFieldDidChange(_ textField: UITextField){
+        textField.layer.borderColor = UIColor.clear.cgColor
+        textField.setBottomLine(borderColor: UIColor(red:0.12, green:0.23, blue:0.35, alpha:0.8))
+    }
+    
+    func setTextFieldEditing(){
+        self.usernameTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        self.passwordTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+    }
+    
+    func errorInTextField(_ textField: UITextField){
+        textField.layer.borderWidth = 2.0
+        textField.layer.cornerRadius = 12.0
+        textField.layer.borderColor = UIColor.red.cgColor
     }
     
     func getAllUsers(){
@@ -103,6 +121,8 @@ class SignInVC: UIViewController {
             if user.username == username{
                 if user.password != password{
                     print("Password entered is incorrect")
+                    errorInTextField(passwordTextField)
+                    createAlert(titleText: "Error", messageText: "Password entered is incorrect")
                     return false
                 }
                 
@@ -124,15 +144,25 @@ class SignInVC: UIViewController {
             }
         }
         print("User entered does not exist.")
+        errorInTextField(usernameTextField)
+        createAlert(titleText: "Error", messageText: "Username entered does not exist")
         return false
     }
     
     
     @IBAction func signInUser(_ sender: AnyObject) {
+        if (usernameTextField.text?.isEmpty)! && (passwordTextField.text?.isEmpty)!{
+            errorInTextField(usernameTextField)
+            errorInTextField(passwordTextField)
+            createAlert(titleText: "Error", messageText: "Username and Password is blank")
+            return
+        }
         if !((usernameTextField.text?.isEmpty)!){
             self.username = usernameTextField.text! as String
         }else{
             print("Username is blank")
+            errorInTextField(usernameTextField)
+            createAlert(titleText: "Error", messageText: "Username is blank")
             return
         }
         
@@ -140,6 +170,8 @@ class SignInVC: UIViewController {
             self.password = passwordTextField.text! as String
         }else{
             print("Password is blank")
+            errorInTextField(passwordTextField)
+            createAlert(titleText: "Error", messageText: "Password is blank")
             return
         }
         

@@ -82,17 +82,6 @@ class ContributionActivitySelectionVC: UIViewController, iCarouselDataSource, iC
             }
         }
     }
-
-    
-    func createAlert(titleText: String, messageText: String){
-        let alert = UIAlertController(title: titleText, message: messageText, preferredStyle: UIAlertControllerStyle.alert)
-        
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: {(action) in
-            alert.dismiss(animated: true, completion: nil)
-        }))
-        
-        present(alert, animated: true)
-    }
     
     @IBAction func submitPressed(_ sender: Any) {
         // display alert if user did not select two activities

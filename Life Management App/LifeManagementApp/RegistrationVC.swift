@@ -66,6 +66,28 @@ class RegistrationVC: UIViewController {
         
     }
     
+    func textFieldDidChange(_ textField: UITextField){
+        textField.layer.borderColor = UIColor.clear.cgColor
+        textField.setBottomLine(borderColor: UIColor(red:0.12, green:0.23, blue:0.35, alpha:0.8))
+    }
+    
+    func setTextFieldEditing(){
+        self.usernameTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        self.emailTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        self.firstNameTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        self.lastNameTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        self.dobTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        self.passwordTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        self.reTypePasswordTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        
+    }
+    
+    func errorInTextField(_ textField: UITextField){
+        textField.layer.borderWidth = 2.0
+        textField.layer.cornerRadius = 12.0
+        textField.layer.borderColor = UIColor.red.cgColor
+    }
+    
     func getAllUsers(){
         let userRef = dbRef.child("Users")
         userRef.observe(DataEventType.value, with: {(snapshot) in
@@ -79,7 +101,6 @@ class RegistrationVC: UIViewController {
         })
     }
 
-   
     func handleRegister() -> Bool{
         
         let childRef = dbRef.child("Users").childByAutoId()
@@ -87,21 +108,29 @@ class RegistrationVC: UIViewController {
         // check for empty fields
         guard let username = usernameTextField.text else{
             print("Please enter a username")
+            errorInTextField(usernameTextField)
+            createAlert(titleText: "Error", messageText: "Please enter a username")
             return false
         }
         
         guard let email = emailTextField.text else{
             print("Please enter an email")
+            errorInTextField(emailTextField)
+            createAlert(titleText: "Error", messageText: "Please enter an email")
             return false
         }
         
         guard let password = passwordTextField.text else{
             print("Please enter a password.")
+            errorInTextField(usernameTextField)
+            createAlert(titleText: "Error", messageText: "Please enter a password")
             return false
         }
         
         guard let reTypePassword = reTypePasswordTextField.text else{
             print("Please confirm your password.")
+            errorInTextField(reTypePasswordTextField)
+            createAlert(titleText: "Error", messageText: "Please confirm your password")
             return false
         }
         
@@ -117,6 +146,8 @@ class RegistrationVC: UIViewController {
         // check if email input is valid
         if !checkEmail(email: email){
             print("Email is invalid")
+            errorInTextField(emailTextField)
+            createAlert(titleText: "Error", messageText: "Email entered is invalid")
             return false
         }
         
@@ -160,39 +191,48 @@ class RegistrationVC: UIViewController {
     // username validation
     func checkUsername(username:String) -> Bool{
         var check = true
+        var errorMsg = ""
         
         // check the length of username
         if username.characters.count < 5{
             print("Username is too short")
             check = false
-            return false
-        }
-        
-        if username.characters.count >= 15{
+            errorMsg = "Username is too short"
+            
+        }else if username.characters.count >= 15{
             print("Username is too long")
             check = false
-            return false
-        }
-        
-        // check if username contains space
-        if containsSpace(word: username){
+            errorMsg = "Username is too long"
+            
+        }else if containsSpace(word: username){
+            
+            // check if username contains space
+            
             print("Username CANNOT contain any spaces")
             check = false
-            return false
-        }
-        
-        // check if username contains any symbols
-        if containsSymbol(word: username){
+            errorMsg = "Username CANNOT contain any spaces"
+           
+        }else if containsSymbol(word: username){
+            
+            // check if username contains any symbols
+            
             print("Username CANNOT contain any symbols")
             check = false
-            return false
+            errorMsg = "Username CANNOT contain any symbols"
+    
+        }
+        
+        if !check{
+            errorInTextField(usernameTextField)
+            createAlert(titleText: "Error", messageText: errorMsg)
         }
         
         // check list of username already in use for availability
         for uname in self.usernameList{
             if uname == username{
                 print("This username has already been taken")
-                check = false
+                errorInTextField(usernameTextField)
+                createAlert(titleText: "Error", messageText: "Username entered already exists")
                 return false
             }
         }
