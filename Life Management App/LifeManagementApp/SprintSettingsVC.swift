@@ -392,6 +392,8 @@ class SprintSettingsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         updateTargetScoreAndDailyPoints(id: contributionActivityIds[0], targetPoints: contributionTargetScore1.text!)
         updateTargetScoreAndDailyPoints(id: contributionActivityIds[1], targetPoints: contributionTargetScore2.text!)
         
+        self.delegate.activitySelectedImages.removeAll()
+        
         segueCheck = true
         performSegue(withIdentifier: "newDashBoardSegue", sender: self)
         

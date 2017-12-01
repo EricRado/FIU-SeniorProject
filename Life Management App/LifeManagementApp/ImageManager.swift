@@ -52,20 +52,21 @@ class ImageManager: NSObject{
     func downloadImage(user: User){
         if let profileImageURL = user.imgURL{
             print("IMAGE MANAGER : \(profileImageURL)")
-            let url = URL(string: profileImageURL)
-            let request = URLRequest(url: url!)
-            URLSession.shared.dataTask(with: request, completionHandler: {(data, response, error) in
+            if let url = URL(string: profileImageURL){
+                let request = URLRequest(url: url)
+                URLSession.shared.dataTask(with: request, completionHandler: {(data, response, error) in
                 
-                if let error = error{
-                    print(error.localizedDescription)
-                    return
+                    if let error = error{
+                        print(error.localizedDescription)
+                        return
                 }
                 
                 DispatchQueue.main.async(execute: {
                     self.downloadedImage = UIImage(data: data!)!
                 })
                 
-            }).resume()
+                }).resume()
+            }
         }
     }
 }

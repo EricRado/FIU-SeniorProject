@@ -132,6 +132,8 @@ class PassionActivitySelectionVC: UIViewController, iCarouselDataSource, iCarous
             }
         })
         
+        self.selectedIndexes.removeAll()
+        
         // selection is valid set the flag to true, the segue will execute next
         self.selectionIsValid = true
         

@@ -129,6 +129,8 @@ class ContributionActivitySelectionVC: UIViewController, iCarouselDataSource, iC
             }
         })
         
+        self.selectedIndexes.removeAll()
+        
         // selection is valid set the flag to true, the segue will execute next
         self.selectionIsValid = true
         performSegue(withIdentifier: "SprintSettingSegue", sender: self)

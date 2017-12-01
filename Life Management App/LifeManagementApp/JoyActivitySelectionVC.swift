@@ -14,7 +14,6 @@ class JoyActivitySelectionVC: UIViewController, iCarouselDataSource, iCarouselDe
     var selectionIsValid = false
 
     @IBOutlet var joyCarouselView: iCarousel!
-    @IBOutlet weak var displayUsername: UILabel!
     @IBOutlet weak var submitBtn: UIButton!
     
     var selectedIndexes = Set<Int>()
@@ -154,6 +153,8 @@ class JoyActivitySelectionVC: UIViewController, iCarouselDataSource, iCarouselDe
                 return
             }
         })
+        
+        self.selectedIndexes.removeAll()
         
         // selection is valid set the flag to true, the segue will execute next
         self.selectionIsValid = true

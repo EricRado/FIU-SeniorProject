@@ -24,8 +24,8 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        iconNameArr = ["Top","Home","New Cycle","Previous Cycle", "View Coaches", "Share Progress","Messages", "Invite a Friend", "Settings"]
-        iconImage = [delegate.userImgProfile, UIImage(named: "home")!, UIImage(named: "newCycles")!, UIImage(named: "previousCycles")!, UIImage(named: "coachList")!, UIImage(named: "shareProgress")!, UIImage(named: "messages")!, UIImage(named: "inviteFriend")!, UIImage(named: "settings")!]
+        iconNameArr = ["Top","Home","New Cycle","Previous Cycle", "View Coaches", "Share Progress","Messages", "Invite a Friend", "Settings", "Sign Out"]
+        iconImage = [delegate.userImgProfile, UIImage(named: "home")!, UIImage(named: "newCycles")!, UIImage(named: "previousCycles")!, UIImage(named: "coachList")!, UIImage(named: "shareProgress")!, UIImage(named: "messages")!, UIImage(named: "inviteFriend")!, UIImage(named: "settings")!, UIImage(named: "signOut")!]
         
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.none
     
