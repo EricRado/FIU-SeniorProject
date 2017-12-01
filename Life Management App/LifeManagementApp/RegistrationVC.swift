@@ -197,6 +197,7 @@ class RegistrationVC: UIViewController {
             
 
             print("Successfully saved a user into database.")
+            self.delegate.userImgProfile = UIImage(named: "noPicture")!
         })
         return true
     }

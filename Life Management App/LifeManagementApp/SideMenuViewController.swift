@@ -30,7 +30,6 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
         
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.none
     
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -91,6 +90,15 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
             
             if cell.iconNameLabel.text! == "Home"{
                 self.performSegue(withIdentifier: "homeSegue", sender: self)
+            }
+            
+            if cell.iconNameLabel.text! == "Sign Out"{
+                
+                // reset all global delegate variable to none because user is signing out
+                self.delegate.user = User()
+                self.delegate.categoryKey = ""
+                self.delegate.userImgProfile = UIImage()
+                self.performSegue(withIdentifier: "signOutSegue", sender: self)
             }
 
         }

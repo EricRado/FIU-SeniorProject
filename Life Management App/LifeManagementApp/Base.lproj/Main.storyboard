@@ -4065,7 +4065,7 @@
                                         <rect key="frame" x="0.0" y="28" width="300" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YFz-ht-4qe" id="gNd-qC-OhE">
-                                            <rect key="frame" x="0.0" y="0.0" width="300" height="149.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="300" height="150"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Some Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sfq-xa-uKw">
@@ -4150,6 +4150,7 @@
                         <segue destination="zuQ-HF-i9G" kind="show" identifier="viewChatsSegue" id="xh9-O9-RTn"/>
                         <segue destination="EAB-pk-uy0" kind="show" identifier="settingsSegue" id="ner-H4-YhQ"/>
                         <segue destination="HVX-Cu-tUn" kind="show" identifier="homeSegue" id="Opt-lI-0Wu"/>
+                        <segue destination="bGx-m1-ER2" kind="presentation" identifier="signOutSegue" id="SI1-2R-6Ws"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GKT-cB-krq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -7502,7 +7503,7 @@
         <segue reference="E2e-RD-eat"/>
         <segue reference="Opt-lI-0Wu"/>
         <segue reference="IHu-UO-RcH"/>
+        <segue reference="SI1-2R-6Ws"/>
         <segue reference="cIz-8c-tQu"/>
-        <segue reference="Mmc-8c-1pg"/>
     </inferredMetricsTieBreakers>
 </document>

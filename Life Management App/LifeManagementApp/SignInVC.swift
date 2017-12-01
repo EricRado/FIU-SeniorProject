@@ -186,6 +186,9 @@ class SignInVC: UIViewController {
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: {
                 self.delegate.userImgProfile = self.imageManager.downloadedImage
+                if self.delegate.user.imgURL == ""{
+                    self.delegate.userImgProfile = UIImage(named: "noPicture")!
+                }
                 self.performSegue(withIdentifier: "DashBoardSegue", sender: self)
 
             })
