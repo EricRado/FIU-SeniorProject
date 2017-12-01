@@ -105,6 +105,7 @@ class SprintSettingsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         passionTargetScore2.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         contributionTargetScore1.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         contributionTargetScore2.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        weekTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
     }
     
     func setStartAndEndDate(weeks: String){
@@ -201,7 +202,7 @@ class SprintSettingsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
                     self.passionActivityIds.append(activityId1)
                 }
                 if let activityId2 = sprintDict?["sprintActivityId2"] as? String{
-                    print("This is passion activity id 1 : \(activityId2)")
+                    print("This is passion activity id 2 : \(activityId2)")
                     self.passionActivityIds.append(activityId2)
                 }
                 
@@ -234,7 +235,7 @@ class SprintSettingsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
                     self.contributionActivityIds.append(activityId1)
                 }
                 if let activityId2 = sprintDict?["sprintActivityId2"] as? String{
-                    print("This is contribution activity id 1 : \(activityId2)")
+                    print("This is contribution activity id 2 : \(activityId2)")
                     self.contributionActivityIds.append(activityId2)
                 }
             }
@@ -275,7 +276,10 @@ class SprintSettingsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     }
     
     func updateTargetScoreAndDailyPoints(id: String, targetPoints: String){
+        print("This is the target points : \(targetPoints)")
         let activityRef = dbref.child("Activities/\(id)")
+        print("This is activity ref....")
+        print(activityRef)
         activityRef.updateChildValues(["targetPoints": targetPoints, "sprintDailyPoints": sprintDailyPoints])
     }
     
@@ -299,15 +303,34 @@ class SprintSettingsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     
     func checkTextFields(textField: UITextField) -> Bool{
         if textField.text == ""{
-            print("Text field is empty")
+            createAlert(titleText: "Error", messageText: "There is a textbox field that is empty")
             textField.layer.borderWidth = 2.0
             textField.layer.borderColor = UIColor.red.cgColor
             return false
         }else{
             if weekChoice != ""{
                 print("There is a number selected for week choice")
-                let maxDays = Int(weekChoice)
-                print("This is maxDays : \(maxDays)")
+                if let weekChoice = Int(weekChoice) ,let input = Int(textField.text!){
+                    let maxDays = weekChoice * 7
+                    if input > maxDays{
+                        print("This is maxDays : \(maxDays)")
+                        createAlert(titleText: "Error", messageText: "There is an input which has exceeded the max goal points according to the week choice. Choose a goal score equal to or less than \(maxDays)")
+                        textField.layer.borderWidth = 2.0
+                        textField.layer.borderColor = UIColor.red.cgColor
+                        return false
+                    }else if input <= 0{
+                        createAlert(titleText: "Error", messageText: "There is an input which is below or equal to zero. Choose a goal score between 1 - \(maxDays)")
+                        textField.layer.borderWidth = 2.0
+                        textField.layer.borderColor = UIColor.red.cgColor
+                        return false
+                    }
+                }
+            }else{
+                print("weekChoice is blank...")
+                createAlert(titleText: "Error", messageText: "Please select how long the new sprint will last")
+                weekTextField.layer.borderWidth = 2.0
+                weekTextField.layer.borderColor = UIColor.red.cgColor
+                return false
                 
             }
         }
@@ -315,16 +338,22 @@ class SprintSettingsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     }
     
     func checkFields() -> Bool{
-        let textFieldCheck1 = checkTextFields(textField: joyTargetScore1)
-        let textFieldCheck2 = checkTextFields(textField: joyTargetScore2)
-        let textFieldCheck3 = checkTextFields(textField: passionTargetScore1)
-        let textFieldCheck4 = checkTextFields(textField: passionTargetScore2)
-        let textFieldCheck5 = checkTextFields(textField: contributionTargetScore1)
-        let textFieldCheck6 = checkTextFields(textField: contributionTargetScore2)
-        
-        if weekChoice == ""{
-            print("weekChoice is blank...")
-            createAlert(titleText: "Error", messageText: "Please select how long the new sprint will last")
+        if !checkTextFields(textField: joyTargetScore1){
+            return false
+        }
+        if !checkTextFields(textField: joyTargetScore2){
+            return false
+        }
+        if !checkTextFields(textField: passionTargetScore1){
+            return false
+        }
+        if !checkTextFields(textField: passionTargetScore2){
+            return false
+        }
+        if !checkTextFields(textField: contributionTargetScore1){
+            return false
+        }
+        if !checkTextFields(textField: contributionTargetScore2){
             return false
         }
         
@@ -334,20 +363,18 @@ class SprintSettingsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     @IBAction func submitPressed(_ sender: UIButton) {
         
         // add validation before updating to database, exit if their is empty fields
-        segueCheck = checkFields()
-        print("This is check : \(segueCheck)")
-        if !segueCheck{
-            print("what the fuck")
+        let check = checkFields()
+        if !check{
             return
         }
         
+        print("GOING TO THE CATEGORY DB REFS...")
         let joySprintRef = dbref.child("Categories/\(categoryKey)/JoySprints/\(joySprintKey)")
         let passionSprintRef = dbref.child("Categories/\(categoryKey)/PassionSprints/\(passionSprintKey)")
         let contributionSprintRef = dbref.child("Categories/\(categoryKey)/ContributionSprints/\(contributionSprintKey)")
         
-        print("WEEK CHOICE : \(weekChoice)")
-        
         setStartAndEndDate(weeks: weekChoice)
+        print(sprintDailyPoints)
         
         // update starting date, ending date , number of weeks
         joySprintRef.updateChildValues(["startingDate": startingDate, "endingDate": endingDate, "numberOfWeeks": weekChoice])
@@ -355,16 +382,25 @@ class SprintSettingsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         contributionSprintRef.updateChildValues(["startingDate": startingDate, "endingDate": endingDate, "numberOfWeeks": weekChoice])
         
         // update target score and sprint daily points
-        
+        print("Going to update joy activities")
+        print("Joy activity 1 id : \(joyActivityIds[0])")
+        print("Joy activity 2 id : \(joyActivityIds[1])")
         updateTargetScoreAndDailyPoints(id: joyActivityIds[0], targetPoints: joyTargetScore1.text!)
         updateTargetScoreAndDailyPoints(id: joyActivityIds[1], targetPoints: joyTargetScore2.text!)
         
+        print("Going to update passion activities")
+        print("Passion activity 1 id : \(passionActivityIds[0])")
+        print("Passion activity 2 id : \(passionActivityIds[1])")
         updateTargetScoreAndDailyPoints(id: passionActivityIds[0], targetPoints: passionTargetScore1.text!)
         updateTargetScoreAndDailyPoints(id: passionActivityIds[1], targetPoints: passionTargetScore2.text!)
         
+        print("Going to update contribution activities")
+        print("Contribution activity 1 id : \(contributionActivityIds[0])")
+        print("Contribution activity 2 id : \(contributionActivityIds[1])")
         updateTargetScoreAndDailyPoints(id: contributionActivityIds[0], targetPoints: contributionTargetScore1.text!)
         updateTargetScoreAndDailyPoints(id: contributionActivityIds[1], targetPoints: contributionTargetScore2.text!)
         
+        segueCheck = true
         performSegue(withIdentifier: "newDashBoardSegue", sender: self)
         
     }
