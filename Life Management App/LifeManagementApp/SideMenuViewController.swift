@@ -15,6 +15,7 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
     var interactor: Interactor? = nil
     let imageManager = ImageManager()
     let delegate = UIApplication.shared.delegate as! AppDelegate
+    let backgroundImage = UIImage(named: "backgroundSideMenu")
     
     var iconNameArr = [String]()
     var iconImage = [UIImage]()
@@ -32,6 +33,15 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // add a background view to the table view
+        let backgroundImage = UIImage(named: "backgroundSideMenu")
+        let imageView = UIImageView(image: backgroundImage)
+        self.tableView.backgroundView = imageView
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return iconNameArr.count
     }
@@ -39,12 +49,14 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0{
             let cell = tableView.dequeueReusableCell(withIdentifier: "SideMenuTopTableViewCell") as! SideMenuTopTableViewCell
+            cell.backgroundColor = UIColor.clear
             cell.nameLabel.text = "\(delegate.user.firstName) \(delegate.user.lastName)"
             cell.userProfileImg.image = delegate.userImgProfile
             cell.layoutIfNeeded()
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "SideMenuTableViewCell") as! SideMenuTableViewCell
+            cell.backgroundColor = UIColor.clear
             cell.iconNameLabel.text! = iconNameArr[indexPath.row]
         
             cell.iconImage.image = iconImage[indexPath.row]
