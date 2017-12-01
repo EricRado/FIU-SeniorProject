@@ -39,6 +39,7 @@ class CurrentChatsVC: UIViewController, UITableViewDelegate, UITableViewDataSour
     let dbref = Database.database().reference(fromURL: "https://life-management-v2.firebaseio.com/")
     var selectedCoach = Coach()
     var selectedChatId = ""
+    var coachImageDict = [String: UIImage]()
     
     @IBOutlet weak var tableView: UITableView!
 
@@ -84,7 +85,7 @@ class CurrentChatsVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         })
     }
     
-    func getImage(url: String, cell : CurrentChatTableViewCell){
+    func getImage(id: String, url: String, cell : CurrentChatTableViewCell){
         let imageRef = storage.reference(forURL: url)
         
         imageRef.getData(maxSize: 1 * 1024 * 1024, completion: {data, error in
@@ -93,6 +94,7 @@ class CurrentChatsVC: UIViewController, UITableViewDelegate, UITableViewDataSour
                 return
             }else {
                 cell.userProfileImg.image = UIImage(data: data!)
+                self.coachImageDict[id] = cell.userProfileImg.image
             }
         })
         
@@ -110,7 +112,7 @@ class CurrentChatsVC: UIViewController, UITableViewDelegate, UITableViewDataSour
         if !coach.isEmpty{
             cell.nameLabel.text = "\(coach[0].firstName)  \(coach[0].lastName)"
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
-                self.getImage(url: coach[0].imgURL, cell: cell)
+                self.getImage(id: coach[0].id, url: coach[0].imgURL, cell: cell)
             })
         }
         return cell
@@ -147,6 +149,9 @@ class CurrentChatsVC: UIViewController, UITableViewDelegate, UITableViewDataSour
             // new vc should have property that will store passed value
             viewController.recipient = selectedCoach
             viewController.chatId = selectedChatId
+            if let image = self.coachImageDict[self.selectedCoach.id]{
+                viewController.receipentImage = image
+            }
             
         }
         if let destinationViewController = segue.destination as? SideMenuViewController{

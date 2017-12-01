@@ -61,6 +61,8 @@ class MessageLogVC: UIViewController,UICollectionViewDelegate,UICollectionViewDa
         return textField
     }()
     
+    var receipentImage = UIImage()
+    
     var bottomConstraint: NSLayoutConstraint?
     
     let sendButton: UIButton = {
@@ -217,6 +219,8 @@ class MessageLogVC: UIViewController,UICollectionViewDelegate,UICollectionViewDa
                 cell.bubbleImageView.image = ChatLogMessageCell.grayBubbleImage
                 cell.bubbleImageView.tintColor = UIColor(white: 0.95, alpha: 1)
                 cell.messageTextView.textColor = UIColor.black
+                
+                cell.profileImageView.image = receipentImage
                 
             }else{
                 
