@@ -84,6 +84,14 @@ class SideMenuViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 0{
+            return 150
+        }
+        
+        return 55
+    }
+    
     @IBAction func handleGesture(sender: UIPanGestureRecognizer){
         // you use translation(in: view) to get the pan gesture coordinates
         let translation = sender.translation(in: view)

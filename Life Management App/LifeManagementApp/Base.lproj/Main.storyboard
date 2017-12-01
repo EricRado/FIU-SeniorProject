@@ -4061,21 +4061,21 @@
                                 <rect key="frame" x="0.0" y="0.0" width="300" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SideMenuTopTableViewCell" rowHeight="135" id="YFz-ht-4qe" customClass="SideMenuTopTableViewCell" customModule="LifeManagementApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="300" height="135"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SideMenuTopTableViewCell" rowHeight="150" id="YFz-ht-4qe" customClass="SideMenuTopTableViewCell" customModule="LifeManagementApp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="300" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YFz-ht-4qe" id="gNd-qC-OhE">
-                                            <rect key="frame" x="0.0" y="0.0" width="300" height="135"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="300" height="149.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Some Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sfq-xa-uKw">
-                                                    <rect key="frame" x="67" y="104" width="166" height="21"/>
+                                                    <rect key="frame" x="67" y="119" width="166" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="noPicture" translatesAutoresizingMaskIntoConstraints="NO" id="5wJ-7d-Gj8">
-                                                    <rect key="frame" x="104.5" y="8" width="90" height="90"/>
+                                                    <rect key="frame" x="104.5" y="23" width="90" height="90"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="90" id="KFB-xV-Hhv"/>
                                                         <constraint firstAttribute="width" constant="90" id="poh-gZ-1cf"/>
@@ -4084,7 +4084,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="sfq-xa-uKw" firstAttribute="top" secondItem="5wJ-7d-Gj8" secondAttribute="bottom" constant="6" id="G7r-Od-ReG"/>
-                                                <constraint firstItem="5wJ-7d-Gj8" firstAttribute="top" secondItem="gNd-qC-OhE" secondAttribute="topMargin" id="JUn-u3-BoN"/>
+                                                <constraint firstItem="5wJ-7d-Gj8" firstAttribute="top" secondItem="gNd-qC-OhE" secondAttribute="topMargin" constant="15" id="JUn-u3-BoN"/>
                                                 <constraint firstItem="sfq-xa-uKw" firstAttribute="centerX" secondItem="5wJ-7d-Gj8" secondAttribute="centerX" id="QGs-4p-XYV"/>
                                                 <constraint firstItem="5wJ-7d-Gj8" firstAttribute="centerX" secondItem="gNd-qC-OhE" secondAttribute="centerX" id="TTl-0B-dq6"/>
                                                 <constraint firstItem="sfq-xa-uKw" firstAttribute="leading" secondItem="gNd-qC-OhE" secondAttribute="leadingMargin" constant="59" id="W9D-wc-BJU"/>
@@ -4097,7 +4097,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SideMenuTableViewCell" rowHeight="55" id="1Ai-nv-sBV" customClass="SideMenuTableViewCell" customModule="LifeManagementApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="163" width="300" height="55"/>
+                                        <rect key="frame" x="0.0" y="178" width="300" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1Ai-nv-sBV" id="ayN-Kd-t78">
                                             <rect key="frame" x="0.0" y="0.0" width="300" height="55"/>
@@ -7500,8 +7500,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="E2e-RD-eat"/>
-        <segue reference="vUG-b0-bNY"/>
-        <segue reference="DMP-7Y-CxG"/>
+        <segue reference="Opt-lI-0Wu"/>
+        <segue reference="IHu-UO-RcH"/>
         <segue reference="cIz-8c-tQu"/>
         <segue reference="Mmc-8c-1pg"/>
     </inferredMetricsTieBreakers>

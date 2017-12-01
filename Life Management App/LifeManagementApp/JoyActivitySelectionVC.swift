@@ -23,6 +23,8 @@ class JoyActivitySelectionVC: UIViewController, iCarouselDataSource, iCarouselDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print("Inside joy activity selection....")
 
         joyCarouselView.delegate = self
         joyCarouselView.dataSource = self
