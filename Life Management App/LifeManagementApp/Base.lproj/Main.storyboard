@@ -2295,6 +2295,8 @@
                         <outlet property="goalScore1" destination="7hS-5O-ird" id="jEU-jD-6fG"/>
                         <outlet property="goalScore2" destination="ALx-ll-GmD" id="aa3-rm-8MN"/>
                         <outlet property="menuBtn" destination="Lcv-ag-3w8" id="ZHO-pb-Sax"/>
+                        <outlet property="overallScore" destination="5hC-Kc-GSJ" id="JSC-a6-4Ri"/>
+                        <outlet property="overallScoreLabel" destination="wMp-C5-fMi" id="Pkg-8i-zHW"/>
                         <outlet property="startingDate" destination="Gb9-0A-KPX" id="WpZ-ZS-sXe"/>
                         <outletCollection property="dayTopBtns" destination="beT-9G-UwC" collectionClass="NSMutableArray" id="lW5-Zk-H9g"/>
                         <outletCollection property="dayTopBtns" destination="mvd-PQ-vmP" collectionClass="NSMutableArray" id="poR-IV-yiA"/>
@@ -3968,6 +3970,8 @@
                         <outlet property="goalScore1" destination="2FI-92-sJZ" id="GQB-vR-PKH"/>
                         <outlet property="goalScore2" destination="AW5-HG-fK4" id="RnU-wU-ioh"/>
                         <outlet property="menuBtn" destination="071-Iu-BPf" id="rgZ-Jz-2vo"/>
+                        <outlet property="overallScore" destination="xZI-xy-4Pr" id="wgx-to-dFU"/>
+                        <outlet property="overallScoreLabel" destination="Awb-q5-BwT" id="Vhq-Yl-7Tw"/>
                         <outlet property="startingDate" destination="sUG-JI-kvu" id="R23-tk-Vs6"/>
                         <outletCollection property="dayTopBtns" destination="29W-ZV-Axx" collectionClass="NSMutableArray" id="YtC-aJ-xYx"/>
                         <outletCollection property="dayTopBtns" destination="SNp-Fz-nLn" collectionClass="NSMutableArray" id="mjk-DN-Y7M"/>
@@ -6569,6 +6573,8 @@
                         <outlet property="joyScore" destination="VlI-yr-Erx" id="qhC-JE-fx9"/>
                         <outlet property="joyScoreLabel" destination="gnu-kX-Pch" id="mT3-Bq-MK0"/>
                         <outlet property="menuBtn" destination="2cJ-r9-EHr" id="tSe-bm-3FG"/>
+                        <outlet property="overallScore" destination="Da9-Xm-h5E" id="hFy-lC-glE"/>
+                        <outlet property="overallScoreLabel" destination="IfF-3T-VCF" id="qwa-nL-2fg"/>
                         <outlet property="startingDate" destination="mSL-d3-xoA" id="1ng-uP-jRK"/>
                         <outletCollection property="dayBtns" destination="uo0-7Y-IEb" collectionClass="NSMutableArray" id="jgV-2p-RH7"/>
                         <outletCollection property="dayBtns" destination="BZr-F0-cGh" collectionClass="NSMutableArray" id="uN4-P5-6yo"/>

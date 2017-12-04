@@ -36,7 +36,14 @@ class ContributionVC: UIViewController {
     
     var sprintOnDisplay: Sprint = Sprint()
     var activity1OnDisplay: Activity = Activity()
+    var activity1OnDisplayId = ""
     var activity2OnDisplay: Activity = Activity()
+    var activity2OnDisplayId = ""
+    var sprintOnDisplayId = ""
+    
+    var passionOverallScore = ""
+    var joyOverallScore = ""
+    
     var btnIndexes = [Int]()
     
     
@@ -67,6 +74,9 @@ class ContributionVC: UIViewController {
     
     @IBOutlet weak var activityScore: KDCircularProgress!
     @IBOutlet weak var activityScoreLabel: UILabel!
+    
+    @IBOutlet weak var overallScore: KDCircularProgress!
+    @IBOutlet weak var overallScoreLabel: UILabel!
     
     var dbref = Database.database().reference(fromURL: "https://life-management-v2.firebaseio.com/")
     
@@ -126,6 +136,9 @@ class ContributionVC: UIViewController {
     
     func getActiveSprint(categoryKey: String){
         let categoryRef = dbref.child("Categories/\(categoryKey)/ContributionSprints")
+        let joyRef = dbref.child("Categories/\(categoryKey)/JoySprints")
+        let passionRef = dbref.child("Categories/\(categoryKey)/PassionSprints")
+        
         
         // get the latest sprint
         let activeSprintQuery = categoryRef.queryOrdered(byChild: "startingDate").queryLimited(toLast: 1)
@@ -150,6 +163,34 @@ class ContributionVC: UIViewController {
         }, withCancel: {
             (error) in print(error.localizedDescription)
         })
+        
+        // get other sprints for their sprintOverallScore
+        let passionActiveSprintQuery = passionRef.queryOrdered(byChild: "startingDate").queryLimited(toLast: 1)
+        passionActiveSprintQuery.observeSingleEvent(of: .value, with: {(snapshot) in
+            for child in snapshot.children.allObjects as! [DataSnapshot]{
+                if !child.exists(){
+                    print("Snapshot is empty")
+                    return
+                }
+                let passionSprint = Sprint(snapshot: child)!
+                self.passionOverallScore = passionSprint.sprintOverallScore
+                print(self.passionOverallScore)
+            }
+        })
+        
+        let joyActiveSprintQuery = joyRef.queryOrdered(byChild: "startingDate").queryLimited(toLast: 1)
+        joyActiveSprintQuery.observeSingleEvent(of: .value, with: {(snapshot) in
+            for child in snapshot.children.allObjects as! [DataSnapshot]{
+                if !child.exists(){
+                    print("Snapshot is empty")
+                    return
+                }
+                let joySprint = Sprint(snapshot: child)!
+                self.joyOverallScore = joySprint.sprintOverallScore
+                print(self.joyOverallScore)
+            }
+        })
+
     }
     
     
@@ -221,7 +262,14 @@ class ContributionVC: UIViewController {
             Double(self.activity1OnDisplay.targetPoints){
             goalP1 = (actual1 / target1) * 100
             let goalP1Int = Int(round(goalP1!))
-            self.goalPercentage1?.text = "\(String(goalP1Int))%"
+            var goalPercentage1 = ""
+            if goalP1Int >= 100{
+                goalPercentage1 = "100%"
+            }else{
+                goalPercentage1 = "\(String(goalP1Int))%"
+            }
+            self.goalPercentage1?.text = goalPercentage1
+            dbref.child("Activities/\(self.activity1OnDisplayId)").updateChildValues(["activityScore": String(goalP1Int)])
         }else{return}
         
         // set goal percentage actual/target for activity 2
@@ -229,7 +277,14 @@ class ContributionVC: UIViewController {
             Double(self.activity2OnDisplay.targetPoints){
             goalP2 = (actual2 / target2) * 100
             let goalP2Int = Int(round(goalP2!))
-            self.goalPercentage2?.text = "\(String(goalP2Int))%"
+            var goalPercentage2 = ""
+            if goalP2Int >= 100{
+                goalPercentage2 = "100%"
+            }else{
+                goalPercentage2 = "\(String(goalP2Int))%"
+            }
+            self.goalPercentage2?.text = goalPercentage2
+            dbref.child("Activities/\(self.activity2OnDisplayId)").updateChildValues(["activityScore": String(goalP2Int)])
         }else{return}
         
         // find the average score of both joy activies by taking their
@@ -241,6 +296,26 @@ class ContributionVC: UIViewController {
             self.activityScoreLabel?.text = String(format:"%.01f%"+"%", activityAvg)
             
         }else{return}
+        
+        // find the average score of both joy activies by taking their
+        // percentage score for each activity and dividing by 2
+        if let p1 = goalP1, let p2 = goalP2{
+            let contributionAvg = ((p1 + p2)/2.0)
+            let contributionAvgInt = Int(round(contributionAvg * 3.6))
+            self.activityScore.angle = Double(contributionAvgInt)
+            self.activityScoreLabel?.text = String(format:"%.01f%"+"%", contributionAvg)
+            dbref.child("Categories/\(self.delegate.categoryKey)/PassionSprints/\(self.sprintOnDisplayId)").updateChildValues(["sprintOverallScore": String(contributionAvg)])
+            self.sprintOnDisplay.sprintOverallScore = String(contributionAvg)
+        }else{return}
+        
+        // setup overall score for all sprints
+        if let contributionAvg = Double(self.sprintOnDisplay.sprintOverallScore), let joyAvg = Double(self.joyOverallScore), let passionAvg = Double(self.passionOverallScore){
+            let overallAvg = ((contributionAvg + joyAvg + passionAvg)/3.0)
+            let overallAvgInt = Int(round(overallAvg * 3.6))
+            print("This is the overall avg : \(overallAvg)")
+            self.overallScore.angle = Double(overallAvgInt)
+            self.overallScoreLabel?.text = String(format: "%.01f%"+"%", overallAvg)
+        }
         
     }
     

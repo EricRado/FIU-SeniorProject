@@ -47,8 +47,15 @@ class JoyVC: UIViewController {
     
     var sprintOnDisplay: Sprint = Sprint()
     var activity1OnDisplay: Activity = Activity()
+    var activity1OnDisplayId = ""
     var activity2OnDisplay: Activity = Activity()
+    var activity2OnDisplayId = ""
+    var sprintOnDisplayId = ""
+    
     var btnIndexes = [Int]()
+    
+    var passionOverallScore = ""
+    var contributionOverallScore = ""
     
     @IBOutlet weak var goalScore1: UILabel!
     @IBOutlet weak var goalScore2: UILabel!
@@ -77,6 +84,10 @@ class JoyVC: UIViewController {
     
     @IBOutlet weak var joyScore: KDCircularProgress!
     @IBOutlet weak var joyScoreLabel: UILabel!
+
+    @IBOutlet weak var overallScore: KDCircularProgress!
+    @IBOutlet weak var overallScoreLabel: UILabel!
+    
     
     var dbref = Database.database().reference(fromURL: "https://life-management-v2.firebaseio.com/")
     var delegate = UIApplication.shared.delegate as! AppDelegate
@@ -140,6 +151,8 @@ class JoyVC: UIViewController {
     
     func getActiveSprint(categoryKey: String){
         let categoryRef = dbref.child("Categories/\(categoryKey)/JoySprints")
+        let passionRef = dbref.child("Categories/\(categoryKey)/PassionSprints")
+        let contributionRef = dbref.child("Categories/\(categoryKey)/ContributionSprints")
         
         // get the latest sprint
         let activeSprintQuery = categoryRef.queryOrdered(byChild: "startingDate").queryLimited(toLast: 1)
@@ -150,12 +163,13 @@ class JoyVC: UIViewController {
                     print("Snapshot is empty")
                     return
                 }
-                
+                print("snaphot key : \(child.key)")
+                self.sprintOnDisplayId = child.key
                 self.sprintOnDisplay = Sprint(snapshot: child)!
                 
-                let activityId1 = self.sprintOnDisplay.sprintActivityId1
-                let activityId2 = self.sprintOnDisplay.sprintActivityId2
-                self.getActivities(id1: activityId1, id2: activityId2)
+                self.activity1OnDisplayId = self.sprintOnDisplay.sprintActivityId1
+                self.activity2OnDisplayId = self.sprintOnDisplay.sprintActivityId2
+                self.getActivities(id1: self.activity1OnDisplayId, id2: self.activity2OnDisplayId)
 
                 self.setDates()
                 self.setGoalsText()
@@ -164,6 +178,34 @@ class JoyVC: UIViewController {
         }, withCancel: {
             (error) in print(error.localizedDescription)
         })
+        
+        // get other sprints for their sprintOverallScore
+        let passionActiveSprintQuery = passionRef.queryOrdered(byChild: "startingDate").queryLimited(toLast: 1)
+        passionActiveSprintQuery.observeSingleEvent(of: .value, with: {(snapshot) in
+            for child in snapshot.children.allObjects as! [DataSnapshot]{
+                if !child.exists(){
+                    print("Snapshot is empty")
+                    return
+                }
+                let passionSprint = Sprint(snapshot: child)!
+                self.passionOverallScore = passionSprint.sprintOverallScore
+                print(self.passionOverallScore)
+            }
+        })
+        
+        let contributionActiveSprintQuery = contributionRef.queryOrdered(byChild: "startingDate").queryLimited(toLast: 1)
+        contributionActiveSprintQuery.observeSingleEvent(of: .value, with: {(snapshot) in
+            for child in snapshot.children.allObjects as! [DataSnapshot]{
+                if !child.exists(){
+                    print("Snapshot is empty")
+                    return
+                }
+                let contributionSprint = Sprint(snapshot: child)!
+                self.contributionOverallScore = contributionSprint.sprintOverallScore
+                print(self.contributionOverallScore)
+            }
+        })
+
     }
     
     func getActivities(id1: String, id2: String){
@@ -233,11 +275,14 @@ class JoyVC: UIViewController {
             Double(self.activity1OnDisplay.targetPoints){
             goalP1 = (actual1 / target1) * 100
             let goalP1Int = Int(round(goalP1!))
+            var goalPercentage1 = ""
             if goalP1Int >= 100{
-                self.goalPercentage1?.text = "100%"
+                goalPercentage1 = "100%"
             }else{
-                self.goalPercentage1?.text = "\(String(goalP1Int))%"
+                goalPercentage1 = "\(String(goalP1Int))%"
             }
+            self.goalPercentage1?.text = goalPercentage1
+            dbref.child("Activities/\(self.activity1OnDisplayId)").updateChildValues(["activityScore": String(goalP1Int)])
         }else{return}
         
         // set goal percentage actual/target for activity 2
@@ -245,11 +290,14 @@ class JoyVC: UIViewController {
             Double(self.activity2OnDisplay.targetPoints){
             goalP2 = (actual2 / target2) * 100
             let goalP2Int = Int(round(goalP2!))
+            var goalPercentage2 = ""
             if goalP2Int >= 100{
-                self.goalPercentage2?.text = "100%"
+               goalPercentage2 = "100%"
             }else{
-                self.goalPercentage2?.text = "\(String(goalP2Int))%"
+                goalPercentage2 = "\(String(goalP2Int))%"
             }
+            self.goalPercentage2?.text = goalPercentage2
+            dbref.child("Activities/\(self.activity2OnDisplayId)").updateChildValues(["activityScore": String(goalP2Int)])
         }else{return}
         
         // find the average score of both joy activies by taking their 
@@ -259,8 +307,18 @@ class JoyVC: UIViewController {
             let joyAvgInt = Int(round(joyAvg * 3.6))
             self.joyScore.angle = Double(joyAvgInt)
             self.joyScoreLabel?.text = String(format:"%.01f%"+"%", joyAvg)
-            
+            dbref.child("Categories/\(self.delegate.categoryKey)/JoySprints/\(self.sprintOnDisplayId)").updateChildValues(["sprintOverallScore": String(joyAvg)])
+            self.sprintOnDisplay.sprintOverallScore = String(joyAvg)
         }else{return}
+        
+        // setup overall score for all sprints
+        if let joyAvg = Double(self.sprintOnDisplay.sprintOverallScore), let passionAvg = Double(self.passionOverallScore), let contributionAvg = Double(self.contributionOverallScore){
+                let overallAvg = ((joyAvg + passionAvg + contributionAvg)/3.0)
+                let overallAvgInt = Int(round(overallAvg * 3.6))
+                print("This is the overall avg : \(overallAvg)")
+                self.overallScore.angle = Double(overallAvgInt)
+                self.overallScoreLabel?.text = String(format: "%.01f%"+"%", overallAvg)
+        }
 
     }
     
