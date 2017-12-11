@@ -150,11 +150,12 @@ class ContributionVC: UIViewController {
                     return
                 }
                 
+                self.sprintOnDisplayId = child.key
                 self.sprintOnDisplay = Sprint(snapshot: child)!
                 
-                let activityId1 = self.sprintOnDisplay.sprintActivityId1
-                let activityId2 = self.sprintOnDisplay.sprintActivityId2
-                self.getActivities(id1: activityId1, id2: activityId2)
+                self.activity1OnDisplayId = self.sprintOnDisplay.sprintActivityId1
+                self.activity2OnDisplayId = self.sprintOnDisplay.sprintActivityId2
+                self.getActivities(id1: self.activity1OnDisplayId, id2: self.activity2OnDisplayId)
                 
                 self.setDates()
                 self.setGoalsText()
@@ -261,13 +262,16 @@ class ContributionVC: UIViewController {
         if let actual1 = Double(self.activity1OnDisplay.actualPoints), let target1 =
             Double(self.activity1OnDisplay.targetPoints){
             goalP1 = (actual1 / target1) * 100
-            let goalP1Int = Int(round(goalP1!))
+            var goalP1Int = Int(round(goalP1!))
             var goalPercentage1 = ""
+            
             if goalP1Int >= 100{
+                goalP1Int = 100
                 goalPercentage1 = "100%"
             }else{
                 goalPercentage1 = "\(String(goalP1Int))%"
             }
+            
             self.goalPercentage1?.text = goalPercentage1
             dbref.child("Activities/\(self.activity1OnDisplayId)").updateChildValues(["activityScore": String(goalP1Int)])
         }else{return}
@@ -276,25 +280,18 @@ class ContributionVC: UIViewController {
         if let actual2 = Double(self.activity2OnDisplay.actualPoints), let target2 =
             Double(self.activity2OnDisplay.targetPoints){
             goalP2 = (actual2 / target2) * 100
-            let goalP2Int = Int(round(goalP2!))
+            var goalP2Int = Int(round(goalP2!))
             var goalPercentage2 = ""
+            
             if goalP2Int >= 100{
+                goalP2Int = 100
                 goalPercentage2 = "100%"
             }else{
                 goalPercentage2 = "\(String(goalP2Int))%"
             }
+            
             self.goalPercentage2?.text = goalPercentage2
             dbref.child("Activities/\(self.activity2OnDisplayId)").updateChildValues(["activityScore": String(goalP2Int)])
-        }else{return}
-        
-        // find the average score of both joy activies by taking their
-        // percentage score for each activity and dividing by 2
-        if let p1 = goalP1, let p2 = goalP2{
-            let activityAvg = ((p1 + p2)/2.0)
-            let activityAvgInt = Int(round(activityAvg * 3.6))
-            self.activityScore.angle = Double(activityAvgInt)
-            self.activityScoreLabel?.text = String(format:"%.01f%"+"%", activityAvg)
-            
         }else{return}
         
         // find the average score of both joy activies by taking their
@@ -304,7 +301,7 @@ class ContributionVC: UIViewController {
             let contributionAvgInt = Int(round(contributionAvg * 3.6))
             self.activityScore.angle = Double(contributionAvgInt)
             self.activityScoreLabel?.text = String(format:"%.01f%"+"%", contributionAvg)
-            dbref.child("Categories/\(self.delegate.categoryKey)/PassionSprints/\(self.sprintOnDisplayId)").updateChildValues(["sprintOverallScore": String(contributionAvg)])
+            dbref.child("Categories/\(self.delegate.categoryKey)/ContributionSprints/\(self.sprintOnDisplayId)").updateChildValues(["sprintOverallScore": String(contributionAvg)])
             self.sprintOnDisplay.sprintOverallScore = String(contributionAvg)
         }else{return}
         

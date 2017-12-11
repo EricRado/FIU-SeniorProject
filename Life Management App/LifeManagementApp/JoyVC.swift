@@ -90,6 +90,7 @@ class JoyVC: UIViewController {
     
     
     var dbref = Database.database().reference(fromURL: "https://life-management-v2.firebaseio.com/")
+    
     var delegate = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
@@ -274,13 +275,16 @@ class JoyVC: UIViewController {
         if let actual1 = Double(self.activity1OnDisplay.actualPoints), let target1 =
             Double(self.activity1OnDisplay.targetPoints){
             goalP1 = (actual1 / target1) * 100
-            let goalP1Int = Int(round(goalP1!))
+            var goalP1Int = Int(round(goalP1!))
             var goalPercentage1 = ""
+            
             if goalP1Int >= 100{
+                goalP1Int = 100
                 goalPercentage1 = "100%"
             }else{
                 goalPercentage1 = "\(String(goalP1Int))%"
             }
+            
             self.goalPercentage1?.text = goalPercentage1
             dbref.child("Activities/\(self.activity1OnDisplayId)").updateChildValues(["activityScore": String(goalP1Int)])
         }else{return}
@@ -289,13 +293,16 @@ class JoyVC: UIViewController {
         if let actual2 = Double(self.activity2OnDisplay.actualPoints), let target2 =
             Double(self.activity2OnDisplay.targetPoints){
             goalP2 = (actual2 / target2) * 100
-            let goalP2Int = Int(round(goalP2!))
+            var goalP2Int = Int(round(goalP2!))
             var goalPercentage2 = ""
+            
             if goalP2Int >= 100{
+                goalP2Int = 100
                goalPercentage2 = "100%"
             }else{
                 goalPercentage2 = "\(String(goalP2Int))%"
             }
+            
             self.goalPercentage2?.text = goalPercentage2
             dbref.child("Activities/\(self.activity2OnDisplayId)").updateChildValues(["activityScore": String(goalP2Int)])
         }else{return}

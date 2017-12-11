@@ -122,8 +122,8 @@
 		076E009A1F9DB050004467D0 /* PassionActivitySelectionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassionActivitySelectionVC.swift; sourceTree = "<group>"; };
 		076E009C1F9DB078004467D0 /* ContributionActivitySelectionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContributionActivitySelectionVC.swift; sourceTree = "<group>"; };
 		076E009E1F9EAAF8004467D0 /* SprintSettingsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SprintSettingsVC.swift; sourceTree = "<group>"; };
-		0778EEAC1FBCBCCC009E9903 /* iCarousel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = iCarousel.h; path = "../../../../../../../Volumes/Eric SD/iCarousel-master/iCarousel/iCarousel.h"; sourceTree = "<group>"; };
 		0778EEAD1FBCBCD8009E9903 /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = iCarousel.m; path = "../../../../../../../Volumes/Eric SD/iCarousel-master/iCarousel/iCarousel.m"; sourceTree = "<group>"; };
+		078CE98E1FD50F4A00E38F13 /* iCarousel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = iCarousel.h; path = "../../../../../Downloads/iCarousel-master/iCarousel/iCarousel.h"; sourceTree = "<group>"; };
 		079265641F7B0636008B5BDE /* JoyVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoyVC.swift; sourceTree = "<group>"; };
 		07B40A141F99A6540002DCC3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		07B40A161F99A8E30002DCC3 /* LifeManagementApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LifeManagementApp-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -304,7 +304,7 @@
 		079C30E81F8E68BF0044DA18 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				0778EEAC1FBCBCCC009E9903 /* iCarousel.h */,
+				078CE98E1FD50F4A00E38F13 /* iCarousel.h */,
 				0778EEAD1FBCBCD8009E9903 /* iCarousel.m */,
 				07316B841F843C3D00EF2F8F /* KDCircularProgress.swift */,
 				07B40A161F99A8E30002DCC3 /* LifeManagementApp-Bridging-Header.h */,
