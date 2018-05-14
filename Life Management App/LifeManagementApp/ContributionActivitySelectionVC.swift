@@ -82,17 +82,6 @@ class ContributionActivitySelectionVC: UIViewController, iCarouselDataSource, iC
             }
         }
     }
-
-    
-    func createAlert(titleText: String, messageText: String){
-        let alert = UIAlertController(title: titleText, message: messageText, preferredStyle: UIAlertControllerStyle.alert)
-        
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: {(action) in
-            alert.dismiss(animated: true, completion: nil)
-        }))
-        
-        present(alert, animated: true)
-    }
     
     @IBAction func submitPressed(_ sender: Any) {
         // display alert if user did not select two activities
@@ -109,7 +98,8 @@ class ContributionActivitySelectionVC: UIViewController, iCarouselDataSource, iC
             activityIds.append(activityRef.key)
             
             // store the image of the activity into array of selected activities for Sprint Setting Screen
-            self.delegate.activitySelectedImages.append(self.delegate.contributionImages[selection].uiImage.image!)
+            self.delegate.activitySelectedImages
+                .append(self.delegate.contributionImages[selection].uiImage.image!)
             
             // get name of the activity selected
             let name = self.delegate.contributionImages[selection].name
@@ -139,6 +129,8 @@ class ContributionActivitySelectionVC: UIViewController, iCarouselDataSource, iC
                 return
             }
         })
+        
+        self.selectedIndexes.removeAll()
         
         // selection is valid set the flag to true, the segue will execute next
         self.selectionIsValid = true

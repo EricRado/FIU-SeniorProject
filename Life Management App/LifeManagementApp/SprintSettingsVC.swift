@@ -11,8 +11,11 @@ import Firebase
 
 class SprintSettingsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate {
     
+    // MARK: - ViewController's Variables
+    
     let delegate = UIApplication.shared.delegate as! AppDelegate
-    let dbref = Database.database().reference(fromURL: "https://life-management-f0cdf.firebaseio.com/")
+    let dbref = Database.database()
+        .reference(fromURL: "https://life-management-v2.firebaseio.com/")
     var categoryKey = ""
     var weekList = ["1", "2", "3"]
     var weekChoice = ""
@@ -26,6 +29,9 @@ class SprintSettingsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     var startingDate = ""
     var endingDate = ""
     var sprintDailyPoints = ""
+    var segueCheck = false
+    
+    // MARK: - ViewController's IBOutlet Variables
     
     @IBOutlet weak var weekTextField: UITextField!
     @IBOutlet weak var weekOptions: UIPickerView!
@@ -40,7 +46,7 @@ class SprintSettingsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     
     @IBOutlet weak var submitBtn: UIButton!
     
-    // set the target score text field inputs
+    // sets the target score text field inputs
     
     @IBOutlet weak var joyTargetScore1: UITextField!
     @IBOutlet weak var joyTargetScore2: UITextField!
@@ -51,8 +57,7 @@ class SprintSettingsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
     @IBOutlet weak var contributionTargetScore1: UITextField!
     @IBOutlet weak var contributionTargetScore2: UITextField!
     
-    // set the images for each selected activity
-    
+    // MARK: - ViewController's Life Cycle Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,6 +69,8 @@ class SprintSettingsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         
         weekOptions.isHidden = true
         
+        // set the images for each selected activity
+        
         loadImages()
         turnImageToCircle(picture: joyActivity1Img)
         turnImageToCircle(picture: joyActivity2Img)
@@ -72,11 +79,113 @@ class SprintSettingsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         turnImageToCircle(picture: contributionActivity1Img)
         turnImageToCircle(picture: contributionActivity2Img)
         
+        setTextFieldEditing()
+        
         submitBtn.layer.cornerRadius = 15
         submitBtn.layer.masksToBounds = true
         
         getSprintActivities()
+        self.joyTargetScore1.delegate = self
+        self.joyTargetScore2.delegate = self
+        self.passionTargetScore1.delegate = self
+        self.passionTargetScore2.delegate = self
+        self.contributionTargetScore1.delegate = self
+        self.contributionTargetScore2.delegate = self
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: Selector("endEditing:")))
+        
+        getSprintActivities()
     }
+    
+    // MARK: - TextField Methods
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField){
+        if textField == self.weekTextField{
+            self.weekOptions.isHidden = false
+            
+            // user will not be able to see keyboard
+            textField.endEditing(true)
+        }
+    }
+    
+    func setTextFieldEditing() {
+        joyTargetScore1.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        joyTargetScore2.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        passionTargetScore1.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        passionTargetScore2.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        contributionTargetScore1.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        contributionTargetScore2.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        weekTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+    }
+    
+    func textFieldDidChange(_ textField: UITextField) {
+        textField.layer.borderColor = UIColor.clear.cgColor
+    }
+    
+    func checkTextFields(textField: UITextField) -> Bool{
+        if textField.text == ""{
+            createAlert(titleText: "Error", messageText: "There is a textbox field that is empty")
+            textField.layer.borderWidth = 2.0
+            textField.layer.borderColor = UIColor.red.cgColor
+            return false
+        }else{
+            if weekChoice != ""{
+                print("There is a number selected for week choice")
+                if let weekChoice = Int(weekChoice) ,let input = Int(textField.text!){
+                    let maxDays = weekChoice * 7
+                    if input > maxDays{
+                        print("This is maxDays : \(maxDays)")
+                        createAlert(titleText: "Error", messageText: "There is an input which has exceeded the max goal points according to the week choice. Choose a goal score equal to or less than \(maxDays)")
+                        textField.layer.borderWidth = 2.0
+                        textField.layer.borderColor = UIColor.red.cgColor
+                        return false
+                    }else if input <= 0{
+                        createAlert(titleText: "Error", messageText: "There is an input which is below or equal to zero. Choose a goal score between 1 - \(maxDays)")
+                        textField.layer.borderWidth = 2.0
+                        textField.layer.borderColor = UIColor.red.cgColor
+                        return false
+                    }
+                }
+            }else{
+                print("weekChoice is blank...")
+                createAlert(titleText: "Error", messageText: "Please select how long the new sprint will last")
+                weekTextField.layer.borderWidth = 2.0
+                weekTextField.layer.borderColor = UIColor.red.cgColor
+                return false
+                
+            }
+        }
+        return true
+    }
+    
+    func checkFields() -> Bool{
+        if !checkTextFields(textField: joyTargetScore1){
+            return false
+        }
+        if !checkTextFields(textField: joyTargetScore2){
+            return false
+        }
+        if !checkTextFields(textField: passionTargetScore1){
+            return false
+        }
+        if !checkTextFields(textField: passionTargetScore2){
+            return false
+        }
+        if !checkTextFields(textField: contributionTargetScore1){
+            return false
+        }
+        if !checkTextFields(textField: contributionTargetScore2){
+            return false
+        }
+        
+        return true
+    }
+    
+    // MARK: - Image Methods
     
     func loadImages(){
         joyActivity1Img.image = delegate.activitySelectedImages[0]
@@ -94,6 +203,8 @@ class SprintSettingsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         picture.clipsToBounds = true
         self.view.layoutIfNeeded()
     }
+    
+    // MARK: - SOMETHING
     
     func setStartAndEndDate(weeks: String){
         let dateFmt = DateFormatter()
@@ -234,6 +345,13 @@ class SprintSettingsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         
     }
     
+    func updateTargetScoreAndDailyPoints(id: String, targetPoints: String){
+        let activityRef = dbref.child("Activities/\(id)")
+        activityRef.updateChildValues(["targetPoints": targetPoints, "sprintDailyPoints": sprintDailyPoints])
+    }
+    
+    // MARK: - UIPickerView Methods
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int{
         return 1
     }
@@ -253,28 +371,14 @@ class SprintSettingsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         self.weekOptions.isHidden = true
     }
     
-    func textFieldDidBeginEditing(_ textField: UITextField){
-        if textField == self.weekTextField{
-            self.weekOptions.isHidden = false
-            
-            // user will not be able to see keyboard
-            textField.endEditing(true)
-        }
-    }
+    // MARK: - IBAction Methods
     
-    func updateTargetScoreAndDailyPoints(id: String, targetPoints: String){
-        let activityRef = dbref.child("Activities/\(id)")
-        activityRef.updateChildValues(["targetPoints": targetPoints, "sprintDailyPoints": sprintDailyPoints])
-    }
-    
-    
-    
-    @IBAction func moreInfoPressed(_ sender: Any) {
+    @IBAction func moreInfoPressed(_ sender: UIButton) {
+        self.createAlert(titleText: "Info", messageText: "Im about to drop some knowledge on you")
         print("More info pressed")
     }
     
-    
-    @IBAction func submitPressed(_ sender: Any) {
+    @IBAction func submitPressed(_ sender: UIButton) {
         
         // add validation before updating to database, exit if their is empty fields
         
@@ -304,6 +408,15 @@ class SprintSettingsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         
         performSegue(withIdentifier: "newDashBoardSegue", sender: self)
         
+    }
+    
+    // MARK: - Navigation Methods
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool{
+        if segueCheck{
+            return true
+        }
+        return false
     }
     
 }

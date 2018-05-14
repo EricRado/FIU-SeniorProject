@@ -18,7 +18,8 @@ class PassionActivitySelectionVC: UIViewController, iCarouselDataSource, iCarous
     var selectionIsValid = false
 
     let delegate = UIApplication.shared.delegate as! AppDelegate
-    let dbref = Database.database().reference(fromURL: "https://life-management-f0cdf.firebaseio.com/")
+    let dbref = Database.database()
+        .reference(fromURL: "https://life-management-v2.firebaseio.com/")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,16 +87,6 @@ class PassionActivitySelectionVC: UIViewController, iCarouselDataSource, iCarous
         }
     }
     
-    func createAlert(titleText: String, messageText: String){
-        let alert = UIAlertController(title: titleText, message: messageText, preferredStyle: UIAlertControllerStyle.alert)
-        
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler:{(action) in
-            alert.dismiss(animated: true, completion: nil)
-        }))
-        
-        present(alert, animated: true)
-    }
-    
     @IBAction func submitPressed(_ sender: Any) {
         // display alert if user did not select two activities
         if self.selectedIndexes.count != 2{
@@ -111,7 +102,8 @@ class PassionActivitySelectionVC: UIViewController, iCarouselDataSource, iCarous
             activityIds.append(activityRef.key)
             
             // store the image of the activity into array of selected activities for Sprint Setting Screen
-            self.delegate.activitySelectedImages.append(self.delegate.passionImages[selection].uiImage.image!)
+            self.delegate.activitySelectedImages
+                .append(self.delegate.passionImages[selection].uiImage.image!)
             
             // get name of the activity selected
             let name = self.delegate.passionImages[selection].name
@@ -141,6 +133,8 @@ class PassionActivitySelectionVC: UIViewController, iCarouselDataSource, iCarous
                 return
             }
         })
+        
+        self.selectedIndexes.removeAll()
         
         // selection is valid set the flag to true, the segue will execute next
         self.selectionIsValid = true

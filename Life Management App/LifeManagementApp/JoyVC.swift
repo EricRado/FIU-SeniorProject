@@ -43,12 +43,23 @@ extension JoyVC: UIViewControllerTransitioningDelegate{
 
 class JoyVC: UIViewController {
     
+    // MARK: - ViewController's Variables
+    
     let interactor = Interactor()
     
     var sprintOnDisplay: Sprint = Sprint()
     var activity1OnDisplay: Activity = Activity()
+    var activity1OnDisplayId = ""
     var activity2OnDisplay: Activity = Activity()
+    var activity2OnDisplayId = ""
+    var sprintOnDisplayId = ""
+    
     var btnIndexes = [Int]()
+    
+    var passionOverallScore = ""
+    var contributionOverallScore = ""
+    
+    // MARK: - ViewController IBOutlet Variables
     
     @IBOutlet weak var goalScore1: UILabel!
     @IBOutlet weak var goalScore2: UILabel!
@@ -78,8 +89,14 @@ class JoyVC: UIViewController {
     @IBOutlet weak var joyScore: KDCircularProgress!
     @IBOutlet weak var joyScoreLabel: UILabel!
     
-    var dbref = Database.database().reference(fromURL: "https://life-management-f0cdf.firebaseio.com/")
+    @IBOutlet weak var overallScore: KDCircularProgress!
+    @IBOutlet weak var overallScoreLabel: UILabel!
+    
+    var dbref = Database.database().reference(fromURL:
+        "https://life-management-v2.firebaseio.com/")
     var delegate = UIApplication.shared.delegate as! AppDelegate
+    
+    // ViewController Life Cycle Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,6 +119,13 @@ class JoyVC: UIViewController {
         getCategoryKey(userId: self.delegate.user.id)
     
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
+    // MARK: - Setup View Display
     
     func turnLabelToCircle(label: UILabel){
         label.layer.cornerRadius = label.frame.size.width / 2
@@ -227,36 +251,57 @@ class JoyVC: UIViewController {
         if let actual1 = Double(self.activity1OnDisplay.actualPoints), let target1 =
             Double(self.activity1OnDisplay.targetPoints){
             goalP1 = (actual1 / target1) * 100
-            let goalP1Int = Int(round(goalP1!))
+            var goalP1Int = Int(round(goalP1!))
+            var goalPercentage1 = ""
+            
             if goalP1Int >= 100{
-                self.goalPercentage1?.text = "100%"
+                goalP1Int = 100
+                goalPercentage1 = "100%"
             }else{
-                self.goalPercentage1?.text = "\(String(goalP1Int))%"
+                goalPercentage1 = "\(String(goalP1Int))%"
             }
+            
+            self.goalPercentage1?.text = goalPercentage1
+            dbref.child("Activities/\(self.activity1OnDisplayId)").updateChildValues(["activityScore": String(goalP1Int)])
         }else{return}
         
         // set goal percentage actual/target for activity 2
         if let actual2 = Double(self.activity2OnDisplay.actualPoints), let target2 =
             Double(self.activity2OnDisplay.targetPoints){
             goalP2 = (actual2 / target2) * 100
-            let goalP2Int = Int(round(goalP2!))
+            var goalP2Int = Int(round(goalP2!))
+            var goalPercentage2 = ""
+            
             if goalP2Int >= 100{
-                self.goalPercentage2?.text = "100%"
+                goalP2Int = 100
+                goalPercentage2 = "100%"
             }else{
-                self.goalPercentage2?.text = "\(String(goalP2Int))%"
+                goalPercentage2 = "\(String(goalP2Int))%"
             }
+            
+            self.goalPercentage2?.text = goalPercentage2
+            dbref.child("Activities/\(self.activity2OnDisplayId)").updateChildValues(["activityScore": String(goalP2Int)])
         }else{return}
         
-        // find the average score of both joy activies by taking their 
+        // find the average score of both joy activies by taking their
         // percentage score for each activity and dividing by 2
         if let p1 = goalP1, let p2 = goalP2{
             let joyAvg = ((p1 + p2)/2.0)
             let joyAvgInt = Int(round(joyAvg * 3.6))
             self.joyScore.angle = Double(joyAvgInt)
             self.joyScoreLabel?.text = String(format:"%.01f%"+"%", joyAvg)
-            
+            dbref.child("Categories/\(self.delegate.categoryKey)/JoySprints/\(self.sprintOnDisplayId)").updateChildValues(["sprintOverallScore": String(joyAvg)])
+            self.sprintOnDisplay.sprintOverallScore = String(joyAvg)
         }else{return}
-
+        
+        // setup overall score for all sprints
+        if let joyAvg = Double(self.sprintOnDisplay.sprintOverallScore), let passionAvg = Double(self.passionOverallScore), let contributionAvg = Double(self.contributionOverallScore){
+            let overallAvg = ((joyAvg + passionAvg + contributionAvg)/3.0)
+            let overallAvgInt = Int(round(overallAvg * 3.6))
+            print("This is the overall avg : \(overallAvg)")
+            self.overallScore.angle = Double(overallAvgInt)
+            self.overallScoreLabel?.text = String(format: "%.01f%"+"%", overallAvg)
+        }
     }
     
     func setDates(){
@@ -424,6 +469,8 @@ class JoyVC: UIViewController {
         })
     }
     
+    // MARK: - IBAction Methods
+    
     @IBAction func topDayBtnPressed(_ sender: UIButton) {
         var newScore: Int
         
@@ -472,11 +519,7 @@ class JoyVC: UIViewController {
     }
 
 
-    /***********************************************************
- 
-                        Side Menu Functions
- 
-    ***********************************************************/
+    // MARK: - Side Menu Methods
     
     
     @IBAction func openMenu(_ sender: AnyObject){

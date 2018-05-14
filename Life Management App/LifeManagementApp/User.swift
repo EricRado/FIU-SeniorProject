@@ -18,12 +18,13 @@ struct User{
     var lastName : String
     var password: String
     var dob: String
+    var imgURL: String?
     let adminFlag: Bool
     let coachFlag: Bool
     
     
     init(id: String, email: String, username: String, firstName: String, lastName: String,
-         dob: String,password: String, adminFlag: Bool, coachFlag: Bool){
+         dob: String,password: String, adminFlag: Bool, coachFlag: Bool, imgURL: String){
         
         self.id = id
         self.email = email
@@ -32,6 +33,7 @@ struct User{
         self.firstName = firstName
         self.lastName = lastName
         self.dob = dob
+        self.imgURL = imgURL
         self.adminFlag = adminFlag
         self.coachFlag = coachFlag
     }
@@ -45,6 +47,7 @@ struct User{
         guard let firstName = dict["firstName"] else { return nil }
         guard let lastName = dict["lastName"] else { return nil }
         guard let dob = dict["dob"] else { return nil }
+        guard let imgURL = dict["imgURL"] else {return nil}
         
         self.id = id
         self.email = email
@@ -53,6 +56,7 @@ struct User{
         self.firstName = firstName
         self.lastName = lastName
         self.dob = dob
+        self.imgURL = imgURL
         self.adminFlag = false
         self.coachFlag = false
         
@@ -66,12 +70,13 @@ struct User{
         self.firstName = ""
         self.lastName = ""
         self.dob = ""
+        self.imgURL = ""
         self.adminFlag = false
         self.coachFlag = false
     }
     
     func toAnyObject() -> [AnyHashable:Any]{
         return ["id":id,"email":email, "username":username,"firstName":firstName, "lastName":lastName,
-                "dob":dob, "password":password, "adminFlag": adminFlag, "coachFlag": coachFlag] as [AnyHashable:Any]
+                "dob":dob, "password":password, "adminFlag": adminFlag, "coachFlag": coachFlag, "imgURL": ""] as [AnyHashable:Any]
     }
 }

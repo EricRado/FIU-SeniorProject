@@ -14,13 +14,13 @@ class JoyActivitySelectionVC: UIViewController, iCarouselDataSource, iCarouselDe
     var selectionIsValid = false
 
     @IBOutlet var joyCarouselView: iCarousel!
-    @IBOutlet weak var displayUsername: UILabel!
     @IBOutlet weak var submitBtn: UIButton!
     
     var selectedIndexes = Set<Int>()
     
     let delegate = UIApplication.shared.delegate as! AppDelegate
-    let dbRef = Database.database().reference(fromURL: "https://life-management-f0cdf.firebaseio.com/")
+    let dbRef = Database.database().reference(fromURL:
+        "https://life-management-v2.firebaseio.com/")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -107,17 +107,6 @@ class JoyActivitySelectionVC: UIViewController, iCarouselDataSource, iCarouselDe
 
     }
     
-    func createAlert(titleText: String, messageText: String){
-        let alert = UIAlertController(title: titleText, message: messageText, preferredStyle: UIAlertControllerStyle.alert)
-        
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: { (action) in
-            alert.dismiss(animated: true, completion: nil)
-        }))
-        
-        present(alert, animated: true)
-        
-    }
-    
     
     @IBAction func submitPressed(_ sender: AnyObject) {
         // display alert if user did not select two activities
@@ -133,15 +122,15 @@ class JoyActivitySelectionVC: UIViewController, iCarouselDataSource, iCarouselDe
             activityIds.append(activityRef.key)
             
             // store the image of the activity into array of selected activities for Sprint Setting Screen
-            self.delegate.activitySelectedImages.append(self.delegate.joyImages[selection].uiImage.image!)
+            self.delegate.activitySelectedImages
+                .append(self.delegate.joyImages[selection].uiImage.image!)
             
             // get name of the activity selected
             let name = self.delegate.joyImages[selection].name
             print("This is the name going to db : \(name)")
             
             // create a new Activity object to store in the database
-            let newActivity = Activity(name: name, categoryId: self.delegate.categoryKey, userId: self.delegate.user
-                .id)
+            let newActivity = Activity(name: name, categoryId: self.delegate.categoryKey, userId: self.delegate.user.id)
             // Activity object is stored in the database
             activityRef.setValue(newActivity.toAnyObject(), withCompletionBlock: {(error,activityRef) in
                 if error != nil{
@@ -166,6 +155,8 @@ class JoyActivitySelectionVC: UIViewController, iCarouselDataSource, iCarouselDe
                 return
             }
         })
+        
+        self.selectedIndexes.removeAll()
         
         // selection is valid set the flag to true, the segue will execute next
         self.selectionIsValid = true
