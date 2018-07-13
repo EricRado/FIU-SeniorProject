@@ -102,8 +102,7 @@ class PassionActivitySelectionVC: UIViewController, iCarouselDataSource, iCarous
             activityIds.append(activityRef.key)
             
             // store the image of the activity into array of selected activities for Sprint Setting Screen
-            self.delegate.activitySelectedImages
-                .append(self.delegate.passionImages[selection].uiImage.image!)
+            self.delegate.activitySelectedImages.append(self.delegate.passionImages[selection].uiImage.image!)
             
             // get name of the activity selected
             let name = self.delegate.passionImages[selection].name

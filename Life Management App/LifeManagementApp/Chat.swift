@@ -2,29 +2,28 @@
 //  Chat.swift
 //  LifeManagementApp
 //
-//  Created by Eric Rado on 5/4/18.
-//  Copyright © 2018 SeniorProject. All rights reserved.
+//  Created by Eric Rado on 11/25/17.
+//  Copyright © 2017 SeniorProject. All rights reserved.
 //
 
 import Foundation
 import Firebase
 
-struct Chat {
+struct Chat{
     var id: String
     var coachId: String
     var userId: String
     var lastMessage: String
     
-    init(id: String, coachId: String, userId: String) {
+    init(id: String, coachId: String, userId: String){
         self.id = id
         self.coachId = coachId
         self.userId = userId
         self.lastMessage = ""
     }
     
-    init?(snapshot: DataSnapshot) {
-        guard let dict = snapshot.value as? [String: String] else { return nil}
-        
+    init?(snapshot: DataSnapshot){
+        guard let dict = snapshot.value as? [String: String] else{ return nil}
         guard let id = dict["id"] else { return nil}
         guard let coachId = dict["coachId"] else{ return nil}
         guard let userId = dict["userId"] else{ return nil}
@@ -47,14 +46,3 @@ struct Chat {
         return ["id": id, "coachId": coachId, "userId": userId, "lastMessage": lastMessage]
     }
 }
-
-
-
-
-
-
-
-
-
-
-

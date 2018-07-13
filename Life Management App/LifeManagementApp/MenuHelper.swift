@@ -18,7 +18,7 @@ enum Direction {
 
 struct MenuHelper{
     // constant defines the width of the slide out menu
-    static let menuWidth: CGFloat = 0.75
+    static let menuWidth: CGFloat = 0.80
     
     // this is how far the user must pan before the menu changes state
     static let percentThreshold: CGFloat = 0.3
@@ -59,8 +59,8 @@ struct MenuHelper{
             return CGFloat(positiveMovementOnAxisPercent)
             
         case .Up, .Left:
-            positiveMovementOnAxis = fmaxf(Float(movementOnAxis), 0.0)
-            positiveMovementOnAxisPercent = fminf(positiveMovementOnAxis, -1.0)
+            positiveMovementOnAxis = fminf(Float(movementOnAxis), 0.0)
+            positiveMovementOnAxisPercent = fmaxf(positiveMovementOnAxis, -1.0)
             return CGFloat(-positiveMovementOnAxisPercent)
     
         }

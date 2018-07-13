@@ -59,6 +59,10 @@ class JoyVC: UIViewController {
     var passionOverallScore = ""
     var contributionOverallScore = ""
     
+    var dbref = Database.database().reference(fromURL: "https://life-management-v2.firebaseio.com/")
+    
+    var delegate = UIApplication.shared.delegate as! AppDelegate
+    
     // MARK: - ViewController IBOutlet Variables
     
     @IBOutlet weak var goalScore1: UILabel!
@@ -88,14 +92,10 @@ class JoyVC: UIViewController {
     
     @IBOutlet weak var joyScore: KDCircularProgress!
     @IBOutlet weak var joyScoreLabel: UILabel!
-    
+
     @IBOutlet weak var overallScore: KDCircularProgress!
     @IBOutlet weak var overallScoreLabel: UILabel!
-    
-    var dbref = Database.database().reference(fromURL:
-        "https://life-management-v2.firebaseio.com/")
-    var delegate = UIApplication.shared.delegate as! AppDelegate
-    
+
     // ViewController Life Cycle Methods
     
     override func viewDidLoad() {
@@ -159,6 +159,8 @@ class JoyVC: UIViewController {
     
     func getActiveSprint(categoryKey: String){
         let categoryRef = dbref.child("Categories/\(categoryKey)/JoySprints")
+        let passionRef = dbref.child("Categories/\(categoryKey)/PassionSprints")
+        let contributionRef = dbref.child("Categories/\(categoryKey)/ContributionSprints")
         
         // get the latest sprint
         let activeSprintQuery = categoryRef.queryOrdered(byChild: "startingDate").queryLimited(toLast: 1)
@@ -169,12 +171,13 @@ class JoyVC: UIViewController {
                     print("Snapshot is empty")
                     return
                 }
-                
+                print("snaphot key : \(child.key)")
+                self.sprintOnDisplayId = child.key
                 self.sprintOnDisplay = Sprint(snapshot: child)!
                 
-                let activityId1 = self.sprintOnDisplay.sprintActivityId1
-                let activityId2 = self.sprintOnDisplay.sprintActivityId2
-                self.getActivities(id1: activityId1, id2: activityId2)
+                self.activity1OnDisplayId = self.sprintOnDisplay.sprintActivityId1
+                self.activity2OnDisplayId = self.sprintOnDisplay.sprintActivityId2
+                self.getActivities(id1: self.activity1OnDisplayId, id2: self.activity2OnDisplayId)
 
                 self.setDates()
                 self.setGoalsText()
@@ -183,6 +186,34 @@ class JoyVC: UIViewController {
         }, withCancel: {
             (error) in print(error.localizedDescription)
         })
+        
+        // get other sprints for their sprintOverallScore
+        let passionActiveSprintQuery = passionRef.queryOrdered(byChild: "startingDate").queryLimited(toLast: 1)
+        passionActiveSprintQuery.observeSingleEvent(of: .value, with: {(snapshot) in
+            for child in snapshot.children.allObjects as! [DataSnapshot]{
+                if !child.exists(){
+                    print("Snapshot is empty")
+                    return
+                }
+                let passionSprint = Sprint(snapshot: child)!
+                self.passionOverallScore = passionSprint.sprintOverallScore
+                print(self.passionOverallScore)
+            }
+        })
+        
+        let contributionActiveSprintQuery = contributionRef.queryOrdered(byChild: "startingDate").queryLimited(toLast: 1)
+        contributionActiveSprintQuery.observeSingleEvent(of: .value, with: {(snapshot) in
+            for child in snapshot.children.allObjects as! [DataSnapshot]{
+                if !child.exists(){
+                    print("Snapshot is empty")
+                    return
+                }
+                let contributionSprint = Sprint(snapshot: child)!
+                self.contributionOverallScore = contributionSprint.sprintOverallScore
+                print(self.contributionOverallScore)
+            }
+        })
+
     }
     
     func getActivities(id1: String, id2: String){
@@ -274,7 +305,7 @@ class JoyVC: UIViewController {
             
             if goalP2Int >= 100{
                 goalP2Int = 100
-                goalPercentage2 = "100%"
+               goalPercentage2 = "100%"
             }else{
                 goalPercentage2 = "\(String(goalP2Int))%"
             }
@@ -283,7 +314,7 @@ class JoyVC: UIViewController {
             dbref.child("Activities/\(self.activity2OnDisplayId)").updateChildValues(["activityScore": String(goalP2Int)])
         }else{return}
         
-        // find the average score of both joy activies by taking their
+        // find the average score of both joy activies by taking their 
         // percentage score for each activity and dividing by 2
         if let p1 = goalP1, let p2 = goalP2{
             let joyAvg = ((p1 + p2)/2.0)
@@ -296,12 +327,13 @@ class JoyVC: UIViewController {
         
         // setup overall score for all sprints
         if let joyAvg = Double(self.sprintOnDisplay.sprintOverallScore), let passionAvg = Double(self.passionOverallScore), let contributionAvg = Double(self.contributionOverallScore){
-            let overallAvg = ((joyAvg + passionAvg + contributionAvg)/3.0)
-            let overallAvgInt = Int(round(overallAvg * 3.6))
-            print("This is the overall avg : \(overallAvg)")
-            self.overallScore.angle = Double(overallAvgInt)
-            self.overallScoreLabel?.text = String(format: "%.01f%"+"%", overallAvg)
+                let overallAvg = ((joyAvg + passionAvg + contributionAvg)/3.0)
+                let overallAvgInt = Int(round(overallAvg * 3.6))
+                print("This is the overall avg : \(overallAvg)")
+                self.overallScore.angle = Double(overallAvgInt)
+                self.overallScoreLabel?.text = String(format: "%.01f%"+"%", overallAvg)
         }
+
     }
     
     func setDates(){
@@ -384,7 +416,7 @@ class JoyVC: UIViewController {
         var counter = 0
         
         // setup the sprint daily points
-        for index in dailyPointsStr.characters.indices{
+        for index in dailyPointsStr.indices{
             if dailyPointsStr[index] == "1"{
                 // get the index of the button on display
                 let btnIndex = self.btnIndexes[counter]
@@ -517,10 +549,8 @@ class JoyVC: UIViewController {
         // update the new goals to the database
         updateGoals(goal1: goal1TextField.text!, goal2: goal2TextField.text!, goal3: goal3TextField.text!, goal4: goal4TextField.text!)
     }
-
-
+   
     // MARK: - Side Menu Methods
-    
     
     @IBAction func openMenu(_ sender: AnyObject){
         performSegue(withIdentifier: "openMenu", sender: nil)

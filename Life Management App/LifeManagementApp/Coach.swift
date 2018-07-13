@@ -2,14 +2,14 @@
 //  Coach.swift
 //  LifeManagementApp
 //
-//  Created by Eric Rado on 5/4/18.
-//  Copyright © 2018 SeniorProject. All rights reserved.
+//  Created by Eric Rado on 11/19/17.
+//  Copyright © 2017 SeniorProject. All rights reserved.
 //
 
 import Foundation
 import Firebase
 
-struct Coach {
+struct Coach{
     var username: String
     var password: String
     var firstName: String
@@ -70,6 +70,7 @@ struct Coach {
     
     func toAnyObject() -> [AnyHashable:Any]{
         return ["id": id, "username": username, "password": password, "email": email, "firstName": firstName, "lastName": lastName,
-                "successRating": successRating, "skills": skills]
+            "successRating": successRating, "skills": skills]
     }
+    
 }

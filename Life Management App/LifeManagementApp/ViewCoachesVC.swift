@@ -2,8 +2,8 @@
 //  ViewCoachesVC.swift
 //  LifeManagementApp
 //
-//  Created by Eric Rado on 5/14/18.
-//  Copyright © 2018 SeniorProject. All rights reserved.
+//  Created by Eric Rado on 11/17/17.
+//  Copyright © 2017 SeniorProject. All rights reserved.
 //
 
 import UIKit
@@ -30,6 +30,8 @@ extension ViewCoachesVC: UIViewControllerTransitioningDelegate{
     }
 }
 
+
+
 class ViewCoachesVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     // MARK: - ViewController's variables
@@ -49,10 +51,11 @@ class ViewCoachesVC: UIViewController, UITableViewDataSource, UITableViewDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         getCoaches()
+        
     }
     
     // MARK: - Retrieve All Coaches information
-
+    
     // retrieve all coaches information from firebase database
     func getCoaches(){
         let coachRef = dbref.child("Coaches")
@@ -114,7 +117,7 @@ class ViewCoachesVC: UIViewController, UITableViewDataSource, UITableViewDelegat
 
     // MARK: - Side Menu Methods
     
-    @IBAction func openMenu(_ sender: UIButton){
+    @IBAction func openMenu(_ sender: AnyObject){
         performSegue(withIdentifier: "openMenu", sender: nil)
     }
     
@@ -135,5 +138,6 @@ class ViewCoachesVC: UIViewController, UITableViewDataSource, UITableViewDelegat
             self.performSegue(withIdentifier: "openMenu", sender: nil)
         }
     }
+
 
 }

@@ -29,8 +29,7 @@ class RegistrationVC: UIViewController, UITextFieldDelegate {
     var check:Bool = false
     let delegate = UIApplication.shared.delegate as! AppDelegate
     
-    let dbRef = Database.database().reference(fromURL:
-        "https://life-management-v2.firebaseio.com/")
+    let dbRef = Database.database().reference(fromURL: "https://life-management-v2.firebaseio.com/")
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
@@ -52,13 +51,12 @@ class RegistrationVC: UIViewController, UITextFieldDelegate {
                                 attributes:[NSForegroundColorAttributeName: UIColor.white])
         self.passwordTextField.attributedPlaceholder = NSAttributedString(string: "Password",
                                 attributes:[NSForegroundColorAttributeName: UIColor.white])
-        self.reTypePasswordTextField.attributedPlaceholder = NSAttributedString(string: "Confirm Password", attributes:[NSForegroundColorAttributeName: UIColor.white])
+        self.reTypePasswordTextField.attributedPlaceholder = NSAttributedString(string: "Confirm Password",attributes:[NSForegroundColorAttributeName: UIColor.white])
         
         self.registerButton.layer.cornerRadius = 15
         self.registerButton.layer.masksToBounds = true
         
         setTextFieldEditing()
-        
         self.usernameTextField.delegate = self
         self.emailTextField.delegate = self
         self.firstNameTextField.delegate = self
@@ -67,7 +65,9 @@ class RegistrationVC: UIViewController, UITextFieldDelegate {
         self.passwordTextField.delegate = self
         self.reTypePasswordTextField.delegate = self
         
-        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: Selector("endEditing:")))
+        
+        // Replace 'Selector("endEditing:")' with '#selector(UIView.endEditing(_:))
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: Selector("endEditing:")))
     }
     
     override func viewDidLayoutSubviews() {
@@ -118,7 +118,6 @@ class RegistrationVC: UIViewController, UITextFieldDelegate {
         })
     }
 
-   
     func handleRegister() -> Bool{
         
         let childRef = dbRef.child("Users").childByAutoId()
@@ -181,13 +180,13 @@ class RegistrationVC: UIViewController, UITextFieldDelegate {
         }
         
         print("confirm password check ...")
-        
+
         // check if password input is valid
         if !checkPassword(password:password!, reTypePassword:reTypePassword!){
             
             return false
         }
-        
+    
         // check if first name input is valid
         if !checkName(name: firstName!, option: "first"){
             
@@ -211,7 +210,7 @@ class RegistrationVC: UIViewController, UITextFieldDelegate {
                 return
             }
             
-            
+
             print("Successfully saved a user into database.")
             self.delegate.userImgProfile = UIImage(named: "noPicture")!
         })
@@ -220,7 +219,7 @@ class RegistrationVC: UIViewController, UITextFieldDelegate {
     
     /***********************************************************
      
-                Textfield Validation Functions
+                    Textfield Validation Functions
      
      ***********************************************************/
     
@@ -230,12 +229,12 @@ class RegistrationVC: UIViewController, UITextFieldDelegate {
         var errorMsg = ""
         
         // check the length of username
-        if username.characters.count < 5{
+        if username.count < 5{
             print("Username is too short")
             check = false
             errorMsg = "Username is too short"
             
-        }else if username.characters.count >= 15{
+        }else if username.count >= 15{
             print("Username is too long")
             check = false
             errorMsg = "Username is too long"
@@ -247,7 +246,7 @@ class RegistrationVC: UIViewController, UITextFieldDelegate {
             print("Username CANNOT contain any spaces")
             check = false
             errorMsg = "Username CANNOT contain any spaces"
-            
+           
         }else if containsSymbol(word: username){
             
             // check if username contains any symbols
@@ -255,7 +254,7 @@ class RegistrationVC: UIViewController, UITextFieldDelegate {
             print("Username CANNOT contain any symbols")
             check = false
             errorMsg = "Username CANNOT contain any symbols"
-            
+    
         }
         
         if !check{
@@ -281,11 +280,11 @@ class RegistrationVC: UIViewController, UITextFieldDelegate {
         var errorMsg = ""
         
         // check the length of password
-        if password.characters.count >= 16{
+        if password.count >= 16{
             print("Password is too long")
             check = false
             errorMsg = "Password is too long"
-        }else if password.characters.count < 5{
+        }else if password.count < 5{
             print("Password is too short")
             check = false
             errorMsg = "Password is too short"
@@ -362,7 +361,7 @@ class RegistrationVC: UIViewController, UITextFieldDelegate {
         var errorMsg = ""
         
         // check length of first or last name
-        if name.characters.count >= 15{
+        if name.count >= 15{
             if option == "first"{
                 print("First name is too long")
                 errorMsg = "First name is too long"
@@ -440,7 +439,7 @@ class RegistrationVC: UIViewController, UITextFieldDelegate {
             if results.count == 0 {
                 return false
             }
-            
+        
         }catch let error{
             print("Invalid regex: \(error.localizedDescription)")
             return false
@@ -464,13 +463,17 @@ class RegistrationVC: UIViewController, UITextFieldDelegate {
     @IBAction func registerUser(_ sender: AnyObject) {
         self.check = handleRegister()
         
+        print("This is check \(check)")
+        
         if check{
+            print("GOING TO ACTIVITY SELECTION SCREEN")
             performSegue(withIdentifier: "ActivitySelectionSegue", sender: self)
         }
     }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         // check if handleRegister form was valid before performing segue to Activity Selection
+        print("This is the identifier : \(identifier)")
         if identifier == "signInSegue"{
             return true
         }

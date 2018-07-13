@@ -2,8 +2,8 @@
 //  SettingsVC.swift
 //  LifeManagementApp
 //
-//  Created by Eric Rado on 5/14/18.
-//  Copyright © 2018 SeniorProject. All rights reserved.
+//  Created by Eric Rado on 11/24/17.
+//  Copyright © 2017 SeniorProject. All rights reserved.
 //
 
 import UIKit
@@ -30,6 +30,7 @@ extension SettingsVC: UIViewControllerTransitioningDelegate{
     }
 }
 
+
 class SettingsVC: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     // MARK: - ViewController's Variables
@@ -45,7 +46,7 @@ class SettingsVC: UIViewController, UINavigationControllerDelegate, UIImagePicke
     @IBOutlet weak var userUploadImage: UIImageView!
     
     // MARK: - ViewController Life Cycle Methods
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         userRef = dbref.child("Users/\(delegate.user.id)")
@@ -53,24 +54,25 @@ class SettingsVC: UIViewController, UINavigationControllerDelegate, UIImagePicke
     
     // MARK: - IBAction Methods
     
+    // upload a new image for user profile pic by using UIImagePickerController
     @IBAction func uploadImagePressed(_ sender: UIButton) {
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
         
-        imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        let image = UIImagePickerController()
+        image.delegate = self
         
-        imagePicker.allowsEditing = false
+        image.sourceType = UIImagePickerControllerSourceType.photoLibrary
         
-        self.present(imagePicker, animated: true) {
-            // After photo selection is complete
+        image.allowsEditing = false
+        
+        self.present(image, animated: true){
+            // After it is complete
             self.getUserProfileImg()
         }
+        
     }
     
-    // MARK: -  Setting's Methods
-    
     // retrieve user profile image from firebase by using ImageManager helper class
-    func getUserProfileImg() {
+    func getUserProfileImg(){
         imageManager.downloadImage(user: delegate.user)
         delegate.userImgProfile = imageManager.downloadedImage
     }
@@ -83,31 +85,33 @@ class SettingsVC: UIViewController, UINavigationControllerDelegate, UIImagePicke
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
-        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            self.imageManager.uploadImage(user: delegate.user, image, progressBlock: { (percentage) in
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage{
+            self.imageManager.uploadImage(user: delegate.user, image, progressBlock: {(percentage) in
                 print(percentage)
-            }) { (fileURL, errorMessage) in
+            }, completionBlock: {(fileURL, errorMessage) in
                 // update user with file path to user profile image
-                if let url = fileURL?.absoluteString {
+                if let url = fileURL?.absoluteString{
+                    print("THIS IS THE URL : \(url)")
                     self.userRef.updateChildValues(["imgURL": url])
                     
                     // download new image to display in side menu
+                    print("THIS IS IMAGE NAME : \(self.imageManager.uploadImgName)")
                     let imageRef = storage.reference().child("userProfileImgs/\(self.imageManager.uploadImgName)")
-                    imageRef.getData(maxSize: 5 * 1024 * 1024, completion: { (data, error) in
-                        if let error = error {
+                    imageRef.getData(maxSize: 5 * 1024 * 1024, completion: {(data, error) in
+                        if let error = error{
                             print(error.localizedDescription)
-                        }else {
-                            if let data = data {
-                                self.delegate.userImgProfile = UIImage(data: data)!
-                            }
+                        }else{
+                            self.delegate.userImgProfile = UIImage(data: data!)!
                         }
                     })
                 }
-            }
+                
+            })
             
             userUploadImage.image = image
             
-        }else {
+        
+        }else{
             // Error message
             print("Image was not able to load.")
         }
@@ -138,35 +142,5 @@ class SettingsVC: UIViewController, UINavigationControllerDelegate, UIImagePicke
             self.performSegue(withIdentifier: "openMenu", sender: nil)
         }
     }
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -2,8 +2,8 @@
 //  CurrentChatsVC.swift
 //  LifeManagementApp
 //
-//  Created by Eric Rado on 5/14/18.
-//  Copyright © 2018 SeniorProject. All rights reserved.
+//  Created by Eric Rado on 11/21/17.
+//  Copyright © 2017 SeniorProject. All rights reserved.
 //
 
 import UIKit
@@ -30,17 +30,15 @@ extension CurrentChatsVC: UIViewControllerTransitioningDelegate{
     }
 }
 
-class CurrentChatsVC: UIViewController {
+class CurrentChatsVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     // MARK: - ViewController's Variables
     
     let interactor = Interactor()
-    
     var chats = [Chat]()
     var coaches = [Coach]()
     let delegate = UIApplication.shared.delegate as! AppDelegate
-    let dbref = Database.database()
-        .reference(fromURL: "https://life-management-v2.firebaseio.com/")
+    let dbref = Database.database().reference(fromURL: "https://life-management-v2.firebaseio.com/")
     var selectedCoach = Coach()
     var selectedChatId = ""
     var coachImageDict = [String: UIImage]()
@@ -48,11 +46,11 @@ class CurrentChatsVC: UIViewController {
     // MARK: - ViewController's IBOutlet Variables
     
     @IBOutlet weak var tableView: UITableView!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
         getChats()
+        
     }
     
     // MARK: - Chat's Methods
@@ -105,6 +103,7 @@ class CurrentChatsVC: UIViewController {
                 self.coachImageDict[id] = cell.userProfileImg.image
             }
         })
+        
     }
     
     // MARK: - TableView Methods
@@ -140,7 +139,6 @@ class CurrentChatsVC: UIViewController {
         performSegue(withIdentifier: "conversationSegue", sender: self)
     }
     
-
     // MARK: - Side Menu Methods
     
     @IBAction func openMenu(_ sender: AnyObject){
@@ -176,4 +174,11 @@ class CurrentChatsVC: UIViewController {
         }
     }
 
+    
+
 }
+
+
+
+
+

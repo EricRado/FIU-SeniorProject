@@ -18,7 +18,7 @@ class ContributionActivitySelectionVC: UIViewController, iCarouselDataSource, iC
     var selectedIndexes = Set<Int>()
 
     let delegate = UIApplication.shared.delegate as! AppDelegate
-    let dbref = Database.database().reference(fromURL: "https://life-management-f0cdf.firebaseio.com/")
+    let dbref = Database.database().reference(fromURL: "https://life-management-v2.firebaseio.com/")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,8 +98,7 @@ class ContributionActivitySelectionVC: UIViewController, iCarouselDataSource, iC
             activityIds.append(activityRef.key)
             
             // store the image of the activity into array of selected activities for Sprint Setting Screen
-            self.delegate.activitySelectedImages
-                .append(self.delegate.contributionImages[selection].uiImage.image!)
+            self.delegate.activitySelectedImages.append(self.delegate.contributionImages[selection].uiImage.image!)
             
             // get name of the activity selected
             let name = self.delegate.contributionImages[selection].name

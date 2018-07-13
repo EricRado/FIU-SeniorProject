@@ -7,34 +7,34 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>868568540473-tn32bvqc0nffmkp2qbehuv0cpk3869hd.apps.googleusercontent.com</string>
+	<string>827220111677-u3av842bh2618uj07vibq5c7h83fbvjm.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.868568540473-tn32bvqc0nffmkp2qbehuv0cpk3869hd</string>
+	<string>com.googleusercontent.apps.827220111677-u3av842bh2618uj07vibq5c7h83fbvjm</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAyk57wxgDQJ3J0YDfTjS_aEPNW-9qwFYk</string>
+	<string>AIzaSyCfXfzqoK8PSeDHGHE2rmMFKCq9ZcVsXDE</string>
 	<key>GCM_SENDER_ID</key>
-	<string>868568540473</string>
+	<string>827220111677</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.sp.LifeManagementApp</string>
 	<key>PROJECT_ID</key>
-	<string>life-management-f0cdf</string>
+	<string>life-management-v2</string>
 	<key>STORAGE_BUCKET</key>
-	<string>life-management-f0cdf.appspot.com</string>
+	<string>life-management-v2.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_APPINVITE_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_GCM_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:868568540473:ios:72bec0f3393d3cf3</string>
+	<string>1:827220111677:ios:72bec0f3393d3cf3</string>
 	<key>DATABASE_URL</key>
-	<string>https://life-management-f0cdf.firebaseio.com</string>
+	<string>https://life-management-v2.firebaseio.com</string>
 </dict>
 </plist>

@@ -2,8 +2,8 @@
 //  CurrentChatTableViewCell.swift
 //  LifeManagementApp
 //
-//  Created by Eric Rado on 5/4/18.
-//  Copyright © 2018 SeniorProject. All rights reserved.
+//  Created by Eric Rado on 11/25/17.
+//  Copyright © 2017 SeniorProject. All rights reserved.
 //
 
 import UIKit

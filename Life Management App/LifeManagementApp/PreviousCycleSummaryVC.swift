@@ -56,6 +56,7 @@ class PreviousCycleSummaryVC: UIViewController {
     @IBOutlet weak var contributionActivity1Image: UIImageView!
     @IBOutlet weak var contributionActivity2Image: UIImageView!
     
+    
     // label for date
     @IBOutlet weak var sprintDateLabel: UILabel!
     
@@ -70,11 +71,19 @@ class PreviousCycleSummaryVC: UIViewController {
     @IBOutlet weak var contributionOverallScoreLabel: UILabel!
     
     // MARK: - ViewController's Life Cycle Methods
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        loadLabels()
+        
+        loadImages(name1: joyActivity1.name, name2: joyActivity2.name, option: "Joy")
+        loadImages(name1: passionActivity1.name, name2: passionActivity2.name, option: "Passion")
+        loadImages(name1: contributionActivity1.name, name2: contributionActivity2.name,option: "Contribution")
+        
+        setScorePercentage(target1: joyActivity1.targetPoints, actual1: joyActivity1.actualPoints, target2: joyActivity2.targetPoints, actual2: joyActivity2.actualPoints, option: "Joy")
+        setScorePercentage(target1: passionActivity1.targetPoints, actual1: passionActivity1.actualPoints, target2: passionActivity2.targetPoints, actual2: passionActivity2.actualPoints, option: "Passion")
+        setScorePercentage(target1: contributionActivity1.targetPoints, actual1: contributionActivity1.actualPoints, target2: contributionActivity2.targetPoints, actual2: contributionActivity2.actualPoints, option: "Contribution")
     }
     
     // MARK: - Setup UIView's visual display methods
@@ -106,7 +115,7 @@ class PreviousCycleSummaryVC: UIViewController {
     func setDates(startDay: String, endDay: String) -> String{
         let dateFmt = DateFormatter()
         
-        // convert date strings to  date objects
+        // convert date strings to  date objects 
         dateFmt.dateFormat = "MMddyyyy"
         let startDate = dateFmt.date(from: startDay)
         let endDate = dateFmt.date(from: endDay)
@@ -184,25 +193,3 @@ class PreviousCycleSummaryVC: UIViewController {
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

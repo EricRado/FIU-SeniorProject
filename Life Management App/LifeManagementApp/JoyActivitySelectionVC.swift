@@ -24,6 +24,8 @@ class JoyActivitySelectionVC: UIViewController, iCarouselDataSource, iCarouselDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print("Inside joy activity selection....")
 
         joyCarouselView.delegate = self
         joyCarouselView.dataSource = self
@@ -107,7 +109,6 @@ class JoyActivitySelectionVC: UIViewController, iCarouselDataSource, iCarouselDe
 
     }
     
-    
     @IBAction func submitPressed(_ sender: AnyObject) {
         // display alert if user did not select two activities
         if self.selectedIndexes.count != 2{
@@ -122,15 +123,15 @@ class JoyActivitySelectionVC: UIViewController, iCarouselDataSource, iCarouselDe
             activityIds.append(activityRef.key)
             
             // store the image of the activity into array of selected activities for Sprint Setting Screen
-            self.delegate.activitySelectedImages
-                .append(self.delegate.joyImages[selection].uiImage.image!)
+            self.delegate.activitySelectedImages.append(self.delegate.joyImages[selection].uiImage.image!)
             
             // get name of the activity selected
             let name = self.delegate.joyImages[selection].name
             print("This is the name going to db : \(name)")
             
             // create a new Activity object to store in the database
-            let newActivity = Activity(name: name, categoryId: self.delegate.categoryKey, userId: self.delegate.user.id)
+            let newActivity = Activity(name: name, categoryId: self.delegate.categoryKey, userId: self.delegate.user
+                .id)
             // Activity object is stored in the database
             activityRef.setValue(newActivity.toAnyObject(), withCompletionBlock: {(error,activityRef) in
                 if error != nil{

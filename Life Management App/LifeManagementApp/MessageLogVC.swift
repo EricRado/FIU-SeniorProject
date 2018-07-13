@@ -2,17 +2,14 @@
 //  MessageLogVC.swift
 //  LifeManagementApp
 //
-//  Created by Eric Rado on 5/14/18.
-//  Copyright © 2018 SeniorProject. All rights reserved.
+//  Created by Eric Rado on 11/28/17.
+//  Copyright © 2017 SeniorProject. All rights reserved.
 //
 
 import UIKit
 import Firebase
 
-class MessageLogVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    
-    // MARK: - ViewController's Variables
-    
+class MessageLogVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     var recipient = Coach()
     var chatId = ""
     var messages = [Message]()
@@ -23,6 +20,8 @@ class MessageLogVC: UIViewController, UICollectionViewDelegate, UICollectionView
     
     // current online user or coach
     let delegate = UIApplication.shared.delegate as! AppDelegate
+    
+    @IBOutlet weak var collectionView: UICollectionView!
     
     let messageInputContainerView: UIView = {
         let view = UIView()
@@ -49,14 +48,12 @@ class MessageLogVC: UIViewController, UICollectionViewDelegate, UICollectionView
         button.addTarget(self, action: #selector(sendMessage), for: UIControlEvents.touchUpInside)
         return button
     }()
-    
-    // MARK: - ViewController IBOutlet Variables
-    @IBOutlet weak var collectionView: UICollectionView!
+   
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // set chat reference to current selected chat
+        
+        // set chat refernce to current selected chat
         chatRef = dbref.child("Messages/\(chatId)")
         
         self.collectionView.delegate = self
@@ -78,7 +75,6 @@ class MessageLogVC: UIViewController, UICollectionViewDelegate, UICollectionView
         
         self.navigationItem.title = "\(recipient.firstName)"
         getMessages()
-        
     }
     
     fileprivate func setupInputComponents(){
@@ -97,7 +93,7 @@ class MessageLogVC: UIViewController, UICollectionViewDelegate, UICollectionView
         messageInputContainerView.addConstraintsWithFormat("H:|[v0]|", views: topBorderView)
         messageInputContainerView.addConstraintsWithFormat("V:|[v0(0.5)]", views: topBorderView)
     }
-
+    
     func handleKeyboardNotification(_ notification: Notification){
         
         if let userInfo = notification.userInfo{
@@ -122,8 +118,6 @@ class MessageLogVC: UIViewController, UICollectionViewDelegate, UICollectionView
             })
         }
     }
-    
-    // MARK: - Message's Methods
     
     func getMessages(){
         chatRef.queryLimited(toLast: 15).observe(.childAdded, with: {(snapshot) in
@@ -162,34 +156,32 @@ class MessageLogVC: UIViewController, UICollectionViewDelegate, UICollectionView
         }
     }
     
-    // MARK: - TextField Methods
     func textFieldDidBeginEditing(textField: UITextField){
         textField.text = ""
     }
     
-    // MARK: - CollectionView Methods
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         inputTextField.endEditing(true)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if messages.count != 0 {
+        if messages.count != 0{
             return messages.count
-        }else {
+        }else{
             return 0
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ChatLogMessageCell
-        if let messageText = messages[indexPath.item].text {
+        if let messageText = messages[indexPath.item].text{
             cell.messageTextView.text = "\(messageText)"
             
-            let size = CGSize(width: 250, height: 1000)
+            let size = CGSize(width: 250,height: 1000)
             let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
             let estimatedFrame = NSString(string: messageText).boundingRect(with: size, options: options, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 18)], context: nil)
             
-            if messages[indexPath.item].username != delegate.user.username {
+            if messages[indexPath.item].username != delegate.user.username{
                 
                 // messages received
                 
@@ -203,7 +195,8 @@ class MessageLogVC: UIViewController, UICollectionViewDelegate, UICollectionView
                 cell.messageTextView.textColor = UIColor.black
                 
                 cell.profileImageView.image = receipentImage
-            }else {
+                
+            }else{
                 
                 // outgoing sending message
                 
@@ -217,15 +210,17 @@ class MessageLogVC: UIViewController, UICollectionViewDelegate, UICollectionView
                 cell.messageTextView.textColor = UIColor.white
             }
         }
+        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        if let messageText = messages[indexPath.item].text {
-            let size = CGSize(width: 250, height: 1000)
+        if let messageText = messages[indexPath.item].text{
+            let size = CGSize(width: 250,height: 1000)
             let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
             let estimatedFrame = NSString(string: messageText).boundingRect(with: size, options: options, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 18)], context: nil)
+            
             return CGSize(width: view.frame.width, height: estimatedFrame.height + 20)
         }
         
@@ -233,10 +228,10 @@ class MessageLogVC: UIViewController, UICollectionViewDelegate, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0)
+        return UIEdgeInsetsMake(8, 0, 0, 0)
     }
-}
 
+}
 
 
 class ChatLogMessageCell: UICollectionViewCell{
@@ -294,11 +289,9 @@ class ChatLogMessageCell: UICollectionViewCell{
         textBubbleView.addSubview(bubbleImageView)
         textBubbleView.addConstraintsWithFormat("H:|[v0]|", views: bubbleImageView)
         textBubbleView.addConstraintsWithFormat("V:|[v0]|", views: bubbleImageView)
-        
+       
     }
 }
-
-
 
 
 

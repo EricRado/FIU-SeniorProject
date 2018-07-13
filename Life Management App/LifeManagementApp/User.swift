@@ -24,7 +24,7 @@ struct User{
     
     
     init(id: String, email: String, username: String, firstName: String, lastName: String,
-         dob: String,password: String, adminFlag: Bool, coachFlag: Bool, imgURL: String){
+         dob: String,password: String,adminFlag: Bool, coachFlag: Bool, imgURL: String){
         
         self.id = id
         self.email = email
@@ -47,7 +47,7 @@ struct User{
         guard let firstName = dict["firstName"] else { return nil }
         guard let lastName = dict["lastName"] else { return nil }
         guard let dob = dict["dob"] else { return nil }
-        guard let imgURL = dict["imgURL"] else {return nil}
+        guard let imgURL = dict["imgURL"] else { return nil }
         
         self.id = id
         self.email = email

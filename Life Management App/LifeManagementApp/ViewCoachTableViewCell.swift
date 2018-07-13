@@ -2,18 +2,21 @@
 //  ViewCoachTableViewCell.swift
 //  LifeManagementApp
 //
-//  Created by Eric Rado on 5/4/18.
-//  Copyright © 2018 SeniorProject. All rights reserved.
+//  Created by Eric Rado on 11/17/17.
+//  Copyright © 2017 SeniorProject. All rights reserved.
 //
 
 import UIKit
 
 class ViewCoachTableViewCell: UITableViewCell {
     
+    
     @IBOutlet weak var coachImage: UIImageView!
+    
     @IBOutlet weak var coachNameLabel: UILabel!
     @IBOutlet weak var skillsLabel: UILabel!
     @IBOutlet weak var successRateLabel: UILabel!
+    
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,6 +26,7 @@ class ViewCoachTableViewCell: UITableViewCell {
         coachImage.clipsToBounds = true
         coachImage.layer.borderWidth = 2
         coachImage.layer.borderColor = UIColor.blue.cgColor
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

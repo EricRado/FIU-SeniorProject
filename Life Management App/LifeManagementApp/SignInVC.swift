@@ -17,8 +17,7 @@ class SignInVC: UIViewController {
     @IBOutlet weak var signInButton: UIButton!
     
     let delegate = UIApplication.shared.delegate as! AppDelegate
-    let dbRef = Database.database().reference(fromURL:
-        "https://life-management-v2.firebaseio.com/")
+    let dbRef = Database.database().reference(fromURL: "https://life-management-v2.firebaseio.com/")
     var users = [User]()
     var signInUser = User()
     let imageManager = ImageManager()
@@ -36,6 +35,7 @@ class SignInVC: UIViewController {
                                 attributes: [NSForegroundColorAttributeName:UIColor.black])
         self.passwordTextField.attributedPlaceholder = NSAttributedString(string: "Password",
                                 attributes: [NSForegroundColorAttributeName:UIColor.black])
+        setTextFieldEditing()
 
     }
     
@@ -67,6 +67,7 @@ class SignInVC: UIViewController {
         userRef.observe(DataEventType.value, with: {(snapshot) in
              
             for user in snapshot.children.allObjects as! [DataSnapshot]{
+                print("Testing...")
                 // store the data of the user into a dictionary
                 guard let userDict = user.value as? [String: Any] else {continue}
                 
@@ -84,7 +85,7 @@ class SignInVC: UIViewController {
                 
                 // create user with variables previously created
                 let addUser = User(id: id!,email: email!,username: username!,firstName: firstName!,
-                            lastName: lastName!, dob: dob!, password: password!, adminFlag: isAdmin!,coachFlag: isCoach!, imgURL: imgURL!)
+                                   lastName: lastName!, dob: dob!, password: password!, adminFlag: isAdmin!,coachFlag: isCoach!, imgURL: imgURL!)
                 print("this is FIRSTNAME " + addUser.firstName + " | " )
                 print("this is id " + id! + " | ")
                 self.users.append(addUser)
@@ -162,7 +163,7 @@ class SignInVC: UIViewController {
         if (credentialCheck){
             print("Welcome to Life Management " + self.signInUser.username )
             
-            // get user image profile
+            // get user image profile 
             imageManager.downloadImage(user: self.delegate.user)
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: {
@@ -171,14 +172,13 @@ class SignInVC: UIViewController {
                     self.delegate.userImgProfile = UIImage(named: "noPicture")!
                 }
                 self.performSegue(withIdentifier: "DashBoardSegue", sender: self)
-                
+
             })
             
         }else{
             print("User is invalid")
         }
     
-        
     }
     
     @IBAction func createAccount(_ sender: AnyObject) {
@@ -205,6 +205,7 @@ class SignInVC: UIViewController {
         if segue.identifier == "DashBoardSegue", let tabVC = segue.destination as? CategoryTabBarController{
             print("GOING TO THE Tab BAR CONTROLLER")
             tabVC.onlineUser = self.signInUser
+            
         }
         
     }
