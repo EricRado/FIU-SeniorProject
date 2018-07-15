@@ -87,7 +87,7 @@ class SprintSettingsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         self.passionTargetScore2.delegate = self
         self.contributionTargetScore1.delegate = self
         self.contributionTargetScore2.delegate = self
-        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: Selector("endEditing:")))
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -302,7 +302,7 @@ class SprintSettingsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         print("more info was pressed")
     }
     
-    func textFieldDidChange(_ textField: UITextField){
+    @objc func textFieldDidChange(_ textField: UITextField){
         textField.layer.borderColor = UIColor.clear.cgColor
     }
     

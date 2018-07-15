@@ -32,9 +32,9 @@ class SignInVC: UIViewController {
         self.signInButton.layer.cornerRadius = 15
         self.signInButton.layer.masksToBounds = true
         self.usernameTextField.attributedPlaceholder = NSAttributedString(string: "Username",
-                                attributes: [NSForegroundColorAttributeName:UIColor.black])
+                                attributes: [NSAttributedStringKey.foregroundColor:UIColor.black])
         self.passwordTextField.attributedPlaceholder = NSAttributedString(string: "Password",
-                                attributes: [NSForegroundColorAttributeName:UIColor.black])
+                                attributes: [NSAttributedStringKey.foregroundColor:UIColor.black])
         setTextFieldEditing()
 
     }
@@ -45,7 +45,7 @@ class SignInVC: UIViewController {
         self.passwordTextField.setBottomLine(borderColor: lineColor)
     }
     
-    func textFieldDidChange(_ textField: UITextField){
+    @objc func textFieldDidChange(_ textField: UITextField){
         textField.layer.borderColor = UIColor.clear.cgColor
         textField.setBottomLine(borderColor: UIColor(red:0.12, green:0.23, blue:0.35, alpha:0.8))
     }

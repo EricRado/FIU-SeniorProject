@@ -94,7 +94,7 @@ class MessageLogVC: UIViewController,UICollectionViewDelegate,UICollectionViewDa
         messageInputContainerView.addConstraintsWithFormat("V:|[v0(0.5)]", views: topBorderView)
     }
     
-    func handleKeyboardNotification(_ notification: Notification){
+    @objc func handleKeyboardNotification(_ notification: Notification){
         
         if let userInfo = notification.userInfo{
             
@@ -142,7 +142,7 @@ class MessageLogVC: UIViewController,UICollectionViewDelegate,UICollectionViewDa
         
     }
     
-    func sendMessage(sender: UIButton!){
+    @objc func sendMessage(sender: UIButton!){
         print("Sending Message")
         if inputTextField.text == ""{
             return
@@ -179,7 +179,7 @@ class MessageLogVC: UIViewController,UICollectionViewDelegate,UICollectionViewDa
             
             let size = CGSize(width: 250,height: 1000)
             let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
-            let estimatedFrame = NSString(string: messageText).boundingRect(with: size, options: options, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 18)], context: nil)
+            let estimatedFrame = NSString(string: messageText).boundingRect(with: size, options: options, attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 18)], context: nil)
             
             if messages[indexPath.item].username != delegate.user.username{
                 
@@ -219,7 +219,7 @@ class MessageLogVC: UIViewController,UICollectionViewDelegate,UICollectionViewDa
         if let messageText = messages[indexPath.item].text{
             let size = CGSize(width: 250,height: 1000)
             let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
-            let estimatedFrame = NSString(string: messageText).boundingRect(with: size, options: options, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 18)], context: nil)
+            let estimatedFrame = NSString(string: messageText).boundingRect(with: size, options: options, attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 18)], context: nil)
             
             return CGSize(width: view.frame.width, height: estimatedFrame.height + 20)
         }

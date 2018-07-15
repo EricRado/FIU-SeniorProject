@@ -40,18 +40,18 @@ class RegistrationVC: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         getAllUsers()
         self.usernameTextField.attributedPlaceholder = NSAttributedString(string: "Username",
-                                attributes:[NSForegroundColorAttributeName: UIColor.white])
+                                attributes:[NSAttributedStringKey.foregroundColor: UIColor.white])
         self.emailTextField.attributedPlaceholder = NSAttributedString(string: "Email",
-                                attributes:[NSForegroundColorAttributeName: UIColor.white])
+                                attributes:[NSAttributedStringKey.foregroundColor: UIColor.white])
         self.firstNameTextField.attributedPlaceholder = NSAttributedString(string: "First Name",
-                                attributes:[NSForegroundColorAttributeName: UIColor.white])
+                                attributes:[NSAttributedStringKey.foregroundColor: UIColor.white])
         self.lastNameTextField.attributedPlaceholder = NSAttributedString(string: "Last Name",
-                                attributes:[NSForegroundColorAttributeName: UIColor.white])
+                                attributes:[NSAttributedStringKey.foregroundColor: UIColor.white])
         self.dobTextField.attributedPlaceholder = NSAttributedString(string: "Dob",
-                                attributes:[NSForegroundColorAttributeName: UIColor.white])
+                                attributes:[NSAttributedStringKey.foregroundColor: UIColor.white])
         self.passwordTextField.attributedPlaceholder = NSAttributedString(string: "Password",
-                                attributes:[NSForegroundColorAttributeName: UIColor.white])
-        self.reTypePasswordTextField.attributedPlaceholder = NSAttributedString(string: "Confirm Password",attributes:[NSForegroundColorAttributeName: UIColor.white])
+                                attributes:[NSAttributedStringKey.foregroundColor: UIColor.white])
+        self.reTypePasswordTextField.attributedPlaceholder = NSAttributedString(string: "Confirm Password",attributes:[NSAttributedStringKey.foregroundColor: UIColor.white])
         
         self.registerButton.layer.cornerRadius = 15
         self.registerButton.layer.masksToBounds = true
@@ -67,7 +67,7 @@ class RegistrationVC: UIViewController, UITextFieldDelegate {
         
         
         // Replace 'Selector("endEditing:")' with '#selector(UIView.endEditing(_:))
-        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: Selector("endEditing:")))
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
     }
     
     override func viewDidLayoutSubviews() {
@@ -83,7 +83,7 @@ class RegistrationVC: UIViewController, UITextFieldDelegate {
         
     }
     
-    func textFieldDidChange(_ textField: UITextField){
+    @objc func textFieldDidChange(_ textField: UITextField){
         textField.layer.borderColor = UIColor.clear.cgColor
         textField.setBottomLine(borderColor: UIColor(red:0.12, green:0.23, blue:0.35, alpha:0.8))
     }
