@@ -695,7 +695,7 @@
         <!--Passion-->
         <scene sceneID="77u-na-N93">
             <objects>
-                <viewController title="Passion" modalTransitionStyle="flipHorizontal" id="7F2-H1-Koc" customClass="PassionVC" customModule="LifeManagementApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="passionVC" title="Passion" modalTransitionStyle="flipHorizontal" id="7F2-H1-Koc" customClass="PassionVC" customModule="LifeManagementApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="mJY-fL-8Oj"/>
                         <viewControllerLayoutGuide type="bottom" id="PCd-Fk-YwS"/>
@@ -2372,7 +2372,7 @@
         <!--Contribution-->
         <scene sceneID="eQZ-0V-vbL">
             <objects>
-                <viewController title="Contribution" id="44b-de-dwk" customClass="ContributionVC" customModule="LifeManagementApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="contributionVC" title="Contribution" id="44b-de-dwk" customClass="ContributionVC" customModule="LifeManagementApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="5c4-VN-OsZ"/>
                         <viewControllerLayoutGuide type="bottom" id="pmI-md-Mrh"/>
@@ -6364,7 +6364,7 @@
         <!--Joy-->
         <scene sceneID="SKQ-4B-8Vw">
             <objects>
-                <viewController storyboardIdentifier="JoyVC" title="Joy" modalTransitionStyle="flipHorizontal" useStoryboardIdentifierAsRestorationIdentifier="YES" id="jxi-QP-Bwu" customClass="JoyVC" customModule="LifeManagementApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="joyVC" title="Joy" modalTransitionStyle="flipHorizontal" useStoryboardIdentifierAsRestorationIdentifier="YES" id="jxi-QP-Bwu" customClass="JoyVC" customModule="LifeManagementApp" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="s7L-UR-OXQ"/>
                         <viewControllerLayoutGuide type="bottom" id="DbY-h4-nP2"/>
@@ -9068,7 +9068,7 @@
         <segue reference="DMP-7Y-CxG"/>
         <segue reference="Mmc-8c-1pg"/>
         <segue reference="vUG-b0-bNY"/>
-        <segue reference="QLh-B0-XLt"/>
+        <segue reference="E2e-RD-eat"/>
         <segue reference="cIz-8c-tQu"/>
     </inferredMetricsTieBreakers>
 </document>

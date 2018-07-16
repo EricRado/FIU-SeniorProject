@@ -7,20 +7,65 @@
 //
 
 import UIKit
+import Firebase
 
 class EmotionVC: UIViewController {
+    // :- MARK Instance Variables
+    var sprintOnDisplay: Sprint?
+    var activity1OnDisplay: Activity?
+    var activity1OnDisplayId = ""
+    var activity2OnDisplay: Activity?
+    var activity2OnDisplayId = ""
+    var sprintOnDisplayId = ""
     
-    // :- MARK IBOutlet Instances
+    var btnIndexes = [Int]()
+    
+    var joyOverallScore = ""
+    var passionOverallScore = ""
+    var contributionOverallScore = ""
+    
+    var emotionChoice = ""
+    
+    let dbref = Database.database()
+        .reference(fromURL: "https://life-management-v2.firebaseio.com/")
+    
+    var delegate = UIApplication.shared.delegate as! AppDelegate
+    
+    // :- MARK IBOutlet Instance Variables
     @IBOutlet weak var startDateLabel: UILabel!
     @IBOutlet weak var endDateLabel: UILabel!
     
-    @IBOutlet weak var a1GoalScoreLabel: UILabel!
-    @IBOutlet weak var a1ActualScoreLabel: UILabel!
-    @IBOutlet weak var a1ScorePercentageLabel: UILabel!
+    @IBOutlet weak var a1GoalScoreLabel: UILabel! {
+        didSet {
+            turnLabelToCircle(a1GoalScoreLabel)
+        }
+    }
+    @IBOutlet weak var a1ActualScoreLabel: UILabel! {
+        didSet {
+            turnLabelToCircle(a1ActualScoreLabel)
+        }
+    }
+    @IBOutlet weak var a1ScorePercentageLabel: UILabel! {
+        didSet {
+            turnLabelToCircle(a1ScorePercentageLabel)
+        }
+    }
     
-    @IBOutlet weak var a2GoalScoreLabel: UILabel!
-    @IBOutlet weak var a2ActualScoreLabel: UILabel!
-    @IBOutlet weak var a2ScorePercentageLabel: UILabel!
+    @IBOutlet weak var a2GoalScoreLabel: UILabel! {
+        didSet {
+            turnLabelToCircle(a2GoalScoreLabel)
+        }
+    }
+    @IBOutlet weak var a2ActualScoreLabel: UILabel! {
+        didSet {
+            turnLabelToCircle(a2ActualScoreLabel)
+        }
+    }
+    @IBOutlet weak var a2ScorePercentageLabel: UILabel! {
+        didSet {
+            turnLabelToCircle(a2ScorePercentageLabel)
+        }
+    }
     
     
     @IBOutlet weak var a1Image: UIImageView!
@@ -47,6 +92,65 @@ class EmotionVC: UIViewController {
         self.view.layoutIfNeeded()
 
         // Do any additional setup after loading the view.
+        self.emotionScore.progressThickness = 0.5
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "dropdown"), style: .plain, target: self, action: #selector(menuBtnPressed(_:)))
+        self.submitBtn.addTarget(self,
+                                 action: #selector(submitPressed(_:)),
+                                 for: .touchUpInside)
+        self.navigationController?.navigationBar.barTintColor = .blue
+    }
+    
+    func getCategoryKey(userId: String) {
+        let categoryRef = dbref.child("Categories")
+        /* query the category collection and find the record which
+         contains the current online user's id */
+        let userCategoryQuery = categoryRef
+            .queryOrdered(byChild: "userId")
+            .queryEqual(toValue: userId)
+        
+        userCategoryQuery.observeSingleEvent(of: .value, with: { (snapshot) in
+            for child in snapshot.children.allObjects as! [DataSnapshot] {
+                /* store the key of the user category collection in order to
+                 make a reference to joy, contribution and passion sprints */
+                print(child)
+                self.delegate.categoryKey = child.key
+                self.getActiveSprint(categoryKey: self.delegate.categoryKey,
+                                     emotion: self.emotionChoice)
+            }
+        }, withCancel: {(error) in
+            print(error.localizedDescription)
+        })
+    }
+    
+    func getActiveSprint(categoryKey: String, emotion: String) {
+        print("This is emotion : \(emotion)")
+    }
+    
+    @objc func submitPressed(_ sender: UIButton) {
+        print("submit was pressed")
     }
 
 }
+
+extension UIViewController {
+    func turnLabelToCircle(_ label: UILabel) {
+        label.layer.cornerRadius = label.frame.size.width / 2
+        label.clipsToBounds = true
+    }
+    
+    func turnImageToCircle(_ image: UIImageView) {
+        image.layer.cornerRadius = image.frame.size.width / 2
+        image.clipsToBounds = true
+        self.view.layoutIfNeeded()
+    }
+    
+    @objc func menuBtnPressed(_ sender: UIBarButtonItem) {
+        print("dropdown button pressed")
+    }
+}
+
+
+
+
+
+

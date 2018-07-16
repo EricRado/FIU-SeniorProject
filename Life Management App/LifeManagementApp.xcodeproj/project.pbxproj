@@ -12,6 +12,7 @@
 		07174FD51F8E73DE00E1E8AC /* JoyActivitySelectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07174FD41F8E73DE00E1E8AC /* JoyActivitySelectionVC.swift */; };
 		07237B9F20AA069B00BBB96E /* AllExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07237B9E20AA069B00BBB96E /* AllExtensions.swift */; };
 		0723CDDD20FBC08900F8B560 /* EmotionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0723CDDC20FBC08900F8B560 /* EmotionVC.swift */; };
+		0723CDDF20FC584900F8B560 /* Test1VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0723CDDE20FC584900F8B560 /* Test1VC.swift */; };
 		072F861C1F5D9227007E5A8A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072F861B1F5D9227007E5A8A /* AppDelegate.swift */; };
 		072F86211F5D9227007E5A8A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 072F861F1F5D9227007E5A8A /* Main.storyboard */; };
 		072F86231F5D9228007E5A8A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 072F86221F5D9228007E5A8A /* Assets.xcassets */; };
@@ -91,6 +92,7 @@
 		07174FD41F8E73DE00E1E8AC /* JoyActivitySelectionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoyActivitySelectionVC.swift; sourceTree = "<group>"; };
 		07237B9E20AA069B00BBB96E /* AllExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllExtensions.swift; sourceTree = "<group>"; };
 		0723CDDC20FBC08900F8B560 /* EmotionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionVC.swift; sourceTree = "<group>"; };
+		0723CDDE20FC584900F8B560 /* Test1VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test1VC.swift; sourceTree = "<group>"; };
 		072F86181F5D9227007E5A8A /* LifeManagementApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LifeManagementApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		072F861B1F5D9227007E5A8A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		072F86201F5D9227007E5A8A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -289,6 +291,7 @@
 				076E009E1F9EAAF8004467D0 /* SprintSettingsVC.swift */,
 				07F9D2B81FBFCDF10083AEF2 /* ViewCoachesVC.swift */,
 				0723CDDC20FBC08900F8B560 /* EmotionVC.swift */,
+				0723CDDE20FC584900F8B560 /* Test1VC.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -674,6 +677,7 @@
 				07C129FF1FCA180F003149A6 /* Chat.swift in Sources */,
 				0723CDDD20FBC08900F8B560 /* EmotionVC.swift in Sources */,
 				072F867C1F69F2A9007E5A8A /* Popup5VC.swift in Sources */,
+				0723CDDF20FC584900F8B560 /* Test1VC.swift in Sources */,
 				07F6BB0E1F874FB200E5F4E1 /* Activity.swift in Sources */,
 				07C129F51FC88EAF003149A6 /* SettingsVC.swift in Sources */,
 				07C12A011FCA181C003149A6 /* Message.swift in Sources */,
