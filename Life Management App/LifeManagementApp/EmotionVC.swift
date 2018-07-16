@@ -12,6 +12,9 @@ import Firebase
 class EmotionVC: UIViewController {
     // :- MARK Instance Variables
     var sprintOnDisplay: Sprint?
+    var sprintViewModel: SprintViewModel?
+    var activityViewModel: ActivityViewModel?
+    
     var activity1OnDisplay: Activity?
     var activity1OnDisplayId = ""
     var activity2OnDisplay: Activity?
@@ -144,9 +147,10 @@ class EmotionVC: UIViewController {
                 if let sprint = self.sprintOnDisplay {
                     self.activity1OnDisplayId = sprint.sprintActivityId1
                     self.activity2OnDisplayId = sprint.sprintActivityId2
-                    //self.getActivities(id1: ,id:2)
-                    self.setDates()
-                    self.setGoalsText()
+                    self.getActivities(id1: self.activity1OnDisplayId,
+                                       id2: self.activity2OnDisplayId)
+                    self.sprintViewModel = SprintViewModel(sprint: sprint)
+                    self.setDatesAndGoalsText()
                 } else {
                     print("Data was not downloaded properly")
                     return
@@ -157,11 +161,50 @@ class EmotionVC: UIViewController {
         }
     }
     
-    func setDates() {
+    func getActivities(id1: String, id2: String) {
+        
+        // set two reference db points to each activity that will be displayed on dashboard
+        let activity1Ref = dbRef.child("Activities/\(id1)")
+        let activity2Ref = dbRef.child("Activities/\(id2)")
+        
+        activity1Ref.observe(.value, with: { (snapshot) in
+            if !snapshot.exists() {
+                print("Snapshot is empty...")
+                return
+            }
+            print(snapshot)
+    
+            self.activity1OnDisplay = Activity(snapshot: snapshot)
+            if let activity1 = self.activity1OnDisplay {
+                print("Activity was set")
+                print(activity1)
+            } else {
+                print("Activity was not set")
+            }
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+        
+        activity2Ref.observe(.value, with: { (snapshot) in
+            if !snapshot.exists() {
+                print("Snapshot is empty...")
+                return
+            }
+            print(snapshot)
+            self.activity2OnDisplay = Activity(snapshot: snapshot)
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+    }
+    
+    func setDatesAndGoalsText() {
+        self.startDateLabel.text = sprintViewModel?.startingDateFormatted
+        self.endDateLabel.text = sprintViewModel?.endingDateFormatted
+        
         
     }
     
-    func setGoalsText() {
+    func setScoresAndPercentages() {
         
     }
     
