@@ -13,6 +13,8 @@
 		07237B9F20AA069B00BBB96E /* AllExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07237B9E20AA069B00BBB96E /* AllExtensions.swift */; };
 		0723CDDD20FBC08900F8B560 /* EmotionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0723CDDC20FBC08900F8B560 /* EmotionVC.swift */; };
 		0723CDDF20FC584900F8B560 /* Test1VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0723CDDE20FC584900F8B560 /* Test1VC.swift */; };
+		0723CDE120FCFAEF00F8B560 /* SprintViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0723CDE020FCFAEF00F8B560 /* SprintViewModel.swift */; };
+		0723CDE320FCFAFD00F8B560 /* ActivityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0723CDE220FCFAFD00F8B560 /* ActivityViewModel.swift */; };
 		072F861C1F5D9227007E5A8A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072F861B1F5D9227007E5A8A /* AppDelegate.swift */; };
 		072F86211F5D9227007E5A8A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 072F861F1F5D9227007E5A8A /* Main.storyboard */; };
 		072F86231F5D9228007E5A8A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 072F86221F5D9228007E5A8A /* Assets.xcassets */; };
@@ -93,6 +95,8 @@
 		07237B9E20AA069B00BBB96E /* AllExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllExtensions.swift; sourceTree = "<group>"; };
 		0723CDDC20FBC08900F8B560 /* EmotionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionVC.swift; sourceTree = "<group>"; };
 		0723CDDE20FC584900F8B560 /* Test1VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test1VC.swift; sourceTree = "<group>"; };
+		0723CDE020FCFAEF00F8B560 /* SprintViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SprintViewModel.swift; sourceTree = "<group>"; };
+		0723CDE220FCFAFD00F8B560 /* ActivityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewModel.swift; sourceTree = "<group>"; };
 		072F86181F5D9227007E5A8A /* LifeManagementApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LifeManagementApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		072F861B1F5D9227007E5A8A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		072F86201F5D9227007E5A8A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -259,14 +263,16 @@
 		072F86811F6F1CC3007E5A8A /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				072F86821F6F1CF6007E5A8A /* User.swift */,
-				072F86841F6F236D007E5A8A /* Category.swift */,
 				07F6BB0D1F874FB200E5F4E1 /* Activity.swift */,
-				07F6BB0F1F874FC300E5F4E1 /* Sprint.swift */,
 				07B40A1C1F9AC6200002DCC3 /* ActivityImage.swift */,
-				07FED9B11FC1F1D400F5D763 /* Coach.swift */,
+				0723CDE220FCFAFD00F8B560 /* ActivityViewModel.swift */,
+				072F86841F6F236D007E5A8A /* Category.swift */,
 				07C129FE1FCA180F003149A6 /* Chat.swift */,
+				07FED9B11FC1F1D400F5D763 /* Coach.swift */,
 				07C12A001FCA181C003149A6 /* Message.swift */,
+				07F6BB0F1F874FC300E5F4E1 /* Sprint.swift */,
+				0723CDE020FCFAEF00F8B560 /* SprintViewModel.swift */,
+				072F86821F6F1CF6007E5A8A /* User.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -679,10 +685,12 @@
 				072F867C1F69F2A9007E5A8A /* Popup5VC.swift in Sources */,
 				0723CDDF20FC584900F8B560 /* Test1VC.swift in Sources */,
 				07F6BB0E1F874FB200E5F4E1 /* Activity.swift in Sources */,
+				0723CDE120FCFAEF00F8B560 /* SprintViewModel.swift in Sources */,
 				07C129F51FC88EAF003149A6 /* SettingsVC.swift in Sources */,
 				07C12A011FCA181C003149A6 /* Message.swift in Sources */,
 				076E009B1F9DB050004467D0 /* PassionActivitySelectionVC.swift in Sources */,
 				073D89E31FA78E43000DE687 /* ContributionVC.swift in Sources */,
+				0723CDE320FCFAFD00F8B560 /* ActivityViewModel.swift in Sources */,
 				07F6BB101F874FC300E5F4E1 /* Sprint.swift in Sources */,
 				07F2F4621FB4B547002B4308 /* PreviousCycleVC.swift in Sources */,
 				07FED9B21FC1F1D400F5D763 /* Coach.swift in Sources */,

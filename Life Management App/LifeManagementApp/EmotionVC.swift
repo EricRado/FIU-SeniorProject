@@ -26,7 +26,7 @@ class EmotionVC: UIViewController {
     
     var emotionChoice = ""
     
-    let dbref = Database.database()
+    let dbRef = Database.database()
         .reference(fromURL: "https://life-management-v2.firebaseio.com/")
     
     var delegate = UIApplication.shared.delegate as! AppDelegate
@@ -101,7 +101,7 @@ class EmotionVC: UIViewController {
     }
     
     func getCategoryKey(userId: String) {
-        let categoryRef = dbref.child("Categories")
+        let categoryRef = dbRef.child("Categories")
         /* query the category collection and find the record which
          contains the current online user's id */
         let userCategoryQuery = categoryRef
@@ -124,6 +124,45 @@ class EmotionVC: UIViewController {
     
     func getActiveSprint(categoryKey: String, emotion: String) {
         print("This is emotion : \(emotion)")
+        let emotionStr = "\(emotion)Sprints"
+        let categoryRef = dbRef.child("Categories/\(categoryKey)/\(emotionStr)")
+        
+        let activeSprintQuery = categoryRef
+            .queryOrdered(byChild: "startingDate")
+            .queryLimited(toLast: 1)
+        
+        activeSprintQuery.observeSingleEvent(of: .value, with: { (snapshot) in
+            for child in snapshot.children.allObjects as! [DataSnapshot] {
+                if !child.exists() {
+                    print("Snapshot is empty")
+                    return
+                }
+                print("snapshot key : \(child.key)")
+                self.sprintOnDisplayId = child.key
+                self.sprintOnDisplay = Sprint(snapshot: child)
+                
+                if let sprint = self.sprintOnDisplay {
+                    self.activity1OnDisplayId = sprint.sprintActivityId1
+                    self.activity2OnDisplayId = sprint.sprintActivityId2
+                    //self.getActivities(id1: ,id:2)
+                    self.setDates()
+                    self.setGoalsText()
+                } else {
+                    print("Data was not downloaded properly")
+                    return
+                }
+            }
+        }) { (error) in
+            print(error.localizedDescription)
+        }
+    }
+    
+    func setDates() {
+        
+    }
+    
+    func setGoalsText() {
+        
     }
     
     @objc func submitPressed(_ sender: UIButton) {

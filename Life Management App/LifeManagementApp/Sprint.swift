@@ -12,7 +12,7 @@ import Firebase
 struct Sprint{
     var numberOfWeeks: String
     var sprintOverallScore: String
-    var startingDate: String
+    var startingDate: String 
     var endingDate: String
     var sprintActivityId1: String
     var sprintActivityId2: String
