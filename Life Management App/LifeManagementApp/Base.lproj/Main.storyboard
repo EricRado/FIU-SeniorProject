@@ -4083,13 +4083,13 @@
                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="aF5-bl-nBq" userLabel="Dates">
                                                                 <rect key="frame" x="98" y="8" width="178" height="24"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="08/01/2017" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EqP-Ty-PIU">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="08/01/2017" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EqP-Ty-PIU" userLabel="Start Date">
                                                                         <rect key="frame" x="0.0" y="0.0" width="73" height="24"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="08/21/2017" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4mp-Ab-R7N">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="08/21/2017" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4mp-Ab-R7N" userLabel="End Date">
                                                                         <rect key="frame" x="105" y="0.0" width="73" height="24"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <color key="textColor" red="0.43529412150000002" green="0.4431372583" blue="0.47450980539999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -5154,6 +5154,28 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="875"/>
+                    <connections>
+                        <outlet property="a1ActualScoreLabel" destination="N4Y-gQ-ieE" id="65L-Kl-9ZU"/>
+                        <outlet property="a1GoalScoreLabel" destination="65x-XF-iVc" id="Qlz-0N-v3t"/>
+                        <outlet property="a1Image" destination="11C-g6-fOc" id="B9Z-qB-vEC"/>
+                        <outlet property="a1ScorePercentageLabel" destination="YlS-42-WbX" id="yhi-yZ-Hg3"/>
+                        <outlet property="a2ActualScoreLabel" destination="XX4-df-cV8" id="fDL-uF-mQ5"/>
+                        <outlet property="a2GoalScoreLabel" destination="eaj-BC-AVN" id="GRo-fa-cze"/>
+                        <outlet property="a2Image" destination="QYg-ed-fE3" id="14m-WY-qh4"/>
+                        <outlet property="a2ScorePercentageLabel" destination="Ejk-2l-6KA" id="YFk-Op-jWg"/>
+                        <outlet property="emotionLabel" destination="L9s-S3-P9x" id="h8K-jI-LTK"/>
+                        <outlet property="emotionScore" destination="BIt-X0-ppZ" id="nw1-MS-NGG"/>
+                        <outlet property="emotionScorePercentageLabel" destination="1eL-vy-AGz" id="Rt8-gn-g30"/>
+                        <outlet property="endDateLabel" destination="4mp-Ab-R7N" id="KJP-4M-tZj"/>
+                        <outlet property="overallScore" destination="zV2-p8-myG" id="b8h-b8-KBJ"/>
+                        <outlet property="overallScorePercentageLabel" destination="WOs-ub-KH6" id="rJ7-HY-e3d"/>
+                        <outlet property="question1TextField" destination="yXQ-sa-rnw" id="C9I-EL-x3z"/>
+                        <outlet property="question2TextField" destination="fzd-WD-cUv" id="Ikp-es-s0X"/>
+                        <outlet property="question3TextField" destination="v7j-qy-iX2" id="YbH-uk-jm3"/>
+                        <outlet property="question4TextField" destination="Ys7-tm-On2" id="9nZ-Ur-0o7"/>
+                        <outlet property="startDateLabel" destination="EqP-Ty-PIU" id="JWi-Sw-mLc"/>
+                        <outlet property="submitBtn" destination="Wgv-PA-MSw" id="ZqK-fa-Be0"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rwy-h8-DaK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
