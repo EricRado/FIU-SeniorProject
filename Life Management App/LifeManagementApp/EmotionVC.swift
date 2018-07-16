@@ -13,7 +13,8 @@ class EmotionVC: UIViewController {
     // :- MARK Instance Variables
     var sprintOnDisplay: Sprint?
     var sprintViewModel: SprintViewModel?
-    var activityViewModel: ActivityViewModel?
+    var activity1ViewModel: ActivityViewModel?
+    var activity2ViewModel: ActivityViewModel?
     
     var activity1OnDisplay: Activity?
     var activity1OnDisplayId = ""
@@ -71,8 +72,16 @@ class EmotionVC: UIViewController {
     }
     
     
-    @IBOutlet weak var a1Image: UIImageView!
-    @IBOutlet weak var a2Image: UIImageView!
+    @IBOutlet weak var a1Image: UIImageView! {
+        didSet {
+            turnImageToCircle(a1Image)
+        }
+    }
+    @IBOutlet weak var a2Image: UIImageView! {
+        didSet {
+            turnImageToCircle(a2Image)
+        }
+    }
     
     @IBOutlet weak var emotionLabel: UILabel!
     
@@ -175,12 +184,16 @@ class EmotionVC: UIViewController {
             print(snapshot)
     
             self.activity1OnDisplay = Activity(snapshot: snapshot)
-            if let activity1 = self.activity1OnDisplay {
-                print("Activity was set")
-                print(activity1)
+            if let activity = self.activity1OnDisplay {
+                self.activity1ViewModel = ActivityViewModel(activity: activity,
+                                                            sprint: self.sprintOnDisplay!)
+                self.setScoresAndPercentages(activityViewModel: self.activity1ViewModel!, option: "1")
+                self.setAverageEmotionScore()
             } else {
-                print("Activity was not set")
+                print("Error parsing activity 1 data")
+                return
             }
+            
         }) { (error) in
             print(error.localizedDescription)
         }
@@ -192,6 +205,15 @@ class EmotionVC: UIViewController {
             }
             print(snapshot)
             self.activity2OnDisplay = Activity(snapshot: snapshot)
+            if let activity = self.activity2OnDisplay {
+                self.activity2ViewModel = ActivityViewModel(activity: activity,
+                                                            sprint: self.sprintOnDisplay!)
+                self.setScoresAndPercentages(activityViewModel: self.activity2ViewModel!, option: "2")
+                self.setAverageEmotionScore()
+            } else {
+                print("Error parsing activity 2 data")
+                return
+            }
         }) { (error) in
             print(error.localizedDescription)
         }
@@ -201,11 +223,35 @@ class EmotionVC: UIViewController {
         self.startDateLabel.text = sprintViewModel?.startingDateFormatted
         self.endDateLabel.text = sprintViewModel?.endingDateFormatted
         
-        
+        self.question1TextField.text = sprintViewModel?.goal1
+        self.question2TextField.text = sprintViewModel?.goal2
+        self.question3TextField.text = sprintViewModel?.goal3
+        self.question4TextField.text = sprintViewModel?.goal4
     }
     
-    func setScoresAndPercentages() {
-        
+    func setScoresAndPercentages(activityViewModel: ActivityViewModel, option: String) {
+        if option == "1" {
+            self.a1ActualScoreLabel.text = activityViewModel.actualPoints
+            self.a1GoalScoreLabel.text = activityViewModel.targetPoints
+            self.a1ScorePercentageLabel.text = activityViewModel.goalPercentageStr
+        } else {
+            self.a2ActualScoreLabel.text = activityViewModel.actualPoints
+            self.a2GoalScoreLabel.text = activityViewModel.targetPoints
+            self.a2ScorePercentageLabel.text = activityViewModel.goalPercentageStr
+        }
+    }
+    
+    // set the average percentage score label and KDCircular progress bar for the emotion
+    func setAverageEmotionScore() {
+        if let goalPercentage1 = self.activity1ViewModel?.goalPercentage,
+            let goalPercentage2 = self.activity2ViewModel?.goalPercentage {
+            let emotionAverage = (goalPercentage1 + goalPercentage2) / 2.0
+            
+            // format the average double such as 50.1%
+            self.emotionScorePercentageLabel.text = String(format: "%.01f%" + "%", emotionAverage)
+            
+            
+        }
     }
     
     @objc func submitPressed(_ sender: UIButton) {
@@ -223,7 +269,7 @@ extension UIViewController {
     func turnImageToCircle(_ image: UIImageView) {
         image.layer.cornerRadius = image.frame.size.width / 2
         image.clipsToBounds = true
-        self.view.layoutIfNeeded()
+       
     }
     
     @objc func menuBtnPressed(_ sender: UIBarButtonItem) {

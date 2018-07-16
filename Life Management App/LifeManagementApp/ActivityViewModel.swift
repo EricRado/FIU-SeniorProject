@@ -25,12 +25,12 @@ struct ActivityViewModel {
         return activity.actualPoints
     }
     
-    // goal percentage actual/target for activity
-    public var goalPercentage: String {
+    // goal percentage actual/target for UILabel to display
+    public var goalPercentageStr: String? {
         var goalPercentageString: String
         if let actualScore = Double(activity.actualPoints),
             let targetScore = Double(activity.targetPoints) {
-
+            
             let goalScore = (actualScore / targetScore) * 100
             let goalScoreInt = Int(round(goalScore))
             
@@ -41,9 +41,42 @@ struct ActivityViewModel {
             }
         }else {
             print("Scores were not set properly")
-            return ""
+            return nil
         }
         return goalPercentageString
     }
     
+    // goal percentage = actual/target for calculating average emotion score
+    public var goalPercentage: Double? {
+        var goalPercentage: Double
+        if let actualScore = Double(activity.actualPoints),
+            let targetScore = Double(activity.targetPoints) {
+            
+            goalPercentage = (actualScore / targetScore) * 100
+            
+            if goalPercentage >= 100.0 {
+                goalPercentage = 100.0
+            }
+        } else {
+            print("Scores were not set properly")
+            return nil
+        }
+        return goalPercentage
+    }
+    
+
+    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
