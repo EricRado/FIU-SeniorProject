@@ -7,29 +7,29 @@
 //
 
 import Foundation
+import Firebase
 
 struct SprintViewModel {
     private let sprint: Sprint
+    private let dbRef = Database.database()
+        .reference(fromURL: "https://life-management-v2.firebaseio.com/")
     
     public init(sprint: Sprint) {
         self.sprint = sprint
+        
+        self.goal1 = sprint.goal1
+        self.goal2 = sprint.goal2
+        self.goal3 = sprint.goal3
+        self.goal4 = sprint.goal4
     }
     
-    public var goal1: String {
-        return sprint.goal1
-    }
+    public var goal1: String
     
-    public var goal2: String {
-        return sprint.goal2
-    }
+    public var goal2: String
     
-    public var goal3: String {
-        return sprint.goal3
-    }
+    public var goal3: String
     
-    public var goal4: String {
-        return sprint.goal4
-    }
+    public var goal4: String
     
     public var startingDateFormatted: String {
         return formatStringDate(sprint.startingDate)
@@ -53,4 +53,45 @@ struct SprintViewModel {
         return newDateStr
         
     }
+    
+    public func updateGoals(emotion: String, sprintId: String, viewController: UIViewController) {
+        let emotionStr = "\(emotion)Sprints"
+        print("UPDATE GOALS : [sprint.categoryId] : \(sprint.categoryId) ")
+        print("UPDATE GOALS : [sprintId] : \(sprintId) ")
+
+        let updateRef = dbRef.child("Categories/\(sprint.categoryId)/\(emotionStr)/\(sprintId)/")
+        updateRef.updateChildValues(
+            ["goal1": goal1, "goal2": goal2,"goal3": goal3, "goal4": goal4 ]) { (error, ref) in
+                if let error = error {
+                    print(error.localizedDescription)
+                    viewController.createAlert(titleText: "Update Goals",
+                                               messageText: "Save was unsuccessful")
+                }
+                viewController.createAlert(titleText: "Update Goals",
+                                           messageText: "Save was successful")
+                
+        }
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

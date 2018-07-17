@@ -9,6 +9,14 @@
 import UIKit
 import Firebase
 
+
+
+public enum Position {
+    case Top
+    case Bottom
+}
+
+
 class EmotionVC: UIViewController {
     // :- MARK Instance Variables
     var sprintOnDisplay: Sprint?
@@ -95,10 +103,26 @@ class EmotionVC: UIViewController {
     @IBOutlet weak var overallScore: KDCircularProgress!
     
     
-    @IBOutlet weak var question1TextField: UITextField!
-    @IBOutlet weak var question2TextField: UITextField!
-    @IBOutlet weak var question3TextField: UITextField!
-    @IBOutlet weak var question4TextField: UITextField!
+    @IBOutlet weak var question1TextField: UITextField! {
+        didSet {
+            question1TextField.delegate = self
+        }
+    }
+    @IBOutlet weak var question2TextField: UITextField! {
+        didSet {
+            question2TextField.delegate = self
+        }
+    }
+    @IBOutlet weak var question3TextField: UITextField! {
+        didSet {
+            question3TextField.delegate = self
+        }
+    }
+    @IBOutlet weak var question4TextField: UITextField! {
+        didSet {
+            question4TextField.delegate = self
+        }
+    }
     
     @IBOutlet weak var submitBtn: UIButton!
     
@@ -327,13 +351,27 @@ class EmotionVC: UIViewController {
         }
     }
     
+    @objc func dayBtnPressed(_ sender: UIButton) {
+        
+    }
+    
     @objc func submitPressed(_ sender: UIButton) {
-        print("submit was pressed")
+        // retrieve goals text from text fields
+        // if field is blank set to empty string
+        self.sprintViewModel?.goal1 = self.question1TextField.text ?? ""
+        self.sprintViewModel?.goal2 = self.question2TextField.text ?? ""
+        self.sprintViewModel?.goal3 = self.question3TextField.text ?? ""
+        self.sprintViewModel?.goal4 = self.question4TextField.text ?? ""
+        
+        // update the new goals to the database
+        self.sprintViewModel?.updateGoals(emotion: self.emotionChoice,
+                                          sprintId: self.sprintOnDisplayId,
+                                          viewController: self)
     }
 
 }
 
-extension UIViewController {
+extension UIViewController: UITextFieldDelegate {
     func turnLabelToCircle(_ label: UILabel) {
         label.layer.cornerRadius = label.frame.size.width / 2
         label.clipsToBounds = true
@@ -352,6 +390,11 @@ extension UIViewController {
     
     @objc func menuBtnPressed(_ sender: UIBarButtonItem) {
         print("dropdown button pressed")
+    }
+    
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
 

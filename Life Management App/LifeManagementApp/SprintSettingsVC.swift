@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 
-class SprintSettingsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate {
+class SprintSettingsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
     let delegate = UIApplication.shared.delegate as! AppDelegate
     let dbref = Database.database()
@@ -90,10 +90,6 @@ class SprintSettingsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.view.endEditing(true)
-        return true
-    }
     
     func loadImages(){
         joyActivity1Img.image = delegate.activitySelectedImages[0]

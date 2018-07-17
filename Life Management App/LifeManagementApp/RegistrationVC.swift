@@ -11,7 +11,7 @@ import Firebase
 import Foundation
 
 
-class RegistrationVC: UIViewController, UITextFieldDelegate {
+class RegistrationVC: UIViewController {
 
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
@@ -30,11 +30,6 @@ class RegistrationVC: UIViewController, UITextFieldDelegate {
     let delegate = UIApplication.shared.delegate as! AppDelegate
     
     let dbRef = Database.database().reference(fromURL: "https://life-management-v2.firebaseio.com/")
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.view.endEditing(true)
-        return true
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
