@@ -83,6 +83,9 @@ class EmotionVC: UIViewController {
         }
     }
     
+    @IBOutlet var daytopBtns: [UIButton]!
+    @IBOutlet var dayBottomBtns: [UIButton]!
+    
     @IBOutlet weak var emotionLabel: UILabel!
     
     @IBOutlet weak var emotionScorePercentageLabel: UILabel!
@@ -189,6 +192,8 @@ class EmotionVC: UIViewController {
                                                             sprint: self.sprintOnDisplay!)
                 self.setScoresAndPercentages(activityViewModel: self.activity1ViewModel!, option: "1")
                 self.setAverageEmotionScore()
+                self.setCalendar(btnArray: self.daytopBtns,
+                                 dailyPointsStr: activity.sprintDailyPoints)
             } else {
                 print("Error parsing activity 1 data")
                 return
@@ -210,6 +215,8 @@ class EmotionVC: UIViewController {
                                                             sprint: self.sprintOnDisplay!)
                 self.setScoresAndPercentages(activityViewModel: self.activity2ViewModel!, option: "2")
                 self.setAverageEmotionScore()
+                self.setCalendar(btnArray: self.dayBottomBtns,
+                                 dailyPointsStr: activity.sprintDailyPoints)
             } else {
                 print("Error parsing activity 2 data")
                 return
@@ -254,6 +261,72 @@ class EmotionVC: UIViewController {
         }
     }
     
+    func setCalendar(btnArray: [UIButton], dailyPointsStr: String) {
+        let dateFmt = DateFormatter()
+        
+        // convert date strings to date objects
+        dateFmt.dateFormat = "MMddyyyy"
+        let startDate = dateFmt.date(from: self.sprintOnDisplay!.startingDate)
+        
+        // save start month will be used to check if the date has changed to a new month
+        let startMonth = Calendar.current.component(.month, from: startDate!)
+        
+        // determine the day of the week such as Wednesday = 3 or Friday = 5
+        // the day of the week is substracted by 1 because the button tags start at index 0
+        let dayOfTheWeek = Int(Calendar.current.component(.weekday, from: startDate!)) - 1
+        
+        // extract the day the sprint starts from the starting date
+        var startDay = Calendar.current.component(.day, from: startDate!)
+        
+        // determine the last day of the sprint from the number of weeks input by the user
+        let dayCountInWeekChoice = (Int(self.sprintOnDisplay!.numberOfWeeks)! * 7) - 1
+        var dayCounter = 0
+        
+        // store the indices of all the day buttons that are displayed on the calendar
+        var dateComponent = DateComponents()
+        
+        // month flag is used to make sure the reset of startDay is only executed once
+        var monthFlag = true
+        
+        // setup the calendar display
+        for button in btnArray {
+            // get the date about to be displayed and extract the month from the date
+            dateComponent.day = dayCounter
+            let date = Calendar.current.date(byAdding: dateComponent, to: startDate!)
+            let checkMonth = Calendar.current.component(.month, from: date!)
+            
+            if checkMonth != startMonth && monthFlag {
+                startDay = 1
+                monthFlag = false
+            }
+            
+            if button.tag < dayOfTheWeek {
+                hideButton(button)
+            }
+            if (dayOfTheWeek <= button.tag) && (dayCounter <= dayCountInWeekChoice) {
+                // store the indices of all the day buttons that are displayed on the calendar
+                self.btnIndexes.append(button.tag)
+                startDay += 1
+                dayCounter += 1
+            } else {
+                hideButton(button)
+            }
+            
+        }
+        
+        var counter = 0
+        
+        // setup the sprint daily points
+        for index in dailyPointsStr.indices {
+            if dailyPointsStr[index] == "1" {
+                // get the index of the button on display
+                let btnIndex = self.btnIndexes[counter]
+                btnArray[btnIndex].backgroundColor = UIColor.green
+            }
+            counter += 1
+        }
+    }
+    
     @objc func submitPressed(_ sender: UIButton) {
         print("submit was pressed")
     }
@@ -270,6 +343,11 @@ extension UIViewController {
         image.layer.cornerRadius = image.frame.size.width / 2
         image.clipsToBounds = true
        
+    }
+    
+    func hideButton(_ button: UIButton) {
+        button.alpha = 0.0
+        button.isUserInteractionEnabled = false
     }
     
     @objc func menuBtnPressed(_ sender: UIBarButtonItem) {
