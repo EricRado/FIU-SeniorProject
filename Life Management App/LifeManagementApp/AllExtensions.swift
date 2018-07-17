@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Firebase
 
 
 // dismisses keyboard when any part of the screen is tapped
@@ -74,4 +75,77 @@ extension UIViewController{
     }
     
 }
+
+extension UIImageView {
+    // get url for the activity image from snapshot
+    func downloadActivityImg(url: DatabaseReference?) {
+        if let url = url {
+            url.observeSingleEvent(of: .childAdded, with: { (snapshot) in
+                print("Download image url...")
+                print(snapshot)
+                
+                // Get download URL from snapshot
+                let downloadURL = snapshot.value as! String
+                print(downloadURL)
+                
+                // Create a storage reference from the URL
+                let storageReference = storage.reference(forURL: downloadURL)
+                
+                // Download the data, assuming a max size of 1MB
+                storageReference.getData(maxSize: 1*1024*1024, completion: { (data, error) in
+                    if let error = error {
+                        print(error.localizedDescription)
+                        return
+                    }
+                    self.image = UIImage(data: data!)
+                })
+            }) { (error) in
+                print(error.localizedDescription)
+            }
+        } else {
+            print("Url does not exist")
+        }
+    }
+}
+
+// Adding a stored property to UIButton class
+
+protocol PropertyStoring {
+    associatedtype T
+    
+    func getAssociatedObject(_ key: UnsafeRawPointer!, defaultValue: T) -> T
+}
+
+extension PropertyStoring {
+    func getAssociatedObject(_ key: UnsafeRawPointer!, defaultValue: T) ->T {
+        guard let value = objc_getAssociatedObject(self, key) as? T else {
+            return defaultValue
+        }
+        return value
+    }
+}
+
+public enum Position {
+    case Top
+    case Bottom
+    case NotApplicable
+}
+
+extension UIButton: PropertyStoring {
+    typealias T = Position
+    
+    private struct CustomProperties {
+        static var position = Position.NotApplicable
+    }
+    
+    var position: Position {
+        get {
+            return getAssociatedObject(&CustomProperties.position, defaultValue: CustomProperties.position)
+        }
+        set {
+            return objc_setAssociatedObject(self, &CustomProperties.position, newValue, .OBJC_ASSOCIATION_RETAIN)
+        }
+    }
+}
+
 

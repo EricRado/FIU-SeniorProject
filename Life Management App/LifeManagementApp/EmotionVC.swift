@@ -9,49 +9,29 @@
 import UIKit
 import Firebase
 
-
-protocol PropertyStoring {
-    associatedtype T
-    
-    func getAssociatedObject(_ key: UnsafeRawPointer!, defaultValue: T) -> T
-}
-
-extension PropertyStoring {
-    func getAssociatedObject(_ key: UnsafeRawPointer!, defaultValue: T) ->T {
-        guard let value = objc_getAssociatedObject(self, key) as? T else {
-            return defaultValue
-        }
-        return value
-    }
-}
-
-public enum Position {
-    case Top
-    case Bottom
-    case NotApplicable
-}
-
-extension UIButton: PropertyStoring {
-    typealias T = Position
-    
-    private struct CustomProperties {
-        static var position = Position.NotApplicable
+extension EmotionVC: UIViewControllerTransitioningDelegate{
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return PresentMenuAnimator()
     }
     
-    var position: Position {
-        get {
-            return getAssociatedObject(&CustomProperties.position, defaultValue: CustomProperties.position)
-        }
-        set {
-            return objc_setAssociatedObject(self, &CustomProperties.position, newValue, .OBJC_ASSOCIATION_RETAIN)
-        }
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return DismissMenuAnimator()
+    }
+    
+    /* indicate that the dismiss transition is going to be interactive, but
+     only if the user is panning */
+    
+    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        return interactor.hasStarted ? interactor : nil
+    }
+    
+    func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        return interactor.hasStarted ? interactor : nil
     }
 }
-
 
 class EmotionVC: UIViewController {
     // :- MARK Instance Variables
-    let interactor = Interactor()
     
     var sprintOnDisplay: Sprint?
     var sprintViewModel: SprintViewModel?
@@ -178,6 +158,12 @@ class EmotionVC: UIViewController {
         // Do any additional setup after loading the view.
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "dropdown"), style: .plain, target: self, action: #selector(menuBtnPressed(_:)))
         self.navigationController?.navigationBar.barTintColor = .blue
+        
+        let pan = UIScreenEdgePanGestureRecognizer(target: self,
+                                                   action: #selector(edgePanGestureTest(sender:)))
+        pan.edges = .left
+        pan.delegate = self
+        self.view.addGestureRecognizer(pan)
         
     }
     
@@ -465,8 +451,43 @@ class EmotionVC: UIViewController {
     }
 
 }
+protocol Gesture {
+    var interactor: Interactor {
+        get
+    }
+}
+
+extension EmotionVC: Gesture, UIGestureRecognizerDelegate {
+    var interactor: Interactor {
+        get {
+            return Interactor()
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destinationViewController = segue.destination as? SideMenuViewController{
+            destinationViewController.transitioningDelegate = self
+            // pass the interactor object forward
+            destinationViewController.interactor = interactor
+        }
+    }
+    
+    @objc func edgePanGestureTest(sender: UIScreenEdgePanGestureRecognizer) {
+        let translation = sender.translation(in: view)
+        
+        let progress = MenuHelper.calculateProgress(translationInView: translation,
+                                                    viewBounds: view.bounds,
+                                                    direction: .Right)
+        
+        MenuHelper.mapGestureStateToInteractor(gestureState: sender.state, progress: progress, interactor: interactor) {
+            self.performSegue(withIdentifier: "openMenu", sender: nil)
+        }
+    }
+}
 
 extension UIViewController: UITextFieldDelegate {
+    
+    
     func turnLabelToCircle(_ label: UILabel) {
         label.layer.cornerRadius = label.frame.size.width / 2
         label.clipsToBounds = true
@@ -490,45 +511,13 @@ extension UIViewController: UITextFieldDelegate {
     
     @objc func menuBtnPressed(_ sender: UIBarButtonItem) {
         print("dropdown button pressed")
+        performSegue(withIdentifier: "openMenu", sender: nil)
     }
-    
-    
     
 }
 
 
 
-extension UIImageView {
-    // get url for the activity image from snapshot
-    func downloadActivityImg(url: DatabaseReference?) {
-        if let url = url {
-            url.observeSingleEvent(of: .childAdded, with: { (snapshot) in
-                print("Download image url...")
-                print(snapshot)
-                
-                // Get download URL from snapshot
-                let downloadURL = snapshot.value as! String
-                print(downloadURL)
-                
-                // Create a storage reference from the URL
-                let storageReference = storage.reference(forURL: downloadURL)
-                
-                // Download the data, assuming a max size of 1MB
-                storageReference.getData(maxSize: 1*1024*1024, completion: { (data, error) in
-                    if let error = error {
-                        print(error.localizedDescription)
-                        return
-                    }
-                    self.image = UIImage(data: data!)
-                })
-            }) { (error) in
-                print(error.localizedDescription)
-            }
-        } else {
-            print("Url does not exist")
-        }
-    }
-}
 
 
 

@@ -5231,6 +5231,7 @@
                         <outletCollection property="dayBottomBtns" destination="ag3-gs-3F2" collectionClass="NSMutableArray" id="GRa-V6-YdK"/>
                         <outletCollection property="dayBottomBtns" destination="yZE-Ds-xNX" collectionClass="NSMutableArray" id="6yz-Bk-3N9"/>
                         <outletCollection property="dayBottomBtns" destination="g0Q-v8-Mam" collectionClass="NSMutableArray" id="fUd-2N-cWA"/>
+                        <segue destination="d5V-DO-Q8U" kind="presentation" identifier="openMenu" id="OzN-ms-NxI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rwy-h8-DaK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -9124,7 +9125,7 @@
         <segue reference="DMP-7Y-CxG"/>
         <segue reference="Mmc-8c-1pg"/>
         <segue reference="vUG-b0-bNY"/>
-        <segue reference="E2e-RD-eat"/>
+        <segue reference="jEA-9h-OB1"/>
         <segue reference="cIz-8c-tQu"/>
     </inferredMetricsTieBreakers>
 </document>
