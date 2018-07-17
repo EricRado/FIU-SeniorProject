@@ -10,10 +10,42 @@ import UIKit
 import Firebase
 
 
+protocol PropertyStoring {
+    associatedtype T
+    
+    func getAssociatedObject(_ key: UnsafeRawPointer!, defaultValue: T) -> T
+}
+
+extension PropertyStoring {
+    func getAssociatedObject(_ key: UnsafeRawPointer!, defaultValue: T) ->T {
+        guard let value = objc_getAssociatedObject(self, key) as? T else {
+            return defaultValue
+        }
+        return value
+    }
+}
 
 public enum Position {
     case Top
     case Bottom
+    case NotApplicable
+}
+
+extension UIButton: PropertyStoring {
+    typealias T = Position
+    
+    private struct CustomProperties {
+        static var position = Position.NotApplicable
+    }
+    
+    var position: Position {
+        get {
+            return getAssociatedObject(&CustomProperties.position, defaultValue: CustomProperties.position)
+        }
+        set {
+            return objc_setAssociatedObject(self, &CustomProperties.position, newValue, .OBJC_ASSOCIATION_RETAIN)
+        }
+    }
 }
 
 
@@ -99,7 +131,11 @@ class EmotionVC: UIViewController {
     @IBOutlet weak var emotionScorePercentageLabel: UILabel!
     @IBOutlet weak var overallScorePercentageLabel: UILabel!
     
-    @IBOutlet weak var emotionScore: KDCircularProgress!
+    @IBOutlet weak var emotionScore: KDCircularProgress! {
+        didSet {
+            emotionScore.progressThickness = 0.5
+        }
+    }
     @IBOutlet weak var overallScore: KDCircularProgress!
     
     
@@ -124,18 +160,20 @@ class EmotionVC: UIViewController {
         }
     }
     
-    @IBOutlet weak var submitBtn: UIButton!
+    @IBOutlet weak var submitBtn: UIButton! {
+        didSet {
+            submitBtn.addTarget(self,
+                                action: #selector(submitPressed(_:)),
+                                for: .touchUpInside)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.layoutIfNeeded()
 
         // Do any additional setup after loading the view.
-        self.emotionScore.progressThickness = 0.5
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "dropdown"), style: .plain, target: self, action: #selector(menuBtnPressed(_:)))
-        self.submitBtn.addTarget(self,
-                                 action: #selector(submitPressed(_:)),
-                                 for: .touchUpInside)
         self.navigationController?.navigationBar.barTintColor = .blue
     }
     
@@ -217,7 +255,8 @@ class EmotionVC: UIViewController {
                 self.setScoresAndPercentages(activityViewModel: self.activity1ViewModel!, option: "1")
                 self.setAverageEmotionScore()
                 self.setCalendar(btnArray: self.daytopBtns,
-                                 dailyPointsStr: activity.sprintDailyPoints)
+                                 dailyPointsStr: activity.sprintDailyPoints,
+                                 position: Position.Top)
             } else {
                 print("Error parsing activity 1 data")
                 return
@@ -240,7 +279,8 @@ class EmotionVC: UIViewController {
                 self.setScoresAndPercentages(activityViewModel: self.activity2ViewModel!, option: "2")
                 self.setAverageEmotionScore()
                 self.setCalendar(btnArray: self.dayBottomBtns,
-                                 dailyPointsStr: activity.sprintDailyPoints)
+                                 dailyPointsStr: activity.sprintDailyPoints,
+                                 position: Position.Bottom)
             } else {
                 print("Error parsing activity 2 data")
                 return
@@ -285,7 +325,7 @@ class EmotionVC: UIViewController {
         }
     }
     
-    func setCalendar(btnArray: [UIButton], dailyPointsStr: String) {
+    func setCalendar(btnArray: [UIButton], dailyPointsStr: String, position: Position) {
         let dateFmt = DateFormatter()
         
         // convert date strings to date objects
@@ -330,6 +370,19 @@ class EmotionVC: UIViewController {
             if (dayOfTheWeek <= button.tag) && (dayCounter <= dayCountInWeekChoice) {
                 // store the indices of all the day buttons that are displayed on the calendar
                 self.btnIndexes.append(button.tag)
+                
+                // store position property for button that is going to be displayed
+                if position == Position.Top {
+                    button.position = .Top
+                } else if position == Position.Bottom {
+                    button.position = .Bottom
+                }
+                
+                // add button action
+                button.addTarget(self,
+                                 action: #selector(dayBtnPressed(_:)),
+                                 for: .touchUpInside)
+                
                 startDay += 1
                 dayCounter += 1
             } else {
@@ -352,6 +405,31 @@ class EmotionVC: UIViewController {
     }
     
     @objc func dayBtnPressed(_ sender: UIButton) {
+        let activity: Activity?
+        let newScore: Int
+        switch sender.position {
+        case .Top:
+            print("Top button was pressed")
+            activity = activity1OnDisplay
+        case .Bottom:
+            print("Bottom button was pressed")
+            activity = activity2OnDisplay
+        case .NotApplicable:
+            return
+        }
+        
+        // store the index that will be changed in sprint daily points
+        let index = Int(self.btnIndexes.index(of: sender.tag)!)
+        
+        if sender.backgroundColor == UIColor.green {
+            // the score has decreased
+            newScore = Int((activity!.actualPoints))! - 1
+            sender.backgroundColor = UIColor.gray
+        } else {
+            // the score has increased
+            newScore = Int(activity!.actualPoints)! + 1
+            sender.backgroundColor = UIColor.green
+        }
         
     }
     

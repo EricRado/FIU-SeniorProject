@@ -56,8 +56,6 @@ struct SprintViewModel {
     
     public func updateGoals(emotion: String, sprintId: String, viewController: UIViewController) {
         let emotionStr = "\(emotion)Sprints"
-        print("UPDATE GOALS : [sprint.categoryId] : \(sprint.categoryId) ")
-        print("UPDATE GOALS : [sprintId] : \(sprintId) ")
 
         let updateRef = dbRef.child("Categories/\(sprint.categoryId)/\(emotionStr)/\(sprintId)/")
         updateRef.updateChildValues(
