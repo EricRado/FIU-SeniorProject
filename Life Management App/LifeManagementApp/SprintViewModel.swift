@@ -31,6 +31,14 @@ struct SprintViewModel {
     
     public var goal4: String
     
+    public var activityId1: String {
+        return sprint.sprintActivityId1
+    }
+    
+    public var activityId2: String {
+        return sprint.sprintActivityId2
+    }
+    
     public var startingDateFormatted: String {
         return formatStringDate(sprint.startingDate)
     }

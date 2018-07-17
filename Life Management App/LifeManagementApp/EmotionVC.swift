@@ -405,15 +405,19 @@ class EmotionVC: UIViewController {
     }
     
     @objc func dayBtnPressed(_ sender: UIButton) {
-        let activity: Activity?
+        let activity: ActivityViewModel?
+        let activityId: String?
         let newScore: Int
+        
         switch sender.position {
         case .Top:
             print("Top button was pressed")
-            activity = activity1OnDisplay
+            activity = activity1ViewModel
+            activityId = self.sprintViewModel?.activityId1
         case .Bottom:
             print("Bottom button was pressed")
-            activity = activity2OnDisplay
+            activity = activity2ViewModel
+            activityId = self.sprintViewModel?.activityId2
         case .NotApplicable:
             return
         }
@@ -430,8 +434,13 @@ class EmotionVC: UIViewController {
             newScore = Int(activity!.actualPoints)! + 1
             sender.backgroundColor = UIColor.green
         }
+        activity?.actualPoints = String(newScore)
+        activity?.updateActualScoreAndDailyPoints(activityId: activityId!,
+                                                  dailyPointsModifiedIndex: index)
         
     }
+    
+    
     
     @objc func submitPressed(_ sender: UIButton) {
         // retrieve goals text from text fields
