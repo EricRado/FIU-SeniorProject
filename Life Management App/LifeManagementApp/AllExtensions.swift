@@ -28,6 +28,17 @@ extension UITextField{
     
 }
 
+extension String {
+    
+    //Enables replacement of the character at a specified position within a string
+    func replace(_ index: Int, _ newChar: Character) -> String {
+        var chars = Array(characters)
+        chars[index] = newChar
+        let modifiedString = String(chars)
+        return modifiedString
+    }
+}
+
 extension UIView{
     
     func addConstraintsWithFormat(_ format: String, views: UIView...){
@@ -61,8 +72,6 @@ extension UIViewController{
         }))
         present(alert, animated: true)
     }
-    
-    
     
 }
 

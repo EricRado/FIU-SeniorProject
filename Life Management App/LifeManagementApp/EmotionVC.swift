@@ -51,6 +51,8 @@ extension UIButton: PropertyStoring {
 
 class EmotionVC: UIViewController {
     // :- MARK Instance Variables
+    let interactor = Interactor()
+    
     var sprintOnDisplay: Sprint?
     var sprintViewModel: SprintViewModel?
     var activity1ViewModel: ActivityViewModel?
@@ -72,6 +74,7 @@ class EmotionVC: UIViewController {
     
     let dbRef = Database.database()
         .reference(fromURL: "https://life-management-v2.firebaseio.com/")
+    var imgUrlDbRef: DatabaseReference?
     
     var delegate = UIApplication.shared.delegate as! AppDelegate
     
@@ -175,6 +178,7 @@ class EmotionVC: UIViewController {
         // Do any additional setup after loading the view.
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "dropdown"), style: .plain, target: self, action: #selector(menuBtnPressed(_:)))
         self.navigationController?.navigationBar.barTintColor = .blue
+        
     }
     
     func getCategoryKey(userId: String) {
@@ -257,6 +261,7 @@ class EmotionVC: UIViewController {
                 self.setCalendar(btnArray: self.daytopBtns,
                                  dailyPointsStr: activity.sprintDailyPoints,
                                  position: Position.Top)
+                self.a1Image.downloadActivityImg(url: self.imgUrlDbRef?.child("\(self.activity1ViewModel!.activityName)/"))
             } else {
                 print("Error parsing activity 1 data")
                 return
@@ -281,6 +286,8 @@ class EmotionVC: UIViewController {
                 self.setCalendar(btnArray: self.dayBottomBtns,
                                  dailyPointsStr: activity.sprintDailyPoints,
                                  position: Position.Bottom)
+                self.a2Image.downloadActivityImg(url: self.imgUrlDbRef?.child(
+                    "\(self.activity2ViewModel!.activityName)/"))
             } else {
                 print("Error parsing activity 2 data")
                 return
@@ -320,7 +327,6 @@ class EmotionVC: UIViewController {
             
             // format the average double such as 50.1%
             self.emotionScorePercentageLabel.text = String(format: "%.01f%" + "%", emotionAverage)
-            
             
         }
     }
@@ -404,6 +410,10 @@ class EmotionVC: UIViewController {
         }
     }
     
+    func setActivityImg(activityName: String, option: String) {
+        
+    }
+    
     @objc func dayBtnPressed(_ sender: UIButton) {
         let activity: ActivityViewModel?
         let activityId: String?
@@ -440,8 +450,6 @@ class EmotionVC: UIViewController {
         
     }
     
-    
-    
     @objc func submitPressed(_ sender: UIButton) {
         // retrieve goals text from text fields
         // if field is blank set to empty string
@@ -475,17 +483,52 @@ extension UIViewController: UITextFieldDelegate {
         button.isUserInteractionEnabled = false
     }
     
-    @objc func menuBtnPressed(_ sender: UIBarButtonItem) {
-        print("dropdown button pressed")
-    }
-    
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }
+    
+    @objc func menuBtnPressed(_ sender: UIBarButtonItem) {
+        print("dropdown button pressed")
+    }
+    
+    
+    
 }
 
 
+
+extension UIImageView {
+    // get url for the activity image from snapshot
+    func downloadActivityImg(url: DatabaseReference?) {
+        if let url = url {
+            url.observeSingleEvent(of: .childAdded, with: { (snapshot) in
+                print("Download image url...")
+                print(snapshot)
+                
+                // Get download URL from snapshot
+                let downloadURL = snapshot.value as! String
+                print(downloadURL)
+                
+                // Create a storage reference from the URL
+                let storageReference = storage.reference(forURL: downloadURL)
+                
+                // Download the data, assuming a max size of 1MB
+                storageReference.getData(maxSize: 1*1024*1024, completion: { (data, error) in
+                    if let error = error {
+                        print(error.localizedDescription)
+                        return
+                    }
+                    self.image = UIImage(data: data!)
+                })
+            }) { (error) in
+                print(error.localizedDescription)
+            }
+        } else {
+            print("Url does not exist")
+        }
+    }
+}
 
 
 

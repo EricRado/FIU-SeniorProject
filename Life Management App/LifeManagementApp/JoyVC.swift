@@ -9,16 +9,6 @@
 import UIKit
 import Firebase
 
-extension String {
-    
-    //Enables replacement of the character at a specified position within a string
-    func replace(_ index: Int, _ newChar: Character) -> String {
-        var chars = Array(characters)
-        chars[index] = newChar
-        let modifiedString = String(chars)
-        return modifiedString
-    }
-}
 
 extension JoyVC: UIViewControllerTransitioningDelegate{
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
@@ -437,6 +427,7 @@ class JoyVC: UIViewController {
         let imgUrlDBref = Database.database().reference(withPath: "ActivityImgs/JoyActivities/")
         let imgUrlQuery = imgUrlDBref.queryOrdered(byChild: "name")
             .queryEqual(toValue: activityName)
+        
         
         // get url for the activity image from DataSnapshot
         imgUrlQuery.observeSingleEvent(of: .value, with: {(snapshot) in

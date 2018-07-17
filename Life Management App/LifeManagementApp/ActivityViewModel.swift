@@ -27,6 +27,10 @@ struct ActivityViewModel {
         return activity.targetPoints
     }
     
+    public var activityName: String {
+        return activity.name
+    }
+    
     public var actualPoints: String
     
     public var sprintDailyPoints: String
