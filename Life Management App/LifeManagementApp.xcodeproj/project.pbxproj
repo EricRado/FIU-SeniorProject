@@ -12,7 +12,6 @@
 		07174FD51F8E73DE00E1E8AC /* JoyActivitySelectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07174FD41F8E73DE00E1E8AC /* JoyActivitySelectionVC.swift */; };
 		07237B9F20AA069B00BBB96E /* AllExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07237B9E20AA069B00BBB96E /* AllExtensions.swift */; };
 		0723CDDD20FBC08900F8B560 /* EmotionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0723CDDC20FBC08900F8B560 /* EmotionVC.swift */; };
-		0723CDDF20FC584900F8B560 /* Test1VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0723CDDE20FC584900F8B560 /* Test1VC.swift */; };
 		0723CDE120FCFAEF00F8B560 /* SprintViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0723CDE020FCFAEF00F8B560 /* SprintViewModel.swift */; };
 		0723CDE320FCFAFD00F8B560 /* ActivityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0723CDE220FCFAFD00F8B560 /* ActivityViewModel.swift */; };
 		072F861C1F5D9227007E5A8A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072F861B1F5D9227007E5A8A /* AppDelegate.swift */; };
@@ -64,8 +63,6 @@
 		07F6BB121F8DC33B00E5F4E1 /* CategoryTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F6BB111F8DC33B00E5F4E1 /* CategoryTabBarController.swift */; };
 		07F9D2B91FBFCDF10083AEF2 /* ViewCoachesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F9D2B81FBFCDF10083AEF2 /* ViewCoachesVC.swift */; };
 		07F9D2BB1FBFCEE50083AEF2 /* ViewCoachTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F9D2BA1FBFCEE50083AEF2 /* ViewCoachTableViewCell.swift */; };
-		07FA3C1A20FE9EA100B56330 /* Test2VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FA3C1920FE9EA100B56330 /* Test2VC.swift */; };
-		07FA3C1C20FF85DC00B56330 /* Test3VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FA3C1B20FF85DC00B56330 /* Test3VC.swift */; };
 		07FED9B21FC1F1D400F5D763 /* Coach.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FED9B11FC1F1D400F5D763 /* Coach.swift */; };
 		1B2B05D62BBECE085957DD88 /* Pods_LifeManagementAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD2E15214151F4A5569119C2 /* Pods_LifeManagementAppUITests.framework */; };
 		5D1E2C62B058D75B140D9636 /* Pods_LifeManagementApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EEB56DFFD2D6DB1CEBA2D06 /* Pods_LifeManagementApp.framework */; };
@@ -96,7 +93,6 @@
 		07174FD41F8E73DE00E1E8AC /* JoyActivitySelectionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoyActivitySelectionVC.swift; sourceTree = "<group>"; };
 		07237B9E20AA069B00BBB96E /* AllExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllExtensions.swift; sourceTree = "<group>"; };
 		0723CDDC20FBC08900F8B560 /* EmotionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmotionVC.swift; sourceTree = "<group>"; };
-		0723CDDE20FC584900F8B560 /* Test1VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test1VC.swift; sourceTree = "<group>"; };
 		0723CDE020FCFAEF00F8B560 /* SprintViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SprintViewModel.swift; sourceTree = "<group>"; };
 		0723CDE220FCFAFD00F8B560 /* ActivityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewModel.swift; sourceTree = "<group>"; };
 		072F86181F5D9227007E5A8A /* LifeManagementApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LifeManagementApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -156,8 +152,6 @@
 		07F6BB111F8DC33B00E5F4E1 /* CategoryTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryTabBarController.swift; sourceTree = "<group>"; };
 		07F9D2B81FBFCDF10083AEF2 /* ViewCoachesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewCoachesVC.swift; sourceTree = "<group>"; };
 		07F9D2BA1FBFCEE50083AEF2 /* ViewCoachTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewCoachTableViewCell.swift; sourceTree = "<group>"; };
-		07FA3C1920FE9EA100B56330 /* Test2VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test2VC.swift; sourceTree = "<group>"; };
-		07FA3C1B20FF85DC00B56330 /* Test3VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test3VC.swift; sourceTree = "<group>"; };
 		07FED9B11FC1F1D400F5D763 /* Coach.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coach.swift; sourceTree = "<group>"; };
 		26C9179FB6569CF8F0450F69 /* Pods-LifeManagementAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeManagementAppUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LifeManagementAppUITests/Pods-LifeManagementAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		54322A843B3FA1EA6DA5DE28 /* Pods-LifeManagementApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeManagementApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LifeManagementApp/Pods-LifeManagementApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -288,6 +282,7 @@
 				076E009C1F9DB078004467D0 /* ContributionActivitySelectionVC.swift */,
 				073D89E21FA78E43000DE687 /* ContributionVC.swift */,
 				07C53BB71FC4D7BF00AD9904 /* CurrentChatsVC.swift */,
+				0723CDDC20FBC08900F8B560 /* EmotionVC.swift */,
 				07174FD41F8E73DE00E1E8AC /* JoyActivitySelectionVC.swift */,
 				079265641F7B0636008B5BDE /* JoyVC.swift */,
 				070F45D21FCE47C9003FAF75 /* MessageLogVC.swift */,
@@ -300,10 +295,6 @@
 				072F86881F6F8121007E5A8A /* SignInVC.swift */,
 				076E009E1F9EAAF8004467D0 /* SprintSettingsVC.swift */,
 				07F9D2B81FBFCDF10083AEF2 /* ViewCoachesVC.swift */,
-				0723CDDC20FBC08900F8B560 /* EmotionVC.swift */,
-				0723CDDE20FC584900F8B560 /* Test1VC.swift */,
-				07FA3C1920FE9EA100B56330 /* Test2VC.swift */,
-				07FA3C1B20FF85DC00B56330 /* Test3VC.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -689,10 +680,8 @@
 				07C129FF1FCA180F003149A6 /* Chat.swift in Sources */,
 				0723CDDD20FBC08900F8B560 /* EmotionVC.swift in Sources */,
 				072F867C1F69F2A9007E5A8A /* Popup5VC.swift in Sources */,
-				0723CDDF20FC584900F8B560 /* Test1VC.swift in Sources */,
 				07F6BB0E1F874FB200E5F4E1 /* Activity.swift in Sources */,
 				0723CDE120FCFAEF00F8B560 /* SprintViewModel.swift in Sources */,
-				07FA3C1A20FE9EA100B56330 /* Test2VC.swift in Sources */,
 				07C129F51FC88EAF003149A6 /* SettingsVC.swift in Sources */,
 				07C12A011FCA181C003149A6 /* Message.swift in Sources */,
 				076E009B1F9DB050004467D0 /* PassionActivitySelectionVC.swift in Sources */,
@@ -711,7 +700,6 @@
 				079265651F7B0636008B5BDE /* JoyVC.swift in Sources */,
 				07F2F4641FB4B611002B4308 /* PreviousCycleTableViewCell.swift in Sources */,
 				073D89DB1FA7696A000DE687 /* PresentMenuAnimator.swift in Sources */,
-				07FA3C1C20FF85DC00B56330 /* Test3VC.swift in Sources */,
 				072F86761F69968D007E5A8A /* Popup2VC.swift in Sources */,
 				072F86871F6F4D7F007E5A8A /* RegistrationVC.swift in Sources */,
 				07F9D2B91FBFCDF10083AEF2 /* ViewCoachesVC.swift in Sources */,
