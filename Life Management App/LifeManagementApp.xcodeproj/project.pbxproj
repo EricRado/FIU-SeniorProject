@@ -222,8 +222,6 @@
 				07C53BBB1FC4D80F00AD9904 /* Views */,
 				072F86811F6F1CC3007E5A8A /* Models */,
 				072F868A1F6F814C007E5A8A /* Controllers */,
-				072F861B1F5D9227007E5A8A /* AppDelegate.swift */,
-				072F861F1F5D9227007E5A8A /* Main.storyboard */,
 				072F86221F5D9228007E5A8A /* Assets.xcassets */,
 				072F86241F5D9228007E5A8A /* LaunchScreen.storyboard */,
 				072F866B1F609F08007E5A8A /* PageVC.swift */,
@@ -321,6 +319,7 @@
 				07B40A161F99A8E30002DCC3 /* LifeManagementApp-Bridging-Header.h */,
 				07C129F61FC8A54E003149A6 /* ImageManager.swift */,
 				07237B9E20AA069B00BBB96E /* AllExtensions.swift */,
+				072F861B1F5D9227007E5A8A /* AppDelegate.swift */,
 			);
 			name = Sources;
 			sourceTree = "<group>";
@@ -328,6 +327,7 @@
 		07C53BBB1FC4D80F00AD9904 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				072F861F1F5D9227007E5A8A /* Main.storyboard */,
 				07F9D2BA1FBFCEE50083AEF2 /* ViewCoachTableViewCell.swift */,
 				07F2F4631FB4B611002B4308 /* PreviousCycleTableViewCell.swift */,
 				07C129F81FC9CBB2003149A6 /* SideMenuTopTableViewCell.swift */,

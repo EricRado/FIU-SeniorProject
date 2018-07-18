@@ -20,14 +20,17 @@ class CategoryTabBarController: UITabBarController {
         let joyVC = storyboard.instantiateViewController(withIdentifier: "emotionVC")
         object_setClass(joyVC, JoyVC.self)
         joyVC.title = "Joy"
+        joyVC.tabBarItem.image = UIImage(named: "joy")
         
         let passionVC = storyboard.instantiateViewController(withIdentifier: "emotionVC")
         object_setClass(passionVC, PassionVC.self)
         passionVC.title = "Passion"
+        passionVC.tabBarItem.image = UIImage(named: "passion")
         
         let contributionVC = storyboard.instantiateViewController(withIdentifier: "emotionVC")
         object_setClass(contributionVC, ContributionVC.self)
         contributionVC.title = "Contribution"
+        contributionVC.tabBarItem.image = UIImage(named: "contribution")
         
         let viewControllersList = [joyVC, passionVC, contributionVC]
         
