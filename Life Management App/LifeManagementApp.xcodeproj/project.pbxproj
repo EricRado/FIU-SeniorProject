@@ -64,6 +64,8 @@
 		07F6BB121F8DC33B00E5F4E1 /* CategoryTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F6BB111F8DC33B00E5F4E1 /* CategoryTabBarController.swift */; };
 		07F9D2B91FBFCDF10083AEF2 /* ViewCoachesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F9D2B81FBFCDF10083AEF2 /* ViewCoachesVC.swift */; };
 		07F9D2BB1FBFCEE50083AEF2 /* ViewCoachTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F9D2BA1FBFCEE50083AEF2 /* ViewCoachTableViewCell.swift */; };
+		07FA3C1A20FE9EA100B56330 /* Test2VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FA3C1920FE9EA100B56330 /* Test2VC.swift */; };
+		07FA3C1C20FF85DC00B56330 /* Test3VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FA3C1B20FF85DC00B56330 /* Test3VC.swift */; };
 		07FED9B21FC1F1D400F5D763 /* Coach.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07FED9B11FC1F1D400F5D763 /* Coach.swift */; };
 		1B2B05D62BBECE085957DD88 /* Pods_LifeManagementAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD2E15214151F4A5569119C2 /* Pods_LifeManagementAppUITests.framework */; };
 		5D1E2C62B058D75B140D9636 /* Pods_LifeManagementApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EEB56DFFD2D6DB1CEBA2D06 /* Pods_LifeManagementApp.framework */; };
@@ -154,6 +156,8 @@
 		07F6BB111F8DC33B00E5F4E1 /* CategoryTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryTabBarController.swift; sourceTree = "<group>"; };
 		07F9D2B81FBFCDF10083AEF2 /* ViewCoachesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewCoachesVC.swift; sourceTree = "<group>"; };
 		07F9D2BA1FBFCEE50083AEF2 /* ViewCoachTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewCoachTableViewCell.swift; sourceTree = "<group>"; };
+		07FA3C1920FE9EA100B56330 /* Test2VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test2VC.swift; sourceTree = "<group>"; };
+		07FA3C1B20FF85DC00B56330 /* Test3VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test3VC.swift; sourceTree = "<group>"; };
 		07FED9B11FC1F1D400F5D763 /* Coach.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coach.swift; sourceTree = "<group>"; };
 		26C9179FB6569CF8F0450F69 /* Pods-LifeManagementAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeManagementAppUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LifeManagementAppUITests/Pods-LifeManagementAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		54322A843B3FA1EA6DA5DE28 /* Pods-LifeManagementApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeManagementApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LifeManagementApp/Pods-LifeManagementApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -298,6 +302,8 @@
 				07F9D2B81FBFCDF10083AEF2 /* ViewCoachesVC.swift */,
 				0723CDDC20FBC08900F8B560 /* EmotionVC.swift */,
 				0723CDDE20FC584900F8B560 /* Test1VC.swift */,
+				07FA3C1920FE9EA100B56330 /* Test2VC.swift */,
+				07FA3C1B20FF85DC00B56330 /* Test3VC.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -686,6 +692,7 @@
 				0723CDDF20FC584900F8B560 /* Test1VC.swift in Sources */,
 				07F6BB0E1F874FB200E5F4E1 /* Activity.swift in Sources */,
 				0723CDE120FCFAEF00F8B560 /* SprintViewModel.swift in Sources */,
+				07FA3C1A20FE9EA100B56330 /* Test2VC.swift in Sources */,
 				07C129F51FC88EAF003149A6 /* SettingsVC.swift in Sources */,
 				07C12A011FCA181C003149A6 /* Message.swift in Sources */,
 				076E009B1F9DB050004467D0 /* PassionActivitySelectionVC.swift in Sources */,
@@ -704,6 +711,7 @@
 				079265651F7B0636008B5BDE /* JoyVC.swift in Sources */,
 				07F2F4641FB4B611002B4308 /* PreviousCycleTableViewCell.swift in Sources */,
 				073D89DB1FA7696A000DE687 /* PresentMenuAnimator.swift in Sources */,
+				07FA3C1C20FF85DC00B56330 /* Test3VC.swift in Sources */,
 				072F86761F69968D007E5A8A /* Popup2VC.swift in Sources */,
 				072F86871F6F4D7F007E5A8A /* RegistrationVC.swift in Sources */,
 				07F9D2B91FBFCDF10083AEF2 /* ViewCoachesVC.swift in Sources */,

@@ -9122,9 +9122,10 @@
         <image name="startSprint" width="805" height="537"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="lfn-68-6p7"/>
         <segue reference="DMP-7Y-CxG"/>
-        <segue reference="Mmc-8c-1pg"/>
-        <segue reference="vUG-b0-bNY"/>
+        <segue reference="SI1-2R-6Ws"/>
+        <segue reference="Opt-lI-0Wu"/>
         <segue reference="jEA-9h-OB1"/>
         <segue reference="cIz-8c-tQu"/>
     </inferredMetricsTieBreakers>

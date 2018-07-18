@@ -16,14 +16,20 @@ class CategoryTabBarController: UITabBarController {
         super.viewDidLoad()
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
-        let joyVC = storyboard.instantiateViewController(withIdentifier: "joyVC")
-        let passionVC = storyboard.instantiateViewController(withIdentifier: "passionVC")
         let contributionVC = storyboard.instantiateViewController(withIdentifier: "contributionVC")
         let testerVC = storyboard.instantiateViewController(withIdentifier: "emotionVC")
         object_setClass(testerVC, Test1VC.self)
-        testerVC.title = "Test"
+        testerVC.title = "Joy"
         
-        let viewControllersList = [joyVC, passionVC, contributionVC, testerVC]
+        let tester2VC = storyboard.instantiateViewController(withIdentifier: "emotionVC")
+        object_setClass(tester2VC, Test2VC.self)
+        tester2VC.title = "Passion"
+        
+        let tester3VC = storyboard.instantiateViewController(withIdentifier: "emotionVC")
+        object_setClass(tester3VC, Test3VC.self)
+        tester3VC.title = "Contribution"
+        
+        let viewControllersList = [testerVC, tester2VC, contributionVC, tester3VC]
         
         viewControllers = viewControllersList.map {
             UINavigationController(rootViewController: $0)
