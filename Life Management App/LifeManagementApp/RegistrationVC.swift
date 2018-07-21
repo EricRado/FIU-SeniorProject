@@ -462,7 +462,9 @@ class RegistrationVC: UIViewController {
         
         if check{
             print("GOING TO ACTIVITY SELECTION SCREEN")
-            performSegue(withIdentifier: "ActivitySelectionSegue", sender: self)
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "JoyActivitySelection")
+            present(vc, animated: true, completion: nil)
         }
     }
     
@@ -472,9 +474,9 @@ class RegistrationVC: UIViewController {
         if identifier == "signInSegue"{
             return true
         }
-        if check{
+        /*if check{
             return true
-        }
+        }*/
         return false
     }
     

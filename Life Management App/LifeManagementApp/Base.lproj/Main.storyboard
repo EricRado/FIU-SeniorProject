@@ -625,7 +625,6 @@
                                 <state key="normal" title="Register"/>
                                 <connections>
                                     <action selector="registerUser:" destination="rvJ-mW-ejx" eventType="touchUpInside" id="wev-rA-Jcm"/>
-                                    <segue destination="aVb-NQ-5Dj" kind="presentation" identifier="ActivitySelectionSegue" id="DMP-7Y-CxG"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MKk-pz-7Yo">
@@ -3311,7 +3310,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="233.5"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="joySelectionText" translatesAutoresizingMaskIntoConstraints="NO" id="XXI-LK-ceF">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="236.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="233.5"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bfi-4U-BPp">
                                         <rect key="frame" x="118" y="183.5" width="139" height="35"/>
@@ -3334,38 +3333,27 @@
                                     <constraint firstItem="XXI-LK-ceF" firstAttribute="leading" secondItem="q9r-sD-5s0" secondAttribute="leading" id="6pN-C2-vMO"/>
                                     <constraint firstItem="bfi-4U-BPp" firstAttribute="width" secondItem="q9r-sD-5s0" secondAttribute="width" multiplier="0.37" id="8Ii-Tp-tU0"/>
                                     <constraint firstItem="bfi-4U-BPp" firstAttribute="height" secondItem="q9r-sD-5s0" secondAttribute="height" multiplier="0.15" id="Ews-BJ-HWa"/>
-                                    <constraint firstAttribute="bottom" secondItem="XXI-LK-ceF" secondAttribute="bottom" constant="-3.5" id="GYO-Lb-HSo"/>
                                     <constraint firstAttribute="bottom" secondItem="bfi-4U-BPp" secondAttribute="bottom" constant="15" id="ITA-U7-Aus"/>
+                                    <constraint firstAttribute="bottom" secondItem="XXI-LK-ceF" secondAttribute="bottom" id="W3B-iV-ioq"/>
                                     <constraint firstAttribute="trailing" secondItem="XXI-LK-ceF" secondAttribute="trailing" id="cHa-Ky-4WM"/>
                                     <constraint firstItem="XXI-LK-ceF" firstAttribute="top" secondItem="q9r-sD-5s0" secondAttribute="top" id="cZZ-Yl-UTJ"/>
                                     <constraint firstItem="bfi-4U-BPp" firstAttribute="centerX" secondItem="q9r-sD-5s0" secondAttribute="centerX" id="muc-tf-NJN"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k2j-vu-p2N" userLabel="Bottom Container">
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5BV-eU-CTB" customClass="iCarousel">
                                 <rect key="frame" x="0.0" y="233.5" width="375" height="433.5"/>
-                                <subviews>
-                                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5BV-eU-CTB" customClass="iCarousel">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="433.5"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </view>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="5BV-eU-CTB" secondAttribute="trailing" id="IsC-Df-Paf"/>
-                                    <constraint firstItem="5BV-eU-CTB" firstAttribute="top" secondItem="k2j-vu-p2N" secondAttribute="top" id="d0x-Ik-2ZO"/>
-                                    <constraint firstItem="5BV-eU-CTB" firstAttribute="leading" secondItem="k2j-vu-p2N" secondAttribute="leading" id="j58-28-IvV"/>
-                                    <constraint firstAttribute="bottom" secondItem="5BV-eU-CTB" secondAttribute="bottom" id="nUM-yB-wAb"/>
-                                </constraints>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <constraints>
                             <constraint firstItem="q9r-sD-5s0" firstAttribute="leading" secondItem="rDz-Wp-Tug" secondAttribute="leading" id="1ZT-5O-O87"/>
                             <constraint firstItem="q9r-sD-5s0" firstAttribute="top" secondItem="rDz-Wp-Tug" secondAttribute="top" id="9h0-6k-stC"/>
-                            <constraint firstAttribute="trailing" secondItem="k2j-vu-p2N" secondAttribute="trailing" id="ATc-qF-XOb"/>
-                            <constraint firstItem="k2j-vu-p2N" firstAttribute="bottom" secondItem="rDz-Wp-Tug" secondAttribute="baseline" id="O2X-Y3-47t"/>
-                            <constraint firstItem="k2j-vu-p2N" firstAttribute="leading" secondItem="rDz-Wp-Tug" secondAttribute="leading" id="Xhb-cm-s1C"/>
+                            <constraint firstItem="5BV-eU-CTB" firstAttribute="height" secondItem="rDz-Wp-Tug" secondAttribute="height" multiplier="0.65" id="NT2-Xg-uHa"/>
+                            <constraint firstItem="x6q-Uc-kse" firstAttribute="top" secondItem="5BV-eU-CTB" secondAttribute="bottom" id="RtT-Kg-4wN"/>
                             <constraint firstAttribute="trailing" secondItem="q9r-sD-5s0" secondAttribute="trailing" id="koJ-Bj-Znn"/>
-                            <constraint firstItem="k2j-vu-p2N" firstAttribute="height" secondItem="rDz-Wp-Tug" secondAttribute="height" multiplier="0.65" id="vw5-am-Cyw"/>
+                            <constraint firstItem="5BV-eU-CTB" firstAttribute="leading" secondItem="rDz-Wp-Tug" secondAttribute="leading" id="q0d-hA-U0n"/>
                             <constraint firstItem="q9r-sD-5s0" firstAttribute="height" secondItem="rDz-Wp-Tug" secondAttribute="height" multiplier="0.35" id="wDM-JM-E3J"/>
+                            <constraint firstAttribute="trailing" secondItem="5BV-eU-CTB" secondAttribute="trailing" id="wGG-Vv-rnZ"/>
                         </constraints>
                     </view>
                     <connections>
@@ -4031,7 +4019,7 @@
         <image name="startSprint" width="805" height="537"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="DMP-7Y-CxG"/>
+        <segue reference="bY5-t3-Usz"/>
         <segue reference="Mmc-8c-1pg"/>
         <segue reference="vUG-b0-bNY"/>
         <segue reference="OzN-ms-NxI"/>

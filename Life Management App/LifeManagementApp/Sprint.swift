@@ -83,7 +83,7 @@ struct Sprint{
     
     init(categoryId: String, sprintActivityId1: String, sprintActivityId2: String){
         self.numberOfWeeks = "0"
-        self.sprintOverallScore = "0"
+        self.sprintOverallScore = "0.0"
         self.startingDate = ""
         self.endingDate = ""
         self.sprintActivityId1 = sprintActivityId1

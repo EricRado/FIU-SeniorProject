@@ -55,20 +55,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func getImgURLS(option: String){
+        print("getting img URLS...")
         // get reference to specific category picture collection in firebase
         let specificImgCategoryRef = self.imgDbRef?.child("ActivityImgs/\(option)Activities/")
         
         // from the snapshot, use every URL found to get image from firebase storage
         specificImgCategoryRef?.observe(.value, with: {(snapshot) in
             for child in snapshot.children.allObjects as! [DataSnapshot]{
+                print(snapshot)
                 self.getImg(snapshot: child, option: option)
             }
         })
+        
     }
     
     func getImg(snapshot: DataSnapshot, option: String){
         var dict = snapshot.value as? [String: Any]
-        if let url = dict?["url"] as? String {
+        if let url = dict?["imgURL"] as? String {
             // get image with url from storage
             let imgRef = storage.reference(forURL: url)
             

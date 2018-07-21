@@ -11,26 +11,30 @@ import Firebase
 
 class ContributionActivitySelectionVC: UIViewController, iCarouselDataSource, iCarouselDelegate {
     var selectionIsValid = false
-    
-    @IBOutlet weak var submitBtn: UIButton!
-    @IBOutlet var carouselView: iCarousel!
-    
+    var sprintCreatedId: String?
     var selectedIndexes = Set<Int>()
-
+    
     let delegate = UIApplication.shared.delegate as! AppDelegate
     let dbref = Database.database().reference(fromURL: "https://life-management-v2.firebaseio.com/")
     
+    @IBOutlet weak var submitBtn: UIButton! {
+        didSet {
+            submitBtn.layer.cornerRadius = 15
+            submitBtn.layer.masksToBounds = true
+        }
+    }
+    @IBOutlet var carouselView: iCarousel! {
+        didSet {
+            carouselView.delegate = self
+            carouselView.dataSource = self
+            carouselView.reloadData()
+            carouselView.type = .coverFlow2
+            
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        carouselView.delegate = self
-        carouselView.dataSource = self
-        carouselView.reloadData()
-        carouselView.type = .coverFlow2
-        
-        submitBtn.layer.cornerRadius = 15
-        submitBtn.layer.masksToBounds = true
-        
     }
     
     func numberOfItems(in carousel: iCarousel) -> Int {
@@ -116,18 +120,27 @@ class ContributionActivitySelectionVC: UIViewController, iCarouselDataSource, iC
         }
         
         // set a reference to PassionSprints and create a new record
-        let userCategoryRef = dbref.child("Categories/\(self.delegate.categoryKey)/ContributionSprints").childByAutoId()
+        //let userCategoryRef = dbref.child("Categories/\(self.delegate.categoryKey)/ContributionSprints").childByAutoId()
         
-        // create a new Sprint object to store in the database
-        let newSprint = Sprint(categoryId: self.delegate.categoryKey, sprintActivityId1: activityIds[0], sprintActivityId2: activityIds[1])
-        
-        // Sprint object is stored in the database
-        userCategoryRef.setValue(newSprint.toAnyObject(), withCompletionBlock: {(error, userCategoryRef) in
-            if error != nil{
-                print(error!)
-                return
-            }
-        })
+        // TEST METHOD
+        if let id = self.sprintCreatedId {
+            let userCategoryRef = dbref
+                .child("Categories/\(self.delegate.categoryKey)/ContributionSprints/\(id)")
+            
+            // create a new Sprint object to store in the database
+            let newSprint = Sprint(categoryId: self.delegate.categoryKey, sprintActivityId1: activityIds[0], sprintActivityId2: activityIds[1])
+            
+            // Sprint object is stored in the database
+            userCategoryRef.setValue(newSprint.toAnyObject(), withCompletionBlock: {(error, userCategoryRef) in
+                if error != nil{
+                    print(error!)
+                    return
+                }
+            })
+        } else {
+            print("Id was not passed correctly")
+            return
+        }
         
         self.selectedIndexes.removeAll()
         

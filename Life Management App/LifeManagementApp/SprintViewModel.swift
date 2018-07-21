@@ -21,6 +21,7 @@ struct SprintViewModel {
         self.goal2 = sprint.goal2
         self.goal3 = sprint.goal3
         self.goal4 = sprint.goal4
+        self.overallScore = self.sprint.sprintOverallScore
     }
     
     public var goal1: String
@@ -30,6 +31,8 @@ struct SprintViewModel {
     public var goal3: String
     
     public var goal4: String
+    
+    public var overallScore: String
     
     public var activityId1: String {
         return sprint.sprintActivityId1
@@ -77,6 +80,48 @@ struct SprintViewModel {
                                            messageText: "Save was successful")
                 
         }
+    }
+    
+    mutating public func updateOverallScore(oldEmotionAverage: Double, newEmotionAverage: Double, sprintId: String) {
+        
+        // setup database reference to update sprint overall score
+        let joyRef = dbRef.child("Categories/\(sprint.categoryId)/\("JoySprints")/\(sprintId)/")
+        let passionRef = dbRef.child("Categories/\(sprint.categoryId)/\("PassionSprints")/\(sprintId)/")
+        let contributionRef = dbRef.child("Categories/\(sprint.categoryId)/\("ContributionSprints")/\(sprintId)/")
+        
+        if let overallScore = Double(self.overallScore) {
+            var overall = overallScore
+            
+            // calculates the total average for the 3 different emotion sprints
+            overall = overall - oldEmotionAverage
+            overall = overall + newEmotionAverage
+            
+            overall = (overall / 300.0) * 100
+            
+            let newScore = String(format: "%.01f%", overall)
+            
+            joyRef.updateChildValues(["sprintOverallScore": newScore]) { (error, dbref) in
+                if let error = error {
+                    print(error.localizedDescription)
+                }
+            }
+            passionRef.updateChildValues(["sprintOverallScore": newScore]) { (error, dbref) in
+                if let error = error {
+                    print(error.localizedDescription)
+                }
+            }
+            contributionRef.updateChildValues(["sprintOverallScore": newScore]) { (error, dbref) in
+                if let error = error {
+                    print(error.localizedDescription)
+                }
+            }
+            self.overallScore = newScore
+        }
+        
+        
+        
+        
+        
     }
 }
 

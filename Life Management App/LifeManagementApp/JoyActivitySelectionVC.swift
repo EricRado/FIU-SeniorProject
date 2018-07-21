@@ -9,12 +9,25 @@
 import UIKit
 import Firebase
 
-
-class JoyActivitySelectionVC: UIViewController, iCarouselDataSource, iCarouselDelegate {
+class JoyActivitySelectionVC: UIViewController, iCarouselDelegate, iCarouselDataSource {
     var selectionIsValid = false
+    var sprintCreatedId = ""
 
-    @IBOutlet var joyCarouselView: iCarousel!
-    @IBOutlet weak var submitBtn: UIButton!
+    @IBOutlet var joyCarouselView: iCarousel! {
+        didSet {
+            joyCarouselView.delegate = self
+            joyCarouselView.dataSource = self
+            joyCarouselView.reloadData()
+            joyCarouselView.type = .coverFlow2
+        }
+    }
+    
+    @IBOutlet weak var submitBtn: UIButton! {
+        didSet {
+            submitBtn.layer.cornerRadius = 15
+            submitBtn.layer.masksToBounds = true
+        }
+    }
     
     var selectedIndexes = Set<Int>()
     
@@ -27,23 +40,17 @@ class JoyActivitySelectionVC: UIViewController, iCarouselDataSource, iCarouselDe
         
         print("Inside joy activity selection....")
 
-        joyCarouselView.delegate = self
-        joyCarouselView.dataSource = self
-        joyCarouselView.reloadData()
-        joyCarouselView.type = .coverFlow2
-        
-        submitBtn.layer.cornerRadius = 15
-        submitBtn.layer.masksToBounds = true
+        if delegate.joyImages.isEmpty {
+            print("There are no passion images")
+        }else {
+            print("There images in the array")
+        }
         
         self.createCategory()
     }
     
-    func numberOfItems(in carousel: iCarousel) ->Int {
-        return delegate.joyImages.count
-    }
-    
     func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView{
-        
+        print("viewForItemAt running...")
         // create a UIView
         let tempView = UIView(frame: CGRect(x: 0, y: 0, width: 225, height: 240))
         
@@ -58,7 +65,7 @@ class JoyActivitySelectionVC: UIViewController, iCarouselDataSource, iCarouselDe
         
         
         // set the UIImageView to the tempView
-        tempView.addSubview(uiImageView)  
+        tempView.addSubview(uiImageView)
         
         return tempView
     }
@@ -87,6 +94,10 @@ class JoyActivitySelectionVC: UIViewController, iCarouselDataSource, iCarouselDe
                 self.selectedIndexes.remove(index)
             }
         }
+    }
+    
+    func numberOfItems(in carousel: iCarousel) ->Int {
+        return delegate.joyImages.count
     }
     
     func createCategory(){
@@ -148,6 +159,7 @@ class JoyActivitySelectionVC: UIViewController, iCarouselDataSource, iCarouselDe
         let newSprint = Sprint(categoryId: self.delegate.categoryKey, sprintActivityId1: activityIds[0], sprintActivityId2: activityIds[1])
         
         print("This is Joy Sprint id : \(userCategoryRef.key)")
+        self.sprintCreatedId = userCategoryRef.key
         
         // Sprint object is stored in the database
         userCategoryRef.setValue(newSprint.toAnyObject(), withCompletionBlock: {(error, userCategoryRef) in
@@ -173,6 +185,15 @@ class JoyActivitySelectionVC: UIViewController, iCarouselDataSource, iCarouselDe
             return true
         }
         return false
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "PassionActivitySelectionSegue" {
+            if let destination = segue.destination as? PassionActivitySelectionVC {
+                print("sending id : \(self.sprintCreatedId)")
+                destination.sprintCreatedId = self.sprintCreatedId
+            }
+        }
     }
 
 }

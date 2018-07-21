@@ -9,31 +9,7 @@
 import UIKit
 import Firebase
 
-class PassionActivitySelectionVC: UIViewController, iCarouselDataSource, iCarouselDelegate {
-    
-    @IBOutlet weak var submitBtn: UIButton!
-    @IBOutlet var carouselView: iCarousel!
-    
-    var selectedIndexes = Set<Int>()
-    var selectionIsValid = false
-
-    let delegate = UIApplication.shared.delegate as! AppDelegate
-    let dbref = Database.database()
-        .reference(fromURL: "https://life-management-v2.firebaseio.com/")
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        carouselView.delegate = self
-        carouselView.dataSource = self
-        carouselView.reloadData()
-        carouselView.type = .coverFlow2
-        
-        submitBtn.layer.cornerRadius = 15
-        submitBtn.layer.masksToBounds = true
-
-    }
-    
+extension PassionActivitySelectionVC: iCarouselDataSource, iCarouselDelegate {
     func numberOfItems(in carousel: iCarousel) -> Int {
         return self.delegate.passionImages.count
     }
@@ -86,6 +62,41 @@ class PassionActivitySelectionVC: UIViewController, iCarouselDataSource, iCarous
             }
         }
     }
+}
+
+class PassionActivitySelectionVC: UIViewController {
+    
+    @IBOutlet weak var submitBtn: UIButton! {
+        didSet {
+            submitBtn.layer.cornerRadius = 15
+            submitBtn.layer.masksToBounds = true
+        }
+    }
+    @IBOutlet var carouselView: iCarousel! {
+        didSet {
+            carouselView.delegate = self
+            carouselView.dataSource = self
+            carouselView.reloadData()
+            carouselView.type = .coverFlow2
+            
+        }
+    }
+    
+    var selectedIndexes = Set<Int>()
+    var selectionIsValid = false
+    var sprintCreatedId: String?
+
+    let delegate = UIApplication.shared.delegate as! AppDelegate
+    let dbref = Database.database()
+        .reference(fromURL: "https://life-management-v2.firebaseio.com/")
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        if let id = self.sprintCreatedId {
+            print("The generated id : \(id)")
+        }
+        
+    }
     
     @IBAction func submitPressed(_ sender: Any) {
         // display alert if user did not select two activities
@@ -120,18 +131,27 @@ class PassionActivitySelectionVC: UIViewController, iCarouselDataSource, iCarous
         }
         
         // set a reference to PassionSprints and create a new record
-        let userCategoryRef = dbref.child("Categories/\(self.delegate.categoryKey)/PassionSprints").childByAutoId()
+        //let userCategoryRef = dbref.child("Categories/\(self.delegate.categoryKey)/PassionSprints").childByAutoId()
         
-        // create a new Sprint object to store in the database
-        let newSprint = Sprint(categoryId: self.delegate.categoryKey, sprintActivityId1: activityIds[0], sprintActivityId2: activityIds[1])
-        
-        // Sprint object is stored in the database
-        userCategoryRef.setValue(newSprint.toAnyObject(), withCompletionBlock: {(error, userCategoryRef) in
-            if error != nil{
-                print(error!)
-                return
-            }
-        })
+        // TEST METHOD
+        if let id = self.sprintCreatedId {
+            let userCategoryRef = dbref
+                .child("Categories/\(self.delegate.categoryKey)/PassionSprints/\(id)")
+            
+            // create a new Sprint object to store in the database
+            let newSprint = Sprint(categoryId: self.delegate.categoryKey, sprintActivityId1: activityIds[0], sprintActivityId2: activityIds[1])
+            
+            // Sprint object is stored in the database
+            userCategoryRef.setValue(newSprint.toAnyObject(), withCompletionBlock: {(error, userCategoryRef) in
+                if error != nil{
+                    print(error!)
+                    return
+                }
+            })
+        } else {
+            print("Id was not passed correctly")
+            return
+        }
         
         self.selectedIndexes.removeAll()
         
@@ -147,6 +167,14 @@ class PassionActivitySelectionVC: UIViewController, iCarouselDataSource, iCarous
             return true
         }
         return false
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ContributionActivitySelectionSegue" {
+            if let destination = segue.destination as? ContributionActivitySelectionVC {
+                destination.sprintCreatedId = self.sprintCreatedId
+            }
+        }
     }
     
 }

@@ -44,11 +44,10 @@ class EmotionVC: UIViewController {
     var activity2OnDisplayId = ""
     var sprintOnDisplayId = ""
     
-    var btnIndexes = [Int]()
+    var emotionAverage: Double?
+    var oldAverage: Double?
     
-    var joyOverallScore = ""
-    var passionOverallScore = ""
-    var contributionOverallScore = ""
+    var btnIndexes = [Int]()
     
     var emotionChoice = ""
     
@@ -119,7 +118,11 @@ class EmotionVC: UIViewController {
             emotionScore.progressThickness = 0.5
         }
     }
-    @IBOutlet weak var overallScore: KDCircularProgress!
+    @IBOutlet weak var overallScore: KDCircularProgress! {
+        didSet {
+            overallScore.progressThickness = 0.5
+        }
+    }
     
     
     @IBOutlet weak var question1TextField: UITextField! {
@@ -204,6 +207,7 @@ class EmotionVC: UIViewController {
                     print("Snapshot is empty")
                     return
                 }
+                print(snapshot)
                 print("snapshot key : \(child.key)")
                 self.sprintOnDisplayId = child.key
                 self.sprintOnDisplay = Sprint(snapshot: child)
@@ -242,7 +246,7 @@ class EmotionVC: UIViewController {
             if let activity = self.activity1OnDisplay {
                 self.activity1ViewModel = ActivityViewModel(activity: activity,
                                                             sprint: self.sprintOnDisplay!)
-                self.setScoresAndPercentages(activityViewModel: self.activity1ViewModel!, option: "1")
+                self.setScoresAndPercentages(activityViewModel: self.activity1ViewModel!, position: Position.Top)
                 self.setAverageEmotionScore()
                 self.setCalendar(btnArray: self.daytopBtns,
                                  dailyPointsStr: activity.sprintDailyPoints,
@@ -267,7 +271,7 @@ class EmotionVC: UIViewController {
             if let activity = self.activity2OnDisplay {
                 self.activity2ViewModel = ActivityViewModel(activity: activity,
                                                             sprint: self.sprintOnDisplay!)
-                self.setScoresAndPercentages(activityViewModel: self.activity2ViewModel!, option: "2")
+                self.setScoresAndPercentages(activityViewModel: self.activity2ViewModel!, position: Position.Bottom)
                 self.setAverageEmotionScore()
                 self.setCalendar(btnArray: self.dayBottomBtns,
                                  dailyPointsStr: activity.sprintDailyPoints,
@@ -293,28 +297,51 @@ class EmotionVC: UIViewController {
         self.question4TextField.text = sprintViewModel?.goal4
     }
     
-    func setScoresAndPercentages(activityViewModel: ActivityViewModel, option: String) {
-        if option == "1" {
+    func setScoresAndPercentages(activityViewModel: ActivityViewModel, position: Position) {
+        if position == Position.Top {
             self.a1ActualScoreLabel.text = activityViewModel.actualPoints
             self.a1GoalScoreLabel.text = activityViewModel.targetPoints
             self.a1ScorePercentageLabel.text = activityViewModel.goalPercentageStr
-        } else {
+        } else if position == Position.Bottom {
             self.a2ActualScoreLabel.text = activityViewModel.actualPoints
             self.a2GoalScoreLabel.text = activityViewModel.targetPoints
             self.a2ScorePercentageLabel.text = activityViewModel.goalPercentageStr
         }
+        
+        self.overallScorePercentageLabel.text = self.sprintViewModel?.overallScore
     }
     
     // set the average percentage score label and KDCircular progress bar for the emotion
     func setAverageEmotionScore() {
+        print("SET AVERAGE EMOTION SCORE")
         if let goalPercentage1 = self.activity1ViewModel?.goalPercentage,
             let goalPercentage2 = self.activity2ViewModel?.goalPercentage {
-            let emotionAverage = (goalPercentage1 + goalPercentage2) / 2.0
+            
+            // setup the overall average for all emotion activities
+            if let average = self.emotionAverage {
+                self.oldAverage = average
+                self.emotionAverage = (goalPercentage1 + goalPercentage2) / 2.0
+                self.sprintViewModel?.updateOverallScore(oldEmotionAverage: self.oldAverage!, newEmotionAverage: self.emotionAverage!, sprintId: self.sprintOnDisplayId)
+            } else {
+                self.emotionAverage = (goalPercentage1 + goalPercentage2) / 2.0
+            }
             
             // format the average double such as 50.1%
-            self.emotionScorePercentageLabel.text = String(format: "%.01f%" + "%", emotionAverage)
+            self.emotionScorePercentageLabel.text = String(format: "%.01f%" + "%", self.emotionAverage!)
+            print("The overall score : \(self.sprintViewModel?.overallScore)")
+            self.overallScorePercentageLabel.text = (self.sprintViewModel?.overallScore)! + "%"
+            
+            // setup the progress bar for emotion and overall score
+            self.emotionScore.angle = getKDCircularAngle(self.emotionAverage!)
+            let overall = Double(self.sprintViewModel!.overallScore)!
+            self.overallScore.angle = getKDCircularAngle(overall)
             
         }
+    }
+    
+    func getKDCircularAngle(_ input: Double) -> Double {
+        let emotionAvgInt = Int(round(input * 3.6))
+        return Double(emotionAvgInt)
     }
     
     func setCalendar(btnArray: [UIButton], dailyPointsStr: String, position: Position) {
@@ -394,10 +421,6 @@ class EmotionVC: UIViewController {
             }
             counter += 1
         }
-    }
-    
-    func setActivityImg(activityName: String, option: String) {
-        
     }
     
     @objc func dayBtnPressed(_ sender: UIButton) {
