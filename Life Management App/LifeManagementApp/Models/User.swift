@@ -9,6 +9,7 @@
 import Foundation
 import Firebase
 
+// Change to a singleton
 struct User{
     
     var id: String

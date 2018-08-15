@@ -217,23 +217,12 @@
 		072F861A1F5D9227007E5A8A /* LifeManagementApp */ = {
 			isa = PBXGroup;
 			children = (
-				073D89D51FA76901000DE687 /* Side Menu */,
-				079C30E81F8E68BF0044DA18 /* Sources */,
-				07C53BBB1FC4D80F00AD9904 /* Views */,
-				072F86811F6F1CC3007E5A8A /* Models */,
-				072F868A1F6F814C007E5A8A /* Controllers */,
+				0740BCAD2124BE8C00A44A3E /* Models */,
+				0740BCAE2124BEE600A44A3E /* Controllers */,
+				07774BEF2124C0AA00D1B00C /* Side Menu */,
+				07774BED2124BFEB00D1B00C /* Sources */,
+				0740BCAF2124BF8400A44A3E /* Views */,
 				072F86221F5D9228007E5A8A /* Assets.xcassets */,
-				072F86241F5D9228007E5A8A /* LaunchScreen.storyboard */,
-				072F866B1F609F08007E5A8A /* PageVC.swift */,
-				072F86731F696625007E5A8A /* Screen4VC.swift */,
-				072F86711F685D5C007E5A8A /* Popup1VC.swift */,
-				072F86751F69968D007E5A8A /* Popup2VC.swift */,
-				072F86771F69DABF007E5A8A /* Popup3VC.swift */,
-				072F86791F69EF88007E5A8A /* Popup4VC.swift */,
-				072F867B1F69F2A9007E5A8A /* Popup5VC.swift */,
-				072F867D1F69F483007E5A8A /* Popup6VC.swift */,
-				07ABF13E1FDE43C00077C8F1 /* GoogleService-Info.plist */,
-				072F86271F5D9228007E5A8A /* Info.plist */,
 			);
 			path = LifeManagementApp;
 			sourceTree = "<group>";
@@ -256,7 +245,7 @@
 			path = LifeManagementAppUITests;
 			sourceTree = "<group>";
 		};
-		072F86811F6F1CC3007E5A8A /* Models */ = {
+		0740BCAD2124BE8C00A44A3E /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				07F6BB0D1F874FB200E5F4E1 /* Activity.swift */,
@@ -270,10 +259,10 @@
 				0723CDE020FCFAEF00F8B560 /* SprintViewModel.swift */,
 				072F86821F6F1CF6007E5A8A /* User.swift */,
 			);
-			name = Models;
+			path = Models;
 			sourceTree = "<group>";
 		};
-		072F868A1F6F814C007E5A8A /* Controllers */ = {
+		0740BCAE2124BEE600A44A3E /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				07F6BB111F8DC33B00E5F4E1 /* CategoryTabBarController.swift */,
@@ -293,24 +282,25 @@
 				072F86881F6F8121007E5A8A /* SignInVC.swift */,
 				076E009E1F9EAAF8004467D0 /* SprintSettingsVC.swift */,
 				07F9D2B81FBFCDF10083AEF2 /* ViewCoachesVC.swift */,
+				07774BEE2124C05700D1B00C /* Landing */,
 			);
-			name = Controllers;
+			path = Controllers;
 			sourceTree = "<group>";
 		};
-		073D89D51FA76901000DE687 /* Side Menu */ = {
+		0740BCAF2124BF8400A44A3E /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				073D89D61FA7692F000DE687 /* MenuHelper.swift */,
-				073D89D81FA76947000DE687 /* Interactor.swift */,
-				073D89DA1FA7696A000DE687 /* PresentMenuAnimator.swift */,
-				073D89DC1FA7697E000DE687 /* DismissMenuAnimator.swift */,
-				073D89DE1FA7754E000DE687 /* SideMenuViewController.swift */,
-				070ED9111FABBD80007F18F2 /* SideMenuTableViewCell.swift */,
+				072F861F1F5D9227007E5A8A /* Main.storyboard */,
+				072F86241F5D9228007E5A8A /* LaunchScreen.storyboard */,
+				07F9D2BA1FBFCEE50083AEF2 /* ViewCoachTableViewCell.swift */,
+				07F2F4631FB4B611002B4308 /* PreviousCycleTableViewCell.swift */,
+				07C129F81FC9CBB2003149A6 /* SideMenuTopTableViewCell.swift */,
+				07C129FA1FCA05CD003149A6 /* CurrentChatTableViewCell.swift */,
 			);
-			name = "Side Menu";
+			path = Views;
 			sourceTree = "<group>";
 		};
-		079C30E81F8E68BF0044DA18 /* Sources */ = {
+		07774BED2124BFEB00D1B00C /* Sources */ = {
 			isa = PBXGroup;
 			children = (
 				07316B841F843C3D00EF2F8F /* KDCircularProgress.swift */,
@@ -320,20 +310,38 @@
 				07C129F61FC8A54E003149A6 /* ImageManager.swift */,
 				07237B9E20AA069B00BBB96E /* AllExtensions.swift */,
 				072F861B1F5D9227007E5A8A /* AppDelegate.swift */,
+				07ABF13E1FDE43C00077C8F1 /* GoogleService-Info.plist */,
+				072F86271F5D9228007E5A8A /* Info.plist */,
 			);
-			name = Sources;
+			path = Sources;
 			sourceTree = "<group>";
 		};
-		07C53BBB1FC4D80F00AD9904 /* Views */ = {
+		07774BEE2124C05700D1B00C /* Landing */ = {
 			isa = PBXGroup;
 			children = (
-				072F861F1F5D9227007E5A8A /* Main.storyboard */,
-				07F9D2BA1FBFCEE50083AEF2 /* ViewCoachTableViewCell.swift */,
-				07F2F4631FB4B611002B4308 /* PreviousCycleTableViewCell.swift */,
-				07C129F81FC9CBB2003149A6 /* SideMenuTopTableViewCell.swift */,
-				07C129FA1FCA05CD003149A6 /* CurrentChatTableViewCell.swift */,
+				072F866B1F609F08007E5A8A /* PageVC.swift */,
+				072F86731F696625007E5A8A /* Screen4VC.swift */,
+				072F86711F685D5C007E5A8A /* Popup1VC.swift */,
+				072F86751F69968D007E5A8A /* Popup2VC.swift */,
+				072F86771F69DABF007E5A8A /* Popup3VC.swift */,
+				072F86791F69EF88007E5A8A /* Popup4VC.swift */,
+				072F867B1F69F2A9007E5A8A /* Popup5VC.swift */,
+				072F867D1F69F483007E5A8A /* Popup6VC.swift */,
 			);
-			name = Views;
+			path = Landing;
+			sourceTree = "<group>";
+		};
+		07774BEF2124C0AA00D1B00C /* Side Menu */ = {
+			isa = PBXGroup;
+			children = (
+				073D89D61FA7692F000DE687 /* MenuHelper.swift */,
+				073D89D81FA76947000DE687 /* Interactor.swift */,
+				073D89DA1FA7696A000DE687 /* PresentMenuAnimator.swift */,
+				073D89DC1FA7697E000DE687 /* DismissMenuAnimator.swift */,
+				073D89DE1FA7754E000DE687 /* SideMenuViewController.swift */,
+				070ED9111FABBD80007F18F2 /* SideMenuTableViewCell.swift */,
+			);
+			path = "Side Menu";
 			sourceTree = "<group>";
 		};
 		8D1A1436F2307BCF3B8430EE /* Pods */ = {
