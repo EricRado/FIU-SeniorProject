@@ -35,7 +35,7 @@ struct User{
         self.lastName = lastName
         self.dob = dob
         self.imgURL = imgURL
-        self.adminFlag = adminFlag
+        self.adminFlag = adminFlagDo
         self.coachFlag = coachFlag
     }
     
