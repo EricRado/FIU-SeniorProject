@@ -148,4 +148,33 @@ extension UIButton: PropertyStoring {
     }
 }
 
+// Timestamp extensions
+extension Date {
+    func toMillis() -> Int64! {
+        return Int64(self.timeIntervalSince1970 * 1000)
+    }
+}
+
+extension Int64 {
+    func timestampToDate() -> Date {
+        let timeInterval = Double(self / 1000)
+        return Date(timeIntervalSince1970: timeInterval)
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -21,10 +21,11 @@ struct Sprint{
     var goal3: String
     var goal4: String
     var categoryId: String
+    let timestamp: Int64
     
     init(numberOfWeeks: String, sprintOverallScore: String, startingDate: String, endingDate: String,
          sprintActivityId1: String, sprintActivityId2: String, goal1: String, goal2: String,
-         goal3: String, goal4: String, categoryId: String){
+         goal3: String, goal4: String, categoryId: String, timestamp: Int64){
         self.numberOfWeeks = numberOfWeeks
         self.sprintOverallScore = sprintOverallScore
         self.startingDate = startingDate
@@ -36,6 +37,7 @@ struct Sprint{
         self.goal3 = goal3
         self.goal4 = goal4
         self.categoryId = categoryId
+        self.timestamp = timestamp
     }
     
     init?(snapshot: DataSnapshot){
@@ -52,6 +54,7 @@ struct Sprint{
         guard let goal3 = dict["goal3"] else {return nil}
         guard let goal4 = dict["goal4"] else {return nil}
         guard let categoryId = dict["categoryId"] else {return nil}
+        guard let timestamp = dict["timestamp"] else {return nil}
         
         self.numberOfWeeks = numberOfWeeks
         self.sprintOverallScore = sprintOverallScore
@@ -64,6 +67,7 @@ struct Sprint{
         self.goal3 = goal3
         self.goal4 = goal4
         self.categoryId = categoryId
+        self.timestamp = Int64(timestamp) ?? 0
         
     }
     
@@ -79,6 +83,7 @@ struct Sprint{
         self.goal3 = ""
         self.goal4 = ""
         self.categoryId = ""
+        self.timestamp = 0
     }
     
     init(categoryId: String, sprintActivityId1: String, sprintActivityId2: String){
@@ -93,6 +98,7 @@ struct Sprint{
         self.goal3 = ""
         self.goal4 = ""
         self.categoryId = categoryId
+        self.timestamp = 0
     }
     
     func toAnyObject() -> [AnyHashable: Any]{

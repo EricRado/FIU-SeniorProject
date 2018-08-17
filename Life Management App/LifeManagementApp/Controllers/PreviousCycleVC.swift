@@ -64,7 +64,7 @@ class PreviousCycleVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     }
     
     func getSpecificCategory(ref: DatabaseReference, option: String){
-        ref.queryOrdered(byChild: "startingDate").observe(.value, with: {(snapshot) in
+        ref.queryOrdered(byChild: "timestamp").observe(.value, with: {(snapshot) in
             for child in snapshot.children.allObjects as! [DataSnapshot]{
                 if !child.exists(){
                     print("Snapshot is empty")
@@ -170,11 +170,17 @@ class PreviousCycleVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     }
     
     func getScorePercentage(target1: String, actual1: String, target2: String, actual2: String) -> String{
-        var avgScore: String
-        var score: Double = ((Double(actual1)! / Double(target1)!) + (Double(actual2)! / Double(target2)!))/2
-        score = score*100
+        guard let actualScore1 = Double(actual1),
+            let targetScore1 = Double(target1) else {return ""}
+        let activity1Avg = actualScore1 < targetScore1 ? (actualScore1 / targetScore1) : 1.0
         
-        avgScore = String(format:"%.01f%"+"%", score)
+        guard let actualScore2 = Double(actual2),
+            let targetScore2 = Double(target2) else {return ""}
+        let activity2Avg = actualScore2 < targetScore2 ? (actualScore2 / targetScore2) : 1.0
+        
+        let score: Double = ((activity1Avg + activity2Avg) / 2.0) * 100
+        
+        let avgScore = String(format:"%.01f%"+"%", score)
         
         return avgScore
     }

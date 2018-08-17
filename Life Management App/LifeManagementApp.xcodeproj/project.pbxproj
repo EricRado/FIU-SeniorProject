@@ -217,6 +217,7 @@
 		072F861A1F5D9227007E5A8A /* LifeManagementApp */ = {
 			isa = PBXGroup;
 			children = (
+				07B40A161F99A8E30002DCC3 /* LifeManagementApp-Bridging-Header.h */,
 				0740BCAD2124BE8C00A44A3E /* Models */,
 				0740BCAE2124BEE600A44A3E /* Controllers */,
 				07774BEF2124C0AA00D1B00C /* Side Menu */,
@@ -306,7 +307,6 @@
 				07316B841F843C3D00EF2F8F /* KDCircularProgress.swift */,
 				07ABF1401FDE45230077C8F1 /* iCarousel.h */,
 				07ABF1411FDE45350077C8F1 /* iCarousel.m */,
-				07B40A161F99A8E30002DCC3 /* LifeManagementApp-Bridging-Header.h */,
 				07C129F61FC8A54E003149A6 /* ImageManager.swift */,
 				07237B9E20AA069B00BBB96E /* AllExtensions.swift */,
 				072F861B1F5D9227007E5A8A /* AppDelegate.swift */,
@@ -897,8 +897,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = RK6ET38AYF;
-				INFOPLIST_FILE = LifeManagementApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				INFOPLIST_FILE = "$(SRCROOT)/LifeManagementApp/Sources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sp.LifeManagementApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -918,8 +918,8 @@
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = RK6ET38AYF;
-				INFOPLIST_FILE = LifeManagementApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				INFOPLIST_FILE = "$(SRCROOT)/LifeManagementApp/Sources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sp.LifeManagementApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";

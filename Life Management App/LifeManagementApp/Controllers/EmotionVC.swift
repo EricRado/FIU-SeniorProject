@@ -198,7 +198,7 @@ class EmotionVC: UIViewController {
         let categoryRef = dbRef.child("Categories/\(categoryKey)/\(emotionStr)")
         
         let activeSprintQuery = categoryRef
-            .queryOrdered(byChild: "startingDate")
+            .queryOrdered(byChild: "timestamp")
             .queryLimited(toLast: 1)
         
         activeSprintQuery.observeSingleEvent(of: .value, with: { (snapshot) in
@@ -307,8 +307,6 @@ class EmotionVC: UIViewController {
             self.a2GoalScoreLabel.text = activityViewModel.targetPoints
             self.a2ScorePercentageLabel.text = activityViewModel.goalPercentageStr
         }
-        
-        self.overallScorePercentageLabel.text = self.sprintViewModel?.overallScore
     }
     
     // set the average percentage score label and KDCircular progress bar for the emotion
@@ -329,12 +327,15 @@ class EmotionVC: UIViewController {
             // format the average double such as 50.1%
             self.emotionScorePercentageLabel.text = String(format: "%.01f%" + "%", self.emotionAverage!)
             print("The overall score : \(self.sprintViewModel?.overallScore)")
-            self.overallScorePercentageLabel.text = (self.sprintViewModel?.overallScore)! + "%"
-            
-            // setup the progress bar for emotion and overall score
-            self.emotionScore.angle = getKDCircularAngle(self.emotionAverage!)
-            let overall = Double(self.sprintViewModel!.overallScore)!
-            self.overallScore.angle = getKDCircularAngle(overall)
+            if let overallScore = self.sprintViewModel?.overallScore {
+                let overallScoreDisplay = (overallScore / 300.0) * 100.0
+                print("The overallScoreDisplay : \(overallScoreDisplay)")
+                self.overallScorePercentageLabel.text = String(format: "%.01f%" + "%", overallScoreDisplay)
+                
+                // setup the progress bar for emotion and overall score
+                self.emotionScore.angle = getKDCircularAngle(self.emotionAverage!)
+                self.overallScore.angle = getKDCircularAngle(overallScoreDisplay)
+            }
             
         }
     }
@@ -401,6 +402,7 @@ class EmotionVC: UIViewController {
                 button.addTarget(self,
                                  action: #selector(dayBtnPressed(_:)),
                                  for: .touchUpInside)
+                button.setTitle(String(startDay), for: .normal)
                 
                 startDay += 1
                 dayCounter += 1

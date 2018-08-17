@@ -377,10 +377,14 @@ class SprintSettingsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         setStartAndEndDate(weeks: weekChoice)
         print(sprintDailyPoints)
         
-        // update starting date, ending date , number of weeks
-        joySprintRef.updateChildValues(["startingDate": startingDate, "endingDate": endingDate, "numberOfWeeks": weekChoice])
-        passionSprintRef.updateChildValues(["startingDate": startingDate, "endingDate": endingDate, "numberOfWeeks": weekChoice,])
-        contributionSprintRef.updateChildValues(["startingDate": startingDate, "endingDate": endingDate, "numberOfWeeks": weekChoice])
+        let timestamp: String = getTimestampString(date: Date())
+        print("This is timestamp : \(timestamp)")
+        
+        
+        // update starting date, ending date , number of weeks, and timestamp
+        joySprintRef.updateChildValues(["startingDate": startingDate, "endingDate": endingDate, "numberOfWeeks": weekChoice, "timestamp": timestamp])
+        passionSprintRef.updateChildValues(["startingDate": startingDate, "endingDate": endingDate, "numberOfWeeks": weekChoice, "timestamp": timestamp])
+        contributionSprintRef.updateChildValues(["startingDate": startingDate, "endingDate": endingDate, "numberOfWeeks": weekChoice, "timestamp": timestamp])
         
         // update target score and sprint daily points
         print("Going to update joy activities")
@@ -406,6 +410,11 @@ class SprintSettingsVC: UIViewController, UIPickerViewDataSource, UIPickerViewDe
         segueCheck = true
         performSegue(withIdentifier: "newDashBoardSegue", sender: self)
         
+    }
+    
+    private func getTimestampString(date: Date) -> String {
+        let timestamp = date.toMillis()
+        return String(timestamp!) 
     }
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool{

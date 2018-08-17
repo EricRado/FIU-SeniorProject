@@ -21,7 +21,7 @@ struct SprintViewModel {
         self.goal2 = sprint.goal2
         self.goal3 = sprint.goal3
         self.goal4 = sprint.goal4
-        self.overallScore = self.sprint.sprintOverallScore
+        self.overallScore = Double(self.sprint.sprintOverallScore)
     }
     
     public var goal1: String
@@ -32,7 +32,7 @@ struct SprintViewModel {
     
     public var goal4: String
     
-    public var overallScore: String
+    public var overallScore: Double?
     
     public var activityId1: String {
         return sprint.sprintActivityId1
@@ -89,14 +89,12 @@ struct SprintViewModel {
         let passionRef = dbRef.child("Categories/\(sprint.categoryId)/\("PassionSprints")/\(sprintId)/")
         let contributionRef = dbRef.child("Categories/\(sprint.categoryId)/\("ContributionSprints")/\(sprintId)/")
         
-        if let overallScore = Double(self.overallScore) {
+        if let overallScore = self.overallScore {
             var overall = overallScore
             
             // calculates the total average for the 3 different emotion sprints
             overall = overall - oldEmotionAverage
             overall = overall + newEmotionAverage
-            
-            overall = (overall / 300.0) * 100
             
             let newScore = String(format: "%.01f%", overall)
             
@@ -115,7 +113,7 @@ struct SprintViewModel {
                     print(error.localizedDescription)
                 }
             }
-            self.overallScore = newScore
+            self.overallScore = overall
         }
         
         

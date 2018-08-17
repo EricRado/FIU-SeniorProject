@@ -1991,7 +1991,7 @@
                     <extendedEdge key="edgesForExtendedLayout" top="YES"/>
                     <connections>
                         <outlet property="tableView" destination="7OP-ZT-Yjv" id="soz-bo-tsq"/>
-                        <segue destination="aVb-NQ-5Dj" kind="presentation" identifier="newCycleSegue" id="IHu-UO-RcH"/>
+                        <segue destination="aVb-NQ-5Dj" kind="presentation" identifier="newCycleSegue" modalPresentationStyle="overFullScreen" id="IHu-UO-RcH"/>
                         <segue destination="gni-k7-3yr" kind="show" identifier="previousCycleSegue" id="C7z-JB-zWa"/>
                         <segue destination="7cS-Fm-9g7" kind="show" identifier="viewCoachesSegue" id="qJF-bO-A9x"/>
                         <segue destination="zuQ-HF-i9G" kind="show" identifier="viewChatsSegue" id="xh9-O9-RTn"/>
@@ -4019,7 +4019,7 @@
         <image name="startSprint" width="805" height="537"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bY5-t3-Usz"/>
+        <segue reference="IHu-UO-RcH"/>
         <segue reference="Mmc-8c-1pg"/>
         <segue reference="vUG-b0-bNY"/>
         <segue reference="OzN-ms-NxI"/>

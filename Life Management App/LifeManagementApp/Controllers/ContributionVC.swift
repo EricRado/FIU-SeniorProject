@@ -25,6 +25,14 @@ class ContributionVC: EmotionVC {
         getCategoryKey(userId: delegate.user.id)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        print("view is about to appear")
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        print("view is disappearing")
+    }
+    
 }
 
 
