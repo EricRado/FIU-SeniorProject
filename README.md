@@ -6,7 +6,7 @@ Version 2.0 consists of the transition from web app to iOS and Andriod devices u
 
 In order to allow cross compatibility for the two operating systems the data was saved on Firebase database and images on Firebase storage.
 
-The purpose of Life Management is to guide users to a more active and healthy lifestyle. Our approach will try to get users to become more active through engaging them in activities that bring out the emotions of joy, passion, and contribution.
+The purpose of Life Management is to guide users to a more active and healthy lifestyle. Our approach will try to get users to become more active through engaging them in activities that bring out the emotions of joy, passion, and contribution. Also with the help of life coaches users will get tips on how to acheive their goals.
 
 Youtube video link to a guest user case 
 https://www.youtube.com/watch?v=8481F749Ug&index=5&list=PLG3lylzOg8Fh9erMQ5yX-NxLJ--Ky59z3 
@@ -23,7 +23,15 @@ After selecting the activities, the user setups a target score indicating how ma
 
 ![picture](Documents/img/sprintSettings.PNG)
 
+The dashboard is where the user keeps track of their progress for each of the activities they selected for the specific emotion. Clicking on a day of the calendar signifies the user engaged in the activitiy and the progress is recorded.
 
+![picture](Documents/img/dashboard.png)
+
+Sidemenu design
+
+![picture](Documents/img/sidemenu.png)
+
+A full demo of the project can be seen on the links provided uptop.
 
 
 
