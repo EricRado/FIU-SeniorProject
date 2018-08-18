@@ -21,7 +21,7 @@ Users can select two activities for each of the three different emotions
 
 After selecting the activities, the user setups a target score indicating how many times he/she will engage in the activity for a certain period of time or cycle. The user also selects how long the cycle will last which can be from 1 to 3 weeks.
 
-![picture](Documents/img/sprintSettings.png)
+![picture](Documents/img/sprintSettings.PNG)
 
 
 
