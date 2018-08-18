@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 
+
 class PassionVC: EmotionVC {
     
     override func viewDidLoad() {
@@ -22,14 +23,29 @@ class PassionVC: EmotionVC {
         
         // retrieve most recent passion sprint
         getCategoryKey(userId: delegate.user.id)
+        
+        NotificationCenter.default
+            .addObserver(self,
+                         selector: #selector(didReceiveNotification(_:)),
+                         name: .didReceiveNotification,
+                         object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        print("view is about to appear")
+        print("PASSION view is about to appear")
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        print("view is disappearing")
+        print("PASSION view is disappearing")
+        NotificationCenter.default.post(name: .didReceiveNotification, object: self, userInfo: ["overallAverage" : self.emotionAverage!])
+    }
+    
+    @objc func didReceiveNotification(_ notification: Notification) {
+        print("Got it ROGER DODGER JOY")
+        if let dict = notification.userInfo {
+            let avg = dict["overallAverage"] ?? 0.0
+            print("This is the avg from notification : \(avg)")
+        }
     }
 
 }

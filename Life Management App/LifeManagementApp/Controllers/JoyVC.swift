@@ -9,6 +9,9 @@
 import UIKit
 import Firebase
 
+extension Notification.Name {
+    static let didReceiveNotification = Notification.Name("didReceiveNotification")
+}
 
 class JoyVC: EmotionVC {
     
@@ -23,14 +26,21 @@ class JoyVC: EmotionVC {
         
         // retrieve most recent joy sprint
         getCategoryKey(userId: delegate.user.id)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        print("view is about to appear")
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(didReceiveNotification(_:)), name: .didReceiveNotification, object: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        print("view is disappearing")
+        print("JOY view is disappearing")
+        NotificationCenter.default.post(name: .didReceiveNotification, object: self, userInfo: ["overallAverage" : self.emotionAverage!])
+    }
+    
+    @objc func didReceiveNotification(_ notification: Notification) {
+        print("Got it ROGER DODGER JOY")
+        if let dict = notification.userInfo {
+            let avg = dict["overallAverage"] ?? 0.0
+            print("This is the avg from notification : \(avg)")
+        }
     }
 
 }

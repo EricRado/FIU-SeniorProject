@@ -38,6 +38,10 @@ class CategoryTabBarController: UITabBarController {
             UINavigationController(rootViewController: $0)
         }
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        "CATEGORY TAB CONTROLLER IS DISAPPEARING !!!"
+    }
 
 
 }
